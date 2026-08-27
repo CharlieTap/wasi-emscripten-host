@@ -9,14 +9,15 @@
 package at.released.weh.filesystem.path.virtual
 
 import arrow.core.Either
+import arrow.core.flatMap
 import at.released.weh.common.api.InternalWasiEmscriptenHostApi
 import at.released.weh.filesystem.path.PathError
 import at.released.weh.filesystem.path.real.posix.PosixPathValidator
 import kotlinx.io.bytestring.ByteString
-import kotlinx.io.bytestring.decodeToString
 import kotlinx.io.bytestring.encodeToByteString
 import kotlinx.io.bytestring.isNotEmpty
-import kotlin.LazyThreadSafetyMode.PUBLICATION
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringApi
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringOperations
 import kotlin.jvm.JvmStatic
 
 /**
@@ -36,11 +37,8 @@ public class VirtualPath private constructor(
      * UTF-8 representation of path. Not null terminated.
      */
     public val utf8Bytes: ByteString,
+    private val utf8String: String,
 ) {
-    private val utf8String: String by lazy(PUBLICATION) {
-        utf8Bytes.decodeToString()
-    }
-
     /**
      * Number of bytes to represent the path in UTF8. Not null terminated
      */
@@ -73,13 +71,31 @@ public class VirtualPath private constructor(
         @JvmStatic
         public fun create(string: String): Either<PathError, VirtualPath> {
             return PosixPathValidator.validate(string).map {
-                VirtualPath(string.encodeToByteString())
+                VirtualPath(string.encodeToByteString(), string)
             }
         }
 
         internal fun create(bytes: ByteString): Either<PathError, VirtualPath> {
-            return PosixPathValidator.validate(bytes).map {
-                VirtualPath(bytes)
+            return PosixPathValidator.decodeAndValidate(bytes).map { decoded ->
+                VirtualPath(bytes, decoded)
+            }
+        }
+
+        internal fun createValidated(bytes: ByteString, decoded: String): VirtualPath = VirtualPath(bytes, decoded)
+
+        /**
+         * Creates a path without copying [ownedUtf8Bytes]. Ownership of the array is transferred to the returned path;
+         * the caller must never modify it after calling this function.
+         */
+        @InternalWasiEmscriptenHostApi
+        @OptIn(UnsafeByteStringApi::class)
+        public fun createOwnedUtf8(ownedUtf8Bytes: ByteArray): Either<PathError, VirtualPath> = Either.catch {
+            ownedUtf8Bytes.decodeToString(throwOnInvalidSequence = true)
+        }.mapLeft {
+            PathError.InvalidPathFormat("Path is not a valid Unicode string")
+        }.flatMap { decoded ->
+            PosixPathValidator.validate(decoded).map {
+                VirtualPath(UnsafeByteStringOperations.wrapUnsafe(ownedUtf8Bytes), decoded)
             }
         }
 

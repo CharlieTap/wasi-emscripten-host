@@ -8,7 +8,6 @@ package at.released.weh.gradle.wasm.codegen.chasm
 
 import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmBindingsClassname
 import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmShapesClassname
-import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmShapesClassname.HOST_FUNCTION_CONTEXT
 import at.released.weh.gradle.wasm.codegen.util.WasiFunctionHandlerProperty
 import at.released.weh.gradle.wasm.codegen.util.WasiFunctionHandlersExt.NO_MEMORY_FUNCTIONS
 import at.released.weh.gradle.wasm.codegen.util.WasiFunctionHandlersExt.WASI_MEMORY_READER_FUNCTIONS
@@ -29,10 +28,8 @@ import at.released.weh.gradle.wasm.codegen.witx.helper.WasiBaseTypeResolver.Wasi
 import at.released.weh.gradle.wasm.codegen.witx.parser.model.Identifier
 import at.released.weh.gradle.wasm.codegen.witx.parser.model.WasiFunc
 import at.released.weh.gradle.wasm.codegen.witx.parser.model.WasiType
-import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.LIST
-import com.squareup.kotlinpoet.MemberName
-import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.CodeBlock
+import com.squareup.kotlinpoet.PropertySpec
 
 internal class ChasmArgsFunctionHandles(
     wasiTypes: Map<Identifier, WasiType>,
@@ -55,52 +52,71 @@ internal class ChasmArgsFunctionHandles(
     ) {
         val handleProperty = WasiFunctionHandlerProperty(func)
 
-        fun chasmHostFunctionDeclaration(): FunSpec = FunSpec.builder(chasmHostFunctionName).apply {
-            addParameter("context", HOST_FUNCTION_CONTEXT)
-            addParameter("args", LIST.parameterizedBy(ChasmShapesClassname.EXECUTION_VALUE))
-            returns(LIST.parameterizedBy(ChasmShapesClassname.EXECUTION_VALUE))
+        fun chasmHostFunctionDeclaration(): PropertySpec =
+            PropertySpec.builder(chasmHostFunctionName, ChasmShapesClassname.HOST_FUNCTION).apply {
+                initializer(buildCallback())
+            }.build()
 
-            val handleArgs: List<Pair<String, MemberName>> =
-                baseTypeResolver.getFuncInputArgs(func).mapIndexed { index, (baseType: WasiBaseWasmType, _, comment) ->
-                    val converterFunc = when (baseType) {
-                        POINTER -> ChasmBindingsClassname.ChasmExt.VALUE_AS_WASM_ADDR
-                        S8, U8 -> ChasmBindingsClassname.ChasmExt.VALUE_AS_BYTE
-                        S16, U16 -> ChasmBindingsClassname.ChasmExt.VALUE_AS_SHORT
-                        S32, U32, HANDLE -> ChasmBindingsClassname.ChasmExt.VALUE_AS_INT
-                        S64, U64 -> ChasmBindingsClassname.ChasmExt.VALUE_AS_LONG
-                    }
-                    "\nargs[$index].%M(), /* $comment */" to converterFunc
-                }
+        @Suppress("CyclomaticComplexMethod")
+        private fun buildCallback(): CodeBlock = CodeBlock.builder().apply {
+            add("%T { parameters, results ->\n", ChasmShapesClassname.HOST_FUNCTION)
+            indent()
 
-            val allArgs: List<Pair<String, Any>> = buildList {
-                if (func.export !in NO_MEMORY_FUNCTIONS) {
-                    add("\n%N," to "memory")
+            val args = baseTypeResolver.getFuncInputArgs(func)
+            args.forEachIndexed { index, (baseType: WasiBaseWasmType, _, comment) ->
+                val read = when (baseType) {
+                    S64, U64 -> ChasmShapesClassname.READ_I64
+                    else -> ChasmShapesClassname.READ_I32
                 }
-                if (func.export in WASI_MEMORY_READER_FUNCTIONS) {
-                    add("\n%N," to "wasiMemoryReader")
+                val conversion = when (baseType) {
+                    S8, U8 -> ".toByte()"
+                    S16, U16 -> ".toShort()"
+                    POINTER, S32, U32, HANDLE, S64, U64 -> ""
                 }
-                if (func.export in WASI_MEMORY_WRITER_FUNCTIONS) {
-                    add("\n%N," to "wasiMemoryWriter")
-                }
-
-                addAll(handleArgs)
+                add("val arg%L = parameters.%M(%L)%L // %L\n", index, read, index, conversion, comment)
             }
 
-            val toListOfReturnValues = if (func.result != null) {
-                ".toListOfReturnValues()"
+            val hasMemory = func.export !in NO_MEMORY_FUNCTIONS
+            if (hasMemory) {
+                add("val errno = %M(memoryIndex) {\n", ChasmShapesClassname.WITH_MEMORY)
+                indent()
             } else {
-                ""
+                add("val errno = ")
             }
 
-            addCode(
-                format = allArgs.joinToString(
-                    separator = "",
-                    prefix = "return %N.execute(⇥⇥⇥",
-                    postfix = "\n⇤)$toListOfReturnValues⇤⇤\n",
-                    transform = Pair<String, *>::first,
-                ),
-                args = (listOf(handleProperty.propertyName) + allArgs.map(Pair<String, Any>::second)).toTypedArray(),
-            )
+            val allArgs = buildList<String> {
+                if (func.export in WASI_MEMORY_READER_FUNCTIONS) add("wasiMemoryReader")
+                if (func.export in WASI_MEMORY_WRITER_FUNCTIONS) add("wasiMemoryWriter")
+                args.indices.forEach { add("arg$it") }
+            }
+            val executeFunction = if (
+                func.export in WASI_MEMORY_READER_FUNCTIONS || func.export in WASI_MEMORY_WRITER_FUNCTIONS
+            ) {
+                "executeDirect"
+            } else {
+                "execute"
+            }
+            add("%N.%L(\n", handleProperty.propertyName, executeFunction)
+            indent()
+            if (hasMemory) {
+                add("this,\n")
+            }
+            allArgs.forEach { add("%N,\n", it) }
+            if (hasMemory) {
+                add("memoryAccess = %T,\n", ChasmBindingsClassname.CHASM_MEMORY_ACCESS)
+            }
+            unindent()
+            add(")\n")
+
+            if (hasMemory) {
+                unindent()
+                add("}\n")
+            }
+            if (func.result != null) {
+                add("results.%M(0, errno.code)\n", ChasmShapesClassname.WRITE_I32)
+            }
+            unindent()
+            add("}")
         }.build()
     }
 }

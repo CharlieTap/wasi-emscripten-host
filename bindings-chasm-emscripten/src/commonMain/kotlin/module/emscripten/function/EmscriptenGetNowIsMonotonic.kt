@@ -9,14 +9,14 @@ package at.released.weh.bindings.chasm.module.emscripten.function
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.EmscriptenGetNowIsMonotonicFunctionHandle
 import at.released.weh.host.EmbedderHost
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.writeI32
 
 internal class EmscriptenGetNowIsMonotonic(
     host: EmbedderHost,
 ) : HostFunctionProvider {
     private val handle = EmscriptenGetNowIsMonotonicFunctionHandle(host)
-    override val function: HostFunction = {
-        listOf(NumberValue.I32(handle.execute()))
+    override val function: HostFunction = HostFunction { _, results ->
+        results.writeI32(0, handle.execute())
     }
 }

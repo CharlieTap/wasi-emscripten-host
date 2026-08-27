@@ -11,19 +11,21 @@ import at.released.weh.emcripten.runtime.FcntlHandler
 import at.released.weh.filesystem.model.FileDescriptor
 import at.released.weh.filesystem.model.IntFileDescriptor
 import at.released.weh.host.EmbedderHost
-import at.released.weh.wasm.core.memory.ReadOnlyMemory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class SyscallFcntl64FunctionHandle(
     host: EmbedderHost,
 ) : EmscriptenHostFunctionHandle(SYSCALL_FCNTL64, host) {
     private val fcntlHandler = FcntlHandler(host.fileSystem)
 
-    public fun execute(
-        memory: ReadOnlyMemory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         cmd: Int,
         thirdArg: Int,
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
     ): Int {
-        return fcntlHandler.invoke(memory, fd, cmd.toUInt(), thirdArg)
+        return fcntlHandler.invoke(memory, fd, cmd.toUInt(), thirdArg, memoryAccess)
     }
 }

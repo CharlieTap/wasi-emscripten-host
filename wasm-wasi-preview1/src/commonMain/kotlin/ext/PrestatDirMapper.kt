@@ -4,10 +4,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+@file:Suppress("NoUnusedImports", "UnusedImports")
+
 package at.released.weh.wasi.preview1.ext
 
 import at.released.weh.wasi.preview1.type.Prestat
 import at.released.weh.wasi.preview1.type.PrestatDir
+import at.released.weh.wasm.core.WasmPtr
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.writeI32
 import kotlinx.io.Sink
 import kotlinx.io.writeIntLe
 
@@ -24,4 +29,10 @@ internal fun PrestatDir.packTo(
 ): Unit = sink.run {
     writeIntLe(0) // preopentype: prestat_dir
     writeIntLe(this@packTo.prNameLen)
+}
+
+context(_: MemoryAccess<M>)
+internal fun <M> PrestatDir.writeTo(memory: M, address: WasmPtr) {
+    memory.writeI32(address, 0)
+    memory.writeI32(address + 4, prNameLen)
 }

@@ -6,10 +6,6 @@
 
 package at.released.weh.wasi.preview1.function
 
-import at.released.weh.filesystem.fdrights.FdRights
-import at.released.weh.filesystem.fdrights.FdRightsFlag
-import at.released.weh.filesystem.fdrights.FdRightsType
-import at.released.weh.filesystem.model.FdflagsType
 import at.released.weh.filesystem.model.FileDescriptor
 import at.released.weh.filesystem.model.Filetype
 import at.released.weh.filesystem.model.Filetype.BLOCK_DEVICE
@@ -25,86 +21,45 @@ import at.released.weh.filesystem.op.fdattributes.FdAttributes
 import at.released.weh.filesystem.op.fdattributes.FdAttributesResult
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasi.preview1.WasiPreview1HostFunction.FD_FDSTAT_GET
-import at.released.weh.wasi.preview1.ext.FDSTAT_PACKED_SIZE
 import at.released.weh.wasi.preview1.ext.foldToErrno
-import at.released.weh.wasi.preview1.ext.packTo
 import at.released.weh.wasi.preview1.type.Errno
-import at.released.weh.wasi.preview1.type.Fdflags
 import at.released.weh.wasi.preview1.type.FdflagsFlag
 import at.released.weh.wasi.preview1.type.Fdstat
-import at.released.weh.wasi.preview1.type.Rights
-import at.released.weh.wasi.preview1.type.RightsFlag
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
-import kotlinx.io.buffered
-import kotlin.experimental.or
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.writeI16
+import at.released.weh.wasm.core.memory.writeI32
+import at.released.weh.wasm.core.memory.writeI64
+import at.released.weh.wasm.core.memory.writeI8
 import at.released.weh.filesystem.model.FdFlag as FileSystemFdFlag
 import at.released.weh.wasi.preview1.type.Filetype as WasiFiletype
 
 public class FdFdstatGetFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(FD_FDSTAT_GET, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Fdstat::class) dstAddr: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         return host.fileSystem.execute(FdAttributes, FdAttributes(fd))
             .onRight { prestatResult: FdAttributesResult ->
-                memory.sinkWithMaxSize(dstAddr, FDSTAT_PACKED_SIZE).buffered().use {
-                    prestatResult.toFdStat().packTo(it)
-                }
+                memory.writeI8(dstAddr, prestatResult.type.toWasiType().code.toByte())
+                memory.writeI8(dstAddr + 1, 0)
+                memory.writeI16(dstAddr + 2, prestatResult.flags.toWasiFdFlags())
+                memory.writeI32(dstAddr + 4, 0)
+                memory.writeI64(dstAddr + 8, prestatResult.rights and SUPPORTED_RIGHTS_MASK)
+                memory.writeI64(dstAddr + 16, prestatResult.inheritingRights and SUPPORTED_RIGHTS_MASK)
             }.foldToErrno()
     }
 
     private companion object {
-        private val fsFdFlagsToWasiFdFlagsMap = listOf(
-            FileSystemFdFlag.FD_APPEND to FdflagsFlag.APPEND,
-            FileSystemFdFlag.FD_DSYNC to FdflagsFlag.DSYNC,
-            FileSystemFdFlag.FD_NONBLOCK to FdflagsFlag.NONBLOCK,
-            FileSystemFdFlag.FD_SYNC to FdflagsFlag.SYNC,
-        )
-        private val filesystemToWasiRights = listOf(
-            FdRightsFlag.FD_DATASYNC to RightsFlag.FD_DATASYNC,
-            FdRightsFlag.FD_READ to RightsFlag.FD_READ,
-            FdRightsFlag.FD_SEEK to RightsFlag.FD_SEEK,
-            FdRightsFlag.FD_FDSTAT_SET_FLAGS to RightsFlag.FD_FDSTAT_SET_FLAGS,
-            FdRightsFlag.FD_SYNC to RightsFlag.FD_SYNC,
-            FdRightsFlag.FD_TELL to RightsFlag.FD_TELL,
-            FdRightsFlag.FD_WRITE to RightsFlag.FD_WRITE,
-            FdRightsFlag.FD_ADVISE to RightsFlag.FD_ADVISE,
-            FdRightsFlag.FD_ALLOCATE to RightsFlag.FD_ALLOCATE,
-            FdRightsFlag.PATH_CREATE_DIRECTORY to RightsFlag.PATH_CREATE_DIRECTORY,
-            FdRightsFlag.PATH_CREATE_FILE to RightsFlag.PATH_CREATE_FILE,
-            FdRightsFlag.PATH_LINK_SOURCE to RightsFlag.PATH_LINK_SOURCE,
-            FdRightsFlag.PATH_LINK_TARGET to RightsFlag.PATH_LINK_TARGET,
-            FdRightsFlag.PATH_OPEN to RightsFlag.PATH_OPEN,
-            FdRightsFlag.FD_READDIR to RightsFlag.FD_READDIR,
-            FdRightsFlag.PATH_READLINK to RightsFlag.PATH_READLINK,
-            FdRightsFlag.PATH_RENAME_SOURCE to RightsFlag.PATH_RENAME_SOURCE,
-            FdRightsFlag.PATH_RENAME_TARGET to RightsFlag.PATH_RENAME_TARGET,
-            FdRightsFlag.PATH_FILESTAT_GET to RightsFlag.PATH_FILESTAT_GET,
-            FdRightsFlag.PATH_FILESTAT_SET_SIZE to RightsFlag.PATH_FILESTAT_SET_SIZE,
-            FdRightsFlag.PATH_FILESTAT_SET_TIMES to RightsFlag.PATH_FILESTAT_SET_TIMES,
-            FdRightsFlag.FD_FILESTAT_GET to RightsFlag.FD_FILESTAT_GET,
-            FdRightsFlag.FD_FILESTAT_SET_SIZE to RightsFlag.FD_FILESTAT_SET_SIZE,
-            FdRightsFlag.FD_FILESTAT_SET_TIMES to RightsFlag.FD_FILESTAT_SET_TIMES,
-            FdRightsFlag.PATH_SYMLINK to RightsFlag.PATH_SYMLINK,
-            FdRightsFlag.PATH_REMOVE_DIRECTORY to RightsFlag.PATH_REMOVE_DIRECTORY,
-            FdRightsFlag.PATH_UNLINK_FILE to RightsFlag.PATH_UNLINK_FILE,
-            FdRightsFlag.POLL_FD_READWRITE to RightsFlag.POLL_FD_READWRITE,
-            FdRightsFlag.SOCK_SHUTDOWN to RightsFlag.SOCK_SHUTDOWN,
-            FdRightsFlag.SOCK_ACCEPT to RightsFlag.SOCK_ACCEPT,
-        )
-
-        private fun FdAttributesResult.toFdStat(): Fdstat = Fdstat(
-            fsFiletype = this.type.toWasiType(),
-            fsFlags = this.flags.toWasiFdFlags(),
-            fsRightsBase = this.rights.toWasiRights(),
-            fsRightsInheriting = this.inheritingRights.toWasiRights(),
-        )
+        private const val SUPPORTED_RIGHTS_MASK = 0x3fff_ffffL
+        private const val COMMON_FD_FLAGS_MASK =
+            FileSystemFdFlag.FD_APPEND or FileSystemFdFlag.FD_DSYNC or FileSystemFdFlag.FD_NONBLOCK
 
         private fun Filetype.toWasiType(): WasiFiletype = when (this) {
             UNKNOWN -> WasiFiletype.UNKNOWN
@@ -117,26 +72,8 @@ public class FdFdstatGetFunctionHandle(
             SYMBOLIC_LINK -> WasiFiletype.SYMBOLIC_LINK
         }
 
-        @FdflagsType
-        private fun Int.toWasiFdFlags(): Fdflags {
-            var mask: Fdflags = 0
-            fsFdFlagsToWasiFdFlagsMap.forEach { (fileSystemFileFlag, fdFlag) ->
-                if (this and fileSystemFileFlag == fileSystemFileFlag) {
-                    mask = mask or fdFlag
-                }
-            }
-            return mask
-        }
-
-        @FdRightsType
-        private fun FdRights.toWasiRights(): Rights {
-            var mask: Rights = 0
-            filesystemToWasiRights.forEach { (fsFlag, wasiFlag) ->
-                if (this and fsFlag == fsFlag) {
-                    mask = mask or wasiFlag
-                }
-            }
-            return mask
-        }
+        private fun Int.toWasiFdFlags(): Short = ((this and COMMON_FD_FLAGS_MASK) or
+                (if (this and FileSystemFdFlag.FD_RSYNC != 0) FdflagsFlag.RSYNC.toInt() else 0) or
+                (if (this and FileSystemFdFlag.FD_SYNC != 0) FdflagsFlag.SYNC.toInt() else 0)).toShort()
     }
 }

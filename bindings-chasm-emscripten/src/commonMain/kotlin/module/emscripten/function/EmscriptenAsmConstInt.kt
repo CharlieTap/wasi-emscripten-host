@@ -6,21 +6,21 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asWasmAddr
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.EmscriptenAsmConstIntFunctionHandle
 import at.released.weh.host.EmbedderHost
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.host.writeI32
 
 internal class EmscriptenAsmConstInt(host: EmbedderHost) : HostFunctionProvider {
     private val handle = EmscriptenAsmConstIntFunctionHandle(host)
-    override val function: HostFunction = { args ->
+    override val function: HostFunction = HostFunction { parameters, results ->
         val result = handle.execute(
-            emAsmAddr = args[0].asWasmAddr(),
-            sigPtr = args[1].asWasmAddr(),
-            argbuf = args[2].asWasmAddr(),
+            emAsmAddr = parameters.readI32(0),
+            sigPtr = parameters.readI32(1),
+            argbuf = parameters.readI32(2),
         )
-        listOf(NumberValue.I32(result))
+        results.writeI32(0, result)
     }
 }

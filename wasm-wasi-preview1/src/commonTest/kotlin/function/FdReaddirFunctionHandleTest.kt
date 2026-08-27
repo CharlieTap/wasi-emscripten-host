@@ -15,6 +15,9 @@ import at.released.weh.filesystem.test.fixtures.readdir.TestDirEntry.TEST_CURREN
 import at.released.weh.filesystem.test.fixtures.readdir.TestDirEntry.TEST_PARENT_DIR_ENTRY
 import at.released.weh.wasi.preview1.ext.DIRENT_PACKED_SIZE
 import at.released.weh.wasi.preview1.function.FdReaddirFunctionHandle.Companion.packDirEntriesToBuf
+import at.released.weh.wasi.preview1.function.FdReaddirFunctionHandle.Companion.packDirEntriesToMemory
+import at.released.weh.wasm.core.memory.DefaultMemoryAccess
+import at.released.weh.wasm.core.test.fixtures.TestMemory
 import kotlinx.io.Buffer
 import kotlinx.io.bytestring.decodeToString
 import kotlinx.io.readByteString
@@ -73,6 +76,29 @@ public class FdReaddirFunctionHandleTest {
             val bytesWritten = packDirEntriesToBuf(dirEntries, buffer, testMaxSize).getOrElse { "Pack() failed" }
             assertThat(bytesWritten == testMaxSize)
             assertThat(buffer.readByteString()).isEqualTo(testPack.substring(0, testMaxSize))
+        }
+    }
+
+    @Test
+    fun direct_memory_packing_matches_buffer_packing_for_every_truncation_point() {
+        val entries = listOf(TEST_CURRENT_DIR_ENTRY, TEST_PARENT_DIR_ENTRY)
+        val expected = Buffer().let { buffer ->
+            packDirEntriesToBuf(entries.asSequence(), buffer, 1024).getOrElse { "Pack() failed" }
+            buffer.readByteString().toByteArray()
+        }
+
+        for (maxSize in 0..expected.size) {
+            val memory = TestMemory(expected.size + 1)
+            val bytesWritten = packDirEntriesToMemory(
+                entries.asSequence(),
+                memory,
+                address = 0,
+                maxSize = maxSize,
+                memoryAccess = DefaultMemoryAccess,
+            ).getOrElse { "Pack() failed" }
+
+            assertThat(bytesWritten).isEqualTo(maxSize)
+            assertThat(memory.bytes.copyOf(maxSize)).isEqualTo(expected.copyOf(maxSize))
         }
     }
 

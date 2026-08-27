@@ -17,10 +17,9 @@ import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.Store
-import io.github.charlietap.chasm.embedding.shapes.Value.Number.I32
-import io.github.charlietap.chasm.embedding.shapes.flatMap
 import io.github.charlietap.chasm.embedding.shapes.fold
 import io.github.charlietap.chasm.embedding.store
+import io.github.charlietap.chasm.runtime.value.NumberValue.I32
 
 // Create Host and run code
 EmbedderHost {
@@ -31,9 +30,13 @@ EmbedderHost {
 
 private fun executeCode(embedderHost: EmbedderHost) {
     val store: Store = store()
+    val module = module(wasmBinary).fold(
+        onSuccess = { it },
+        onError = { error("Cannot decode WebAssembly binary: $it") },
+    )
 
-    // Prepare WASI and Emscripten host imports
-    val chasmBuilder = ChasmEmscriptenHostBuilder(store) {
+    // Resolve the exported `memory` once while preparing the imports.
+    val chasmBuilder = ChasmEmscriptenHostBuilder(store, module) {
         this.host = embedderHost
     }
     val wasiHostFunctions = chasmBuilder.setupWasiPreview1HostFunctions()
@@ -45,11 +48,9 @@ private fun executeCode(embedderHost: EmbedderHost) {
     }
 
     // Instantiate the WebAssembly module
-    val instance = module(wasmBinary).flatMap { module ->
-        instance(store, module, hostImports)
-    }.fold(
+    val instance = instance(store, module, hostImports).fold(
         onSuccess = { it },
-        onError = { error("Can node instantiate WebAssembly binary: $it") },
+        onError = { error("Cannot instantiate WebAssembly binary: $it") },
     )
 
     // Finalize initialization after module instantiation

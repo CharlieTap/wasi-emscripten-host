@@ -33,24 +33,28 @@ import at.released.weh.wasi.preview1.type.Size
 import at.released.weh.wasi.preview1.type.SizeType
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.write
+import at.released.weh.wasm.core.memory.writeI32
+import at.released.weh.wasm.core.memory.writeI64
+import at.released.weh.wasm.core.memory.writeI8
 import kotlinx.io.Buffer
 import kotlinx.io.IOException
 import kotlinx.io.Sink
-import kotlinx.io.buffered
 
 public class FdReaddirFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(FD_READDIR, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Byte::class) bufAddr: WasmPtr,
         @SizeType bufLen: Size,
         @DircookieType cookie: Dircookie,
         @IntWasmPtr(Size::class) expectedSizeAddr: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         val startPosition = if (cookie != 0L) {
             DirSequenceStartPosition.Cookie(cookie)
         } else {
@@ -61,9 +65,7 @@ public class FdReaddirFunctionHandle(
             .mapLeft(FileSystemOperationError::wasiErrno)
             .flatMap { closeableSequence: DirEntrySequence ->
                 closeableSequence.use { sequence ->
-                    memory.sinkWithMaxSize(bufAddr, bufLen).buffered().use { sink ->
-                        packDirEntriesToBuf(sequence, sink, bufLen)
-                    }
+                    packDirEntriesToMemory(sequence, memory, bufAddr, bufLen, memoryAccess)
                 }.onRight { bytesWritten ->
                     memory.writeI32(expectedSizeAddr, bytesWritten)
                 }
@@ -74,6 +76,8 @@ public class FdReaddirFunctionHandle(
     }
 
     internal companion object {
+        private const val DIRENT_TYPE_OFFSET = 20
+
         fun DirEntry.toDirEntryWithName(): Pair<Dirent, Buffer> {
             val encodedName = this.name.encodeToBuffer()
             return Dirent(
@@ -121,6 +125,86 @@ public class FdReaddirFunctionHandle(
                 is IOException -> IO
                 else -> INVAL
             }
+        }
+
+        internal fun <M> packDirEntriesToMemory(
+            sequence: Sequence<DirEntry>,
+            memory: M,
+            address: WasmPtr,
+            maxSize: Int,
+            memoryAccess: MemoryAccess<M>,
+        ): Either<Errno, Int> = with(memoryAccess) {
+            Either.catch {
+                var bytesLeft = maxSize
+                var destination = address
+                val iterator = sequence.iterator()
+                while (bytesLeft > 0 && iterator.hasNext()) {
+                    val entry = iterator.next()
+                    val name = entry.name.encodeToByteArray()
+                    val type = checkNotNull(Filetype.fromCode(entry.type.id)) { "Unexpected type ${entry.type.id}" }
+                    if (bytesLeft >= DIRENT_PACKED_SIZE) {
+                        memory.writeI64(destination, entry.cookie)
+                        memory.writeI64(destination + 8, entry.inode)
+                        memory.writeI32(destination + 16, name.size)
+                        memory.writeI32(destination + DIRENT_TYPE_OFFSET, type.code)
+                        destination += DIRENT_PACKED_SIZE
+                        bytesLeft -= DIRENT_PACKED_SIZE
+                    } else if (bytesLeft != 0) {
+                        writePartialDirent(
+                            memory = memory,
+                            address = destination,
+                            bytesToWrite = bytesLeft,
+                            dNext = entry.cookie,
+                            dIno = entry.inode,
+                            dNamlen = name.size,
+                            dType = type.code,
+                            memoryAccess = memoryAccess,
+                        )
+                        bytesLeft = 0
+                        break
+                    }
+
+                    val nameLength = name.size.coerceAtMost(bytesLeft)
+                    if (nameLength != 0) {
+                        memory.write(destination, name, bytesToWrite = nameLength)
+                    }
+                    destination += nameLength
+                    bytesLeft -= nameLength
+                }
+                maxSize - bytesLeft
+            }.mapLeft { throwable ->
+                when (throwable) {
+                    is IOException -> IO
+                    else -> INVAL
+                }
+            }
+        }
+
+        private fun <M> writePartialDirent(
+            memory: M,
+            address: WasmPtr,
+            bytesToWrite: Int,
+            dNext: Long,
+            dIno: Long,
+            dNamlen: Int,
+            dType: Int,
+            memoryAccess: MemoryAccess<M>,
+        ): Unit = with(memoryAccess) {
+            var offset = 0
+            fun writeLong(value: Long) {
+                repeat(minOf(Long.SIZE_BYTES, bytesToWrite - offset)) { byteIndex ->
+                    memory.writeI8(address + offset++, (value ushr (byteIndex * 8)).toByte())
+                }
+            }
+            fun writeInt(value: Int) {
+                repeat(minOf(Int.SIZE_BYTES, bytesToWrite - offset)) { byteIndex ->
+                    memory.writeI8(address + offset++, (value ushr (byteIndex * 8)).toByte())
+                }
+            }
+            writeLong(dNext)
+            if (offset < bytesToWrite) writeLong(dIno)
+            if (offset < bytesToWrite) writeInt(dNamlen)
+            if (offset < bytesToWrite) writeInt(dType)
         }
     }
 }

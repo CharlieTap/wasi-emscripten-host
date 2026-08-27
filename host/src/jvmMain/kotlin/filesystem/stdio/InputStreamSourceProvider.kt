@@ -11,6 +11,7 @@ import arrow.core.left
 import arrow.core.right
 import at.released.weh.filesystem.error.Again
 import at.released.weh.filesystem.error.NonblockingPollError
+import at.released.weh.filesystem.internal.fdresource.stdio.ByteArrayStdioSource
 import at.released.weh.filesystem.model.FileSystemErrno
 import at.released.weh.filesystem.model.FileSystemErrno.SUCCESS
 import kotlinx.io.RawSource
@@ -27,7 +28,10 @@ internal class InputStreamSourceProvider(
 private class InputStreamStdioSource(
     private val inputStream: InputStream,
     source: RawSource = inputStream.asSource(),
-) : StdioSource, RawSource by source {
+) : StdioSource, ByteArrayStdioSource, RawSource by source {
+    override fun readToByteArray(sink: ByteArray, startIndex: Int, endIndex: Int): Int =
+        inputStream.read(sink, startIndex, endIndex - startIndex)
+
     override fun pollNonblocking(): Either<NonblockingPollError, StdioPollEvent> {
         return try {
             val bytesAvailable = inputStream.available()

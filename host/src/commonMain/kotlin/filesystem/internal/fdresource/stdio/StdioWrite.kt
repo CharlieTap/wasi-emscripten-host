@@ -20,17 +20,27 @@ import kotlinx.io.RawSink
 internal fun RawSink.transferFrom(
     cIovecs: List<FileSystemByteBuffer>,
 ): Either<WriteError, ULong> = either {
-    val buffer = Buffer()
+    val byteArraySink = this@transferFrom as? ByteArrayStdioSink
+    val buffer = if (byteArraySink == null) Buffer() else null
     var totalBytesMoved = 0UL
     for (ciovec in cIovecs) {
         if (ciovec.length == 0) {
             continue
         }
-        check(buffer.size == 0L)
         @Suppress("SwallowedException")
         try {
-            buffer.write(ciovec.array, ciovec.offset, ciovec.offset + ciovec.length)
-            this@transferFrom.write(buffer, ciovec.length.toLong())
+            if (byteArraySink != null) {
+                byteArraySink.writeFromByteArray(
+                    source = ciovec.array,
+                    startIndex = ciovec.offset,
+                    endIndex = ciovec.offset + ciovec.length,
+                )
+            } else {
+                checkNotNull(buffer)
+                check(buffer.size == 0L)
+                buffer.write(ciovec.array, ciovec.offset, ciovec.offset + ciovec.length)
+                this@transferFrom.write(buffer, ciovec.length.toLong())
+            }
             totalBytesMoved += ciovec.length.toULong()
         } catch (iae: IllegalArgumentException) {
             raise(InvalidArgument("Incorrect iovec length ${ciovec.length}"))

@@ -13,18 +13,25 @@ import at.released.weh.filesystem.op.FileSystemOperation
 
 internal class InterceptorChain<I : Any, out E : FileSystemOperationError, out R : Any>(
     override val operation: FileSystemOperation<I, E, R>,
-    override val input: I,
+    initialInput: I,
     private val interceptors: List<FileSystemInterceptor>,
-    private val index: Int = 0,
 ) : FileSystemInterceptor.Chain<I, E, R> {
+    private var currentInput: I = initialInput
+    private var index: Int = 0
+
+    override val input: I
+        get() = currentInput
+
     override fun proceed(input: I): Either<E, R> {
         val interceptor = interceptors.getOrNull(index) ?: error("End of interceptor chain")
-        val next = InterceptorChain(
-            interceptors = interceptors,
-            index = index + 1,
-            operation = operation,
-            input = input,
-        )
-        return interceptor.intercept(next)
+        val previousInput = currentInput
+        currentInput = input
+        index += 1
+        return try {
+            interceptor.intercept(this)
+        } finally {
+            index -= 1
+            currentInput = previousInput
+        }
     }
 }

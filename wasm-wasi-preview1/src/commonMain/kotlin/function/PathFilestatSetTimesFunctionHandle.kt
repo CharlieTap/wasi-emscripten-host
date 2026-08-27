@@ -29,13 +29,14 @@ import at.released.weh.wasi.preview1.type.Timestamp
 import at.released.weh.wasi.preview1.type.TimestampType
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class PathFilestatSetTimesFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.PATH_FILESTAT_SET_TIMES, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @LookupflagsType flags: Lookupflags,
         @IntWasmPtr(Byte::class) pathAddr: WasmPtr,
@@ -43,8 +44,9 @@ public class PathFilestatSetTimesFunctionHandle(
         @TimestampType atime: Timestamp,
         @TimestampType mtime: Timestamp,
         @FstflagsType fstflags: Fstflags,
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
     ): Errno = either {
-        val path = memory.readPathString(pathAddr, pathSize).bind()
+        val path = memory.readPathString(pathAddr, pathSize, memoryAccess).bind()
         val reqTimestamps = getRequestedAtimeMtime(host.clock, atime, mtime, fstflags).bind()
         host.fileSystem.execute(
             SetTimestamp,

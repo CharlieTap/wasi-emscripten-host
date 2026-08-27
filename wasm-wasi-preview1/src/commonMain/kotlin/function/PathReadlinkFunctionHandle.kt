@@ -19,24 +19,29 @@ import at.released.weh.wasi.preview1.ext.readPathString
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
-import kotlinx.io.buffered
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.write
+import at.released.weh.wasm.core.memory.writeI32
 import kotlinx.io.bytestring.ByteString
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringApi
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringOperations
 import kotlinx.io.write
 
 public class PathReadlinkFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.PATH_READLINK, host) {
-    public fun execute(
-        memory: Memory,
+    @OptIn(UnsafeByteStringApi::class)
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Byte::class) pathAddr: WasmPtr,
         pathSize: Int,
         @IntWasmPtr(Byte::class) bufAddr: WasmPtr,
         bufLen: Int,
         @IntWasmPtr(Int::class) sizeAddr: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         val path = memory.readPathString(pathAddr, pathSize).getOrElse {
             return it
         }
@@ -46,9 +51,9 @@ public class PathReadlinkFunctionHandle(
             ReadLink(path, BaseDirectory.DirectoryFd(fd)),
         ).onRight { symlinkTarget: VirtualPath ->
             val targetEncoded: ByteString = symlinkTarget.utf8Bytes
-            val size = targetEncoded.size.toInt().coerceAtMost(bufLen)
-            memory.sinkWithMaxSize(bufAddr, size).buffered().use {
-                it.write(targetEncoded, 0, size)
+            val size = targetEncoded.size.coerceAtMost(bufLen)
+            UnsafeByteStringOperations.withByteArrayUnsafe(targetEncoded) { bytes ->
+                memory.write(bufAddr, bytes, bytesToWrite = size)
             }
             memory.writeI32(sizeAddr, size)
         }.foldToErrno()

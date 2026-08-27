@@ -6,6 +6,7 @@
 
 package at.released.weh.wasm.core.memory
 
+import at.released.weh.common.api.InternalWasiEmscriptenHostApi
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
 import kotlinx.io.Buffer
@@ -22,11 +23,27 @@ public interface Memory : ReadOnlyMemory {
 
 public fun Memory.writeU8(@IntWasmPtr addr: WasmPtr, data: UByte): Unit = writeI8(addr, data.toByte())
 
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.writeU8(@IntWasmPtr addr: WasmPtr, data: UByte): Unit = writeI8(addr, data.toByte())
+
 public fun Memory.writeU32(@IntWasmPtr addr: WasmPtr, data: UInt): Unit = writeI32(addr, data.toInt())
+
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.writeU32(@IntWasmPtr addr: WasmPtr, data: UInt): Unit = writeI32(addr, data.toInt())
 
 public fun Memory.writeU64(@IntWasmPtr addr: WasmPtr, data: ULong): Unit = writeI64(addr, data.toLong())
 
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.writeU64(@IntWasmPtr addr: WasmPtr, data: ULong): Unit = writeI64(addr, data.toLong())
+
 public fun Memory.writePtr(@IntWasmPtr addr: WasmPtr, @IntWasmPtr data: WasmPtr): Unit = writeI32(addr, data)
+
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.writePtr(@IntWasmPtr addr: WasmPtr, @IntWasmPtr data: WasmPtr): Unit = writeI32(addr, data)
 
 public fun Memory.writeNullTerminatedString(
     @IntWasmPtr offset: WasmPtr,
@@ -43,8 +60,28 @@ public fun Memory.writeNullTerminatedString(
     return size
 }
 
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.writeNullTerminatedString(
+    @IntWasmPtr offset: WasmPtr,
+    value: String,
+): Int {
+    val bytes = value.encodeToByteArray()
+    write(offset, bytes)
+    writeI8(offset + bytes.size, 0.toByte())
+    return bytes.size + 1
+}
+
 @IntWasmPtr
 public fun Memory.sinkWithMaxSize(
+    @IntWasmPtr fromAddr: WasmPtr,
+    maxSize: Int,
+): RawSink = sink(fromAddr, fromAddr + maxSize)
+
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+@IntWasmPtr
+public fun <M> M.sinkWithMaxSize(
     @IntWasmPtr fromAddr: WasmPtr,
     maxSize: Int,
 ): RawSink = sink(fromAddr, fromAddr + maxSize)

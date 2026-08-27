@@ -16,19 +16,21 @@ import at.released.weh.filesystem.path.virtual.VirtualPath
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.ReadOnlyMemory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 import at.released.weh.wasm.core.memory.readNullTerminatedString
 
 public class SyscallChmodFunctionHandle(
     host: EmbedderHost,
 ) : EmscriptenHostFunctionHandle(SYSCALL_CHMOD, host) {
-    public fun execute(
-        memory: ReadOnlyMemory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Byte::class) pathnamePtr: WasmPtr,
         @FileMode mode: Int,
-    ): Int = VirtualPath.create(memory.readNullTerminatedString(pathnamePtr))
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Int = with(memoryAccess) { VirtualPath.create(memory.readNullTerminatedString(pathnamePtr))
         .flatMap { virtualPath ->
             host.fileSystem.execute(Chmod, Chmod(virtualPath, CurrentWorkingDirectory, mode))
         }
-        .negativeErrnoCode()
+        .negativeErrnoCode() }
 }

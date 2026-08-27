@@ -6,7 +6,7 @@
 
 package at.released.weh.bindings.chasm.module.emscripten
 
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
+import io.github.charlietap.chasm.host.HostFunction
 
 internal interface HostFunctionProvider {
     val function: HostFunction

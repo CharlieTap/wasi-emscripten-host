@@ -7,7 +7,6 @@
 package at.released.weh.bindings.chasm.module.emscripten
 
 import at.released.weh.bindings.chasm.ext.toChasmFunctionTypes
-import at.released.weh.bindings.chasm.memory.ChasmMemoryAdapter
 import at.released.weh.bindings.chasm.module.emscripten.function.AbortJs
 import at.released.weh.bindings.chasm.module.emscripten.function.AssertFail
 import at.released.weh.bindings.chasm.module.emscripten.function.EmscriptenAsmConstAsyncOnMainThread
@@ -82,14 +81,15 @@ import at.released.weh.emcripten.runtime.export.stack.EmscriptenStack
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasm.core.WasmModules.ENV_MODULE_NAME
 import io.github.charlietap.chasm.embedding.function
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
 import io.github.charlietap.chasm.embedding.shapes.Store
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.ModuleIndex
 import io.github.charlietap.chasm.embedding.shapes.Import as ChasmImport
 
 @Suppress("LAMBDA_IS_NOT_LAST_PARAMETER")
 internal fun createEmscriptenHostFunctions(
     store: Store,
-    memory: ChasmMemoryAdapter,
+    memoryIndex: ModuleIndex.MemoryIndex,
     host: EmbedderHost,
     emscriptenStackRef: () -> EmscriptenStack,
     moduleName: String = ENV_MODULE_NAME,
@@ -102,7 +102,7 @@ internal fun createEmscriptenHostFunctions(
             value = function(
                 store = store,
                 type = functionTypes.getValue(emscriptenFunc.type),
-                function = emscriptenFunc.createChasmHostFunction(host, memory, emscriptenStackRef),
+                function = emscriptenFunc.createChasmHostFunction(host, memoryIndex, emscriptenStackRef),
             ),
         )
     }
@@ -111,42 +111,42 @@ internal fun createEmscriptenHostFunctions(
 @Suppress("CyclomaticComplexMethod")
 private fun EmscriptenHostFunction.createChasmHostFunction(
     host: EmbedderHost,
-    memory: ChasmMemoryAdapter,
+    memoryIndex: ModuleIndex.MemoryIndex,
     emscriptenStackRef: () -> EmscriptenStack,
 ): HostFunction = when (this) {
     ABORT_JS -> AbortJs(host)
-    ASSERT_FAIL -> AssertFail(host, memory)
+    ASSERT_FAIL -> AssertFail(host, memoryIndex)
     EMSCRIPTEN_ASM_CONST_ASYNC_ON_MAIN_THREAD -> EmscriptenAsmConstAsyncOnMainThread(host)
     EMSCRIPTEN_ASM_CONST_INT -> EmscriptenAsmConstInt(host)
-    EMSCRIPTEN_CONSOLE_ERROR -> EmscriptenConsoleError(host, memory)
+    EMSCRIPTEN_CONSOLE_ERROR -> EmscriptenConsoleError(host, memoryIndex)
     EMSCRIPTEN_DATE_NOW -> EmscriptenDateNow(host)
     EMSCRIPTEN_GET_NOW -> EmscriptenGetNow(host)
     EMSCRIPTEN_GET_NOW_IS_MONOTONIC -> EmscriptenGetNowIsMonotonic(host)
-    EMSCRIPTEN_RESIZE_HEAP -> EmscriptenResizeHeap(host, memory)
+    EMSCRIPTEN_RESIZE_HEAP -> EmscriptenResizeHeap(host, memoryIndex)
     EMSCRIPTEN_RUNTIME_KEEPALIVE_CLEAR -> EmscriptenRuntimeKeepaliveClear(host)
-    GETENTROPY -> Getentropy(host, memory)
+    GETENTROPY -> Getentropy(host, memoryIndex)
     HANDLE_STACK_OVERFLOW -> HandleStackOverflow(host, emscriptenStackRef)
-    LOCALTIME_JS -> LocaltimeJs(host, memory)
+    LOCALTIME_JS -> LocaltimeJs(host, memoryIndex)
     MMAP_JS -> MmapJs(host)
     MUNMAP_JS -> MunmapJs(host)
     SETITIMER_JS -> SetittimerJs(host)
-    SYSCALL_CHMOD -> SyscallChmod(host, memory)
-    SYSCALL_FACCESSAT -> SyscallFaccessat(host, memory)
+    SYSCALL_CHMOD -> SyscallChmod(host, memoryIndex)
+    SYSCALL_FACCESSAT -> SyscallFaccessat(host, memoryIndex)
     SYSCALL_FCHMOD -> SyscallFchmod(host)
     SYSCALL_FCHOWN32 -> SyscallFchown32(host)
-    SYSCALL_FCNTL64 -> SyscallFcntl64(host, memory)
+    SYSCALL_FCNTL64 -> SyscallFcntl64(host, memoryIndex)
     SYSCALL_FDATASYNC -> SyscallFdatasync(host)
-    SYSCALL_FSTAT64 -> SyscallFstat64(host, memory)
+    SYSCALL_FSTAT64 -> SyscallFstat64(host, memoryIndex)
     SYSCALL_FTRUNCATE64 -> SyscallFtruncate64(host)
-    SYSCALL_GETCWD -> SyscallGetcwd(host, memory)
-    SYSCALL_LSTAT64 -> syscallLstat64(host, memory)
-    SYSCALL_MKDIRAT -> SyscallMkdirat(host, memory)
-    SYSCALL_OPENAT -> SyscallOpenat(host, memory)
-    SYSCALL_READLINKAT -> SyscallReadlinkat(host, memory)
-    SYSCALL_RMDIR -> SyscallRmdir(host, memory)
-    SYSCALL_STAT64 -> syscallStat64(host, memory)
-    SYSCALL_UNLINKAT -> SyscallUnlinkat(host, memory)
-    SYSCALL_UTIMENSAT -> SyscallUtimensat(host, memory)
-    TZSET_JS -> TzsetJs(host, memory)
+    SYSCALL_GETCWD -> SyscallGetcwd(host, memoryIndex)
+    SYSCALL_LSTAT64 -> syscallLstat64(host, memoryIndex)
+    SYSCALL_MKDIRAT -> SyscallMkdirat(host, memoryIndex)
+    SYSCALL_OPENAT -> SyscallOpenat(host, memoryIndex)
+    SYSCALL_READLINKAT -> SyscallReadlinkat(host, memoryIndex)
+    SYSCALL_RMDIR -> SyscallRmdir(host, memoryIndex)
+    SYSCALL_STAT64 -> syscallStat64(host, memoryIndex)
+    SYSCALL_UNLINKAT -> SyscallUnlinkat(host, memoryIndex)
+    SYSCALL_UTIMENSAT -> SyscallUtimensat(host, memoryIndex)
+    TZSET_JS -> TzsetJs(host, memoryIndex)
     else -> NotImplementedEmscriptenFunction(this)
 }.function

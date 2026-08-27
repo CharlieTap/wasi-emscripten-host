@@ -18,17 +18,19 @@ import at.released.weh.wasi.preview1.ext.readPathString
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class PathUnlinkFileFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.PATH_UNLINK_FILE, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Byte::class) path: WasmPtr,
         pathSize: Int,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         val pathString = memory.readPathString(path, pathSize).getOrElse {
             return it
         }

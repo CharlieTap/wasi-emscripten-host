@@ -6,13 +6,12 @@
 
 package at.released.weh.bindings.chasm.wasip1
 
-import at.released.weh.bindings.chasm.ext.asInt
 import at.released.weh.wasm.core.WasmModules
 import io.github.charlietap.chasm.embedding.function
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.Store
 import io.github.charlietap.chasm.host.HostFunctionException
-import io.github.charlietap.chasm.runtime.value.ExecutionValue
+import io.github.charlietap.chasm.host.readI32
 import io.github.charlietap.chasm.type.FunctionType
 import io.github.charlietap.chasm.type.NumberType.I32
 import io.github.charlietap.chasm.type.ResultType
@@ -39,7 +38,7 @@ internal fun createCustomWasiPreview1HostFunctions(
     )
 }
 
-private val procExitHostFunction: ChasmHostFunction = { args: List<ExecutionValue> ->
-    val exitCode = args[0].asInt()
+private val procExitHostFunction: ChasmHostFunction = ChasmHostFunction { parameters, _ ->
+    val exitCode = parameters.readI32(0)
     throw HostFunctionException(exitCode.toString())
 }

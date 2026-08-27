@@ -18,21 +18,23 @@ import at.released.weh.wasi.preview1.type.Roflags
 import at.released.weh.wasi.preview1.type.Size
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class SockRecvFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.SOCK_RECV, host) {
     @Suppress("UNUSED_PARAMETER")
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Iovec::class) riData: WasmPtr,
         riDataSize: Int,
         @RiflagsType riFlags: Riflags,
         @IntWasmPtr(Size::class) expectedSizeAddr: WasmPtr,
         @IntWasmPtr(Roflags::class) expectedRoflagsAddr: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         // TODO
         return Errno.NOTSUP
     }

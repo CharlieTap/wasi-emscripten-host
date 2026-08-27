@@ -6,11 +6,9 @@
 
 package at.released.weh.gradle.wasm.codegen.chasm
 
-import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmBindingsClassname
 import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmShapesClassname
 import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmShapesClassname.AstType
 import at.released.weh.gradle.wasm.codegen.util.classname.WehHostClassname
-import at.released.weh.gradle.wasm.codegen.util.classname.WehWasiPreview1ClassName
 import at.released.weh.gradle.wasm.codegen.util.toCamelCasePropertyName
 import at.released.weh.gradle.wasm.codegen.witx.helper.BaseFunctionType
 import at.released.weh.gradle.wasm.codegen.witx.helper.BaseFunctionType.BaseWebAssemblyType
@@ -44,9 +42,7 @@ internal class ChasmFactoryFunctionGenerator(
     fun generate(): FunSpec = FunSpec.builder(factoryFunctionName).apply {
         addModifiers(INTERNAL)
         addParameter("store", ChasmShapesClassname.STORE)
-        addParameter("memory", ChasmBindingsClassname.CHASM_MEMORY_ADAPTER)
-        addParameter("wasiMemoryReader", WehWasiPreview1ClassName.WASI_MEMORY_READER)
-        addParameter("wasiMemoryWriter", WehWasiPreview1ClassName.WASI_MEMORY_WRITER)
+        addParameter("memoryIndex", ChasmShapesClassname.MEMORY_INDEX)
         addParameter("host", WehHostClassname.EMBEDDER_HOST)
         addParameter(
             ParameterSpec.builder("moduleName", STRING).defaultValue("%S", "wasi_snapshot_preview1").build(),
@@ -88,7 +84,7 @@ internal class ChasmFactoryFunctionGenerator(
             )
         }
 
-        addCode("val functions = %T(host, memory, wasiMemoryReader, wasiMemoryWriter)\n", functionsClassName)
+        addCode("val functions = %T(host, memoryIndex)\n", functionsClassName)
 
         addCode("return listOf(⇥⇥\n")
         wasiFunctions.forEach { wasiFunc: WasiFunc ->
@@ -96,7 +92,7 @@ internal class ChasmFactoryFunctionGenerator(
             val wasiNameCamelCase = wasiFunc.export.toCamelCasePropertyName()
 
             addCode(
-                "%T(moduleName, %S, %M(store, %N, functions::%N)),\n",
+                "%T(moduleName, %S, %M(store, %N, functions.%N)),\n",
                 ChasmShapesClassname.IMPORT,
                 wasiFunc.export,
                 ChasmShapesClassname.CHASM_EMBEDDING_FUNCTION,

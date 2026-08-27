@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-@file:Suppress("MagicNumber")
+@file:Suppress("MagicNumber", "NoUnusedImports", "UnusedImports")
 
 package at.released.weh.wasi.preview1.ext
 
@@ -20,6 +20,12 @@ import at.released.weh.wasi.preview1.type.Subscription
 import at.released.weh.wasi.preview1.type.SubscriptionClock
 import at.released.weh.wasi.preview1.type.SubscriptionFdReadwrite
 import at.released.weh.wasi.preview1.type.SubscriptionU
+import at.released.weh.wasm.core.WasmPtr
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.readI16
+import at.released.weh.wasm.core.memory.readI32
+import at.released.weh.wasm.core.memory.readI64
+import at.released.weh.wasm.core.memory.readI8
 import kotlinx.io.Source
 import kotlinx.io.readIntLe
 import kotlinx.io.readLongLe
@@ -40,6 +46,60 @@ internal object SubscriptionMapper {
         source.require(SUBSCRIPTION_SIZE * count)
         return MutableList(count) {
             readSubscription(source)
+        }
+    }
+
+    context(_: MemoryAccess<M>)
+    internal fun <M> readSubscriptions(memory: M, address: WasmPtr, count: Int): List<Subscription> =
+        MutableList(count) { index ->
+            val base = address + index * SUBSCRIPTION_SIZE.toInt()
+            val tag = Eventtype.fromCode(memory.readI8(base + 8).toInt()) ?: error("Incorrect Eventtype")
+            val value = when (tag) {
+                Eventtype.CLOCK -> SubscriptionClock(
+                    tag = tag,
+                    id = Clockid.fromCode(memory.readI32(base + 16)) ?: error("Incorrect clockId"),
+                    timeout = memory.readI64(base + 24),
+                    precision = memory.readI64(base + 32),
+                    flags = memory.readI16(base + 40),
+                )
+                Eventtype.FD_READ, Eventtype.FD_WRITE -> SubscriptionFdReadwrite(
+                    tag = tag,
+                    fileDescriptor = memory.readI32(base + 16),
+                )
+            }
+            Subscription(userdata = memory.readI64(base), u = value)
+        }
+
+    context(_: MemoryAccess<M>)
+    internal fun <M> readFileSystemSubscriptions(
+        memory: M,
+        address: WasmPtr,
+        count: Int,
+    ): List<FileSystemSubscription> = MutableList(count) { index ->
+        val base = address + index * SUBSCRIPTION_SIZE.toInt()
+        val userdata = memory.readI64(base)
+        when (val tag = Eventtype.fromCode(memory.readI8(base + 8).toInt()) ?: error("Incorrect Eventtype")) {
+            Eventtype.CLOCK -> {
+                val clockId = Clockid.fromCode(memory.readI32(base + 16)) ?: error("Incorrect clockId")
+                val timeout = memory.readI64(base + 24)
+                val precision = memory.readI64(base + 32)
+                val flags = memory.readI16(base + 40)
+                ClockSubscription(
+                    userdata = userdata,
+                    clock = clockId.toSubscriptionClockId(),
+                    timeout = if (flags and SUBSCRIPTION_CLOCK_ABSTIME == SUBSCRIPTION_CLOCK_ABSTIME) {
+                        SubscriptionTimeout.Absolute(timeout, precision)
+                    } else {
+                        SubscriptionTimeout.Relative(timeout, precision)
+                    },
+                )
+            }
+
+            Eventtype.FD_READ, Eventtype.FD_WRITE -> FileDescriptorSubscription(
+                userdata = userdata,
+                fileDescriptor = memory.readI32(base + 16),
+                type = if (tag == Eventtype.FD_READ) FileDescriptorEventType.READ else FileDescriptorEventType.WRITE,
+            )
         }
     }
 

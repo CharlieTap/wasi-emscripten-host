@@ -7,10 +7,9 @@
 package at.released.weh.filesystem.posix.stdio
 
 import arrow.core.Either
-import arrow.core.getOrElse
-import arrow.core.left
 import arrow.core.right
 import at.released.weh.filesystem.error.NonblockingPollError
+import at.released.weh.filesystem.internal.fdresource.stdio.ByteArrayStdioSink
 import at.released.weh.filesystem.posix.NativeFileFd
 import at.released.weh.filesystem.stdio.StdioPollEvent
 import at.released.weh.filesystem.stdio.StdioPollEvent.Companion.STDIO_POLL_EVENT_SUCCESS
@@ -38,7 +37,7 @@ internal expect fun writeNative(
 
 internal class PosixFdSink private constructor(
     private val fd: NativeFileFd,
-) : StdioSink, StdioWithPollableFileDescriptor {
+) : StdioSink, ByteArrayStdioSink, StdioWithPollableFileDescriptor {
     @Suppress("GENERIC_VARIABLE_WRONG_DECLARATION")
     private var isClosed = atomic<Boolean>(false)
     override val pollableFileDescriptor: Int get() = fd.fd
@@ -52,23 +51,36 @@ internal class PosixFdSink private constructor(
     }
 
     override fun write(source: Buffer, byteCount: Long) {
-        checkSinkNotClosed()
         val bytes = source.readByteArray(byteCount.toInt())
-        val bytesOrError = bytes.usePinned { buf ->
-            val totalBytes = byteCount.toInt()
-            var offset = 0
-            while (offset != totalBytes) {
-                val writtenBytes = writeNative(fd, buf.addressOf(offset), totalBytes - offset)
-                    .getOrElse {
-                        @Suppress("CUSTOM_LABEL")
-                        return@usePinned it.right()
-                    }
+        writeFromByteArray(bytes, 0, bytes.size)
+    }
+
+    override fun writeFromByteArray(source: ByteArray, startIndex: Int, endIndex: Int) {
+        checkSinkNotClosed()
+        require(startIndex in 0..endIndex && endIndex <= source.size)
+        if (startIndex == endIndex) {
+            return
+        }
+        val errnoOrNull = source.usePinned { buf ->
+            var offset = startIndex
+            var writeError: Int? = null
+            while (offset != endIndex) {
+                val writtenBytes = writeNative(fd, buf.addressOf(offset), endIndex - offset).fold(
+                    ifLeft = {
+                        writeError = it
+                        0
+                    },
+                    ifRight = { it },
+                )
+                if (writeError != null) {
+                    break
+                }
                 offset += writtenBytes
             }
-            offset.left()
+            writeError
         }
-        bytesOrError.onRight {
-            throw IOException("Can not write to ${fd.fd}: $errno")
+        if (errnoOrNull != null) {
+            throw IOException("Can not write to ${fd.fd}: $errnoOrNull")
         }
     }
 

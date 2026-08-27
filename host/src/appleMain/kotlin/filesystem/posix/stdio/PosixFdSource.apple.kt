@@ -20,7 +20,7 @@ internal actual fun readNative(
     count: Int,
 ): Either<Int, Int> {
     val bytes = read(fd.fd, buf, count.toULong())
-    return if (bytes > 0) {
+    return if (bytes >= 0) {
         bytes.toInt().right()
     } else {
         errno.left()

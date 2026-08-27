@@ -17,23 +17,24 @@ import at.released.weh.host.EmbedderHost
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 import at.released.weh.wasm.core.memory.readNullTerminatedString
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
-import kotlinx.io.buffered
+import at.released.weh.wasm.core.memory.write
 import kotlinx.io.bytestring.ByteString
 import kotlinx.io.write
 
 public class SyscallReadlinkatFunctionHandle(
     host: EmbedderHost,
 ) : EmscriptenHostFunctionHandle(SYSCALL_READLINKAT, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         rawDirFd: Int,
         @IntWasmPtr(Byte::class) pathnamePtr: WasmPtr,
         @IntWasmPtr(Byte::class) buf: WasmPtr,
         bufSize: Int,
-    ): Int {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Int = with(memoryAccess) {
         val path = memory.readNullTerminatedString(pathnamePtr)
 
         if (bufSize < 0) {
@@ -51,11 +52,9 @@ public class SyscallReadlinkatFunctionHandle(
             ifLeft = { -it.errno.wasiPreview1Code },
         ) { linkPath: VirtualPath ->
             val linkpathBytes: ByteString = linkPath.utf8Bytes
-            val len = linkpathBytes.size.toInt().coerceAtMost(bufSize)
+            val len = linkpathBytes.size.coerceAtMost(bufSize)
 
-            memory.sinkWithMaxSize(buf, len).buffered().use {
-                it.write(linkpathBytes, 0, len)
-            }
+            memory.write(buf, linkpathBytes.toByteArray(), bytesToWrite = len)
             len
         }
     }

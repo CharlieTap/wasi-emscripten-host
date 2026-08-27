@@ -348,6 +348,6 @@ For the latest updates, visit this link: [chicory/aot]
 
 [Chicory]: https://chicory.dev/
 [Chicory_version]: https://github.com/dylibso/chicory/releases/tag/1.5.1
-[samples/wasm-gradle/app-chicory]: https://github.com/illarionov/wasi-emscripten-host/tree/main/samples/wasm-gradle
+[samples/wasm-gradle/app-chicory]: https://github.com/CharlieTap/wasi-emscripten-host/tree/main/samples/wasm-gradle
 [samples/wasm-maven/chicory-maven]: https://github.com/illarionov/wasi-emscripten-host/tree/main/samples/wasm-maven
 [chicory/aot]: https://chicory.dev/docs/experimental/aot

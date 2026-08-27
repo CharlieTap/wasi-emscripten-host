@@ -30,7 +30,7 @@ internal class DelegateOperationsFileSystem(
     ): Either<E, R> {
         val chain = InterceptorChain(
             operation = operation,
-            input = input,
+            initialInput = input,
             interceptors = interceptors,
         )
         return chain.proceed(input)

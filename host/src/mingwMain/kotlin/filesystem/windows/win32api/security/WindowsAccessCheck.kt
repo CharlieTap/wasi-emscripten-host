@@ -80,7 +80,7 @@ internal fun windowsAccessCheck(
 
 private fun Set<FileAccessibilityCheck>.toDesiredAccessMask(): UInt = fold(0U) { mask, check ->
     mask or when (check) {
-        READABLE -> GENERIC_READ.toUInt()
+        READABLE -> GENERIC_READ
         WRITEABLE -> GENERIC_WRITE.toUInt()
         EXECUTABLE -> GENERIC_EXECUTE.toUInt()
     }

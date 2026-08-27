@@ -6,23 +6,23 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asInt
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.SyscallFchown32FunctionHandle
 import at.released.weh.host.EmbedderHost
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.host.writeI32
 
 internal class SyscallFchown32(
     host: EmbedderHost,
 ) : HostFunctionProvider {
     private val handle = SyscallFchown32FunctionHandle(host)
-    override val function: HostFunction = { args ->
+    override val function: HostFunction = HostFunction { parameters, results ->
         val result: Int = handle.execute(
-            args[0].asInt(),
-            args[1].asInt(),
-            args[2].asInt(),
+            parameters.readI32(0),
+            parameters.readI32(1),
+            parameters.readI32(2),
         )
-        listOf(NumberValue.I32(result))
+        results.writeI32(0, result)
     }
 }

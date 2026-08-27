@@ -12,36 +12,28 @@ import at.released.weh.filesystem.op.prestat.PrestatFd
 import at.released.weh.filesystem.op.prestat.PrestatResult
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasi.preview1.WasiPreview1HostFunction
-import at.released.weh.wasi.preview1.ext.PRESTAT_PACKED_SIZE
-import at.released.weh.wasi.preview1.ext.encodedLength
 import at.released.weh.wasi.preview1.ext.foldToErrno
-import at.released.weh.wasi.preview1.ext.packTo
 import at.released.weh.wasi.preview1.type.Errno
-import at.released.weh.wasi.preview1.type.Preopentype
 import at.released.weh.wasi.preview1.type.Prestat
-import at.released.weh.wasi.preview1.type.PrestatDir
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
-import kotlinx.io.buffered
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.writeI32
 
 public class FdPrestatGetFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.FD_PRESTAT_GET, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Prestat::class) dstAddr: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         return host.fileSystem.execute(PrestatFd, PrestatFd(fd))
             .onRight { prestatResult: PrestatResult ->
-                memory.sinkWithMaxSize(dstAddr, PRESTAT_PACKED_SIZE).buffered().use {
-                    PrestatDir(
-                        tag = Preopentype.DIR,
-                        prNameLen = prestatResult.path.encodedLength(),
-                    ).packTo(it)
-                }
+                memory.writeI32(dstAddr, 0)
+                memory.writeI32(dstAddr + 4, prestatResult.path.utf8SizeBytes)
             }.foldToErrno()
     }
 }

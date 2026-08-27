@@ -13,6 +13,7 @@ import assertk.assertions.isInstanceOf
 import assertk.assertions.isNotNull
 import assertk.fail
 import assertk.tableOf
+import at.released.weh.common.api.InternalWasiEmscriptenHostApi
 import at.released.weh.filesystem.path.PathError
 import at.released.weh.filesystem.path.virtual.VirtualPath.Companion.isAbsolute
 import at.released.weh.filesystem.path.virtual.VirtualPath.Companion.isDirectoryRequest
@@ -67,6 +68,19 @@ class VirtualPathTest {
                 }
                 assertThat(virtualPath.utf8Bytes).isEqualTo(pathString.encodeToByteString())
             }
+    }
+
+    @Test
+    @OptIn(InternalWasiEmscriptenHostApi::class)
+    fun create_owned_utf8_validates_and_preserves_the_decoded_path() {
+        val path = VirtualPath.createOwnedUtf8("tmp/owned".encodeToByteArray()).getOrElse {
+            fail("Can not create owned UTF-8 path")
+        }
+
+        assertThat(path.toString()).isEqualTo("tmp/owned")
+        assertThat(VirtualPath.createOwnedUtf8(byteArrayOf(0xC3.toByte(), 0x28)).leftOrNull())
+            .isNotNull()
+            .isInstanceOf<PathError.InvalidPathFormat>()
     }
 
     @Test

@@ -6,18 +6,18 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asInt
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.FdDatasyncFunctionHandle
 import at.released.weh.host.EmbedderHost
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.host.writeI32
 
 internal class SyscallFdatasync(
     host: EmbedderHost,
 ) : HostFunctionProvider {
     val handle = FdDatasyncFunctionHandle(host)
-    override val function: HostFunction = { args ->
-        listOf(NumberValue.I32(handle.execute(args[0].asInt()).code))
+    override val function: HostFunction = HostFunction { parameters, results ->
+        results.writeI32(0, handle.execute(parameters.readI32(0)).code)
     }
 }

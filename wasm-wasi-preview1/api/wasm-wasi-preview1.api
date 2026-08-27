@@ -7,32 +7,38 @@ public class at/released/weh/wasi/preview1/WasiPreview1Exception : java/lang/Run
 
 public final class at/released/weh/wasi/preview1/function/ArgsGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/ArgsGetFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/ArgsSizesGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/ArgsSizesGetFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/ClockResGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/ClockResGetFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/ClockTimeGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IJI)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IJILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/ClockTimeGetFunctionHandle;Ljava/lang/Object;IJILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/EnvironGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/EnvironGetFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/EnvironSizesGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/EnvironSizesGetFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdAdviseFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
@@ -57,7 +63,8 @@ public final class at/released/weh/wasi/preview1/function/FdDatasyncFunctionHand
 
 public final class at/released/weh/wasi/preview1/function/FdFdstatGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdFdstatGetFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdFdstatSetFlagsFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
@@ -67,12 +74,14 @@ public final class at/released/weh/wasi/preview1/function/FdFdstatSetFlagsFuncti
 
 public final class at/released/weh/wasi/preview1/function/FdFdstatSetRightsFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IJJ)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IJJLat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdFdstatSetRightsFunctionHandle;Ljava/lang/Object;IJJLat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdFilestatGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdFilestatGetFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdFilestatSetSizeFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
@@ -87,32 +96,41 @@ public final class at/released/weh/wasi/preview1/function/FdFilestatSetTimesFunc
 
 public final class at/released/weh/wasi/preview1/function/FdPreadFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;Lat/released/weh/wasi/preview1/memory/WasiMemoryReader;IIIJI)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/WasiMemoryReader;IIIJILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdPreadFunctionHandle;Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/WasiMemoryReader;IIIJILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun executeDirect (Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/DirectWasiMemoryReader;IIIJILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdPrestatDirNameFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;III)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdPrestatDirNameFunctionHandle;Ljava/lang/Object;IIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdPrestatGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdPrestatGetFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdPwriteFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;Lat/released/weh/wasi/preview1/memory/WasiMemoryWriter;IIIJI)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/WasiMemoryWriter;IIIJILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdPwriteFunctionHandle;Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/WasiMemoryWriter;IIIJILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun executeDirect (Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/DirectWasiMemoryWriter;IIIJILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdReadFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;Lat/released/weh/wasi/preview1/memory/WasiMemoryReader;IIII)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/WasiMemoryReader;IIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdReadFunctionHandle;Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/WasiMemoryReader;IIIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun executeDirect (Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/DirectWasiMemoryReader;IIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdReaddirFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIIJI)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIIJILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdReaddirFunctionHandle;Ljava/lang/Object;IIIJILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdRenumberFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
@@ -122,7 +140,8 @@ public final class at/released/weh/wasi/preview1/function/FdRenumberFunctionHand
 
 public final class at/released/weh/wasi/preview1/function/FdSeekFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IJBI)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IJBILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdSeekFunctionHandle;Ljava/lang/Object;IJBILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdSyncFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
@@ -132,67 +151,81 @@ public final class at/released/weh/wasi/preview1/function/FdSyncFunctionHandle :
 
 public final class at/released/weh/wasi/preview1/function/FdTellFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdTellFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/FdWriteFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;Lat/released/weh/wasi/preview1/memory/WasiMemoryWriter;IIII)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/WasiMemoryWriter;IIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/FdWriteFunctionHandle;Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/WasiMemoryWriter;IIIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun executeDirect (Ljava/lang/Object;Lat/released/weh/wasi/preview1/memory/DirectWasiMemoryWriter;IIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathCreateDirectoryFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;III)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathCreateDirectoryFunctionHandle;Ljava/lang/Object;IIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathFilestatGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIIII)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathFilestatGetFunctionHandle;Ljava/lang/Object;IIIIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathFilestatSetTimesFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIIIJJS)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIIIJJSLat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathFilestatSetTimesFunctionHandle;Ljava/lang/Object;IIIIJJSLat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathLinkFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIIIIII)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIIIIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathLinkFunctionHandle;Ljava/lang/Object;IIIIIIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathOpenFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIIISJJSI)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIIISJJSILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathOpenFunctionHandle;Ljava/lang/Object;IIIISJJSILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathReadlinkFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIIIII)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIIIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathReadlinkFunctionHandle;Ljava/lang/Object;IIIIIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathRemoveDirectoryFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;III)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathRemoveDirectoryFunctionHandle;Ljava/lang/Object;IIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathRenameFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIIIII)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIIIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathRenameFunctionHandle;Ljava/lang/Object;IIIIIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathSymlinkFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIIII)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathSymlinkFunctionHandle;Ljava/lang/Object;IIIIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PathUnlinkFileFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;III)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PathUnlinkFileFunctionHandle;Ljava/lang/Object;IIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/PollOneoffFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIII)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/PollOneoffFunctionHandle;Ljava/lang/Object;IIIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/ProcExitFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
@@ -207,12 +240,14 @@ public final class at/released/weh/wasi/preview1/function/ProcExitFunctionHandle
 
 public final class at/released/weh/wasi/preview1/function/ProcRaiseFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;B)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;BLat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/ProcRaiseFunctionHandle;Ljava/lang/Object;BLat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/RandomGetFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;II)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/RandomGetFunctionHandle;Ljava/lang/Object;IILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/SchedYieldFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
@@ -222,22 +257,26 @@ public final class at/released/weh/wasi/preview1/function/SchedYieldFunctionHand
 
 public final class at/released/weh/wasi/preview1/function/SockAcceptFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;ISI)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;ISILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/SockAcceptFunctionHandle;Ljava/lang/Object;ISILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/SockRecvFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIISII)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIISIILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/SockRecvFunctionHandle;Ljava/lang/Object;IIISIILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/SockSendFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IIISI)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IIISILat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/SockSendFunctionHandle;Ljava/lang/Object;IIISILat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public final class at/released/weh/wasi/preview1/function/SockShutdownFunctionHandle : at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
 	public fun <init> (Lat/released/weh/host/EmbedderHost;)V
-	public final fun execute (Lat/released/weh/wasm/core/memory/Memory;IB)Lat/released/weh/wasi/preview1/type/Errno;
+	public final fun execute (Ljava/lang/Object;IBLat/released/weh/wasm/core/memory/MemoryAccess;)Lat/released/weh/wasi/preview1/type/Errno;
+	public static synthetic fun execute$default (Lat/released/weh/wasi/preview1/function/SockShutdownFunctionHandle;Ljava/lang/Object;IBLat/released/weh/wasm/core/memory/MemoryAccess;ILjava/lang/Object;)Lat/released/weh/wasi/preview1/type/Errno;
 }
 
 public abstract class at/released/weh/wasi/preview1/function/WasiPreview1HostFunctionHandle {
@@ -254,6 +293,14 @@ public final class at/released/weh/wasi/preview1/memory/DefaultWasiMemoryReader 
 public final class at/released/weh/wasi/preview1/memory/DefaultWasiMemoryWriter : at/released/weh/wasi/preview1/memory/WasiMemoryWriter {
 	public fun <init> (Lat/released/weh/wasm/core/memory/ReadOnlyMemory;Lat/released/weh/filesystem/FileSystem;)V
 	public fun write (ILat/released/weh/filesystem/op/readwrite/ReadWriteStrategy;Ljava/util/List;)Larrow/core/Either;
+}
+
+public abstract interface class at/released/weh/wasi/preview1/memory/DirectWasiMemoryReader {
+	public abstract fun read (Ljava/lang/Object;ILat/released/weh/filesystem/op/readwrite/ReadWriteStrategy;IILat/released/weh/wasm/core/memory/MemoryAccess;)Larrow/core/Either;
+}
+
+public abstract interface class at/released/weh/wasi/preview1/memory/DirectWasiMemoryWriter {
+	public abstract fun write (Ljava/lang/Object;ILat/released/weh/filesystem/op/readwrite/ReadWriteStrategy;IILat/released/weh/wasm/core/memory/MemoryAccess;)Larrow/core/Either;
 }
 
 public abstract interface class at/released/weh/wasi/preview1/memory/WasiMemoryReader {

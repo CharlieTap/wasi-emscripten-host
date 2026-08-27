@@ -13,25 +13,24 @@ import at.released.weh.wasi.preview1.type.Size
 import at.released.weh.wasi.preview1.type.SizeType
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
-import kotlinx.io.buffered
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.write
 
 public class RandomGetFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.RANDOM_GET, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Byte::class) buf: WasmPtr,
         @SizeType bufLen: Size,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         return try {
             val entropyBytes = host.entropySource.generateEntropy(bufLen)
             check(entropyBytes.size == bufLen)
 
-            memory.sinkWithMaxSize(buf, bufLen).buffered().use {
-                it.write(entropyBytes)
-            }
+            memory.write(buf, entropyBytes)
             Errno.SUCCESS
         } catch (@Suppress("TooGenericExceptionCaught") e: Exception) {
             host.rootLogger.withTag("RandomGetFunctionHandle").i(e) {

@@ -6,24 +6,26 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asWasmAddr
+import at.released.weh.bindings.chasm.memory.ChasmMemoryAccess
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.SyscallRmdirFunctionHandle
 import at.released.weh.host.EmbedderHost
-import at.released.weh.wasm.core.memory.ReadOnlyMemory
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.ModuleIndex
+import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.host.withMemory
+import io.github.charlietap.chasm.host.writeI32
 
 internal class SyscallRmdir(
     host: EmbedderHost,
-    private val memory: ReadOnlyMemory,
+    private val memoryIndex: ModuleIndex.MemoryIndex,
 ) : HostFunctionProvider {
     private val handle = SyscallRmdirFunctionHandle(host)
-    override val function: HostFunction = { args ->
-        val result = handle.execute(
-            memory,
-            args[0].asWasmAddr(),
-        )
-        listOf(NumberValue.I32(result))
+    override val function: HostFunction = HostFunction { parameters, results ->
+        val pathnamePtr = parameters.readI32(0)
+        val result = withMemory(memoryIndex) {
+            handle.execute(this, pathnamePtr, ChasmMemoryAccess)
+        }
+        results.writeI32(0, result)
     }
 }

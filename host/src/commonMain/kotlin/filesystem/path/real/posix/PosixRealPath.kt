@@ -7,14 +7,11 @@
 package at.released.weh.filesystem.path.real.posix
 
 import arrow.core.Either
-import arrow.core.flatMap
 import arrow.core.right
 import at.released.weh.filesystem.path.PathError
 import at.released.weh.filesystem.path.real.RealPath
 import kotlinx.io.bytestring.ByteString
-import kotlinx.io.bytestring.decodeToString
 import kotlinx.io.bytestring.encodeToByteString
-import kotlin.LazyThreadSafetyMode.PUBLICATION
 
 /**
  * Represents a Path in Unix-like File Systems
@@ -35,11 +32,8 @@ import kotlin.LazyThreadSafetyMode.PUBLICATION
  */
 internal class PosixRealPath private constructor(
     override val utf8Bytes: ByteString,
+    public val kString: String,
 ) : RealPath {
-    public val kString: String by lazy(PUBLICATION) {
-        utf8Bytes.decodeToString()
-    }
-
     override fun decodeToString(): Either<PathError.InvalidPathFormat, String> {
         return kString.right()
     }
@@ -65,12 +59,12 @@ internal class PosixRealPath private constructor(
 
     internal companion object : RealPath.Factory<PosixRealPath> {
         override fun create(bytes: ByteString): Either<PathError, PosixRealPath> {
-            return Either.catch { bytes.toByteArray().decodeToString(throwOnInvalidSequence = true) }
-                .mapLeft { _ -> PathError.InvalidPathFormat("Path is not a valid Unicode string") }
-                .flatMap<PathError, String, PosixRealPath>(::create)
+            return PosixPathValidator.decodeAndValidate(bytes).map { decoded -> PosixRealPath(bytes, decoded) }
         }
 
         override fun create(path: String): Either<PathError, PosixRealPath> = PosixPathValidator.validate(path)
-            .map { PosixRealPath(path.encodeToByteString()) }
+            .map { PosixRealPath(path.encodeToByteString(), path) }
+
+        internal fun createValidated(bytes: ByteString, decoded: String): PosixRealPath = PosixRealPath(bytes, decoded)
     }
 }

@@ -6,28 +6,29 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asInt
-import at.released.weh.bindings.chasm.ext.asWasmAddr
+import at.released.weh.bindings.chasm.memory.ChasmMemoryAccess
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.SyscallReadlinkatFunctionHandle
 import at.released.weh.host.EmbedderHost
-import at.released.weh.wasm.core.memory.Memory
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.ModuleIndex
+import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.host.withMemory
+import io.github.charlietap.chasm.host.writeI32
 
 internal class SyscallReadlinkat(
     host: EmbedderHost,
-    private val memory: Memory,
+    private val memoryIndex: ModuleIndex.MemoryIndex,
 ) : HostFunctionProvider {
     private val handle = SyscallReadlinkatFunctionHandle(host)
-    override val function: HostFunction = { args ->
-        val sizeOrErrno = handle.execute(
-            memory,
-            rawDirFd = args[0].asInt(),
-            pathnamePtr = args[1].asWasmAddr(),
-            buf = args[2].asWasmAddr(),
-            bufSize = args[3].asInt(),
-        )
-        listOf(NumberValue.I32(sizeOrErrno))
+    override val function: HostFunction = HostFunction { parameters, results ->
+        val rawDirFd = parameters.readI32(0)
+        val pathnamePtr = parameters.readI32(1)
+        val buf = parameters.readI32(2)
+        val bufSize = parameters.readI32(3)
+        val sizeOrErrno = withMemory(memoryIndex) {
+            handle.execute(this, rawDirFd, pathnamePtr, buf, bufSize, ChasmMemoryAccess)
+        }
+        results.writeI32(0, sizeOrErrno)
     }
 }

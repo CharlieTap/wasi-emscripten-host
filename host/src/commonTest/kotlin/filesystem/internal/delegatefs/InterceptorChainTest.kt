@@ -71,6 +71,33 @@ class InterceptorChainTest {
         assertThat(result.getOrNull()).isEqualTo("link-outp3-outp2-outp1")
     }
 
+    @Test
+    @Suppress("UNCHECKED_CAST")
+    fun interceptor_can_proceed_more_than_once_without_corrupting_chain_state() {
+        val terminalInputs = mutableListOf<String>()
+        val branchingInterceptor = object : FileSystemInterceptor {
+            override fun <I : Any, E : FileSystemOperationError, R : Any> intercept(
+                chain: Chain<I, E, R>,
+            ): Either<E, R> {
+                chain.proceed(TestFsOp("first") as I)
+                return chain.proceed(TestFsOp("second") as I)
+            }
+        }
+        val terminalInterceptor = object : FileSystemInterceptor {
+            override fun <I : Any, E : FileSystemOperationError, R : Any> intercept(
+                chain: Chain<I, E, R>,
+            ): Either<E, R> {
+                terminalInputs += (chain.input as TestFsOp).path
+                return chain.input.right() as Either<E, R>
+            }
+        }
+        val input = TestFsOp("initial")
+
+        InterceptorChain(TestFsOp, input, listOf(branchingInterceptor, terminalInterceptor)).proceed(input)
+
+        assertThat(terminalInputs).containsExactly("first", "second")
+    }
+
     data class TestFsOp(
         val path: String,
     ) {

@@ -6,6 +6,7 @@
 
 package at.released.weh.wasm.core.memory
 
+import at.released.weh.common.api.InternalWasiEmscriptenHostApi
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
 import at.released.weh.wasm.core.WasmPtrUtil.ptrIsNull
@@ -23,12 +24,29 @@ public interface ReadOnlyMemory {
 
 public fun ReadOnlyMemory.readU8(@IntWasmPtr addr: WasmPtr): UByte = readI8(addr).toUByte()
 
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.readU8(@IntWasmPtr addr: WasmPtr): UByte = readI8(addr).toUByte()
+
 public fun ReadOnlyMemory.readU32(@IntWasmPtr addr: WasmPtr): UInt = readI32(addr).toUInt()
+
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.readU32(@IntWasmPtr addr: WasmPtr): UInt = readI32(addr).toUInt()
 
 public fun ReadOnlyMemory.readU64(@IntWasmPtr addr: WasmPtr): ULong = readI64(addr).toULong()
 
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.readU64(@IntWasmPtr addr: WasmPtr): ULong = readI64(addr).toULong()
+
 @IntWasmPtr
 public fun ReadOnlyMemory.readPtr(@IntWasmPtr addr: WasmPtr): WasmPtr = readI32(addr)
+
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+@IntWasmPtr
+public fun <M> M.readPtr(@IntWasmPtr addr: WasmPtr): WasmPtr = readI32(addr)
 
 public fun ReadOnlyMemory.readNullableNullTerminatedString(@IntWasmPtr(ref = Byte::class) offset: WasmPtr): String? {
     return if (!ptrIsNull(offset)) {
@@ -55,7 +73,20 @@ public fun ReadOnlyMemory.readNullTerminatedString(@IntWasmPtr(ref = Byte::class
     return mem.readString()
 }
 
+context(access: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.readNullTerminatedString(@IntWasmPtr(ref = Byte::class) offset: WasmPtr): String {
+    return access.readNullTerminatedString(this, offset)
+}
+
 public fun ReadOnlyMemory.sourceWithMaxSize(
+    @IntWasmPtr fromAddr: WasmPtr,
+    maxSize: Int,
+): RawSource = source(fromAddr, fromAddr + maxSize)
+
+context(_: MemoryAccess<M>)
+@InternalWasiEmscriptenHostApi
+public fun <M> M.sourceWithMaxSize(
     @IntWasmPtr fromAddr: WasmPtr,
     maxSize: Int,
 ): RawSource = source(fromAddr, fromAddr + maxSize)

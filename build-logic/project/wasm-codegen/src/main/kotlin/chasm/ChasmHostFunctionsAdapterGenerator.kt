@@ -8,19 +8,18 @@ package at.released.weh.gradle.wasm.codegen.chasm
 
 import at.released.weh.gradle.wasm.codegen.chasm.ChasmArgsFunctionHandles.WasiFunctionHandle
 import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmBindingsClassname.CHASM_FUNCTIONS_CLASS_NAME
+import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmBindingsClassname.CHASM_WASI_MEMORY_READER
+import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmBindingsClassname.CHASM_WASI_MEMORY_WRITER
 import at.released.weh.gradle.wasm.codegen.chasm.classname.ChasmShapesClassname
 import at.released.weh.gradle.wasm.codegen.util.classname.SUPPRESS_CLASS_NAME
 import at.released.weh.gradle.wasm.codegen.util.classname.WehHostClassname
-import at.released.weh.gradle.wasm.codegen.util.classname.WehWasiPreview1ClassName
-import at.released.weh.gradle.wasm.codegen.util.classname.WehWasmCoreClassName
 import at.released.weh.gradle.wasm.codegen.witx.parser.model.WasiFunc
 import at.released.weh.gradle.wasm.codegen.witx.parser.model.WasiType
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier.INTERNAL
 import com.squareup.kotlinpoet.KModifier.PRIVATE
-import com.squareup.kotlinpoet.LIST
-import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
@@ -47,31 +46,27 @@ internal class ChasmHostFunctionsAdapterGenerator(
     }
 
     private fun generateFunctionsClass(): TypeSpec = TypeSpec.classBuilder(CHASM_FUNCTIONS_CLASS_NAME).apply {
-        addModifiers(PRIVATE)
+        addModifiers(INTERNAL)
         addAnnotation(AnnotationSpec.builder(SUPPRESS_CLASS_NAME).addMember("%S", "UNUSED_PARAMETER").build())
         primaryConstructor(
             FunSpec.constructorBuilder()
                 .addParameter("host", WehHostClassname.EMBEDDER_HOST)
-                .addParameter("memory", WehWasmCoreClassName.Memory.MEMORY_CLASS_NAME)
-                .addParameter("wasiMemoryReader", WehWasiPreview1ClassName.WASI_MEMORY_READER)
-                .addParameter("wasiMemoryWriter", WehWasiPreview1ClassName.WASI_MEMORY_WRITER)
+                .addParameter("memoryIndex", ChasmShapesClassname.MEMORY_INDEX)
                 .build(),
         )
         addProperty(
-            PropertySpec.builder("memory", WehWasmCoreClassName.Memory.MEMORY_CLASS_NAME, PRIVATE)
-                .initializer("memory")
+            PropertySpec.builder("memoryIndex", ChasmShapesClassname.MEMORY_INDEX, PRIVATE)
+                .initializer("memoryIndex")
                 .build(),
         )
         addProperty(
-            PropertySpec
-                .builder("wasiMemoryReader", WehWasiPreview1ClassName.WASI_MEMORY_READER, PRIVATE)
-                .initializer("wasiMemoryReader")
+            PropertySpec.builder("wasiMemoryReader", CHASM_WASI_MEMORY_READER, PRIVATE)
+                .initializer("%T(host.fileSystem)", CHASM_WASI_MEMORY_READER)
                 .build(),
         )
         addProperty(
-            PropertySpec
-                .builder("wasiMemoryWriter", WehWasiPreview1ClassName.WASI_MEMORY_WRITER, PRIVATE)
-                .initializer("wasiMemoryWriter")
+            PropertySpec.builder("wasiMemoryWriter", CHASM_WASI_MEMORY_WRITER, PRIVATE)
+                .initializer("%T(host.fileSystem)", CHASM_WASI_MEMORY_WRITER)
                 .build(),
         )
 
@@ -81,16 +76,7 @@ internal class ChasmHostFunctionsAdapterGenerator(
             addProperty(funcHandleSpec.handleProperty.asPropertySpec())
         }
         functionHandles.forEach { funcHandleSpec: WasiFunctionHandle ->
-            addFunction(funcHandleSpec.chasmHostFunctionDeclaration())
+            addProperty(funcHandleSpec.chasmHostFunctionDeclaration())
         }
-
-        addFunction(
-            FunSpec.builder("toListOfReturnValues")
-                .addModifiers(PRIVATE)
-                .receiver(WehWasiPreview1ClassName.ERRNO)
-                .returns(LIST.parameterizedBy(ChasmShapesClassname.EXECUTION_VALUE))
-                .addCode("""return listOf(%T(this.code))""", ChasmShapesClassname.RUNTIME_NUMBER_VALUE_I32)
-                .build(),
-        )
     }.build()
 }

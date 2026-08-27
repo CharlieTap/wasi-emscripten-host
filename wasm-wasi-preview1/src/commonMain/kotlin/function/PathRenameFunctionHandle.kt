@@ -19,22 +19,24 @@ import at.released.weh.wasi.preview1.ext.readPathString
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class PathRenameFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.PATH_RENAME, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Byte::class) path: WasmPtr,
         pathSize: Int,
         @IntFileDescriptor newFd: FileDescriptor,
         @IntWasmPtr(Byte::class) newPath: WasmPtr,
         newPathSize: Int,
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
     ): Errno = either {
-        val oldPathString = memory.readPathString(path, pathSize).bind()
-        val newPathString = memory.readPathString(newPath, newPathSize).bind()
+        val oldPathString = memory.readPathString(path, pathSize, memoryAccess).bind()
+        val newPathString = memory.readPathString(newPath, newPathSize, memoryAccess).bind()
         host.fileSystem.execute(
             Rename,
             Rename(

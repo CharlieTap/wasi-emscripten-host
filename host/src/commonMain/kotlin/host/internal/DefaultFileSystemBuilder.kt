@@ -6,6 +6,7 @@
 
 package at.released.weh.host.internal
 
+import at.released.weh.common.api.Logger
 import at.released.weh.filesystem.FileSystem
 import at.released.weh.filesystem.FileSystemEngine
 import at.released.weh.filesystem.dsl.FileSystemEngineConfig
@@ -35,7 +36,9 @@ private fun <E : FileSystemEngineConfig> EmbedderHostBuilder.createDefaultFileSy
     val fileSystemConfig: FileSystemSimpleConfigBlock = builder.fileSystem()
     return FileSystem(engine) {
         addInterceptor(GlobalLockFileSystemInterceptor())
-        addInterceptor(LoggingFileSystemInterceptor(builder.logger.withTag(fsLoggerTag)))
+        if (builder.logger !== Logger) {
+            addInterceptor(LoggingFileSystemInterceptor(builder.logger.withTag(fsLoggerTag)))
+        }
         stdio {
             stdinProvider = builder.stdin
             stdoutProvider = builder.stdout

@@ -12,27 +12,28 @@ import at.released.weh.wasi.preview1.ext.WasiArgsEnvironmentFunc.encodeEnvToWasi
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.writeI32
 import at.released.weh.wasm.core.memory.writeNullTerminatedString
 
 public class EnvironGetFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.ENVIRON_GET, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Int::class) environPAddr: WasmPtr,
         @IntWasmPtr(Int::class) environBufAddr: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         var pp = environPAddr
         var bufP = environBufAddr
-        host.systemEnvProvider.getSystemEnv()
-            .entries
-            .map { it.encodeEnvToWasi() }
-            .forEach { envString ->
-                memory.writeI32(pp, bufP)
-                pp += 4
-                bufP += memory.writeNullTerminatedString(bufP, envString)
-            }
+        for (environmentEntry in host.systemEnvProvider.getSystemEnv().entries) {
+            val envString = environmentEntry.encodeEnvToWasi()
+            memory.writeI32(pp, bufP)
+            pp += 4
+            bufP += memory.writeNullTerminatedString(bufP, envString)
+        }
         return Errno.SUCCESS
     }
 }

@@ -8,26 +8,27 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asInt
-import at.released.weh.bindings.chasm.ext.asWasmAddr
+import at.released.weh.bindings.chasm.memory.ChasmMemoryAccess
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.SyscallGetcwdFunctionHandle
 import at.released.weh.host.EmbedderHost
-import at.released.weh.wasm.core.memory.Memory
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.ModuleIndex
+import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.host.withMemory
+import io.github.charlietap.chasm.host.writeI32
 
 internal class SyscallGetcwd(
     host: EmbedderHost,
-    private val memory: Memory,
+    private val memoryIndex: ModuleIndex.MemoryIndex,
 ) : HostFunctionProvider {
     private val handle = SyscallGetcwdFunctionHandle(host)
-    override val function: HostFunction = { args ->
-        val result: Int = handle.execute(
-            memory,
-            args[0].asWasmAddr(),
-            args[1].asInt(),
-        )
-        listOf(NumberValue.I32(result))
+    override val function: HostFunction = HostFunction { parameters, results ->
+        val dst = parameters.readI32(0)
+        val size = parameters.readI32(1)
+        val result = withMemory(memoryIndex) {
+            handle.execute(this, dst, size, ChasmMemoryAccess)
+        }
+        results.writeI32(0, result)
     }
 }

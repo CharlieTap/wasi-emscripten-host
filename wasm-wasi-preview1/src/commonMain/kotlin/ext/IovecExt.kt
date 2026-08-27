@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+@file:Suppress("NoUnusedImports", "UnusedImports")
+
 package at.released.weh.wasi.preview1.ext
 
 import at.released.weh.wasi.preview1.type.Ciovec
@@ -12,7 +14,9 @@ import at.released.weh.wasi.preview1.type.Iovec
 import at.released.weh.wasi.preview1.type.IovecArray
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
+import at.released.weh.wasm.core.memory.MemoryAccess
 import at.released.weh.wasm.core.memory.ReadOnlyMemory
+import at.released.weh.wasm.core.memory.readI32
 import at.released.weh.wasm.core.memory.readPtr
 
 internal fun readCiovecs(
@@ -30,6 +34,19 @@ internal fun readCiovecs(
     return iovecs
 }
 
+context(_: MemoryAccess<M>)
+internal fun <M> readCiovecs(
+    memory: M,
+    @IntWasmPtr(Ciovec::class) pCiov: WasmPtr,
+    ciovCnt: Int,
+): CiovecArray = MutableList(ciovCnt) { idx ->
+    val pCiovec: WasmPtr = pCiov + 8 * idx
+    Ciovec(
+        buf = memory.readPtr(pCiovec),
+        bufLen = memory.readI32(pCiovec + 4),
+    )
+}
+
 internal fun readIovecs(
     memory: ReadOnlyMemory,
     @IntWasmPtr(Iovec::class) pIov: WasmPtr,
@@ -43,4 +60,17 @@ internal fun readIovecs(
         )
     }
     return iovecs
+}
+
+context(_: MemoryAccess<M>)
+internal fun <M> readIovecs(
+    memory: M,
+    @IntWasmPtr(Iovec::class) pIov: WasmPtr,
+    iovCnt: Int,
+): IovecArray = MutableList(iovCnt) { idx ->
+    val pIovec: WasmPtr = pIov + 8 * idx
+    Iovec(
+        buf = memory.readPtr(pIovec),
+        bufLen = memory.readI32(pIovec + 4),
+    )
 }

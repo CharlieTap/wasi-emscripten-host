@@ -10,25 +10,24 @@ import at.released.weh.emcripten.runtime.EmscriptenHostFunction.GETENTROPY
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
-import kotlinx.io.buffered
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.write
 
 public class GetentropyFunctionHandle(
     host: EmbedderHost,
 ) : EmscriptenHostFunctionHandle(GETENTROPY, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Byte::class) buffer: WasmPtr,
         size: Int,
-    ): Int {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Int = with(memoryAccess) {
         return try {
             val entropyBytes = host.entropySource.generateEntropy(size)
             check(entropyBytes.size == size)
 
-            memory.sinkWithMaxSize(buffer, size).buffered().use {
-                it.write(entropyBytes)
-            }
+            memory.write(buffer, entropyBytes)
             0
         } catch (@Suppress("TooGenericExceptionCaught") e: Exception) {
             logger.e(e) { "getentropy() failed" }

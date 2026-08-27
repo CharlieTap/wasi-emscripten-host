@@ -13,6 +13,7 @@ import at.released.weh.host.EmbedderHost
 import at.released.weh.wasi.preview1.WasiPreview1HostFunction
 import at.released.weh.wasi.preview1.ext.foldToErrno
 import at.released.weh.wasi.preview1.ext.readCiovecs
+import at.released.weh.wasi.preview1.memory.DirectWasiMemoryWriter
 import at.released.weh.wasi.preview1.memory.WasiMemoryWriter
 import at.released.weh.wasi.preview1.type.Ciovec
 import at.released.weh.wasi.preview1.type.CiovecArray
@@ -22,24 +23,42 @@ import at.released.weh.wasi.preview1.type.FilesizeType
 import at.released.weh.wasi.preview1.type.Size
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.writeI32
 
 public class FdPwriteFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.FD_PWRITE, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         bulkWriter: WasiMemoryWriter,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Ciovec::class) pCiov: WasmPtr,
         cIovCnt: Int,
         @FilesizeType offset: Filesize,
         @IntWasmPtr(Size::class) expectedSize: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         val cioVecs: CiovecArray = readCiovecs(memory, pCiov, cIovCnt)
         return bulkWriter.write(fd, ReadWriteStrategy.Position(offset), cioVecs)
             .onRight { writtenBytes ->
                 memory.writeI32(expectedSize, writtenBytes.toInt())
             }.foldToErrno()
+    }
+
+    public fun <M> executeDirect(
+        memory: M,
+        bulkWriter: DirectWasiMemoryWriter<M>,
+        @IntFileDescriptor fd: FileDescriptor,
+        @IntWasmPtr(Ciovec::class) pCiov: WasmPtr,
+        cIovCnt: Int,
+        @FilesizeType offset: Filesize,
+        @IntWasmPtr(Size::class) expectedSize: WasmPtr,
+        memoryAccess: MemoryAccess<M>,
+    ): Errno = with(memoryAccess) {
+        return bulkWriter.write(memory, fd, ReadWriteStrategy.Position(offset), pCiov, cIovCnt, memoryAccess)
+            .onRight { writtenBytes -> memory.writeI32(expectedSize, writtenBytes.toInt()) }
+            .foldToErrno()
     }
 }

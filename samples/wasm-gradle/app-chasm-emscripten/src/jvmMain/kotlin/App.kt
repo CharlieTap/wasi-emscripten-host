@@ -13,10 +13,9 @@ import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.Store
-import io.github.charlietap.chasm.embedding.shapes.Value.Number.I32
-import io.github.charlietap.chasm.embedding.shapes.flatMap
 import io.github.charlietap.chasm.embedding.shapes.fold
 import io.github.charlietap.chasm.embedding.store
+import io.github.charlietap.chasm.runtime.value.NumberValue.I32
 import java.io.InputStream
 
 fun main() {
@@ -28,11 +27,21 @@ fun main() {
     }.use(::executeCode)
 }
 
+@Suppress("ThrowsCount")
 private fun executeCode(embedderHost: EmbedderHost) {
     val store: Store = store()
 
+    // Decode first so the host builder can resolve the exported `memory` index once.
+    val helloWorldBytes = checkNotNull(Thread.currentThread().contextClassLoader.getResource("helloworld.wasm"))
+        .openStream()
+        .use(InputStream::readAllBytes)
+    val module = module(bytes = helloWorldBytes).fold(
+        onSuccess = { it },
+        onError = { throw WasmException("Cannot decode WebAssembly binary: $it") },
+    )
+
     // Prepare WASI and Emscripten host imports
-    val chasmBuilder = ChasmEmscriptenHostBuilder(store) {
+    val chasmBuilder = ChasmEmscriptenHostBuilder(store, module) {
         this.host = embedderHost
     }
     val wasiHostFunctions = chasmBuilder.setupWasiPreview1HostFunctions()
@@ -43,17 +52,8 @@ private fun executeCode(embedderHost: EmbedderHost) {
         addAll(wasiHostFunctions)
     }
 
-    // Load WebAssembly binary
-    val helloWorldBytes = checkNotNull(Thread.currentThread().contextClassLoader.getResource("helloworld.wasm"))
-        .openStream()
-        .use(InputStream::readAllBytes)
-
     // Instantiate the WebAssembly module
-    val instance = module(
-        bytes = helloWorldBytes,
-    ).flatMap { module ->
-        instance(store, module, hostImports)
-    }.fold(
+    val instance = instance(store, module, hostImports).fold(
         onSuccess = { it },
         onError = { throw WasmException("Can node instantiate WebAssembly binary: $it") },
     )

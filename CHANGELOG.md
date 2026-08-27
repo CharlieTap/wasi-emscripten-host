@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+#### 💥 Breaking Change
+
+- Migrated the Chasm WASI Preview 1 and Emscripten bindings to the Chasm 2.0
+  raw host-function API. Chasm builders now require the decoded module so the
+  exported memory named `memory` can be resolved and validated once.
+- Raised the build baseline to Gradle 9.7 and Kotlin 2.4.
+
+#### 🚀 Performance
+
+- Removed boxed Chasm callback values and per-call parameter/result lists.
+- Added direct Chasm scalar codecs and zero-payload-copy JVM/Native
+  scatter/gather filesystem I/O with a custom-memory fallback.
+- Reworked fixed WASI structures, paths, entropy writes, polling, and
+  `fd_readdir` to avoid temporary buffers and intermediate copies.
+
+#### 🐛 Bug Fix
+
+- Resolve the spec-defined exported `memory` instead of assuming memory index
+  zero, including imported and nonzero-index memories.
+- Implement Chasm Emscripten heap growth and reject invalid native buffer
+  ranges before POSIX I/O.
+
 ## 0.6.0 - 2025-08-13
 
 This version is compatible with the following WebAssembly runtimes:

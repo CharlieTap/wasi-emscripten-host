@@ -30,7 +30,7 @@ internal actual fun writeNative(
     bytes: Int,
 ): Either<Int, Int> {
     val bytesWritten = write(fd.fd, buf, bytes.toULong())
-    return if (bytes >= 0) {
+    return if (bytesWritten >= 0) {
         bytesWritten.toInt().right()
     } else {
         errno.left()

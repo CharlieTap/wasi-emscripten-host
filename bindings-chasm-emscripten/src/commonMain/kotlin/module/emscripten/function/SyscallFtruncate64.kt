@@ -6,23 +6,23 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asInt
-import at.released.weh.bindings.chasm.ext.asLong
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.SyscallFtruncate64FunctionHandle
 import at.released.weh.host.EmbedderHost
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.host.readI64
+import io.github.charlietap.chasm.host.writeI32
 
 internal class SyscallFtruncate64(
     host: EmbedderHost,
 ) : HostFunctionProvider {
     private val handle = SyscallFtruncate64FunctionHandle(host)
-    override val function: HostFunction = { args ->
+    override val function: HostFunction = HostFunction { parameters, results ->
         val result: Int = handle.execute(
-            args[0].asInt(),
-            args[1].asLong(),
+            parameters.readI32(0),
+            parameters.readI64(1),
         )
-        listOf(NumberValue.I32(result))
+        results.writeI32(0, result)
     }
 }

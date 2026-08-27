@@ -13,16 +13,19 @@ import at.released.weh.wasi.preview1.ext.WasiArgsEnvironmentFunc.cleanupProgramA
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.writeI32
 
 public class ArgsSizesGetFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.ARGS_SIZES_GET, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Int::class) argvAddr: WasmPtr,
         @IntWasmPtr(Int::class) argvBufSizeAddr: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         val args = host.commandArgsProvider.getCommandArgs()
         val count = args.size
         val dataLength = args.sumOf { cleanupProgramArgument(it).encodedNullTerminatedStringLength() }

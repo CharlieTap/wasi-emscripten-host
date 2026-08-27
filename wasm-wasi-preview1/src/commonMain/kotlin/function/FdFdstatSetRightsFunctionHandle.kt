@@ -13,18 +13,20 @@ import at.released.weh.wasi.preview1.WasiPreview1HostFunction
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasi.preview1.type.Rights
 import at.released.weh.wasi.preview1.type.RightsType
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class FdFdstatSetRightsFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.FD_FDSTAT_SET_RIGHTS, host) {
     @Suppress("UNUSED_PARAMETER")
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @RightsType fdFlagsBase: Rights,
         @RightsType fdFlagsInheriting: Rights,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         return Errno.NOTSUP
     }
 }

@@ -9,12 +9,12 @@ package at.released.weh.bindings.chasm.module.emscripten.function
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.EmscriptenDateNowFunctionHandle
 import at.released.weh.host.EmbedderHost
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.writeF64
 
 internal class EmscriptenDateNow(host: EmbedderHost) : HostFunctionProvider {
     private val handle = EmscriptenDateNowFunctionHandle(host)
-    override val function: HostFunction = {
-        listOf(NumberValue.F64(handle.execute()))
+    override val function: HostFunction = HostFunction { _, results ->
+        results.writeF64(0, handle.execute())
     }
 }

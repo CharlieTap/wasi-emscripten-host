@@ -17,20 +17,22 @@ import at.released.weh.wasi.preview1.type.SiflagsType
 import at.released.weh.wasi.preview1.type.Size
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class SockSendFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.SOCK_SEND, host) {
     @Suppress("UNUSED_PARAMETER")
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Ciovec::class) siData: WasmPtr,
         siDataSize: Int,
         @SiflagsType siflags: Siflags,
         @IntWasmPtr(Size::class) bytesTransferredAddr: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         // TODO
         return Errno.NOTSUP
     }

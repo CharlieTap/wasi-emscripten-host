@@ -6,30 +6,29 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asInt
-import at.released.weh.bindings.chasm.ext.asLong
-import at.released.weh.bindings.chasm.ext.asWasmAddr
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.MmapJsFunctionHandle
 import at.released.weh.host.EmbedderHost
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
-import io.github.charlietap.chasm.runtime.value.NumberValue
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.host.readI64
+import io.github.charlietap.chasm.host.writeI32
 
 internal class MmapJs(
     host: EmbedderHost,
 ) : HostFunctionProvider {
     private val handle = MmapJsFunctionHandle(host)
-    override val function: HostFunction = { args ->
+    override val function: HostFunction = HostFunction { parameters, results ->
         @Suppress("MagicNumber")
         val result: Int = handle.execute(
-            args[0].asInt(),
-            args[1].asInt(),
-            args[2].asInt(),
-            args[3].asInt(),
-            args[4].asLong(),
-            args[5].asWasmAddr(),
-            args[6].asWasmAddr(),
+            parameters.readI32(0),
+            parameters.readI32(1),
+            parameters.readI32(2),
+            parameters.readI32(3),
+            parameters.readI64(4),
+            parameters.readI32(5),
+            parameters.readI32(6),
         )
-        listOf(NumberValue.I32(result))
+        results.writeI32(0, result)
     }
 }

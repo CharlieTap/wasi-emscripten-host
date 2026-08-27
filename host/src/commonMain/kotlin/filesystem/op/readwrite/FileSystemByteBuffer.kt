@@ -12,15 +12,8 @@ public class FileSystemByteBuffer(
     public val length: Int = array.size,
 ) {
     init {
-        require(array.size >= 0)
-        @Suppress("ReplaceSizeCheckWithIsNotEmpty")
-        if (array.size > 0) {
-            require(offset in array.indices)
-            require(offset + length in 0..array.size)
-        } else {
-            require(offset == 0)
-            require(length == 0)
-        }
+        require(offset in 0..array.size)
+        require(length in 0..array.size - offset)
     }
 
     override fun equals(other: Any?): Boolean {

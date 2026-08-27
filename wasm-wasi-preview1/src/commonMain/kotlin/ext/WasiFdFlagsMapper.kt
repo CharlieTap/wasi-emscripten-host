@@ -8,28 +8,20 @@ package at.released.weh.wasi.preview1.ext
 
 import at.released.weh.wasi.preview1.type.Fdflags
 import at.released.weh.wasi.preview1.type.FdflagsFlag
-import kotlin.experimental.and
 import at.released.weh.filesystem.model.FdFlag as FsFdFlag
 import at.released.weh.filesystem.model.FdflagsType as FsFdflagsType
 import at.released.weh.wasi.preview1.type.FdflagsType as WasiFdflagsType
 
 internal object WasiFdFlagsMapper {
-    private val wasiFdflagsToFsFdflags = listOf(
-        FdflagsFlag.APPEND to FsFdFlag.FD_APPEND,
-        FdflagsFlag.DSYNC to FsFdFlag.FD_DSYNC,
-        FdflagsFlag.NONBLOCK to FsFdFlag.FD_NONBLOCK,
-        FdflagsFlag.RSYNC to FsFdFlag.FD_RSYNC,
-        FdflagsFlag.SYNC to FsFdFlag.FD_SYNC,
-    )
-
     @FsFdflagsType
     fun getFsFdlags(
         @WasiFdflagsType fdflags: Fdflags,
-    ): Int = wasiFdflagsToFsFdflags.fold(0) { mask, (wasiMask, fsMask) ->
-        if (fdflags and wasiMask == wasiMask) {
-            mask or fsMask
-        } else {
-            mask
-        }
+    ): Int {
+        val flags = fdflags.toInt()
+        return (flags and COMMON_FLAGS_MASK) or
+                (if (flags and FdflagsFlag.RSYNC.toInt() != 0) FsFdFlag.FD_RSYNC else 0) or
+                (if (flags and FdflagsFlag.SYNC.toInt() != 0) FsFdFlag.FD_SYNC else 0)
     }
+
+    private const val COMMON_FLAGS_MASK = FsFdFlag.FD_APPEND or FsFdFlag.FD_DSYNC or FsFdFlag.FD_NONBLOCK
 }

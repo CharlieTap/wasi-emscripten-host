@@ -20,13 +20,6 @@ import at.released.weh.wasi.preview1.type.Rights as WasiRights
 import at.released.weh.wasi.preview1.type.RightsFlag as WasiRightsFlag
 
 internal object WasiOpenFlagsMapper {
-    private val wasiOflagsToFsOpenFlags = listOf(
-        OflagsFlag.CREAT to FsOpenFileFlag.O_CREAT,
-        OflagsFlag.DIRECTORY to FsOpenFileFlag.O_DIRECTORY,
-        OflagsFlag.EXCL to FsOpenFileFlag.O_EXCL,
-        OflagsFlag.TRUNC to FsOpenFileFlag.O_TRUNC,
-    )
-
     @OpenFileFlagsType
     fun getFsOpenFlags(
         @OflagsType wasiOpenFlags: WasiOflags,
@@ -60,11 +53,14 @@ internal object WasiOpenFlagsMapper {
     @OpenFileFlagsType
     private fun getFsOpenFlagsBase(
         @OflagsType wasiOpenFlags: WasiOflags,
-    ): Int = wasiOflagsToFsOpenFlags.fold(0) { mask, (oflagMask, fsOpenFileFlagMask) ->
-        if (wasiOpenFlags and oflagMask == oflagMask) {
-            mask or fsOpenFileFlagMask
-        } else {
-            mask
+    ): Int {
+        var result = 0
+        if (wasiOpenFlags and OflagsFlag.CREAT == OflagsFlag.CREAT) result = result or FsOpenFileFlag.O_CREAT
+        if (wasiOpenFlags and OflagsFlag.DIRECTORY == OflagsFlag.DIRECTORY) {
+            result = result or FsOpenFileFlag.O_DIRECTORY
         }
+        if (wasiOpenFlags and OflagsFlag.EXCL == OflagsFlag.EXCL) result = result or FsOpenFileFlag.O_EXCL
+        if (wasiOpenFlags and OflagsFlag.TRUNC == OflagsFlag.TRUNC) result = result or FsOpenFileFlag.O_TRUNC
+        return result
     }
 }

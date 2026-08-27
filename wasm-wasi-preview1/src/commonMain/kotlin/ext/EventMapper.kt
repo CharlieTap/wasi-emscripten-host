@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+@file:Suppress("MagicNumber", "NoUnusedImports", "UnusedImports")
+
 package at.released.weh.wasi.preview1.ext
 
 import at.released.weh.filesystem.op.poll.FileDescriptorEventType
@@ -11,6 +13,12 @@ import at.released.weh.wasi.preview1.type.Event
 import at.released.weh.wasi.preview1.type.EventFdReadwrite
 import at.released.weh.wasi.preview1.type.EventrwflagsFlag.FD_READWRITE_HANGUP
 import at.released.weh.wasi.preview1.type.Eventtype
+import at.released.weh.wasm.core.WasmPtr
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.writeI16
+import at.released.weh.wasm.core.memory.writeI32
+import at.released.weh.wasm.core.memory.writeI64
+import at.released.weh.wasm.core.memory.writeI8
 import kotlinx.io.Sink
 import kotlinx.io.writeIntLe
 import kotlinx.io.writeLongLe
@@ -35,6 +43,53 @@ internal object EventMapper {
             Eventtype.CLOCK -> DUMMY_EVENT_FD_READWRITE.packTo(sink)
             Eventtype.FD_READ, Eventtype.FD_WRITE -> fdReadwrite.packTo(sink)
         }
+    }
+
+    context(_: MemoryAccess<M>)
+    internal fun <M> Event.writeTo(memory: M, address: WasmPtr) {
+        memory.writeI64(address, userdata)
+        memory.writeI16(address + 8, error.code.toShort())
+        memory.writeI8(address + 10, type.code.toByte())
+        memory.writeI8(address + 11, 0.toByte())
+        memory.writeI32(address + 12, 0)
+        val readwrite = if (type == Eventtype.CLOCK) DUMMY_EVENT_FD_READWRITE else fdReadwrite
+        memory.writeI64(address + 16, readwrite.nbytes)
+        memory.writeI16(address + 24, readwrite.flags)
+        memory.writeI16(address + 26, 0.toShort())
+        memory.writeI32(address + 28, 0)
+    }
+
+    context(_: MemoryAccess<M>)
+    internal fun <M> FileSystemEvent.writeTo(memory: M, address: WasmPtr) {
+        val eventType: Eventtype
+        val bytesAvailable: Long
+        val flags: Short
+        when (this) {
+            is FileSystemEvent.ClockEvent -> {
+                eventType = Eventtype.CLOCK
+                bytesAvailable = 0
+                flags = 0
+            }
+
+            is FileSystemEvent.FileDescriptorEvent -> {
+                eventType = when (type) {
+                    FileDescriptorEventType.READ -> Eventtype.FD_READ
+                    FileDescriptorEventType.WRITE -> Eventtype.FD_WRITE
+                }
+                bytesAvailable = this.bytesAvailable
+                flags = if (isHangup) FD_READWRITE_HANGUP else 0
+            }
+        }
+
+        memory.writeI64(address, userdata)
+        memory.writeI16(address + 8, errno.toWasiErrno().code.toShort())
+        memory.writeI8(address + 10, eventType.code.toByte())
+        memory.writeI8(address + 11, 0)
+        memory.writeI32(address + 12, 0)
+        memory.writeI64(address + 16, bytesAvailable)
+        memory.writeI16(address + 24, flags)
+        memory.writeI16(address + 26, 0)
+        memory.writeI32(address + 28, 0)
     }
 
     private fun EventFdReadwrite.packTo(

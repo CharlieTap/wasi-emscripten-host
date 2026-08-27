@@ -6,19 +6,19 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asWasmAddr
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.export.stack.EmscriptenStack
 import at.released.weh.emcripten.runtime.function.HandleStackOverflowFunctionHandle
 import at.released.weh.host.EmbedderHost
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.readI32
 
 internal class HandleStackOverflow(
     host: EmbedderHost,
     private val stackBindingsRef: () -> EmscriptenStack,
 ) : HostFunctionProvider {
     private val handle = HandleStackOverflowFunctionHandle(host)
-    override val function: HostFunction = { args ->
-        handle.execute(stackBindingsRef(), args[0].asWasmAddr())
+    override val function: HostFunction = HostFunction { parameters, results ->
+        handle.execute(stackBindingsRef(), parameters.readI32(0))
     }
 }

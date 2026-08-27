@@ -12,26 +12,28 @@ import at.released.weh.wasi.preview1.ext.WasiArgsEnvironmentFunc
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.writeI32
 import at.released.weh.wasm.core.memory.writeNullTerminatedString
 
 public class ArgsGetFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.ARGS_GET, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Int::class) argvAddr: WasmPtr,
         @IntWasmPtr(Int::class) argvSizesAddr: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         var argvPointer = argvAddr
         var argBufPointer = argvSizesAddr
-        host.commandArgsProvider.getCommandArgs()
-            .map(WasiArgsEnvironmentFunc::cleanupProgramArgument)
-            .forEach { argString ->
-                memory.writeI32(addr = argvPointer, data = argBufPointer)
-                argvPointer += 4
-                argBufPointer += memory.writeNullTerminatedString(argBufPointer, argString)
-            }
+        for (argument in host.commandArgsProvider.getCommandArgs()) {
+            val argString = WasiArgsEnvironmentFunc.cleanupProgramArgument(argument)
+            memory.writeI32(addr = argvPointer, data = argBufPointer)
+            argvPointer += 4
+            argBufPointer += memory.writeNullTerminatedString(argBufPointer, argString)
+        }
         return Errno.SUCCESS
     }
 }

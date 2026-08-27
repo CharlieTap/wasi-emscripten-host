@@ -11,15 +11,24 @@ import arrow.core.flatMap
 import arrow.core.raise.either
 import at.released.weh.filesystem.path.PathError
 import kotlinx.io.bytestring.ByteString
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringApi
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringOperations
 
 internal object PosixPathValidator {
     internal fun validate(
         utf8ByteString: ByteString,
-    ): Either<PathError, Unit> = Either.catch {
-        utf8ByteString.toByteArray().decodeToString(throwOnInvalidSequence = true)
+    ): Either<PathError, Unit> = decodeAndValidate(utf8ByteString).map { }
+
+    @OptIn(UnsafeByteStringApi::class)
+    internal fun decodeAndValidate(utf8ByteString: ByteString): Either<PathError, String> = Either.catch {
+        var decoded = ""
+        UnsafeByteStringOperations.withByteArrayUnsafe(utf8ByteString) { bytes ->
+            decoded = bytes.decodeToString(throwOnInvalidSequence = true)
+        }
+        decoded
     }
         .mapLeft { PathError.InvalidPathFormat("Path is not a valid Unicode string") }
-        .flatMap { pathString -> validate(pathString) }
+        .flatMap { pathString -> validate(pathString).map { pathString } }
 
     fun validate(path: String): Either<PathError, Unit> = either {
         if (path.isEmpty()) {

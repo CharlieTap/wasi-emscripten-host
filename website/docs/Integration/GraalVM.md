@@ -435,8 +435,8 @@ Check this link for more information: [GraalVM: Managing the Code Cache][graalvm
 
 [GraalWasm]: https://www.graalvm.org/latest/reference-manual/wasm/
 [Polyglot API 24]: https://central.sonatype.com/artifact/org.graalvm.sdk/graal-sdk/24.1.2
-[samples/wasm-gradle/app-graalvm]: https://github.com/illarionov/wasi-emscripten-host/tree/main/samples/wasm-gradle
-[samples/wasm-maven/graalvm-maven]: https://github.com/illarionov/wasi-emscripten-host/tree/main/samples/wasm-maven
+[samples/wasm-gradle/app-graalvm]: https://github.com/CharlieTap/wasi-emscripten-host/tree/main/samples/wasm-gradle
+[samples/wasm-maven/graalvm-maven]: https://github.com/CharlieTap/wasi-emscripten-host/tree/main/samples/wasm-maven
 [graalvm-running-webassembly-embedded-in-java]: https://www.graalvm.org/latest/reference-manual/wasm/#options
 [graalvm-runtime-optimization-support]: https://www.graalvm.org/latest/reference-manual/embed-languages/#runtime-optimization-support
 [jvmci-gradle]: https://gist.github.com/illarionov/9ce560f95366649876133c1634a03b88

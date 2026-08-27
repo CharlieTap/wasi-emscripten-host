@@ -7,15 +7,16 @@
 package at.released.weh.filesystem.path.real.posix
 
 import arrow.core.Either
+import arrow.core.right
 import at.released.weh.filesystem.path.PathError
 import at.released.weh.filesystem.path.virtual.VirtualPath
 
 internal object PosixPathConverter {
     fun toRealPath(virtualPath: VirtualPath): Either<PathError, PosixRealPath> {
-        return PosixRealPath.create(virtualPath.utf8Bytes)
+        return PosixRealPath.createValidated(virtualPath.utf8Bytes, virtualPath.toString()).right()
     }
 
     fun toVirtualPath(path: PosixRealPath): Either<PathError, VirtualPath> {
-        return VirtualPath.create(path.utf8Bytes)
+        return VirtualPath.createValidated(path.utf8Bytes, path.kString).right()
     }
 }

@@ -16,7 +16,7 @@ import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
 import io.github.charlietap.chasm.embedding.shapes.Instance
 import io.github.charlietap.chasm.embedding.shapes.Store
-import io.github.charlietap.chasm.embedding.shapes.flatMap
+import io.github.charlietap.chasm.embedding.shapes.expect
 import io.github.charlietap.chasm.embedding.shapes.fold
 import io.github.charlietap.chasm.embedding.store
 import kotlinx.io.files.Path
@@ -49,14 +49,11 @@ object ChasmWasmTestRuntime : WasmTestRuntime {
         wasmFile: ByteArray,
         host: EmbedderHost,
     ): Instance {
-        val hostImports = ChasmWasiPreview1Builder(store) {
+        val module = module(bytes = wasmFile).expect("Can not decode WebAssembly binary")
+        val hostImports = ChasmWasiPreview1Builder(store, module) {
             this.host = host
         }.build()
-        val instance: Instance = module(
-            bytes = wasmFile,
-        ).flatMap { module ->
-            instance(store, module, hostImports, chasmRuntimeConfig)
-        }.fold(
+        val instance: Instance = instance(store, module, hostImports, chasmRuntimeConfig).fold(
             onSuccess = { it },
             onError = { throw WasmException("Can node instantiate WebAssembly binary: $it") },
         )

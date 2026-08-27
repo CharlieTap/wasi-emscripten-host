@@ -10,16 +10,18 @@ import at.released.weh.host.EmbedderHost
 import at.released.weh.wasi.preview1.WasiPreview1HostFunction
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasi.preview1.type.Signal
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class ProcRaiseFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.PROC_RAISE, host) {
     @Suppress("UNUSED_PARAMETER")
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         signalCode: Byte,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         Signal.fromCode(signalCode.toInt()) ?: return Errno.INVAL
         return Errno.NOTSUP
     }

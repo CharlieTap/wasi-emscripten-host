@@ -14,18 +14,20 @@ import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasi.preview1.type.Filesize
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 import at.released.weh.wasi.preview1.type.Whence as WasiWhence
 
 public class FdTellFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.FD_TELL, host) {
     private val fdSeekHandle = FdSeekFunctionHandle(host)
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Filesize::class) offsetAddr: WasmPtr,
-    ): Errno {
-        return fdSeekHandle.execute(memory, fd, 0, WasiWhence.CUR.code.toByte(), offsetAddr)
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
+        return fdSeekHandle.execute(memory, fd, 0, WasiWhence.CUR.code.toByte(), offsetAddr, memoryAccess)
     }
 }

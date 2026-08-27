@@ -14,30 +14,51 @@ import at.released.weh.host.EmbedderHost
 import at.released.weh.wasi.preview1.WasiPreview1HostFunction
 import at.released.weh.wasi.preview1.ext.readCiovecs
 import at.released.weh.wasi.preview1.ext.wasiErrno
+import at.released.weh.wasi.preview1.memory.DirectWasiMemoryWriter
 import at.released.weh.wasi.preview1.memory.WasiMemoryWriter
 import at.released.weh.wasi.preview1.type.Ciovec
 import at.released.weh.wasi.preview1.type.CiovecArray
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.writeI32
 
 public class FdWriteFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.FD_WRITE, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         bulkWriter: WasiMemoryWriter,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Ciovec::class) pCiov: WasmPtr,
         cIovCnt: Int,
         @IntWasmPtr(Int::class) pNum: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         val cioVecs: CiovecArray = readCiovecs(memory, pCiov, cIovCnt)
         return bulkWriter.write(fd, CurrentPosition, cioVecs)
             .onRight { writtenBytes ->
                 memory.writeI32(pNum, writtenBytes.toInt())
             }.fold(
+                ifLeft = FileSystemOperationError::wasiErrno,
+                ifRight = { Errno.SUCCESS },
+            )
+    }
+
+    public fun <M> executeDirect(
+        memory: M,
+        bulkWriter: DirectWasiMemoryWriter<M>,
+        @IntFileDescriptor fd: FileDescriptor,
+        @IntWasmPtr(Ciovec::class) pCiov: WasmPtr,
+        cIovCnt: Int,
+        @IntWasmPtr(Int::class) pNum: WasmPtr,
+        memoryAccess: MemoryAccess<M>,
+    ): Errno = with(memoryAccess) {
+        return bulkWriter.write(memory, fd, CurrentPosition, pCiov, cIovCnt, memoryAccess)
+            .onRight { writtenBytes -> memory.writeI32(pNum, writtenBytes.toInt()) }
+            .fold(
                 ifLeft = FileSystemOperationError::wasiErrno,
                 ifRight = { Errno.SUCCESS },
             )

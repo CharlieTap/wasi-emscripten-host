@@ -21,16 +21,26 @@ import kotlinx.io.RawSource
 internal fun RawSource.transferTo(
     iovecs: List<FileSystemByteBuffer>,
 ): Either<ReadError, ULong> = either {
-    val buffer = Buffer()
+    val byteArraySource = this@transferTo as? ByteArrayStdioSource
+    val buffer = if (byteArraySource == null) Buffer() else null
     var totalBytesMoved = 0UL
     for (iovec in iovecs) {
         if (iovec.length == 0) {
             continue
         }
 
-        check(buffer.size == 0L)
         val bytesRead = try {
-            this@transferTo.readAtMostTo(buffer, iovec.length.toLong()).toInt()
+            if (byteArraySource != null) {
+                byteArraySource.readToByteArray(
+                    sink = iovec.array,
+                    startIndex = iovec.offset,
+                    endIndex = iovec.offset + iovec.length,
+                )
+            } else {
+                checkNotNull(buffer)
+                check(buffer.size == 0L)
+                this@transferTo.readAtMostTo(buffer, iovec.length.toLong()).toInt()
+            }
         } catch (iae: IllegalArgumentException) {
             raise(InvalidArgument("Incorrect iovec length ${iovec.length}"))
         } catch (ise: IllegalStateException) {
@@ -44,8 +54,11 @@ internal fun RawSource.transferTo(
             break
         }
 
-        val bytesMoved = buffer.readAtMostTo(iovec.array, iovec.offset, iovec.offset + bytesRead)
-        check(bytesMoved == bytesRead)
+        if (byteArraySource == null) {
+            checkNotNull(buffer)
+            val bytesMoved = buffer.readAtMostTo(iovec.array, iovec.offset, iovec.offset + bytesRead)
+            check(bytesMoved == bytesRead)
+        }
 
         totalBytesMoved += bytesRead.toULong()
 

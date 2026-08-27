@@ -13,17 +13,19 @@ import at.released.weh.wasi.preview1.WasiPreview1HostFunction
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasi.preview1.type.Sdflags
 import at.released.weh.wasi.preview1.type.SdflagsType
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class SockShutdownFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.SOCK_SHUTDOWN, host) {
     @Suppress("UNUSED_PARAMETER")
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @SdflagsType how: Sdflags,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         // TODO
         return Errno.NOTSUP
     }

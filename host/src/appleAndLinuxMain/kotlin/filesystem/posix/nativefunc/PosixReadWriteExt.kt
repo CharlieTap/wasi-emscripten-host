@@ -30,10 +30,10 @@ internal fun callReadWrite(
     val bytesMoved = memScoped {
         val size = iovecs.size
         val posixIovecs: CArrayPointer<iovec> = allocArray(size)
-        iovecs.withPinnedByteArrays { pinnedByteArrays: List<Pinned<ByteArray>?> ->
+        iovecs.withPinnedByteArrays { pinnedByteArrayAt ->
             iovecs.forEachIndexed { index, vec ->
                 posixIovecs[index].apply {
-                    val pinnedByteArray = pinnedByteArrays[index]
+                    val pinnedByteArray = pinnedByteArrayAt(index)
                     if (pinnedByteArray != null) {
                         iov_base = pinnedByteArray.addressOf(vec.offset)
                         iov_len = vec.length.toULong()
@@ -55,8 +55,18 @@ internal fun callReadWrite(
 }
 
 private inline fun <R : Any> List<FileSystemByteBuffer>.withPinnedByteArrays(
-    block: (byteArrays: List<Pinned<ByteArray>?>) -> R,
+    block: (pinnedByteArrayAt: (Int) -> Pinned<ByteArray>?) -> R,
 ): R {
+    val sharedBacking = firstOrNull { it.array.isNotEmpty() }?.array
+    if (sharedBacking != null && all { it.array.isEmpty() || it.array === sharedBacking }) {
+        val pinned = sharedBacking.pin()
+        return try {
+            block { index -> if (this[index].array.isEmpty()) null else pinned }
+        } finally {
+            pinned.unpin()
+        }
+    }
+
     val pinnedByteArrays: List<Pinned<ByteArray>?> = this.map {
         @Suppress("ReplaceSizeCheckWithIsNotEmpty")
         if (it.array.size != 0) {
@@ -66,7 +76,7 @@ private inline fun <R : Any> List<FileSystemByteBuffer>.withPinnedByteArrays(
         }
     }
     return try {
-        block(pinnedByteArrays)
+        block(pinnedByteArrays::get)
     } finally {
         pinnedByteArrays.filterNotNull().forEach(Pinned<ByteArray>::unpin)
     }

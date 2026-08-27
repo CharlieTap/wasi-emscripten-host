@@ -13,7 +13,6 @@ import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.Store
-import io.github.charlietap.chasm.embedding.shapes.flatMap
 import io.github.charlietap.chasm.embedding.shapes.fold
 import io.github.charlietap.chasm.embedding.store
 import java.io.InputStream
@@ -36,16 +35,18 @@ fun main() {
 
 fun executeCode(embedderHost: EmbedderHost, wasmBinary: ByteArray): Int {
     val store: Store = store()
+    val module = module(wasmBinary).fold(
+        onSuccess = { it },
+        onError = { throw WasmException("Cannot decode WebAssembly binary: $it") },
+    )
 
-    // Prepare WASI  host imports
-    val wasiImports: List<Import> = ChasmWasiPreview1Builder(store) {
+    // Prepare WASI host imports after resolving the exported `memory` index.
+    val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, module) {
         host = embedderHost
     }.build()
 
     // Instantiate the WebAssembly module
-    val instance = module(wasmBinary)
-        .flatMap { module -> instance(store, module, wasiImports) }
-        .fold(
+    val instance = instance(store, module, wasiImports).fold(
             onSuccess = { it },
             onError = { throw WasmException("Can node instantiate WebAssembly binary: $it") },
         )

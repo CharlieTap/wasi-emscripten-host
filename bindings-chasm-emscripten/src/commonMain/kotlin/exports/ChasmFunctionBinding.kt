@@ -15,47 +15,49 @@ import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmFunctionBinding
 import at.released.weh.wasm.core.WasmPtr
 import io.github.charlietap.chasm.embedding.error.ChasmError
-import io.github.charlietap.chasm.embedding.invoke
+import io.github.charlietap.chasm.embedding.prepareFunction
 import io.github.charlietap.chasm.embedding.shapes.Instance
 import io.github.charlietap.chasm.embedding.shapes.Store
 import io.github.charlietap.chasm.embedding.shapes.fold
 import io.github.charlietap.chasm.runtime.value.NumberValue
 
 internal class ChasmFunctionBinding(
-    private val store: Store,
-    private val instance: Instance,
-    private val name: String,
+    store: Store,
+    instance: Instance,
+    name: String,
 ) : WasmFunctionBinding {
+    private val preparedFunction = prepareFunction(store, instance, name).orThrow()
+
     override fun executeVoid(vararg args: Any?) {
-        invoke(store, instance, name, args.argsToValues()).orThrow()
+        preparedFunction(args.argsToValues()).orThrow()
     }
 
-    override fun executeForInt(vararg args: Any?): Int = invoke(store, instance, name, args.argsToValues())
+    override fun executeForInt(vararg args: Any?): Int = preparedFunction(args.argsToValues())
         .fold(
             { it[0].asInt() },
             ::throwOnError,
         )
 
-    override fun executeForLong(vararg args: Any?): Long = invoke(store, instance, name, args.argsToValues())
+    override fun executeForLong(vararg args: Any?): Long = preparedFunction(args.argsToValues())
         .fold(
             { it[0].asLong() },
             ::throwOnError,
         )
 
-    override fun executeForFloat(vararg args: Any?): Float = invoke(store, instance, name, args.argsToValues())
+    override fun executeForFloat(vararg args: Any?): Float = preparedFunction(args.argsToValues())
         .fold(
             { (it[0] as NumberValue.F32).value },
             ::throwOnError,
         )
 
-    override fun executeForDouble(vararg args: Any?): Double = invoke(store, instance, name, args.argsToValues())
+    override fun executeForDouble(vararg args: Any?): Double = preparedFunction(args.argsToValues())
         .fold(
             { (it[0] as NumberValue.F64).value },
             ::throwOnError,
         )
 
     @IntWasmPtr
-    override fun executeForPtr(vararg args: Any?): WasmPtr = invoke(store, instance, name, args.argsToValues())
+    override fun executeForPtr(vararg args: Any?): WasmPtr = preparedFunction(args.argsToValues())
         .fold(
             { it[0].asWasmAddr() },
             ::throwOnError,
@@ -70,10 +72,10 @@ private fun Array<out Any?>.argsToValues(): List<NumberValue<*>> {
             when (val arg = this[idx]) {
                 is Int -> NumberValue.I32(arg)
                 is UInt -> NumberValue.I32(arg.toInt())
-                is Long -> NumberValue.I64(arg.toLong())
+                is Long -> NumberValue.I64(arg)
                 is ULong -> NumberValue.I64(arg.toLong())
-                is Float -> NumberValue.F32(arg.toFloat())
-                is Double -> NumberValue.F64(arg.toDouble())
+                is Float -> NumberValue.F32(arg)
+                is Double -> NumberValue.F64(arg)
                 else -> error("Unsupported argument type $arg")
             }
         }

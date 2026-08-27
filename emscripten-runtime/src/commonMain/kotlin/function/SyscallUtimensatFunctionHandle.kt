@@ -21,7 +21,9 @@ import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
 import at.released.weh.wasm.core.WasmPtrUtil.ptrIsNull
-import at.released.weh.wasm.core.memory.ReadOnlyMemory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.readI64
 import at.released.weh.wasm.core.memory.readNullTerminatedString
 import kotlin.LazyThreadSafetyMode.NONE
 import kotlin.time.Duration.Companion.nanoseconds
@@ -30,13 +32,14 @@ import kotlin.time.Duration.Companion.seconds
 public class SyscallUtimensatFunctionHandle(
     host: EmbedderHost,
 ) : EmscriptenHostFunctionHandle(SYSCALL_UTIMENSAT, host) {
-    public fun execute(
-        memory: ReadOnlyMemory,
+    public fun <M> execute(
+        memory: M,
         rawDirFd: Int,
         @IntWasmPtr(Byte::class) pathnamePtr: WasmPtr,
         @IntWasmPtr(Byte::class) times: WasmPtr,
         flags: Int,
-    ): Int {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Int = with(memoryAccess) {
         val baseDirectory = BaseDirectory.fromRawDirFd(rawDirFd)
         val folowSymlinks: Boolean = (flags and AT_SYMLINK_NOFOLLOW) == 0
         val path = memory.readNullTerminatedString(pathnamePtr)

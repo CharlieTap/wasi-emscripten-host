@@ -80,7 +80,7 @@ class WindowsPathTypeTest {
             addAll("""²é€""".toCharArray().toList())
         }
 
-        fun Assert<WindowsPathType>.matchingRtlPathType(pathType: RTL_PATH_TYPE, path: String) = given { actual ->
+        fun Assert<WindowsPathType>.matchingRtlPathType(pathType: RTL_PATH_TYPE, path: String): Unit = given { actual ->
             if (windowsTypeMatchingRtlPathType(actual, pathType)) {
                 return
             }

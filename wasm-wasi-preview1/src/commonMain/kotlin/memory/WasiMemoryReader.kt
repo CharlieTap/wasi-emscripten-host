@@ -18,6 +18,7 @@ import at.released.weh.wasi.preview1.type.Iovec
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
 import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
 import at.released.weh.wasm.core.memory.sinkWithMaxSize
 import kotlinx.io.buffered
 
@@ -34,6 +35,18 @@ public fun interface WasiMemoryReader {
         @IntFileDescriptor fd: FileDescriptor,
         strategy: ReadWriteStrategy,
         iovecs: List<Iovec>,
+    ): Either<ReadError, ULong>
+}
+
+/** Runtime-specialized reader that receives callback-scoped memory without a wrapper object. */
+public fun interface DirectWasiMemoryReader<M> {
+    public fun read(
+        memory: M,
+        @IntFileDescriptor fd: FileDescriptor,
+        strategy: ReadWriteStrategy,
+        @IntWasmPtr(Iovec::class) iovecsPointer: WasmPtr,
+        iovecCount: Int,
+        memoryAccess: MemoryAccess<M>,
     ): Either<ReadError, ULong>
 }
 

@@ -13,7 +13,9 @@ import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasi.preview1.type.Size
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
+import at.released.weh.wasm.core.memory.MemoryAccess
 import at.released.weh.wasm.core.memory.ReadOnlyMemory
+import at.released.weh.wasm.core.memory.read
 import at.released.weh.wasm.core.memory.sourceWithMaxSize
 import kotlinx.io.Buffer
 import kotlinx.io.EOFException
@@ -40,6 +42,33 @@ internal fun ReadOnlyMemory.readPathString(
     }
 }.flatMap { pathString ->
     VirtualPath.create(pathString).mapLeft { _ -> Errno.INVAL }
+}
+
+context(_: MemoryAccess<M>)
+internal fun <M> M.readPathString(
+    @IntWasmPtr(Byte::class) path: WasmPtr,
+    pathSize: Int,
+): Either<Errno, VirtualPath> = Either.catch {
+    val bytes = ByteArray(pathSize)
+    read(bytes, path, pathSize)
+    bytes
+}.mapLeft {
+    when (it) {
+        is IllegalArgumentException, is IllegalStateException -> Errno.INVAL
+        is IOException -> Errno.IO
+        is EOFException -> Errno.IO
+        else -> Errno.FAULT
+    }
+}.flatMap { pathBytes ->
+    VirtualPath.createOwnedUtf8(pathBytes).mapLeft { _ -> Errno.INVAL }
+}
+
+internal fun <M> M.readPathString(
+    @IntWasmPtr(Byte::class) path: WasmPtr,
+    pathSize: Int,
+    memoryAccess: MemoryAccess<M>,
+): Either<Errno, VirtualPath> = with(memoryAccess) {
+    readPathString(path, pathSize)
 }
 
 /**

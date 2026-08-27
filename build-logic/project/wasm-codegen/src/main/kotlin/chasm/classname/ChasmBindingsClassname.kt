@@ -7,19 +7,14 @@
 package at.released.weh.gradle.wasm.codegen.chasm.classname
 
 import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.MemberName
 
 object ChasmBindingsClassname {
     const val PACKAGE = "at.released.weh.bindings.chasm.module.wasi"
     val CHASM_FUNCTIONS_CLASS_NAME = ClassName(PACKAGE, "ChasmWasiPreview1Functions")
-    val CHASM_MEMORY_ADAPTER = ClassName("at.released.weh.bindings.chasm.memory", "ChasmMemoryAdapter")
+    val CHASM_MEMORY_ACCESS = ClassName("at.released.weh.bindings.chasm.memory", "ChasmMemoryAccess")
 
-    object ChasmExt {
-        const val PACKAGE = "at.released.weh.bindings.chasm.ext"
-        val VALUE_AS_BYTE = MemberName(PACKAGE, "asByte")
-        val VALUE_AS_SHORT = MemberName(PACKAGE, "asShort")
-        val VALUE_AS_INT = MemberName(PACKAGE, "asInt")
-        val VALUE_AS_LONG = MemberName(PACKAGE, "asLong")
-        val VALUE_AS_WASM_ADDR = MemberName(PACKAGE, "asWasmAddr")
-    }
+    val CHASM_WASI_MEMORY_READER =
+        ClassName("at.released.weh.bindings.chasm.memory", "ChasmWasiMemoryReader")
+    val CHASM_WASI_MEMORY_WRITER =
+        ClassName("at.released.weh.bindings.chasm.memory", "ChasmWasiMemoryWriter")
 }

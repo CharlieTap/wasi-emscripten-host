@@ -11,14 +11,18 @@ import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.MemberName.Companion.member
 
 internal object ChasmShapesClassname {
-    const val PACKAGE = "io.github.charlietap.chasm.embedding.shapes"
-    val HOST_FUNCTION_CONTEXT = ClassName(PACKAGE, "HostFunctionContext")
-    val IMPORT = ClassName(PACKAGE, "Import")
-    val STORE = ClassName(PACKAGE, "Store")
+    const val EMBEDDING_SHAPES_PACKAGE = "io.github.charlietap.chasm.embedding.shapes"
+    const val HOST_PACKAGE = "io.github.charlietap.chasm.host"
+    val HOST_FUNCTION = ClassName(HOST_PACKAGE, "HostFunction")
+    val HOST_MEMORY = ClassName(HOST_PACKAGE, "HostMemory")
+    val MEMORY_INDEX = ClassName(HOST_PACKAGE, "ModuleIndex").nestedClass("MemoryIndex")
+    val IMPORT = ClassName(EMBEDDING_SHAPES_PACKAGE, "Import")
+    val STORE = ClassName(EMBEDDING_SHAPES_PACKAGE, "Store")
     val CHASM_EMBEDDING_FUNCTION = MemberName("io.github.charlietap.chasm.embedding", "function")
-    val EXECUTION_VALUE = ClassName("io.github.charlietap.chasm.runtime.value", "ExecutionValue")
-    val RUNTIME_NUMBER_VALUE = ClassName("io.github.charlietap.chasm.runtime.value", "NumberValue")
-    val RUNTIME_NUMBER_VALUE_I32 = RUNTIME_NUMBER_VALUE.nestedClass("I32")
+    val READ_I32 = MemberName(HOST_PACKAGE, "readI32")
+    val READ_I64 = MemberName(HOST_PACKAGE, "readI64")
+    val WRITE_I32 = MemberName(HOST_PACKAGE, "writeI32")
+    val WITH_MEMORY = MemberName(HOST_PACKAGE, "withMemory")
 
     internal object AstType {
         const val PACKAGE = "io.github.charlietap.chasm.type"

@@ -11,19 +11,21 @@ import at.released.weh.emcripten.runtime.EmscriptenHostFunction.ASSERT_FAIL
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.ReadOnlyMemory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 import at.released.weh.wasm.core.memory.readNullTerminatedString
 
 public class AssertFailFunctionHandle(
     host: EmbedderHost,
 ) : EmscriptenHostFunctionHandle(ASSERT_FAIL, host) {
-    public fun execute(
-        memory: ReadOnlyMemory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Byte::class) condition: WasmPtr,
         @IntWasmPtr(Byte::class) filename: WasmPtr,
         line: Int,
         @IntWasmPtr(Byte::class) func: WasmPtr,
-    ): Nothing {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Nothing = with(memoryAccess) {
         throw AssertionFailedException(
             condition = memory.readNullTerminatedString(condition),
             filename = memory.readNullTerminatedString(filename),

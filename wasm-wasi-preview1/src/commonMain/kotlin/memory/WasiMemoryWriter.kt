@@ -15,6 +15,9 @@ import at.released.weh.filesystem.op.readwrite.FileSystemByteBuffer
 import at.released.weh.filesystem.op.readwrite.ReadWriteStrategy
 import at.released.weh.filesystem.op.readwrite.WriteFd
 import at.released.weh.wasi.preview1.type.Ciovec
+import at.released.weh.wasm.core.IntWasmPtr
+import at.released.weh.wasm.core.WasmPtr
+import at.released.weh.wasm.core.memory.MemoryAccess
 import at.released.weh.wasm.core.memory.ReadOnlyMemory
 import at.released.weh.wasm.core.memory.sourceWithMaxSize
 import kotlinx.io.buffered
@@ -35,6 +38,18 @@ public fun interface WasiMemoryWriter {
         @IntFileDescriptor fd: FileDescriptor,
         strategy: ReadWriteStrategy,
         cioVecs: List<Ciovec>,
+    ): Either<WriteError, ULong>
+}
+
+/** Runtime-specialized writer that receives callback-scoped memory without a wrapper object. */
+public fun interface DirectWasiMemoryWriter<M> {
+    public fun write(
+        memory: M,
+        @IntFileDescriptor fd: FileDescriptor,
+        strategy: ReadWriteStrategy,
+        @IntWasmPtr(Ciovec::class) ciovecsPointer: WasmPtr,
+        ciovecCount: Int,
+        memoryAccess: MemoryAccess<M>,
     ): Either<WriteError, ULong>
 }
 

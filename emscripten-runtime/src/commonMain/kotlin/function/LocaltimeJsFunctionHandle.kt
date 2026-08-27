@@ -7,27 +7,24 @@
 package at.released.weh.emcripten.runtime.function
 
 import at.released.weh.emcripten.runtime.EmscriptenHostFunction.LOCALTIME_JS
-import at.released.weh.emcripten.runtime.include.STRUCT_TM_PACKED_SIZE
-import at.released.weh.emcripten.runtime.include.packTo
+import at.released.weh.emcripten.runtime.include.writeTo
 import at.released.weh.host.EmbedderHost
 import at.released.weh.host.LocalTimeFormatter.StructTm
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
-import kotlinx.io.buffered
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class LocaltimeJsFunctionHandle(
     host: EmbedderHost,
 ) : EmscriptenHostFunctionHandle(LOCALTIME_JS, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         timeSeconds: Long,
         @IntWasmPtr(StructTm::class) timePtr: WasmPtr,
-    ) {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Unit = with(memoryAccess) {
         val localTime = host.localTimeFormatter.format(timeSeconds)
-        memory.sinkWithMaxSize(timePtr, STRUCT_TM_PACKED_SIZE).buffered().use {
-            localTime.packTo(it)
-        }
+        localTime.writeTo(memory, timePtr)
     }
 }

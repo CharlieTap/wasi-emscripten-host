@@ -15,6 +15,7 @@ import arrow.core.right
 import at.released.weh.filesystem.error.Again
 import at.released.weh.filesystem.error.BadFileDescriptor
 import at.released.weh.filesystem.error.NonblockingPollError
+import at.released.weh.filesystem.internal.fdresource.stdio.ByteArrayStdioSource
 import at.released.weh.filesystem.model.FileSystemErrno.SUCCESS
 import at.released.weh.filesystem.posix.NativeFileFd
 import at.released.weh.filesystem.posix.nativefunc.nativeFdBytesAvailable
@@ -36,26 +37,31 @@ internal expect fun readNative(fd: NativeFileFd, buf: CValuesRef<*>, count: Int)
 
 internal class PosixFdSource private constructor(
     private val fd: NativeFileFd,
-) : StdioSource, StdioWithPollableFileDescriptor {
+) : StdioSource, ByteArrayStdioSource, StdioWithPollableFileDescriptor {
     private var isClosed: AtomicBoolean = atomic(false)
     override val pollableFileDescriptor: Int = fd.fd
 
     override fun readAtMostTo(sink: Buffer, byteCount: Long): Long {
-        checkSourceNotClosed()
         require(byteCount >= 0)
         val byteArray = ByteArray(byteCount.toInt().coerceAtMost(MAX_REQUEST_BYTES))
-        val bytesOrError = byteArray.usePinned {
-            readNative(fd, it.addressOf(0), it.get().size)
+        val bytesRead = readToByteArray(byteArray, 0, byteArray.size)
+        if (bytesRead > 0) {
+            sink.write(byteArray, bytesRead)
         }
-        return bytesOrError.fold(
-            ifRight = { bytesRead ->
-                if (bytesRead == 0) {
-                    -1L
-                } else {
-                    sink.write(byteArray, bytesRead)
-                    bytesRead.toLong()
-                }
-            },
+        return bytesRead.toLong()
+    }
+
+    override fun readToByteArray(sink: ByteArray, startIndex: Int, endIndex: Int): Int {
+        checkSourceNotClosed()
+        require(startIndex in 0..endIndex && endIndex <= sink.size)
+        val bytesToRead = (endIndex - startIndex).coerceAtMost(MAX_REQUEST_BYTES)
+        if (bytesToRead == 0) {
+            return 0
+        }
+        return sink.usePinned {
+            readNative(fd, it.addressOf(startIndex), bytesToRead)
+        }.fold(
+            ifRight = { bytesRead -> if (bytesRead == 0) -1 else bytesRead },
             ifLeft = { errno: Int ->
                 when (errno) {
                     EBADF -> throw IllegalStateException("Bad file descriptor")

@@ -10,16 +10,18 @@ import at.released.weh.emcripten.runtime.EmscriptenHostFunction.EMSCRIPTEN_CONSO
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.ReadOnlyMemory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 import at.released.weh.wasm.core.memory.readNullTerminatedString
 
 public class EmscriptenConsoleErrorFunctionHandle(
     host: EmbedderHost,
 ) : EmscriptenHostFunctionHandle(EMSCRIPTEN_CONSOLE_ERROR, host) {
-    public fun execute(
-        memory: ReadOnlyMemory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Byte::class) messagePtr: WasmPtr,
-    ) {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Unit = with(memoryAccess) {
         val message = memory.readNullTerminatedString(messagePtr)
         logger.e { message }
     }

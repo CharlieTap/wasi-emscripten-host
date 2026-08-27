@@ -23,13 +23,14 @@ import at.released.weh.wasi.preview1.type.LookupflagsFlag.SYMLINK_FOLLOW
 import at.released.weh.wasi.preview1.type.LookupflagsType
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class PathLinkFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.PATH_LINK, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor oldFd: FileDescriptor,
         @LookupflagsType oldFlags: Lookupflags,
         @IntWasmPtr(Byte::class) oldPath: WasmPtr,
@@ -37,9 +38,10 @@ public class PathLinkFunctionHandle(
         @IntFileDescriptor newFd: FileDescriptor,
         @IntWasmPtr(Byte::class) newPath: WasmPtr,
         newPathSize: Int,
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
     ): Errno = either {
-        val oldPathString = memory.readPathString(oldPath, oldPathSize).bind()
-        val newPathString = memory.readPathString(newPath, newPathSize).bind()
+        val oldPathString = memory.readPathString(oldPath, oldPathSize, memoryAccess).bind()
+        val newPathString = memory.readPathString(newPath, newPathSize, memoryAccess).bind()
 
         newPathString.let {
             if (it.isDirectoryRequest()) {

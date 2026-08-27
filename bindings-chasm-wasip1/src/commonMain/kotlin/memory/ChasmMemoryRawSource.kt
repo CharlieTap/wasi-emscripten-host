@@ -9,29 +9,18 @@ package at.released.weh.bindings.chasm.memory
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
 import at.released.weh.wasm.core.memory.MemoryRawSource
-import io.github.charlietap.chasm.embedding.error.ChasmError.ExecutionError
-import io.github.charlietap.chasm.embedding.memory.readBytes
-import io.github.charlietap.chasm.embedding.shapes.Memory
-import io.github.charlietap.chasm.embedding.shapes.Store
-import io.github.charlietap.chasm.embedding.shapes.fold
+import io.github.charlietap.chasm.host.HostMemory
 import kotlinx.io.Buffer
 
 internal class ChasmMemoryRawSource(
-    private val store: Store,
-    private val memory: Memory,
+    private val memory: HostMemory,
     @IntWasmPtr baseAddr: WasmPtr,
     @IntWasmPtr toAddrExclusive: WasmPtr,
 ) : MemoryRawSource(baseAddr, toAddrExclusive) {
     override fun readBytesFromMemory(@IntWasmPtr srcAddr: WasmPtr, sink: Buffer, readBytes: Int) {
         val buffer = ByteArray(readBytes)
-        readBytes(store, memory, buffer, srcAddr, readBytes).fold(
-            onSuccess = { bytes ->
-                sink.write(bytes)
-                sink.emit()
-            },
-            onError = { executionError: ExecutionError ->
-                throw IllegalStateException("Read from memory failed: ${executionError.error}")
-            },
-        )
+        memory.read(buffer, srcAddr, readBytes)
+        sink.write(buffer)
+        sink.emit()
     }
 }

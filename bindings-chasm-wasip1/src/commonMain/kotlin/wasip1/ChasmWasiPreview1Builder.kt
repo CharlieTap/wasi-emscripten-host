@@ -7,16 +7,15 @@
 package at.released.weh.bindings.chasm.wasip1
 
 import at.released.weh.bindings.chasm.dsl.ChasmHostFunctionDsl
-import at.released.weh.bindings.chasm.memory.ChasmMemoryAdapter
 import at.released.weh.bindings.chasm.module.wasi.createWasiPreview1HostFunctions
 import at.released.weh.host.EmbedderHost
 import at.released.weh.host.EmbedderHostBuilder
-import at.released.weh.wasi.preview1.memory.DefaultWasiMemoryReader
-import at.released.weh.wasi.preview1.memory.DefaultWasiMemoryWriter
 import at.released.weh.wasm.core.WasmModules
 import io.github.charlietap.chasm.embedding.shapes.Import
-import io.github.charlietap.chasm.embedding.shapes.Memory
+import io.github.charlietap.chasm.embedding.shapes.Module
 import io.github.charlietap.chasm.embedding.shapes.Store
+import io.github.charlietap.chasm.host.ModuleIndex
+import io.github.charlietap.chasm.runtime.type.ExternalType
 
 /**
  * WASI Preview 1 host function installer.
@@ -29,27 +28,22 @@ import io.github.charlietap.chasm.embedding.shapes.Store
  *
  * ```kotlin
  * // Prepare WASI host imports
- * val wasiImports: List<Import> = ChasmWasiPreview1Builder(store) {
+ * val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, module) {
  *     host = embedderHost
  * }.build()
  * ```
  */
 public class ChasmWasiPreview1Builder private constructor(
     private val store: Store,
-    private val memoryProvider: (Store.() -> Memory)?,
+    private val memoryIndex: ModuleIndex.MemoryIndex,
     private val host: EmbedderHost,
 ) {
     public fun build(
         moduleName: String = WasmModules.WASI_SNAPSHOT_PREVIEW1_MODULE_NAME,
     ): List<Import> {
-        val memory = ChasmMemoryAdapter(store, memoryProvider)
-        val wasiMemoryReader = DefaultWasiMemoryReader(memory, host.fileSystem)
-        val wasiMemoryWriter = DefaultWasiMemoryWriter(memory, host.fileSystem)
         return createWasiPreview1HostFunctions(
             store = store,
-            memory = memory,
-            wasiMemoryReader = wasiMemoryReader,
-            wasiMemoryWriter = wasiMemoryWriter,
+            memoryIndex = memoryIndex,
             host = host,
             moduleName = moduleName,
         ) + createCustomWasiPreview1HostFunctions(store, moduleName)
@@ -58,14 +52,27 @@ public class ChasmWasiPreview1Builder private constructor(
     public companion object {
         public operator fun invoke(
             store: Store,
+            module: Module,
             block: ChasmHostFunctionDsl.() -> Unit = {},
         ): ChasmWasiPreview1Builder {
             val config = ChasmHostFunctionDsl().apply(block)
             return ChasmWasiPreview1Builder(
                 store = store,
-                memoryProvider = config.memoryProvider,
+                memoryIndex = module.wasiMemoryIndex(),
                 host = config.host ?: EmbedderHostBuilder().build(),
             )
         }
     }
 }
+
+internal fun Module.wasiMemoryIndex(): ModuleIndex.MemoryIndex {
+    val export = exports.singleOrNull { export -> export.name == WASI_MEMORY_EXPORT_NAME }
+        ?: error("WASI Preview 1 module must export exactly one `$WASI_MEMORY_EXPORT_NAME` memory")
+    check(export.type is ExternalType.Memory) {
+        "WASI Preview 1 `$WASI_MEMORY_EXPORT_NAME` export must be a memory"
+    }
+    return export.index as? ModuleIndex.MemoryIndex
+        ?: error("Chasm returned a non-memory index for the `$WASI_MEMORY_EXPORT_NAME` memory export")
+}
+
+private const val WASI_MEMORY_EXPORT_NAME: String = "memory"

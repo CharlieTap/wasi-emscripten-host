@@ -10,8 +10,7 @@ import arrow.core.getOrElse
 import at.released.weh.emcripten.runtime.EmscriptenHostFunction.SYSCALL_LSTAT64
 import at.released.weh.emcripten.runtime.EmscriptenHostFunction.SYSCALL_STAT64
 import at.released.weh.emcripten.runtime.ext.negativeErrnoCode
-import at.released.weh.emcripten.runtime.include.sys.STRUCT_SIZE_PACKED_SIZE
-import at.released.weh.emcripten.runtime.include.sys.packTo
+import at.released.weh.emcripten.runtime.include.sys.writeTo
 import at.released.weh.filesystem.model.BaseDirectory.CurrentWorkingDirectory
 import at.released.weh.filesystem.op.stat.Stat
 import at.released.weh.filesystem.op.stat.StructStat
@@ -21,21 +20,21 @@ import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.HostFunction
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 import at.released.weh.wasm.core.memory.readNullTerminatedString
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
-import kotlinx.io.buffered
 
 public class SyscallStatLstat64FunctionHandle private constructor(
     host: EmbedderHost,
     private val followSymlinks: Boolean = false,
     function: HostFunction,
 ) : EmscriptenHostFunctionHandle(function, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Byte::class) pathnamePtr: WasmPtr,
         @IntWasmPtr(StructStat::class) dstAddr: WasmPtr,
-    ): Int {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Int = with(memoryAccess) {
         val path = memory.readNullTerminatedString(pathnamePtr)
         val virtualPath = VirtualPath.create(path).getOrElse { _ -> return -Errno.INVAL.code }
 
@@ -47,9 +46,7 @@ public class SyscallStatLstat64FunctionHandle private constructor(
                 followSymlinks = followSymlinks,
             ),
         ).map { stat: StructStat ->
-            memory.sinkWithMaxSize(dstAddr, STRUCT_SIZE_PACKED_SIZE).buffered().use {
-                stat.packTo(it)
-            }
+            stat.writeTo(memory, dstAddr)
         }.negativeErrnoCode()
     }
 

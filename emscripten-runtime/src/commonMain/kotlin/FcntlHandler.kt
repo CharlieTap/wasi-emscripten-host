@@ -14,7 +14,6 @@ import at.released.weh.emcripten.runtime.ext.WhenceMapper
 import at.released.weh.emcripten.runtime.ext.negativeErrnoCode
 import at.released.weh.emcripten.runtime.include.Fcntl
 import at.released.weh.emcripten.runtime.include.StructFlock
-import at.released.weh.emcripten.runtime.include.StructFlock.Companion.STRUCT_FLOCK_SIZE
 import at.released.weh.filesystem.FileSystem
 import at.released.weh.filesystem.error.InvalidArgument
 import at.released.weh.filesystem.model.FileDescriptor
@@ -27,64 +26,50 @@ import at.released.weh.filesystem.op.lock.RemoveAdvisoryLockFd
 import at.released.weh.wasi.preview1.type.Errno.INVAL
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.ReadOnlyMemory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.readI16
+import at.released.weh.wasm.core.memory.readI32
+import at.released.weh.wasm.core.memory.readI64
 import at.released.weh.wasm.core.memory.readPtr
-import at.released.weh.wasm.core.memory.sourceWithMaxSize
-import kotlinx.io.buffered
 
 internal class FcntlHandler(
     private val fileSystem: FileSystem,
 ) {
-    private val handlers: Map<UInt, FcntlOperationHandler> = mapOf(
-        Fcntl.F_SETLK to FcntlSetLockOperation(),
-    )
-
-    fun invoke(
-        memory: ReadOnlyMemory,
+    @Suppress("MagicNumber")
+    fun <M> invoke(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         operation: UInt,
         thirdArg: Int?,
-    ): Int {
-        val handler = handlers[operation] ?: return -INVAL.code
-        return handler.invoke(memory, fd, thirdArg)
-    }
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Int = with(memoryAccess) {
+        if (operation != Fcntl.F_SETLK) return -INVAL.code
 
-    internal fun interface FcntlOperationHandler {
-        fun invoke(
-            memory: ReadOnlyMemory,
-            @IntFileDescriptor fd: FileDescriptor,
-            varArgs: Int?,
-        ): Int
-    }
+        @IntWasmPtr(StructFlock::class)
+        val structStatPtr: WasmPtr = memory.readPtr(checkNotNull(thirdArg))
+        val flock = StructFlock(
+            l_type = memory.readI16(structStatPtr),
+            l_whence = memory.readI16(structStatPtr + 2),
+            l_start = memory.readI64(structStatPtr + 8),
+            l_len = memory.readI64(structStatPtr + 16),
+            l_pid = memory.readI32(structStatPtr + 24),
+        )
+        val advisoryLock = flock.toAdvisoryLock().getOrElse {
+            return -it.errno.wasiPreview1Code
+        }
+        return when (flock.l_type) {
+            Fcntl.F_RDLCK, Fcntl.F_WRLCK -> fileSystem.execute(
+                AddAdvisoryLockFd,
+                AddAdvisoryLockFd(fd, advisoryLock),
+            ).negativeErrnoCode()
 
-    @Suppress("OBJECT_IS_PREFERRED")
-    internal inner class FcntlSetLockOperation : FcntlOperationHandler {
-        override fun invoke(
-            memory: ReadOnlyMemory,
-            @IntFileDescriptor fd: FileDescriptor,
-            varArgs: Int?,
-        ): Int {
-            @IntWasmPtr(StructFlock::class)
-            val structStatPtr: WasmPtr = memory.readPtr(checkNotNull(varArgs))
-            val flock = memory.sourceWithMaxSize(structStatPtr, STRUCT_FLOCK_SIZE).buffered().use {
-                StructFlock.unpack(it)
-            }
-            val advisoryLock = flock.toAdvisoryLock().getOrElse {
-                return -it.errno.wasiPreview1Code
-            }
-            return when (flock.l_type) {
-                Fcntl.F_RDLCK, Fcntl.F_WRLCK -> fileSystem.execute(
-                    AddAdvisoryLockFd,
-                    AddAdvisoryLockFd(fd, advisoryLock),
-                ).negativeErrnoCode()
+            Fcntl.F_UNLCK -> fileSystem.execute(
+                RemoveAdvisoryLockFd,
+                RemoveAdvisoryLockFd(fd, advisoryLock),
+            ).negativeErrnoCode()
 
-                Fcntl.F_UNLCK -> fileSystem.execute(
-                    RemoveAdvisoryLockFd,
-                    RemoveAdvisoryLockFd(fd, advisoryLock),
-                ).negativeErrnoCode()
-
-                else -> -INVAL.code
-            }
+            else -> -INVAL.code
         }
     }
 

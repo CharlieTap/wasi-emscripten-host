@@ -17,18 +17,20 @@ import at.released.weh.filesystem.path.virtual.VirtualPath
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.ReadOnlyMemory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 import at.released.weh.wasm.core.memory.readNullTerminatedString
 
 public class SyscallMkdiratFunctionHandle(
     host: EmbedderHost,
 ) : EmscriptenHostFunctionHandle(SYSCALL_MKDIRAT, host) {
-    public fun execute(
-        memory: ReadOnlyMemory,
+    public fun <M> execute(
+        memory: M,
         rawDirFd: Int,
         @IntWasmPtr(Byte::class) pathnamePtr: WasmPtr,
         @FileMode rawMode: Int,
-    ): Int {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Int = with(memoryAccess) {
         val path = memory.readNullTerminatedString(pathnamePtr)
         return VirtualPath.create(path).flatMap { virtualPath ->
             host.fileSystem.execute(

@@ -6,26 +6,27 @@
 
 package at.released.weh.bindings.chasm.module.emscripten.function
 
-import at.released.weh.bindings.chasm.ext.asWasmAddr
+import at.released.weh.bindings.chasm.memory.ChasmMemoryAccess
 import at.released.weh.bindings.chasm.module.emscripten.HostFunctionProvider
 import at.released.weh.emcripten.runtime.function.TzsetJsFunctionHandle
 import at.released.weh.host.EmbedderHost
-import at.released.weh.wasm.core.memory.Memory
-import io.github.charlietap.chasm.embedding.shapes.HostFunction
+import io.github.charlietap.chasm.host.HostFunction
+import io.github.charlietap.chasm.host.ModuleIndex
+import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.host.withMemory
 
 internal class TzsetJs(
     host: EmbedderHost,
-    private val memory: Memory,
+    private val memoryIndex: ModuleIndex.MemoryIndex,
 ) : HostFunctionProvider {
     private val handle = TzsetJsFunctionHandle(host)
-    override val function: HostFunction = { args ->
-        handle.execute(
-            memory,
-            args[0].asWasmAddr(),
-            args[1].asWasmAddr(),
-            args[2].asWasmAddr(),
-            args[3].asWasmAddr(),
-        )
-        emptyList()
+    override val function: HostFunction = HostFunction { parameters, _ ->
+        val timezone = parameters.readI32(0)
+        val daylight = parameters.readI32(1)
+        val stdName = parameters.readI32(2)
+        val dstName = parameters.readI32(3)
+        withMemory(memoryIndex) {
+            handle.execute(this, timezone, daylight, stdName, dstName, ChasmMemoryAccess)
+        }
     }
 }

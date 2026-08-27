@@ -21,21 +21,23 @@ import at.released.weh.wasi.preview1.ext.readPathString
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
 
 public class PathSymlinkFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.PATH_SYMLINK, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntWasmPtr(Byte::class) oldPath: WasmPtr,
         oldPathSize: Int,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Byte::class) newPath: WasmPtr,
         newPathSize: Int,
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
     ): Errno = either {
-        val oldPathString: VirtualPath = memory.readPathString(oldPath, oldPathSize).bind()
-        val newPathString = memory.readPathString(newPath, newPathSize).bind()
+        val oldPathString: VirtualPath = memory.readPathString(oldPath, oldPathSize, memoryAccess).bind()
+        val newPathString = memory.readPathString(newPath, newPathSize, memoryAccess).bind()
 
         newPathString.let {
             if (it.isDirectoryRequest()) {

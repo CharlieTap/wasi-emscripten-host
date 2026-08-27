@@ -17,32 +17,36 @@ import at.released.weh.filesystem.op.prestat.PrestatFd
 import at.released.weh.filesystem.op.prestat.PrestatResult
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasi.preview1.WasiPreview1HostFunction
-import at.released.weh.wasi.preview1.ext.encodeToBuffer
 import at.released.weh.wasi.preview1.ext.wasiErrno
 import at.released.weh.wasi.preview1.type.Errno
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
-import at.released.weh.wasm.core.memory.sinkWithMaxSize
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.write
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringApi
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringOperations
 
 public class FdPrestatDirNameFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.FD_PRESTAT_DIR_NAME, host) {
-    public fun execute(
-        memory: Memory,
+    @OptIn(UnsafeByteStringApi::class)
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @IntWasmPtr(Byte::class) dstPath: WasmPtr,
         dstPathLen: Int,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         return host.fileSystem.execute(PrestatFd, PrestatFd(fd))
             .mapLeft(PrestatError::wasiErrno)
             .flatMap { prestatResult: PrestatResult ->
-                val bytes = prestatResult.path.encodeToBuffer()
-                if (bytes.size > dstPathLen) {
+                val path = prestatResult.path
+                if (path.utf8SizeBytes > dstPathLen) {
                     return@flatMap Errno.NAMETOOLONG.left()
                 }
-                memory.sinkWithMaxSize(dstPath, bytes.size.toInt()).use {
-                    it.write(bytes, bytes.size)
+                UnsafeByteStringOperations.withByteArrayUnsafe(path.utf8Bytes) { bytes ->
+                    memory.write(dstPath, bytes)
                 }
                 Errno.SUCCESS.right()
             }.getOrElse { it }

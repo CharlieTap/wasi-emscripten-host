@@ -36,7 +36,7 @@ public sealed class MemorySource {
 
     /**
      * Shared memory from [sourceContext] with index [sourceMemoryIndex] will be installed in the module
-     * and exported as [exportedMemoryName].
+     * and exported as [exportedName].
      *
      * Experimental hack, do not use.
      * It is intended for using common shared memory across different GraalVM contexts, each created for its own thread.

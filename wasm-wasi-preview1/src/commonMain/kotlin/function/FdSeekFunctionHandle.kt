@@ -19,18 +19,21 @@ import at.released.weh.wasi.preview1.type.FiledeltaType
 import at.released.weh.wasi.preview1.type.Filesize
 import at.released.weh.wasm.core.IntWasmPtr
 import at.released.weh.wasm.core.WasmPtr
-import at.released.weh.wasm.core.memory.Memory
+import at.released.weh.wasm.core.memory.MemoryAccess
+import at.released.weh.wasm.core.memory.defaultMemoryAccess
+import at.released.weh.wasm.core.memory.writeI64
 
 public class FdSeekFunctionHandle(
     host: EmbedderHost,
 ) : WasiPreview1HostFunctionHandle(WasiPreview1HostFunction.FD_SEEK, host) {
-    public fun execute(
-        memory: Memory,
+    public fun <M> execute(
+        memory: M,
         @IntFileDescriptor fd: FileDescriptor,
         @FiledeltaType offset: Filedelta,
         whenceCode: Byte,
         @IntWasmPtr(Filesize::class) pNewOffset: WasmPtr,
-    ): Errno {
+        memoryAccess: MemoryAccess<M> = memory.defaultMemoryAccess(),
+    ): Errno = with(memoryAccess) {
         val whence = WhenceMapper.fromWasiCodeOrNull(whenceCode.toInt()) ?: return Errno.INVAL
         return host.fileSystem.execute(
             SeekFd,
