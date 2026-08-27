@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+
 plugins {
     id("at.released.weh.gradle.lint.binary-compatibility-validator")
     id("at.released.weh.gradle.lint.android-lint-noagp")
@@ -14,7 +16,7 @@ group = "at.released.weh"
 
 kotlin {
     jvm()
-    js(IR) {
+    js {
         browser()
         nodejs()
     }

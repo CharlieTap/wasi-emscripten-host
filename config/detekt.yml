@@ -140,6 +140,10 @@ formatting:
     active: false
   MaximumLineLength:
     active: false
+  # The embedded ktlint parser misreads Kotlin 2.4 context-parameter colons.
+  # Re-enable this rule when detekt's embedded ktlint supports context parameters.
+  SpacingAroundColon:
+    active: false
   TrailingCommaOnCallSite:
     active: true
     autoCorrect: true
@@ -148,3 +152,7 @@ formatting:
     active: true
     autoCorrect: true
     useTrailingCommaOnDeclarationSite: true
+  # detekt 1.23.8 embeds a ktlint WrappingRule that crashes on Kotlin 2.4 context parameters.
+  # Spotless remains the authoritative wrapping/formatting check.
+  Wrapping:
+    active: false

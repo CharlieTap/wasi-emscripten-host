@@ -7,6 +7,10 @@ plugins {
     id("at.released.weh.gradle.settings.root")
 }
 
+providers.gradleProperty("weh.chasm.source").orNull?.let { chasmSource ->
+    includeBuild(chasmSource)
+}
+
 // Workaround for https://github.com/gradle/gradle/issues/26020
 buildscript {
     repositories {
@@ -14,18 +18,18 @@ buildscript {
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.12.0")
+        classpath("com.android.tools.build:gradle:9.3.1")
         classpath("com.github.node-gradle:gradle-node-plugin:7.1.0")
-        classpath("com.vanniktech:gradle-maven-publish-plugin:0.34.0")
-        classpath("dev.drewhamilton.poko:poko-gradle-plugin:0.19.3")
-        classpath("org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin:2.0.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.0")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:2.2.0")
+        classpath("com.vanniktech:gradle-maven-publish-plugin:0.37.0")
+        classpath("dev.drewhamilton.poko:poko-gradle-plugin:0.23.1")
+        classpath("org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin:2.2.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.0")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:2.4.0")
         classpath(
             "org.jetbrains.kotlinx.binary-compatibility-validator:" +
                     "org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin:0.18.1",
         )
-        classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.29.0")
+        classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.33.0")
     }
 }
 

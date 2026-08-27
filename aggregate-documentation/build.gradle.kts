@@ -29,7 +29,7 @@ dokka {
 }
 
 tasks.register<Sync>("buildWebsite") {
-    description = "Assembles the final website from docusaurus output and api refernce into outputs/website"
+    description = "Assembles the final website from Docusaurus output and API reference into outputs/website"
     from(docusaurusWebsiteDirectory)
     from(apiReferenceDirectory) {
         into("api")

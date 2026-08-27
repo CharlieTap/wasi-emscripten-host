@@ -55,7 +55,7 @@ mavenPublishing {
         description.set(
             "Kotlin Multiplatform Implementation of WebAssembly WASI Preview 1 and Emscripten host functions",
         )
-        url.set("https://github.com/illarionov/wasi-emscripten-host")
+        url.set("https://github.com/CharlieTap/wasi-emscripten-host")
 
         licenses {
             license {
@@ -72,9 +72,9 @@ mavenPublishing {
             }
         }
         scm {
-            connection.set("scm:git:git://github.com/illarionov/wasi-emscripten-host.git")
-            developerConnection.set("scm:git:ssh://github.com:illarionov/wasi-emscripten-host.git")
-            url.set("https://github.com/illarionov/wasi-emscripten-host")
+            connection.set("scm:git:https://github.com/CharlieTap/wasi-emscripten-host.git")
+            developerConnection.set("scm:git:ssh://git@github.com/CharlieTap/wasi-emscripten-host.git")
+            url.set("https://github.com/CharlieTap/wasi-emscripten-host")
         }
     }
 }

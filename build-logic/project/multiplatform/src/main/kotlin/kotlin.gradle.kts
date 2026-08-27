@@ -29,16 +29,22 @@ kotlin {
     sourceSets {
         all {
             languageSettings {
-                languageVersion = "2.1"
-                apiVersion = "2.1"
+                languageVersion = "2.4"
+                apiVersion = "2.4"
                 listOf(
                     "kotlin.RequiresOptIn",
                     "kotlin.ExperimentalStdlibApi",
                     "kotlin.time.ExperimentalTime",
-                    "kotlinx.cinterop.ExperimentalForeignApi",
                     "at.released.weh.common.api.InternalWasiEmscriptenHostApi",
                 ).forEach(::optIn)
             }
+        }
+        matching { sourceSet ->
+            listOf("apple", "ios", "linux", "macos", "mingw", "native").any { prefix ->
+                sourceSet.name.startsWith(prefix, ignoreCase = true)
+            }
+        }.configureEach {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
         }
     }
 }
@@ -47,7 +53,7 @@ tasks.withType<KotlinJvmCompile>().configureEach {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_17)
         freeCompilerArgs.addAll(
-            "-Xjvm-default=all",
+            "-jvm-default=no-compatibility",
             "-Xlambdas=indy",
         )
     }

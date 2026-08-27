@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Wasi-emscripten-host',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Kotlin Multiplatform WASI Preview 1 and Emscripten host functions',
   favicon: 'img/favicon.ico',
 
   url: 'https://weh.released.at',
@@ -12,11 +12,15 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'illarionov', // Usually your GitHub org/user name.
+  organizationName: 'CharlieTap', // Usually your GitHub org/user name.
   projectName: 'wasi-emscripten-host', // Usually your repo name.
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   i18n: {
     defaultLocale: 'en',
@@ -35,7 +39,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           breadcrumbs: false,
           editUrl:
-            'https://github.com/illarionov/wasi-emscripten-host/tree/main/website',
+            'https://github.com/CharlieTap/wasi-emscripten-host/tree/main/website',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -70,7 +74,7 @@ const config: Config = {
           position: 'left'
         },
         {
-          href: 'https://github.com/illarionov/wasi-emscripten-host',
+          href: 'https://github.com/CharlieTap/wasi-emscripten-host',
           label: 'GitHub',
           position: 'right',
         },

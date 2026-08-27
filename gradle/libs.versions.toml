@@ -2,27 +2,27 @@
 androidMinSdk = "26"
 androidCompileSdk = "36"
 
-agp = "8.12.0"
+agp = "9.3.1"
 antlr4 = "4.13.2"
-atomicfu = "0.29.0"
+atomicfu = "0.33.0"
 arrow = "2.1.2"
 assertk = "0.28.1"
-chasm = "1.0.0"
+chasm = "2.0.0-SNAPSHOT"
 chicory = "1.5.1"
 detekt = "1.23.8"
-dokka = "2.0.0"
+dokka = "2.2.0"
 graalvm241 = "24.1.2"
-gradle-maven-publish-plugin = "0.34.0"
+gradle-maven-publish-plugin = "0.37.0"
 kotest = "5.9.1"
-kotlin = "2.2.0"
-kotlinpoet = "2.2.0"
+kotlin = "2.4.0"
+kotlinpoet = "2.3.0"
 kotlinx-binary-compatibility-validator = "0.18.1"
 kotlinx-datetime = "0.7.1"
 kotlinx-serialization-json = "1.9.0"
-kotlinx-io ="0.8.0"
+kotlinx-io ="0.9.1"
 kermit = "2.0.8"
 node-plugin = "7.1.0"
-poko-plugin = "0.19.3"
+poko-plugin = "0.23.1"
 spotless = "7.2.1"
 tempfolder = "0.1"
 
@@ -32,8 +32,6 @@ antlr4-runtime = { group = "org.antlr", name = "antlr4-runtime", version.ref = "
 arrow-core = { group = "io.arrow-kt", name = "arrow-core", version.ref = "arrow" }
 assertk = { group = "com.willowtreeapps.assertk", name = "assertk", version.ref = "assertk" }
 chasm = { group = "io.github.charlietap.chasm", name = "chasm", version.ref = "chasm" }
-chasm-memory = { group = "io.github.charlietap.chasm", name = "memory", version.ref = "chasm" }
-chasm-runtime = { group = "io.github.charlietap.chasm", name = "runtime", version.ref = "chasm" }
 chicory-runtime = { group = "com.dylibso.chicory", name = "runtime", version.ref = "chicory" }
 chicory-aot = { group = "com.dylibso.chicory", name = "aot", version.ref = "chicory" }
 chicory-wasi = { group = "com.dylibso.chicory", name = "wasi", version.ref = "chicory" }

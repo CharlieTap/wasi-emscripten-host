@@ -14,9 +14,6 @@ import com.android.build.api.dsl.Lint
 internal fun Lint.configureCommonAndroidLint() {
     quiet = false
     ignoreWarnings = false
-    htmlReport = true
-    xmlReport = true
-    sarifReport = true
     checkDependencies = false
     ignoreTestSources = false
 

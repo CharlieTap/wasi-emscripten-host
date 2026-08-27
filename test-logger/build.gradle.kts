@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-@file:Suppress("OPT_IN_USAGE")
+@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
 
 plugins {
     id("at.released.weh.gradle.lint.binary-compatibility-validator")
@@ -21,7 +21,7 @@ version = wehVersions.getSubmoduleVersionProvider(
 
 kotlin {
     jvm()
-    js(IR) {
+    js {
         browser()
         nodejs()
     }

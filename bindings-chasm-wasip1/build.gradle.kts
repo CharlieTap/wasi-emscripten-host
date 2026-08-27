@@ -36,7 +36,6 @@ kotlin {
             implementation(projects.commonUtil)
             implementation(projects.wasmWasiPreview1)
             implementation(libs.kotlinx.io)
-            compileOnly(libs.chasm.memory)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

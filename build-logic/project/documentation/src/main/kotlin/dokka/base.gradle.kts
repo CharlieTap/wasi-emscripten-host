@@ -6,6 +6,9 @@
 
 package at.released.weh.gradle.documentation.dokka
 
+import org.jetbrains.dokka.gradle.DokkaExtension
+import org.jetbrains.dokka.gradle.engine.plugins.DokkaHtmlPluginParameters
+
 /*
  * Base configuration of dokkatoo
  */
@@ -16,7 +19,7 @@ plugins {
 @Suppress("UnstableApiUsage")
 private val htmlResourcesRoot = layout.settingsDirectory.dir("aggregate-documentation")
 
-dokka {
+extensions.configure<DokkaExtension> {
     dokkaPublications.configureEach {
         suppressObviousFunctions.set(true)
         suppressInheritedMembers.set(true)
@@ -29,7 +32,7 @@ dokka {
         sourceLink {
             localDirectory.set(project.layout.projectDirectory)
             val remoteUrlSubpath = project.path.replace(':', '/')
-            remoteUrl("https://github.com/illarionov/wasi-emscripten-host/tree/main$remoteUrlSubpath")
+            remoteUrl("https://github.com/CharlieTap/wasi-emscripten-host/tree/main$remoteUrlSubpath")
         }
         externalDocumentationLinks {
             create("arrow") {
@@ -38,7 +41,7 @@ dokka {
         }
     }
 
-    pluginsConfiguration.html {
+    pluginsConfiguration.withType<DokkaHtmlPluginParameters>().configureEach {
         homepageLink.set("https://weh.released.at")
         footerMessage.set("(C) wasi-emscripten-host project authors and contributors")
         customStyleSheets.from(

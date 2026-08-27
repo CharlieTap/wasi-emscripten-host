@@ -2,35 +2,41 @@
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
-### Installation
+## Requirements
 
-```
-$ npm install
-```
+Use Node.js 20 or newer. CI currently uses Node.js 24.
 
-### Local Development
+## Installation
 
-```
-$ npm run start
+```shell
+npm ci
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+## Local development
 
-### Build
-
-```
-$ npm run build
+```shell
+npm run start
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+This starts a local development server. Most changes are reflected without restarting it.
 
-### Deployment
+## Verification
+
+```shell
+npm run typecheck
+npm run build
+```
+
+The production build generates static content in the `build` directory.
+
+## Gradle build and deployment
 
 The static version of the site is built using Gradle and deployed using GitHub Actions.
 
-```
-$ ./gradlew aggregate-documentation:buildWebsite
+```shell
+./gradlew aggregate-documentation:buildWebsite
 ```
 
-This command, executed from the root of the project, builds the site for deployment into the 
+Run this command from the repository root. It builds the Dokka API reference, type-checks Docusaurus, and writes the
+deployable site to the
 `aggregate-documentation/build/outputs/website/` directory.

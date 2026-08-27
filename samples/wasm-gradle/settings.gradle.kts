@@ -1,5 +1,5 @@
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version ("0.10.0")
+    id("org.gradle.toolchains.foojay-resolver-convention") version ("1.0.0")
 }
 
 dependencyResolutionManagement {
@@ -7,6 +7,14 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
     }
+}
+
+providers.gradleProperty("weh.source").orNull?.let { wehSource ->
+    includeBuild(wehSource)
+}
+
+providers.gradleProperty("weh.chasm.source").orNull?.let { chasmSource ->
+    includeBuild(chasmSource)
 }
 
 rootProject.name = "wasm-gradle"

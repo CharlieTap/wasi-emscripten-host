@@ -56,7 +56,7 @@ kotlin {
     }
 
     sourceSets {
-        val appleAndLinuxMain by creating {
+        val appleAndLinuxMain = create("appleAndLinuxMain") {
             dependsOn(nativeMain.get())
         }
         appleMain.get().dependsOn(appleAndLinuxMain)

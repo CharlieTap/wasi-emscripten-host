@@ -42,10 +42,10 @@ val detektCheck = tasks.register("detektCheck", Detekt::class) {
         txt.required.set(false)
         sarif.required.set(true)
 
-        xml.outputLocation.set(file("build/reports/detekt/report.xml"))
-        html.outputLocation.set(file("build/reports/detekt/report.html"))
-        txt.outputLocation.set(file("build/reports/detekt/report.txt"))
-        sarif.outputLocation.set(file("build/reports/detekt/report.sarif"))
+        xml.outputLocation.set(layout.buildDirectory.file("reports/detekt/report.xml"))
+        html.outputLocation.set(layout.buildDirectory.file("reports/detekt/report.html"))
+        txt.outputLocation.set(layout.buildDirectory.file("reports/detekt/report.txt"))
+        sarif.outputLocation.set(layout.buildDirectory.file("reports/detekt/report.sarif"))
     }
 }
 
