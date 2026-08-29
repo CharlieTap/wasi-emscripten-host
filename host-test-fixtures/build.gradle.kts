@@ -20,12 +20,10 @@ version = wehVersions.getSubmoduleVersionProvider(
 kotlin {
     iosSimulatorArm64()
     iosArm64()
-    iosX64()
     jvm()
     linuxArm64()
     linuxX64()
     macosArm64()
-    macosX64()
     mingwX64()
 
     sourceSets {

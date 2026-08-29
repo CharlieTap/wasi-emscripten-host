@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.TestExecutable
 public fun Project.setupCopyDirectoryToIosTestResources(
     directory: Provider<Directory>,
     dstDirectory: String = "wasi-testsuite",
-    appleTargetsWithResources: Set<String> = setOf("iosSimulatorArm64", "iosArm64", "iosX64"),
+    appleTargetsWithResources: Set<String> = setOf("iosSimulatorArm64", "iosArm64"),
 ) {
     extensions.getByType(KotlinMultiplatformExtension::class.java).targets
         .withType(KotlinNativeTarget::class.java)

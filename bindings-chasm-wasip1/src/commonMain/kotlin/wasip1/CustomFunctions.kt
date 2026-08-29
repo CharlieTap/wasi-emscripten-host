@@ -16,7 +16,7 @@ import io.github.charlietap.chasm.type.FunctionType
 import io.github.charlietap.chasm.type.NumberType.I32
 import io.github.charlietap.chasm.type.ResultType
 import io.github.charlietap.chasm.type.ValueType
-import io.github.charlietap.chasm.embedding.shapes.HostFunction as ChasmHostFunction
+import io.github.charlietap.chasm.host.HostFunction as ChasmHostFunction
 
 internal fun createCustomWasiPreview1HostFunctions(
     store: Store,

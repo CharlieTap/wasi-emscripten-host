@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # WASI Preview 1
 
-The library implements all non-deprecated functions of the [WASI Preview 1] specification for Kotlin targets: _JVM_ (based on NIO), _macosArm64_, macosX64_, _iosArm64_, _iosX64_, _iosSimulatorArm64_, _linuxX64_, _linuxArm64_ and _mingwX64_.
+The library implements all non-deprecated functions of the [WASI Preview 1] specification for Kotlin targets: _JVM_ (based on NIO), _macosArm64_, _iosArm64_, _iosSimulatorArm64_, _linuxX64_, _linuxArm64_ and _mingwX64_.
 
 The implementation passes the [WASI Testsuite] with some exceptions that should not affect the overall functionality.
 

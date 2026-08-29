@@ -39,12 +39,10 @@ class ChasmWasiPreview1BuilderTest {
     }
 
     @Test
-    fun `rejects missing memory export`() {
+    fun `falls back to memory index zero when memory export is missing`() {
         val module = module(wasmModule(memorySection())).expect("test module must decode")
 
-        val failure = assertFailsWith<IllegalStateException> { module.wasiMemoryIndex() }
-
-        assertTrue(failure.message.orEmpty().contains("export exactly one `memory` memory"))
+        assertEquals(0, module.wasiMemoryIndex().index)
     }
 
     @Test

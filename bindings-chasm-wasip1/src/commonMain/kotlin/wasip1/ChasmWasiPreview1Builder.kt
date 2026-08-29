@@ -67,7 +67,7 @@ public class ChasmWasiPreview1Builder private constructor(
 
 internal fun Module.wasiMemoryIndex(): ModuleIndex.MemoryIndex {
     val export = exports.singleOrNull { export -> export.name == WASI_MEMORY_EXPORT_NAME }
-        ?: error("WASI Preview 1 module must export exactly one `$WASI_MEMORY_EXPORT_NAME` memory")
+        ?: return ModuleIndex.MemoryIndex(0)
     check(export.type is ExternalType.Memory) {
         "WASI Preview 1 `$WASI_MEMORY_EXPORT_NAME` export must be a memory"
     }

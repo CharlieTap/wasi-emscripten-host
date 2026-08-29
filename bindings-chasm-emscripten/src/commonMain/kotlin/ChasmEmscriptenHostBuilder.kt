@@ -120,6 +120,13 @@ public class ChasmEmscriptenHostBuilder private constructor(
             val memory = exports(instance).singleOrNull { export -> export.name == EMSCRIPTEN_MEMORY_EXPORT_NAME }
                 ?.value as? ChasmMemory
                 ?: error("Emscripten module must export exactly one `$EMSCRIPTEN_MEMORY_EXPORT_NAME` memory")
+            return finalize(instance, memory)
+        }
+
+        public fun finalize(
+            instance: ChasmInstance,
+            memory: ChasmMemory,
+        ): EmscriptenRuntime {
             val emscriptenRuntime = DefaultEmscriptenRuntime.emscriptenSingleThreadedRuntime(
                 mainExports = ChasmEmscriptenMainExports(store, instance),
                 stackExports = ChasmEmscriptenStackExports(store, instance),
@@ -150,7 +157,7 @@ public class ChasmEmscriptenHostBuilder private constructor(
 
 private fun Module.emscriptenMemoryIndex(): ModuleIndex.MemoryIndex {
     val export = exports.singleOrNull { export -> export.name == EMSCRIPTEN_MEMORY_EXPORT_NAME }
-        ?: error("Emscripten module must export exactly one `$EMSCRIPTEN_MEMORY_EXPORT_NAME` memory")
+        ?: return ModuleIndex.MemoryIndex(0)
     check(export.type is ExternalType.Memory) {
         "Emscripten `$EMSCRIPTEN_MEMORY_EXPORT_NAME` export must be a memory"
     }

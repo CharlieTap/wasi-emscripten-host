@@ -20,7 +20,7 @@ version of SQLite compiled with Emscripten. The description of the Emscripten
 implementation and an example of compiling a C++ application to work with this library can be found on the
  [Emscripten environment](Emscripten.md).
 
-Supported Kotlin targets: _JVM_, _macosArm64_, macosX64_, _iosArm64_, _iosX64_, _iosSimulatorArm64_, _linuxX64_, _linuxArm64_, _mingwX64_.
+Supported Kotlin targets: _JVM_, _macosArm64_, _iosArm64_, _iosSimulatorArm64_, _linuxX64_, _linuxArm64_, _mingwX64_.
 
 ## Usage
 

@@ -28,7 +28,6 @@ kotlin {
     jvm()
     iosSimulatorArm64()
     iosArm64()
-    iosX64()
     linuxArm64 {
         setupLinuxInterops()
     }
@@ -36,7 +35,6 @@ kotlin {
         setupLinuxInterops()
     }
     macosArm64()
-    macosX64()
     mingwX64 {
         setupWindowsInterops()
         binaries.all {
