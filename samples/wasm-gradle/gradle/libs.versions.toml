@@ -7,7 +7,7 @@ weh = "0.7.0-SNAPSHOT"
 [libraries]
 chasm = { group = "io.github.charlietap.chasm", name = "chasm", version.ref = "chasm" }
 weh-chasm-emscripten = { group = "at.released.weh", name = "bindings-chasm-emscripten", version.ref = "weh" }
-weh-chasm-wasip1 = { group = "at.released.weh", name = "bindings-chasm-wasip1", version.ref = "weh" }
+weh-chasm-wasip1 = { group = "io.github.charlietap.wasi.emscripten.host", name = "bindings-chasm-wasip1", version.ref = "weh" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

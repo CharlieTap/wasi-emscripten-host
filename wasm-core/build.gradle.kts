@@ -11,12 +11,6 @@ plugins {
     id("at.released.weh.gradle.multiplatform.publish")
 }
 
-group = "at.released.weh"
-version = wehVersions.getSubmoduleVersionProvider(
-    propertiesFileKey = "weh_wasm_base_version",
-    envVariableName = "WEH_WASM_BASE_VERSION",
-).get()
-
 kotlin {
     jvm()
     iosSimulatorArm64()

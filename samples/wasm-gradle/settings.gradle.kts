@@ -13,6 +13,7 @@ dependencyResolutionManagement {
             }
             content {
                 includeGroup("io.github.charlietap.chasm")
+                includeGroup("io.github.charlietap.wasi.emscripten.host")
             }
         }
         mavenCentral()

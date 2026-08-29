@@ -1,31 +1,30 @@
-# Wasi-emscripten-host
+# WASI host functions for Chasm
 
-Kotlin Multiplatform implementation of WebAssembly host functions from WASI Preview 1 system interface and from
-[Emscripten] environment.
+Kotlin Multiplatform implementation of the WebAssembly WASI Preview 1 host functions for the [Chasm] runtime.
 
-It is designed to execute WebAssembly binaries compiled using the Emscripten toolchain with the multiplatform [Chasm]
-WebAssembly runtime.
+The repository retains the Emscripten implementation for compatibility and development, but Maven Central releases
+are intentionally limited to the WASI Preview 1 Chasm binding and its runtime dependencies.
 
-For more information, visit the project website: [weh.released.at](https://weh.released.at)
-
-[Emscripten]: https://emscripten.org/
 [Chasm]: https://github.com/CharlieTap/chasm
 
 ## Development
 
-The build uses JDK 25. The documentation website additionally requires Node.js 20 or newer, and Apple native targets
-require Xcode when built on macOS.
+The build uses JDK 25. Apple native targets require Xcode when built on macOS.
 
 The main verification entry points mirror CI:
 
 ```shell
-./gradlew styleCheck
-./gradlew build
-./gradlew --no-configuration-cache aggregate-documentation:buildWebsite
+./gradlew styleCheck :bindings-chasm-wasip1:jvmTest :test-wasi-testsuite:bindings-test:jvmTest \
+    :wasm-wasi-preview1:jvmTest :host:jvmTest :common-util:jvmTest :wasm-core:jvmTest \
+    :bindings-chasm-wasip1:compileKotlinLinuxX64 :bindings-chasm-wasip1:compileKotlinLinuxArm64 \
+    --no-configuration-cache
+./gradlew :bindings-chasm-wasip1:compileKotlinMacosArm64 :bindings-chasm-wasip1:compileKotlinIosArm64 \
+    :bindings-chasm-wasip1:compileKotlinIosSimulatorArm64 --no-configuration-cache
 ```
 
-The documentation task builds the Dokka API reference, type-checks the Docusaurus site, and creates the production
-website under `aggregate-documentation/build/outputs/website/`.
+The published binding has the coordinate
+`io.github.charlietap.wasi.emscripten.host:bindings-chasm-wasip1`. Its six internal runtime dependencies are published
+at the same version and are resolved transitively.
 
 The standalone Gradle samples can be compiled against this working tree while resolving Chasm 2.0 from Central's
 snapshot repository:
@@ -35,6 +34,8 @@ snapshot repository:
     -Pweh.source=/absolute/path/to/wasi-emscripten-host \
     compileKotlinJvm
 ```
+
+See [RELEASING.md](RELEASING.md) for local publication validation and Maven Central release instructions.
 
 ## License
 

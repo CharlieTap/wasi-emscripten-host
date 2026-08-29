@@ -13,12 +13,6 @@ plugins {
     id("at.released.weh.gradle.multiplatform.publish")
 }
 
-group = "at.released.weh"
-version = wehVersions.getSubmoduleVersionProvider(
-    propertiesFileKey = "weh_common_api_version",
-    envVariableName = "WEH_COMMON_API_VERSION",
-).get()
-
 kotlin {
     jvm()
     js {

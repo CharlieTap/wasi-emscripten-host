@@ -14,8 +14,6 @@ import com.vanniktech.maven.publish.KotlinMultiplatform
  * Convention plugin with publishing defaults
  */
 plugins {
-    id("at.released.weh.gradle.documentation.dokka.subproject")
-    id("at.released.weh.gradle.multiplatform.distribution.subproject")
     id("org.jetbrains.kotlin.multiplatform")
     id("com.vanniktech.maven.publish.base")
 }
@@ -25,24 +23,13 @@ tasks.withType<AbstractArchiveTask>().configureEach {
     isReproducibleFileOrder = true
 }
 
-createWehVersionsExtension()
+val wehVersions = createWehVersionsExtension()
+
+group = "io.github.charlietap.wasi.emscripten.host"
+version = wehVersions.rootVersion.get()
 
 mavenPublishing {
     publishToMavenCentral()
-    publishing {
-        repositories {
-            maven {
-                name = "PixnewsS3"
-                setUrl("s3://maven.pixnews.ru/")
-                credentials(AwsCredentials::class) {
-                    accessKey = providers.environmentVariable("YANDEX_S3_ACCESS_KEY_ID").getOrElse("")
-                    secretKey = providers.environmentVariable("YANDEX_S3_SECRET_ACCESS_KEY").getOrElse("")
-                }
-            }
-        }
-    }
-
-    signAllPublications()
 
     configure(
         KotlinMultiplatform(
@@ -53,7 +40,7 @@ mavenPublishing {
     pom {
         name.set(project.name)
         description.set(
-            "Kotlin Multiplatform Implementation of WebAssembly WASI Preview 1 and Emscripten host functions",
+            "Kotlin Multiplatform implementation of WebAssembly WASI Preview 1 host functions for Chasm",
         )
         url.set("https://github.com/CharlieTap/wasi-emscripten-host")
 
@@ -66,9 +53,8 @@ mavenPublishing {
         }
         developers {
             developer {
-                id.set("illarionov")
-                name.set("Alexey Illarionov")
-                email.set("alexey@0xdc.ru")
+                id.set("CharlieTap")
+                name.set("Charlie Tapping")
             }
         }
         scm {

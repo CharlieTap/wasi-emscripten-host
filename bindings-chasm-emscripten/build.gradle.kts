@@ -8,14 +8,9 @@ plugins {
     id("at.released.weh.gradle.lint.binary-compatibility-validator")
     id("at.released.weh.gradle.lint.android-lint-noagp")
     id("at.released.weh.gradle.multiplatform.kotlin")
-    id("at.released.weh.gradle.multiplatform.publish")
 }
 
 group = "at.released.weh"
-version = wehVersions.getSubmoduleVersionProvider(
-    propertiesFileKey = "weh_bindings_chasm_emscripten_version",
-    envVariableName = "WEH_BINDINGS_CHASM_EMSCRIPTEN_VERSION",
-).get()
 
 kotlin {
     jvm()

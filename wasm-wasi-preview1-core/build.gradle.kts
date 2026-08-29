@@ -12,12 +12,6 @@ plugins {
     id("at.released.weh.gradle.wasm.codegen.wasitypes.witx-interface-generator")
 }
 
-group = "at.released.weh"
-version = wehVersions.getSubmoduleVersionProvider(
-    propertiesFileKey = "weh_wasm_wasi_preview1_core_version",
-    envVariableName = "WEH_WASM_WASI_PREVIEW1_CORE_VERSION",
-).get()
-
 kotlin {
     jvm()
     iosSimulatorArm64()

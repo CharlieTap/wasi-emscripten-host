@@ -12,12 +12,6 @@ plugins {
     id("at.released.weh.gradle.wasm.codegen.chasm.chasm-adapter-generator")
 }
 
-group = "at.released.weh"
-version = wehVersions.getSubmoduleVersionProvider(
-    propertiesFileKey = "weh_bindings_chasm_wasip1_version",
-    envVariableName = "WEH_BINDINGS_CHASM_WASIP1_VERSION",
-).get()
-
 kotlin {
     jvm()
     iosSimulatorArm64()

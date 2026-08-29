@@ -41,18 +41,6 @@ open class WehVersionsExtension @Inject constructor(
                     ?: error("No `weh_version` in $propertiesFile")
             },
         )
-
-    fun getSubmoduleVersionProvider(
-        propertiesFileKey: String,
-        envVariableName: String,
-        gradleKey: String = propertiesFileKey,
-    ): Provider<String> = providers.gradleProperty(gradleKey)
-        .orElse(providers.environmentVariable(envVariableName))
-        .orElse(
-            propertiesProvider.map { props ->
-                props[propertiesFileKey] ?: rootVersion.get()
-            },
-        )
 }
 
 private abstract class PropertiesValueSource : ValueSource<Map<String, String>, Parameters> {

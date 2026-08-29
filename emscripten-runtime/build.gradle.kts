@@ -9,14 +9,9 @@ plugins {
     id("at.released.weh.gradle.lint.android-lint-noagp")
     id("at.released.weh.gradle.multiplatform.kotlin")
     id("at.released.weh.gradle.multiplatform.poko")
-    id("at.released.weh.gradle.multiplatform.publish")
 }
 
 group = "at.released.weh"
-version = wehVersions.getSubmoduleVersionProvider(
-    propertiesFileKey = "weh_emscripten_runtime_version",
-    envVariableName = "WEH_EMSCRIPTEN_RUNTIME_VERSION",
-).get()
 
 kotlin {
     jvm()
