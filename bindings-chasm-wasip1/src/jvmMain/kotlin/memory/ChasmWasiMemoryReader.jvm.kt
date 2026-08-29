@@ -33,7 +33,7 @@ internal actual class ChasmWasiMemoryReader actual constructor(
     private val supportsDirectChannel: Boolean = fileSystem.isOperationSupported(RunWithChannelFd)
 
     @OptIn(UnsafeHostApi::class)
-    override fun read(
+    actual override fun read(
         memory: HostMemory,
         fd: FileDescriptor,
         strategy: ReadWriteStrategy,

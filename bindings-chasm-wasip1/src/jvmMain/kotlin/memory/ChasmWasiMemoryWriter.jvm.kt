@@ -34,7 +34,7 @@ internal actual class ChasmWasiMemoryWriter actual constructor(
     private val supportsDirectChannel: Boolean = fileSystem.isOperationSupported(RunWithChannelFd)
 
     @OptIn(UnsafeHostApi::class)
-    override fun write(
+    actual override fun write(
         memory: HostMemory,
         fd: FileDescriptor,
         strategy: ReadWriteStrategy,

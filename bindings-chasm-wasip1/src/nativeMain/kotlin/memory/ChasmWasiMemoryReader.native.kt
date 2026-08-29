@@ -24,7 +24,7 @@ internal actual class ChasmWasiMemoryReader actual constructor(
     private val fileSystem: FileSystem,
 ) : DirectWasiMemoryReader<HostMemory> {
     @OptIn(UnsafeHostApi::class)
-    override fun read(
+    actual override fun read(
         memory: HostMemory,
         fd: FileDescriptor,
         strategy: ReadWriteStrategy,
