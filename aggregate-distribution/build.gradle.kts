@@ -11,10 +11,6 @@ plugins {
 dependencies {
     mavenSnapshotAggregation(projects.bindingsChasmEmscripten)
     mavenSnapshotAggregation(projects.bindingsChasmWasip1)
-    mavenSnapshotAggregation(projects.bindingsChicoryEmscripten)
-    mavenSnapshotAggregation(projects.bindingsChicoryWasip1)
-    mavenSnapshotAggregation(projects.bindingsGraalvm241Emscripten)
-    mavenSnapshotAggregation(projects.bindingsGraalvm241Wasip1)
     mavenSnapshotAggregation(projects.commonApi)
     mavenSnapshotAggregation(projects.commonUtil)
     mavenSnapshotAggregation(projects.emscriptenRuntime)

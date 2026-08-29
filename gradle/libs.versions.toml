@@ -8,10 +8,8 @@ atomicfu = "0.33.0"
 arrow = "2.1.2"
 assertk = "0.28.1"
 chasm = "2.0.0-SNAPSHOT"
-chicory = "1.5.1"
 detekt = "1.23.8"
 dokka = "2.2.0"
-graalvm241 = "24.1.2"
 gradle-maven-publish-plugin = "0.37.0"
 kotest = "5.9.1"
 kotlin = "2.4.0"
@@ -32,14 +30,6 @@ antlr4-runtime = { group = "org.antlr", name = "antlr4-runtime", version.ref = "
 arrow-core = { group = "io.arrow-kt", name = "arrow-core", version.ref = "arrow" }
 assertk = { group = "com.willowtreeapps.assertk", name = "assertk", version.ref = "assertk" }
 chasm = { group = "io.github.charlietap.chasm", name = "chasm", version.ref = "chasm" }
-chicory-runtime = { group = "com.dylibso.chicory", name = "runtime", version.ref = "chicory" }
-chicory-aot = { group = "com.dylibso.chicory", name = "aot", version.ref = "chicory" }
-chicory-wasi = { group = "com.dylibso.chicory", name = "wasi", version.ref = "chicory" }
-graalvm241-polyglot-polyglot = { group = "org.graalvm.polyglot", name = "polyglot", version.ref = "graalvm241" }
-graalvm241-polyglot-wasm = { group = "org.graalvm.polyglot", name = "wasm-community", version.ref = "graalvm241" }
-graalvm241-truffle-api = { group = "org.graalvm.truffle", name = "truffle-api", version.ref = "graalvm241" }
-graalvm241-truffle-dsl-processor = { group = "org.graalvm.truffle", name = "truffle-dsl-processor", version.ref = "graalvm241" }
-graalvm241-wasm-language = { group = "org.graalvm.wasm", name = "wasm-language", version.ref = "graalvm241" }
 kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 kotest-property = { group = "io.kotest", name = "kotest-property", version.ref = "kotest" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }

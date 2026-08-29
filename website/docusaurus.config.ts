@@ -53,7 +53,7 @@ const config: Config = {
     image: 'img/docusaurus-social-card.jpg',
     metadata: [{
       name: "keywords",
-        content: "kotlin, wasm, emscripten, graalvm, chicory, chasm"
+        content: "kotlin, wasm, wasi, emscripten, chasm"
       }],
     navbar: {
       title: 'Wasi-emscripten-host',

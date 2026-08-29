@@ -17,34 +17,4 @@ public enum class WasmRuntimeBindings(
             "ChasmWasmTestRuntime",
         ).nestedClass("Factory"),
     ),
-    CHICORY(
-        runtimeFactoryClassName = ClassName(
-            "at.released.weh.wasi.bindings.test.chicory.base",
-            "ChicoryWasmTestRuntime",
-        ).nestedClass("Factory"),
-    ),
-    CHICORY_BYTEARRAY_MEMORY(
-        runtimeFactoryClassName = ClassName(
-            "at.released.weh.wasi.bindings.test.chicory.base",
-            "ChicoryWasmTestRuntime",
-        ).nestedClass("ByteArrayMemoryFactory"),
-    ),
-    CHICORY_NATIVE(
-        runtimeFactoryClassName = ClassName(
-            "at.released.weh.wasi.bindings.test.chicory.base",
-            "ChicoryNativeWasmTestRuntime",
-        ).nestedClass("Factory"),
-    ),
-    GRAALVM(
-        runtimeFactoryClassName = ClassName(
-            "at.released.weh.wasi.bindings.test.graalvm.base",
-            "GraalvmWasmTestRuntime",
-        ).nestedClass("Factory"),
-    ),
-    GRAALVM_NATIVE(
-        runtimeFactoryClassName = ClassName(
-            "at.released.weh.wasi.bindings.test.graalvm.base",
-            "GraalvmNativeWasmTestRuntime",
-        ).nestedClass("Factory"),
-    ),
 }

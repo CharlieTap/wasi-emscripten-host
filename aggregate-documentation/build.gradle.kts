@@ -40,10 +40,6 @@ tasks.register<Sync>("buildWebsite") {
 dependencies {
     dokka(projects.bindingsChasmEmscripten)
     dokka(projects.bindingsChasmWasip1)
-    dokka(projects.bindingsChicoryEmscripten)
-    dokka(projects.bindingsChicoryWasip1)
-    dokka(projects.bindingsGraalvm241Emscripten)
-    dokka(projects.bindingsGraalvm241Wasip1)
     dokka(projects.commonApi)
     dokka(projects.host)
     dokka(projects.hostTestFixtures)

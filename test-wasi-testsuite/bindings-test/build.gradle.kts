@@ -30,9 +30,6 @@ wasiTestsuiteTestGen {
     wasiTestsuiteTestsRoot = wasiTestSuiteRoot
     runtimes = setOf(
         WasmRuntimeBindings.CHASM,
-        WasmRuntimeBindings.CHICORY,
-        WasmRuntimeBindings.CHICORY_BYTEARRAY_MEMORY,
-        WasmRuntimeBindings.GRAALVM,
     )
     cIgnores = listOf(
         TestIgnore("sock_shutdown-invalid_fd"),
@@ -79,16 +76,10 @@ kotlin {
         }
         jvmMain.dependencies {
             implementation(kotlin("test-junit"))
-            implementation(libs.graalvm241.polyglot.wasm)
         }
         commonTest.dependencies {
             implementation(projects.bindingsChasmWasip1)
             implementation(kotlin("test"))
-        }
-        jvmTest.dependencies {
-            implementation(libs.chicory.wasi)
-            implementation(projects.bindingsChicoryWasip1)
-            implementation(projects.bindingsGraalvm241Wasip1)
         }
     }
 }

@@ -10,7 +10,6 @@ import at.released.weh.bindings.chasm.wasip1.ChasmWasiPreview1Builder
 import at.released.weh.host.EmbedderHost
 import at.released.weh.wasi.bindings.test.runner.WasiTestsuiteArguments
 import at.released.weh.wasi.bindings.test.runner.WasmTestRuntime
-import io.github.charlietap.chasm.config.RuntimeConfig
 import io.github.charlietap.chasm.embedding.instance
 import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
@@ -24,7 +23,6 @@ import kotlinx.io.files.Path
 object ChasmWasmTestRuntime : WasmTestRuntime {
     private val HOST_FUNCTION_ERROR_PATTERN = """HostFunctionError\(error=(\d+)\)""".toRegex()
     override val hasOwnStdioTests: Boolean = false
-    private val chasmRuntimeConfig = RuntimeConfig(bytecodeFusion = false)
 
     override fun runTest(
         wasmFile: ByteArray,
@@ -53,7 +51,7 @@ object ChasmWasmTestRuntime : WasmTestRuntime {
         val hostImports = ChasmWasiPreview1Builder(store, module) {
             this.host = host
         }.build()
-        val instance: Instance = instance(store, module, hostImports, chasmRuntimeConfig).fold(
+        val instance: Instance = instance(store, module, hostImports).fold(
             onSuccess = { it },
             onError = { throw WasmException("Can node instantiate WebAssembly binary: $it") },
         )

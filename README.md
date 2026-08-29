@@ -3,15 +3,13 @@
 Kotlin Multiplatform implementation of WebAssembly host functions from WASI Preview 1 system interface and from
 [Emscripten] environment.
 
-It is designed to execute WebAssembly binaries compiled using the Emscripten toolchain on JVM/Multiplatform WebAssembly
-runtimes such as [GraalVM][GraalWasm], [Chicory], and [Chasm].
+It is designed to execute WebAssembly binaries compiled using the Emscripten toolchain with the multiplatform [Chasm]
+WebAssembly runtime.
 
 For more information, visit the project website: [weh.released.at](https://weh.released.at)
 
 [Emscripten]: https://emscripten.org/
 [Chasm]: https://github.com/CharlieTap/chasm
-[Chicory]: https://chicory.dev/
-[GraalWasm]: https://www.graalvm.org/latest/reference-manual/wasm/
 
 ## Development
 
@@ -23,7 +21,7 @@ The main verification entry points mirror CI:
 ```shell
 ./gradlew styleCheck
 ./gradlew build
-./gradlew aggregate-documentation:buildWebsite
+./gradlew --no-configuration-cache aggregate-documentation:buildWebsite
 ```
 
 The documentation task builds the Dokka API reference, type-checks the Docusaurus site, and creates the production

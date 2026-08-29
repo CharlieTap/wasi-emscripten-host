@@ -7,7 +7,7 @@ sidebar_position: 1
 
 This Kotlin Multiplatform library provides an implementation of the of the host functions specified in [WASI Preview 1],
 as well as an experimental implementation of the [Emscripten JS][Emscripten] environment host functions.
-It is designed to work with JVM/Multiplatform WebAssembly runtimes such as [GraalWASM][GraalWasm], [Chicory], and [Chasm].
+It is designed to work with the multiplatform [Chasm] WebAssembly runtime.
 
 The primary goal is to run WebAssembly binaries compiled for WASM WASI or for Emscripten in a JVM environment, 
 without the need for a browser or JavaScript.
@@ -27,8 +27,6 @@ Supported Kotlin targets: _JVM_, _macosArm64_, _iosArm64_, _iosSimulatorArm64_, 
 Refer to the sections on integration with runtimes:
 
 * [Usage with Chasm](Integration/Chasm)
-* [Usage with Chicory](Integration/Chicory.md)
-* [Usage with GraalVM](Integration/GraalVM.md)
 
 ## Releases
 
@@ -42,8 +40,6 @@ repositories {
 
 [Emscripten]: https://emscripten.org/
 [Chasm]: https://github.com/CharlieTap/chasm
-[Chicory]: https://github.com/dylibso/chicory
-[GraalWasm]: https://www.graalvm.org/latest/reference-manual/wasm/
 [Maven Central]: https://central.sonatype.com/artifact/at.released.weh/bindings-chasm-wasip1
 [WASI Preview 1]: https://wasi.dev/
 [WASI Testsuite]: https://github.com/WebAssembly/wasi-testsuite
