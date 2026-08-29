@@ -7,10 +7,6 @@ plugins {
     id("at.released.weh.gradle.settings.root")
 }
 
-providers.gradleProperty("weh.chasm.source").orNull?.let { chasmSource ->
-    includeBuild(chasmSource)
-}
-
 // Workaround for https://github.com/gradle/gradle/issues/26020
 buildscript {
     repositories {

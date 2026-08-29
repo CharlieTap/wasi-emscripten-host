@@ -72,11 +72,10 @@ default JVM and POSIX filesystem paths therefore perform scatter/gather reads
 and writes without copying payload bytes; custom memories and filesystems use
 the compatible copying fallback.
 
-Run the retained JVM bridge benchmark against a Chasm source checkout with:
+Run the retained JVM bridge benchmark against the configured Chasm snapshot with:
 
 ```shell
 WEH_CHASM_BENCHMARK_ENFORCE=true ./gradlew \
-    -Pweh.chasm.source=/path/to/chasm \
     :bindings-chasm-wasip1:jvmTest \
     --tests 'at.released.weh.bindings.chasm.performance.ChasmBridgeBenchmarkTest' \
     --rerun-tasks

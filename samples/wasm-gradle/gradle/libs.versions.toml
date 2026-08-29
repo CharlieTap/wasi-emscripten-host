@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.4.0"
 
-chasm = "2.0.0"
+chasm = "2.0.0-SNAPSHOT"
 chicory = "1.5.1"
 graalvm = "24.1.2"
 weh = "0.7.0-SNAPSHOT"

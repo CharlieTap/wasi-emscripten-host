@@ -5,16 +5,22 @@ plugins {
 dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
     repositories {
+        maven {
+            name = "Central Portal Snapshots"
+            url = uri("https://central.sonatype.com/repository/maven-snapshots/")
+            mavenContent {
+                snapshotsOnly()
+            }
+            content {
+                includeGroup("io.github.charlietap.chasm")
+            }
+        }
         mavenCentral()
     }
 }
 
 providers.gradleProperty("weh.source").orNull?.let { wehSource ->
     includeBuild(wehSource)
-}
-
-providers.gradleProperty("weh.chasm.source").orNull?.let { chasmSource ->
-    includeBuild(chasmSource)
 }
 
 rootProject.name = "wasm-gradle"

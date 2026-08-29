@@ -24,12 +24,26 @@ Check [WASI Preview 1](../WASIP1) to see the current limitations of the WASI P1 
 
 ### Installation
 
-Add the required dependencies:
+Until Chasm 2.0 is released, add Central's snapshot repository:
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://central.sonatype.com/repository/maven-snapshots/")
+        content {
+            includeGroup("io.github.charlietap.chasm")
+        }
+    }
+    mavenCentral()
+}
+```
+
+Then add the required dependencies:
 
 ```kotlin
 sourceSets {
     commonMain.dependencies {
-        implementation("io.github.charlietap.chasm:chasm:2.0.0")
+        implementation("io.github.charlietap.chasm:chasm:2.0.0-SNAPSHOT")
         implementation("at.released.weh:bindings-chasm-wasip1:0.7.0-SNAPSHOT")
     }
 }
@@ -113,11 +127,11 @@ each scatter/gather operation. This removes payload copies while remaining
 safe across memory growth. A custom Chasm memory or filesystem automatically
 uses the compatible copying fallback.
 
-For local development against the work-in-progress Chasm 2.0 source tree, use
-the opt-in composite build property:
+The build resolves the work-in-progress Chasm 2.0 release from Central's
+snapshot repository:
 
 ```shell
-./gradlew -Pweh.chasm.source=/path/to/chasm :bindings-chasm-wasip1:jvmTest
+./gradlew :bindings-chasm-wasip1:jvmTest
 ```
 
 The strict callback and direct-filesystem timing gates are opt-in so unrelated
@@ -125,7 +139,6 @@ parallel test load does not make the suite flaky:
 
 ```shell
 WEH_CHASM_BENCHMARK_ENFORCE=true ./gradlew \
-    -Pweh.chasm.source=/path/to/chasm \
     :bindings-chasm-wasip1:jvmTest \
     --tests 'at.released.weh.bindings.chasm.performance.ChasmBridgeBenchmarkTest' \
     --rerun-tasks
@@ -140,7 +153,7 @@ Add the required dependencies:
 ```kotlin
 sourceSets {
     commonMain.dependencies {
-        implementation("io.github.charlietap.chasm:chasm:2.0.0")
+        implementation("io.github.charlietap.chasm:chasm:2.0.0-SNAPSHOT")
         implementation("at.released.weh:bindings-chasm-emscripten:0.7.0-SNAPSHOT")
     }
 }

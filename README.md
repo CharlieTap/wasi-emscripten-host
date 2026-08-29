@@ -18,30 +18,23 @@ For more information, visit the project website: [weh.released.at](https://weh.r
 The build uses JDK 25. The documentation website additionally requires Node.js 20 or newer, and Apple native targets
 require Xcode when built on macOS.
 
-While Chasm 2.0 is still under development, substitute a local Chasm checkout with the `weh.chasm.source` Gradle
-property:
-
-```shell
-./gradlew -Pweh.chasm.source=/absolute/path/to/chasm build
-```
-
 The main verification entry points mirror CI:
 
 ```shell
-./gradlew -Pweh.chasm.source=/absolute/path/to/chasm styleCheck
-./gradlew -Pweh.chasm.source=/absolute/path/to/chasm build
-./gradlew -Pweh.chasm.source=/absolute/path/to/chasm aggregate-documentation:buildWebsite
+./gradlew styleCheck
+./gradlew build
+./gradlew aggregate-documentation:buildWebsite
 ```
 
 The documentation task builds the Dokka API reference, type-checks the Docusaurus site, and creates the production
 website under `aggregate-documentation/build/outputs/website/`.
 
-The standalone Gradle samples can be compiled against both working trees before either snapshot is published:
+The standalone Gradle samples can be compiled against this working tree while resolving Chasm 2.0 from Central's
+snapshot repository:
 
 ```shell
 ./gradlew -p samples/wasm-gradle \
     -Pweh.source=/absolute/path/to/wasi-emscripten-host \
-    -Pweh.chasm.source=/absolute/path/to/chasm \
     compileKotlinJvm
 ```
 
