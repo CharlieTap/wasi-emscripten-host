@@ -1,6 +1,6 @@
 [versions]
-androidMinSdk = "26"
-androidCompileSdk = "36"
+androidMinSdk = "28"
+androidCompileSdk = "37"
 
 agp = "9.3.1"
 antlr4 = "4.13.2"

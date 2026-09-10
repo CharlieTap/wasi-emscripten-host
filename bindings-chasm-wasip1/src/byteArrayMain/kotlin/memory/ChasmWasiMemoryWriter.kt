@@ -16,8 +16,8 @@ import at.released.weh.filesystem.op.readwrite.WriteFd
 import at.released.weh.wasi.preview1.memory.DirectWasiMemoryWriter
 import at.released.weh.wasm.core.WasmPtr
 import at.released.weh.wasm.core.memory.MemoryAccess
+import io.github.charlietap.chasm.host.ByteArrayHostMemory
 import io.github.charlietap.chasm.host.HostMemory
-import io.github.charlietap.chasm.host.NativeHostMemory
 import io.github.charlietap.chasm.host.UnsafeHostApi
 
 internal actual class ChasmWasiMemoryWriter actual constructor(
@@ -32,13 +32,20 @@ internal actual class ChasmWasiMemoryWriter actual constructor(
         ciovecCount: Int,
         memoryAccess: MemoryAccess<HostMemory>,
     ): Either<WriteError, ULong> {
-        if (memory !is NativeHostMemory) {
+        if (memory !is ByteArrayHostMemory) {
             return writeWithCopyFallback(memory, fileSystem, fd, strategy, ciovecsPointer, ciovecCount)
         }
         val backing = memory.unsafeBorrowByteArray()
+        val memorySize = memory.byteSize
         val buffers = List(ciovecCount) { index ->
             val descriptor = iovecDescriptorPointer(ciovecsPointer, index)
-            FileSystemByteBuffer(backing, memory.readI32(descriptor), memory.readI32(checkedPointerAdd(descriptor, 4)))
+            val bufferPointer = memory.readI32(descriptor)
+            val bufferLength = memory.readI32(checkedPointerAdd(descriptor, 4))
+            if (backing.size > memorySize) {
+                require(bufferPointer in 0..memorySize)
+                require(bufferLength in 0..memorySize - bufferPointer)
+            }
+            FileSystemByteBuffer(backing, bufferPointer, bufferLength)
         }
         return fileSystem.execute(WriteFd, WriteFd(fd, buffers, strategy))
     }

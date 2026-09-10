@@ -22,8 +22,8 @@ import at.released.weh.filesystem.op.readwrite.ReadWriteStrategy.Position
 import at.released.weh.wasi.preview1.memory.DirectWasiMemoryReader
 import at.released.weh.wasm.core.WasmPtr
 import at.released.weh.wasm.core.memory.MemoryAccess
+import io.github.charlietap.chasm.host.ByteBufferHostMemory
 import io.github.charlietap.chasm.host.HostMemory
-import io.github.charlietap.chasm.host.JvmHostMemory
 import io.github.charlietap.chasm.host.UnsafeHostApi
 import java.nio.ByteBuffer
 
@@ -41,7 +41,7 @@ internal actual class ChasmWasiMemoryReader actual constructor(
         iovecCount: Int,
         memoryAccess: MemoryAccess<HostMemory>,
     ): Either<ReadError, ULong> {
-        if (memory !is JvmHostMemory || !supportsDirectChannel) {
+        if (memory !is ByteBufferHostMemory || !supportsDirectChannel) {
             return readWithCopyFallback(memory, fileSystem, fd, strategy, iovecsPointer, iovecCount)
         }
         val backing = memory.unsafeBorrowByteBuffer()

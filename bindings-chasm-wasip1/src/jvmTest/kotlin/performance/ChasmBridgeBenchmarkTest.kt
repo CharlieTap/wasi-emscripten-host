@@ -27,6 +27,7 @@ import at.released.weh.filesystem.path.virtual.VirtualPath
 import at.released.weh.host.EmbedderHostBuilder
 import at.released.weh.wasi.preview1.function.SchedYieldFunctionHandle
 import com.sun.management.ThreadMXBean
+import io.github.charlietap.chasm.host.ByteBufferHostMemory
 import io.github.charlietap.chasm.host.HostExceptions
 import io.github.charlietap.chasm.host.HostExterns
 import io.github.charlietap.chasm.host.HostFunction
@@ -39,7 +40,6 @@ import io.github.charlietap.chasm.host.HostReferences
 import io.github.charlietap.chasm.host.HostResources
 import io.github.charlietap.chasm.host.HostTable
 import io.github.charlietap.chasm.host.HostTag
-import io.github.charlietap.chasm.host.JvmHostMemory
 import io.github.charlietap.chasm.host.ModuleIndex
 import io.github.charlietap.chasm.host.UnsafeHostApi
 import io.github.charlietap.chasm.host.writeI32
@@ -377,7 +377,7 @@ private object BenchmarkMemory : HostMemory {
 }
 
 @Suppress("TooManyFunctions")
-private class BenchmarkJvmMemory(size: Int) : JvmHostMemory {
+private class BenchmarkJvmMemory(size: Int) : ByteBufferHostMemory {
     private val buffer = ByteBuffer.allocateDirect(size).order(LITTLE_ENDIAN)
     override val byteSize: Int get() = buffer.capacity()
     override fun readI8(memoryPointer: Int): Byte = buffer.get(memoryPointer)
