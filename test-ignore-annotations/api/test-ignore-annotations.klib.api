@@ -1,0 +1,70 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, js, linuxArm64, linuxX64, macosArm64, mingwX64, wasmJs]
+// Alias: native => [iosArm64, iosSimulatorArm64, linuxArm64, linuxX64, macosArm64, mingwX64]
+// Alias: apple => [iosArm64, iosSimulatorArm64, macosArm64]
+// Alias: linux => [linuxArm64, linuxX64]
+// Alias: ios => [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <at.released.weh:test-ignore-annotations>
+open annotation class at.released.weh.test.ignore.annotations/IgnoreJvm : kotlin/Annotation { // at.released.weh.test.ignore.annotations/IgnoreJvm|null[0]
+    constructor <init>() // at.released.weh.test.ignore.annotations/IgnoreJvm.<init>|<init>(){}[0]
+}
+
+final enum class at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget : kotlin/Enum<at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget> { // at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget|null[0]
+    enum entry JVM_ON_LINUX // at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget.JVM_ON_LINUX|null[0]
+    enum entry JVM_ON_MACOS // at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget.JVM_ON_MACOS|null[0]
+    enum entry JVM_ON_WINDOWS // at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget.JVM_ON_WINDOWS|null[0]
+
+    final val entries // at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget> // at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget // at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget> // at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget.values|values#static(){}[0]
+}
+
+final fun (at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget).at.released.weh.test.ignore.annotations.dynamic/isCurrentSystem(): kotlin/Boolean // at.released.weh.test.ignore.annotations.dynamic/isCurrentSystem|isCurrentSystem@at.released.weh.test.ignore.annotations.dynamic.DynamicIgnoreTarget(){}[0]
+final fun at.released.weh.test.ignore.annotations.dynamic/checkIfShouldBeIgnored(kotlin.collections/Set<at.released.weh.test.ignore.annotations.dynamic/DynamicIgnoreTarget>): kotlin/Boolean // at.released.weh.test.ignore.annotations.dynamic/checkIfShouldBeIgnored|checkIfShouldBeIgnored(kotlin.collections.Set<at.released.weh.test.ignore.annotations.dynamic.DynamicIgnoreTarget>){}[0]
+
+// Targets: [js, native]
+open annotation class at.released.weh.test.ignore.annotations/IgnoreWasmJs : kotlin/Annotation { // at.released.weh.test.ignore.annotations/IgnoreWasmJs|null[0]
+    constructor <init>() // at.released.weh.test.ignore.annotations/IgnoreWasmJs.<init>|<init>(){}[0]
+}
+
+// Targets: [apple, js, linux, wasmJs]
+open annotation class at.released.weh.test.ignore.annotations/IgnoreMingw : kotlin/Annotation { // at.released.weh.test.ignore.annotations/IgnoreMingw|null[0]
+    constructor <init>() // at.released.weh.test.ignore.annotations/IgnoreMingw.<init>|<init>(){}[0]
+}
+
+// Targets: [ios, js, linux, mingwX64, wasmJs]
+open annotation class at.released.weh.test.ignore.annotations/IgnoreMacos : kotlin/Annotation { // at.released.weh.test.ignore.annotations/IgnoreMacos|null[0]
+    constructor <init>() // at.released.weh.test.ignore.annotations/IgnoreMacos.<init>|<init>(){}[0]
+}
+
+// Targets: [native, wasmJs]
+open annotation class at.released.weh.test.ignore.annotations/IgnoreJs : kotlin/Annotation { // at.released.weh.test.ignore.annotations/IgnoreJs|null[0]
+    constructor <init>() // at.released.weh.test.ignore.annotations/IgnoreJs.<init>|<init>(){}[0]
+}
+
+// Targets: [apple, js, mingwX64, wasmJs]
+open annotation class at.released.weh.test.ignore.annotations/IgnoreLinux : kotlin/Annotation { // at.released.weh.test.ignore.annotations/IgnoreLinux|null[0]
+    constructor <init>() // at.released.weh.test.ignore.annotations/IgnoreLinux.<init>|<init>(){}[0]
+}
+
+// Targets: [js, linux, macosArm64, mingwX64, wasmJs]
+open annotation class at.released.weh.test.ignore.annotations/IgnoreIos : kotlin/Annotation { // at.released.weh.test.ignore.annotations/IgnoreIos|null[0]
+    constructor <init>() // at.released.weh.test.ignore.annotations/IgnoreIos.<init>|<init>(){}[0]
+}
+
+// Targets: [js, linux, mingwX64, wasmJs]
+open annotation class at.released.weh.test.ignore.annotations/IgnoreApple : kotlin/Annotation { // at.released.weh.test.ignore.annotations/IgnoreApple|null[0]
+    constructor <init>() // at.released.weh.test.ignore.annotations/IgnoreApple.<init>|<init>(){}[0]
+}
+
+// Targets: [js, wasmJs]
+open annotation class at.released.weh.test.ignore.annotations/IgnoreNative : kotlin/Annotation { // at.released.weh.test.ignore.annotations/IgnoreNative|null[0]
+    constructor <init>() // at.released.weh.test.ignore.annotations/IgnoreNative.<init>|<init>(){}[0]
+}

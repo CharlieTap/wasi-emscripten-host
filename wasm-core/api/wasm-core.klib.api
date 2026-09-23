@@ -1,0 +1,169 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, linuxArm64, linuxX64, macosArm64, mingwX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.charlietap.wasi.emscripten.host:wasm-core>
+open annotation class at.released.weh.wasm.core/IntWasmPtr : kotlin/Annotation { // at.released.weh.wasm.core/IntWasmPtr|null[0]
+    constructor <init>(kotlin.reflect/KClass<*> = ...) // at.released.weh.wasm.core/IntWasmPtr.<init>|<init>(kotlin.reflect.KClass<*>){}[0]
+
+    final val ref // at.released.weh.wasm.core/IntWasmPtr.ref|{}ref[0]
+        final fun <get-ref>(): kotlin.reflect/KClass<*> // at.released.weh.wasm.core/IntWasmPtr.ref.<get-ref>|<get-ref>(){}[0]
+}
+
+open annotation class at.released.weh.wasm.core/WasmValueType : kotlin/Annotation { // at.released.weh.wasm.core/WasmValueType|null[0]
+    constructor <init>() // at.released.weh.wasm.core/WasmValueType.<init>|<init>(){}[0]
+}
+
+abstract interface at.released.weh.wasm.core.memory/Memory : at.released.weh.wasm.core.memory/ReadOnlyMemory { // at.released.weh.wasm.core.memory/Memory|null[0]
+    abstract fun sink(kotlin/Int, kotlin/Int): kotlinx.io/RawSink // at.released.weh.wasm.core.memory/Memory.sink|sink(kotlin.Int;kotlin.Int){}[0]
+    abstract fun writeI32(kotlin/Int, kotlin/Int) // at.released.weh.wasm.core.memory/Memory.writeI32|writeI32(kotlin.Int;kotlin.Int){}[0]
+    abstract fun writeI64(kotlin/Int, kotlin/Long) // at.released.weh.wasm.core.memory/Memory.writeI64|writeI64(kotlin.Int;kotlin.Long){}[0]
+    abstract fun writeI8(kotlin/Int, kotlin/Byte) // at.released.weh.wasm.core.memory/Memory.writeI8|writeI8(kotlin.Int;kotlin.Byte){}[0]
+}
+
+abstract interface at.released.weh.wasm.core.memory/ReadOnlyMemory { // at.released.weh.wasm.core.memory/ReadOnlyMemory|null[0]
+    abstract fun readI32(kotlin/Int): kotlin/Int // at.released.weh.wasm.core.memory/ReadOnlyMemory.readI32|readI32(kotlin.Int){}[0]
+    abstract fun readI64(kotlin/Int): kotlin/Long // at.released.weh.wasm.core.memory/ReadOnlyMemory.readI64|readI64(kotlin.Int){}[0]
+    abstract fun readI8(kotlin/Int): kotlin/Byte // at.released.weh.wasm.core.memory/ReadOnlyMemory.readI8|readI8(kotlin.Int){}[0]
+    abstract fun source(kotlin/Int, kotlin/Int): kotlinx.io/RawSource // at.released.weh.wasm.core.memory/ReadOnlyMemory.source|source(kotlin.Int;kotlin.Int){}[0]
+}
+
+abstract interface at.released.weh.wasm.core/HostFunction { // at.released.weh.wasm.core/HostFunction|null[0]
+    abstract val type // at.released.weh.wasm.core/HostFunction.type|{}type[0]
+        abstract fun <get-type>(): at.released.weh.wasm.core/HostFunction.HostFunctionType // at.released.weh.wasm.core/HostFunction.type.<get-type>|<get-type>(){}[0]
+    abstract val wasmName // at.released.weh.wasm.core/HostFunction.wasmName|{}wasmName[0]
+        abstract fun <get-wasmName>(): kotlin/String // at.released.weh.wasm.core/HostFunction.wasmName.<get-wasmName>|<get-wasmName>(){}[0]
+
+    abstract interface HostFunctionType { // at.released.weh.wasm.core/HostFunction.HostFunctionType|null[0]
+        abstract val paramTypes // at.released.weh.wasm.core/HostFunction.HostFunctionType.paramTypes|{}paramTypes[0]
+            abstract fun <get-paramTypes>(): kotlin.collections/List<kotlin/Int> // at.released.weh.wasm.core/HostFunction.HostFunctionType.paramTypes.<get-paramTypes>|<get-paramTypes>(){}[0]
+        abstract val returnTypes // at.released.weh.wasm.core/HostFunction.HostFunctionType.returnTypes|{}returnTypes[0]
+            abstract fun <get-returnTypes>(): kotlin.collections/List<kotlin/Int> // at.released.weh.wasm.core/HostFunction.HostFunctionType.returnTypes.<get-returnTypes>|<get-returnTypes>(){}[0]
+
+        final object Companion { // at.released.weh.wasm.core/HostFunction.HostFunctionType.Companion|null[0]
+            final fun invoke(kotlin.collections/List<kotlin/Int>, kotlin.collections/List<kotlin/Int> = ...): at.released.weh.wasm.core/HostFunction.HostFunctionType // at.released.weh.wasm.core/HostFunction.HostFunctionType.Companion.invoke|invoke(kotlin.collections.List<kotlin.Int>;kotlin.collections.List<kotlin.Int>){}[0]
+        }
+    }
+}
+
+abstract interface at.released.weh.wasm.core/WasmFunctionBinding { // at.released.weh.wasm.core/WasmFunctionBinding|null[0]
+    abstract fun executeForDouble(kotlin/Array<out kotlin/Any?>...): kotlin/Double // at.released.weh.wasm.core/WasmFunctionBinding.executeForDouble|executeForDouble(kotlin.Array<out|kotlin.Any?>...){}[0]
+    abstract fun executeForFloat(kotlin/Array<out kotlin/Any?>...): kotlin/Float // at.released.weh.wasm.core/WasmFunctionBinding.executeForFloat|executeForFloat(kotlin.Array<out|kotlin.Any?>...){}[0]
+    abstract fun executeForInt(kotlin/Array<out kotlin/Any?>...): kotlin/Int // at.released.weh.wasm.core/WasmFunctionBinding.executeForInt|executeForInt(kotlin.Array<out|kotlin.Any?>...){}[0]
+    abstract fun executeForLong(kotlin/Array<out kotlin/Any?>...): kotlin/Long // at.released.weh.wasm.core/WasmFunctionBinding.executeForLong|executeForLong(kotlin.Array<out|kotlin.Any?>...){}[0]
+    abstract fun executeForPtr(kotlin/Array<out kotlin/Any?>...): kotlin/Int // at.released.weh.wasm.core/WasmFunctionBinding.executeForPtr|executeForPtr(kotlin.Array<out|kotlin.Any?>...){}[0]
+    abstract fun executeVoid(kotlin/Array<out kotlin/Any?>...) // at.released.weh.wasm.core/WasmFunctionBinding.executeVoid|executeVoid(kotlin.Array<out|kotlin.Any?>...){}[0]
+}
+
+abstract class at.released.weh.wasm.core.memory/MemoryRawSink : kotlinx.io/RawSink { // at.released.weh.wasm.core.memory/MemoryRawSink|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int) // at.released.weh.wasm.core.memory/MemoryRawSink.<init>|<init>(kotlin.Int;kotlin.Int){}[0]
+
+    final val toAddrExclusive // at.released.weh.wasm.core.memory/MemoryRawSink.toAddrExclusive|{}toAddrExclusive[0]
+        final fun <get-toAddrExclusive>(): kotlin/Int // at.released.weh.wasm.core.memory/MemoryRawSink.toAddrExclusive.<get-toAddrExclusive>|<get-toAddrExclusive>(){}[0]
+
+    final var baseAddr // at.released.weh.wasm.core.memory/MemoryRawSink.baseAddr|{}baseAddr[0]
+        final fun <get-baseAddr>(): kotlin/Int // at.released.weh.wasm.core.memory/MemoryRawSink.baseAddr.<get-baseAddr>|<get-baseAddr>(){}[0]
+        final fun <set-baseAddr>(kotlin/Int) // at.released.weh.wasm.core.memory/MemoryRawSink.baseAddr.<set-baseAddr>|<set-baseAddr>(kotlin.Int){}[0]
+
+    abstract fun writeBytesToMemory(kotlinx.io/Buffer, kotlin/Int, kotlin/Long) // at.released.weh.wasm.core.memory/MemoryRawSink.writeBytesToMemory|writeBytesToMemory(kotlinx.io.Buffer;kotlin.Int;kotlin.Long){}[0]
+    open fun close() // at.released.weh.wasm.core.memory/MemoryRawSink.close|close(){}[0]
+    open fun flush() // at.released.weh.wasm.core.memory/MemoryRawSink.flush|flush(){}[0]
+    open fun write(kotlinx.io/Buffer, kotlin/Long) // at.released.weh.wasm.core.memory/MemoryRawSink.write|write(kotlinx.io.Buffer;kotlin.Long){}[0]
+}
+
+abstract class at.released.weh.wasm.core.memory/MemoryRawSource : kotlinx.io/RawSource { // at.released.weh.wasm.core.memory/MemoryRawSource|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int) // at.released.weh.wasm.core.memory/MemoryRawSource.<init>|<init>(kotlin.Int;kotlin.Int){}[0]
+
+    final val bytesLeft // at.released.weh.wasm.core.memory/MemoryRawSource.bytesLeft|{}bytesLeft[0]
+        final fun <get-bytesLeft>(): kotlin/Long // at.released.weh.wasm.core.memory/MemoryRawSource.bytesLeft.<get-bytesLeft>|<get-bytesLeft>(){}[0]
+    final val toAddrExclusive // at.released.weh.wasm.core.memory/MemoryRawSource.toAddrExclusive|{}toAddrExclusive[0]
+        final fun <get-toAddrExclusive>(): kotlin/Int // at.released.weh.wasm.core.memory/MemoryRawSource.toAddrExclusive.<get-toAddrExclusive>|<get-toAddrExclusive>(){}[0]
+
+    final var baseAddr // at.released.weh.wasm.core.memory/MemoryRawSource.baseAddr|{}baseAddr[0]
+        final fun <get-baseAddr>(): kotlin/Int // at.released.weh.wasm.core.memory/MemoryRawSource.baseAddr.<get-baseAddr>|<get-baseAddr>(){}[0]
+        final fun <set-baseAddr>(kotlin/Int) // at.released.weh.wasm.core.memory/MemoryRawSource.baseAddr.<set-baseAddr>|<set-baseAddr>(kotlin.Int){}[0]
+
+    abstract fun readBytesFromMemory(kotlin/Int, kotlinx.io/Buffer, kotlin/Int) // at.released.weh.wasm.core.memory/MemoryRawSource.readBytesFromMemory|readBytesFromMemory(kotlin.Int;kotlinx.io.Buffer;kotlin.Int){}[0]
+    open fun close() // at.released.weh.wasm.core.memory/MemoryRawSource.close|close(){}[0]
+    open fun readAtMostTo(kotlinx.io/Buffer, kotlin/Long): kotlin/Long // at.released.weh.wasm.core.memory/MemoryRawSource.readAtMostTo|readAtMostTo(kotlinx.io.Buffer;kotlin.Long){}[0]
+}
+
+final class at.released.weh.wasm.core.memory/Pages { // at.released.weh.wasm.core.memory/Pages|null[0]
+    constructor <init>(kotlin/Long) // at.released.weh.wasm.core.memory/Pages.<init>|<init>(kotlin.Long){}[0]
+
+    final val count // at.released.weh.wasm.core.memory/Pages.count|{}count[0]
+        final fun <get-count>(): kotlin/Long // at.released.weh.wasm.core.memory/Pages.count.<get-count>|<get-count>(){}[0]
+    final val inBytes // at.released.weh.wasm.core.memory/Pages.inBytes|{}inBytes[0]
+        final fun <get-inBytes>(): kotlin/Long // at.released.weh.wasm.core.memory/Pages.inBytes.<get-inBytes>|<get-inBytes>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasm.core.memory/Pages.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasm.core.memory/Pages.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasm.core.memory/Pages.toString|toString(){}[0]
+}
+
+final object at.released.weh.wasm.core/WasmModules { // at.released.weh.wasm.core/WasmModules|null[0]
+    final const val ENV_MODULE_NAME // at.released.weh.wasm.core/WasmModules.ENV_MODULE_NAME|{}ENV_MODULE_NAME[0]
+        final fun <get-ENV_MODULE_NAME>(): kotlin/String // at.released.weh.wasm.core/WasmModules.ENV_MODULE_NAME.<get-ENV_MODULE_NAME>|<get-ENV_MODULE_NAME>(){}[0]
+    final const val WASI_SNAPSHOT_PREVIEW1_MODULE_NAME // at.released.weh.wasm.core/WasmModules.WASI_SNAPSHOT_PREVIEW1_MODULE_NAME|{}WASI_SNAPSHOT_PREVIEW1_MODULE_NAME[0]
+        final fun <get-WASI_SNAPSHOT_PREVIEW1_MODULE_NAME>(): kotlin/String // at.released.weh.wasm.core/WasmModules.WASI_SNAPSHOT_PREVIEW1_MODULE_NAME.<get-WASI_SNAPSHOT_PREVIEW1_MODULE_NAME>|<get-WASI_SNAPSHOT_PREVIEW1_MODULE_NAME>(){}[0]
+}
+
+final object at.released.weh.wasm.core/WasmPtrUtil { // at.released.weh.wasm.core/WasmPtrUtil|null[0]
+    final const val C_NULL // at.released.weh.wasm.core/WasmPtrUtil.C_NULL|{}C_NULL[0]
+        final fun <get-C_NULL>(): kotlin/Int // at.released.weh.wasm.core/WasmPtrUtil.C_NULL.<get-C_NULL>|<get-C_NULL>(){}[0]
+    final const val WASM_SIZEOF_PTR // at.released.weh.wasm.core/WasmPtrUtil.WASM_SIZEOF_PTR|{}WASM_SIZEOF_PTR[0]
+        final fun <get-WASM_SIZEOF_PTR>(): kotlin/Int // at.released.weh.wasm.core/WasmPtrUtil.WASM_SIZEOF_PTR.<get-WASM_SIZEOF_PTR>|<get-WASM_SIZEOF_PTR>(){}[0]
+
+    final fun ptrIsNull(kotlin/Int): kotlin/Boolean // at.released.weh.wasm.core/WasmPtrUtil.ptrIsNull|ptrIsNull(kotlin.Int){}[0]
+}
+
+final object at.released.weh.wasm.core/WasmValueTypes { // at.released.weh.wasm.core/WasmValueTypes|null[0]
+    final const val EXTERN_REF // at.released.weh.wasm.core/WasmValueTypes.EXTERN_REF|{}EXTERN_REF[0]
+        final fun <get-EXTERN_REF>(): kotlin/Int // at.released.weh.wasm.core/WasmValueTypes.EXTERN_REF.<get-EXTERN_REF>|<get-EXTERN_REF>(){}[0]
+    final const val F32 // at.released.weh.wasm.core/WasmValueTypes.F32|{}F32[0]
+        final fun <get-F32>(): kotlin/Int // at.released.weh.wasm.core/WasmValueTypes.F32.<get-F32>|<get-F32>(){}[0]
+    final const val F64 // at.released.weh.wasm.core/WasmValueTypes.F64|{}F64[0]
+        final fun <get-F64>(): kotlin/Int // at.released.weh.wasm.core/WasmValueTypes.F64.<get-F64>|<get-F64>(){}[0]
+    final const val FUNC_REF // at.released.weh.wasm.core/WasmValueTypes.FUNC_REF|{}FUNC_REF[0]
+        final fun <get-FUNC_REF>(): kotlin/Int // at.released.weh.wasm.core/WasmValueTypes.FUNC_REF.<get-FUNC_REF>|<get-FUNC_REF>(){}[0]
+    final const val I32 // at.released.weh.wasm.core/WasmValueTypes.I32|{}I32[0]
+        final fun <get-I32>(): kotlin/Int // at.released.weh.wasm.core/WasmValueTypes.I32.<get-I32>|<get-I32>(){}[0]
+    final const val I64 // at.released.weh.wasm.core/WasmValueTypes.I64|{}I64[0]
+        final fun <get-I64>(): kotlin/Int // at.released.weh.wasm.core/WasmValueTypes.I64.<get-I64>|<get-I64>(){}[0]
+    final const val V128 // at.released.weh.wasm.core/WasmValueTypes.V128|{}V128[0]
+        final fun <get-V128>(): kotlin/Int // at.released.weh.wasm.core/WasmValueTypes.V128.<get-V128>|<get-V128>(){}[0]
+}
+
+final const val at.released.weh.wasm.core.memory/WASM_MEMORY_PAGE_SIZE // at.released.weh.wasm.core.memory/WASM_MEMORY_PAGE_SIZE|{}WASM_MEMORY_PAGE_SIZE[0]
+    final fun <get-WASM_MEMORY_PAGE_SIZE>(): kotlin/Long // at.released.weh.wasm.core.memory/WASM_MEMORY_PAGE_SIZE.<get-WASM_MEMORY_PAGE_SIZE>|<get-WASM_MEMORY_PAGE_SIZE>(){}[0]
+final const val at.released.weh.wasm.core/POINTER // at.released.weh.wasm.core/POINTER|{}POINTER[0]
+    final fun <get-POINTER>(): kotlin/Int // at.released.weh.wasm.core/POINTER.<get-POINTER>|<get-POINTER>(){}[0]
+
+final val at.released.weh.wasm.core.memory/WASM_MEMORY_32_MAX_PAGES // at.released.weh.wasm.core.memory/WASM_MEMORY_32_MAX_PAGES|{}WASM_MEMORY_32_MAX_PAGES[0]
+    final fun <get-WASM_MEMORY_32_MAX_PAGES>(): at.released.weh.wasm.core.memory/Pages // at.released.weh.wasm.core.memory/WASM_MEMORY_32_MAX_PAGES.<get-WASM_MEMORY_32_MAX_PAGES>|<get-WASM_MEMORY_32_MAX_PAGES>(){}[0]
+final val at.released.weh.wasm.core.memory/WASM_MEMORY_64_MAX_PAGES // at.released.weh.wasm.core.memory/WASM_MEMORY_64_MAX_PAGES|{}WASM_MEMORY_64_MAX_PAGES[0]
+    final fun <get-WASM_MEMORY_64_MAX_PAGES>(): at.released.weh.wasm.core.memory/Pages // at.released.weh.wasm.core.memory/WASM_MEMORY_64_MAX_PAGES.<get-WASM_MEMORY_64_MAX_PAGES>|<get-WASM_MEMORY_64_MAX_PAGES>(){}[0]
+final val at.released.weh.wasm.core.memory/WASM_MEMORY_DEFAULT_MAX_PAGES // at.released.weh.wasm.core.memory/WASM_MEMORY_DEFAULT_MAX_PAGES|{}WASM_MEMORY_DEFAULT_MAX_PAGES[0]
+    final fun <get-WASM_MEMORY_DEFAULT_MAX_PAGES>(): at.released.weh.wasm.core.memory/Pages // at.released.weh.wasm.core.memory/WASM_MEMORY_DEFAULT_MAX_PAGES.<get-WASM_MEMORY_DEFAULT_MAX_PAGES>|<get-WASM_MEMORY_DEFAULT_MAX_PAGES>(){}[0]
+final val at.released.weh.wasm.core/BINDING_NOT_INITIALIZED // at.released.weh.wasm.core/BINDING_NOT_INITIALIZED|{}BINDING_NOT_INITIALIZED[0]
+    final fun <get-BINDING_NOT_INITIALIZED>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.wasm.core/BINDING_NOT_INITIALIZED.<get-BINDING_NOT_INITIALIZED>|<get-BINDING_NOT_INITIALIZED>(){}[0]
+
+final fun (at.released.weh.wasm.core.memory/Memory).at.released.weh.wasm.core.memory/sinkWithMaxSize(kotlin/Int, kotlin/Int): kotlinx.io/RawSink // at.released.weh.wasm.core.memory/sinkWithMaxSize|sinkWithMaxSize@at.released.weh.wasm.core.memory.Memory(kotlin.Int;kotlin.Int){}[0]
+final fun (at.released.weh.wasm.core.memory/Memory).at.released.weh.wasm.core.memory/writeNullTerminatedString(kotlin/Int, kotlin/String): kotlin/Int // at.released.weh.wasm.core.memory/writeNullTerminatedString|writeNullTerminatedString@at.released.weh.wasm.core.memory.Memory(kotlin.Int;kotlin.String){}[0]
+final fun (at.released.weh.wasm.core.memory/Memory).at.released.weh.wasm.core.memory/writePtr(kotlin/Int, kotlin/Int) // at.released.weh.wasm.core.memory/writePtr|writePtr@at.released.weh.wasm.core.memory.Memory(kotlin.Int;kotlin.Int){}[0]
+final fun (at.released.weh.wasm.core.memory/Memory).at.released.weh.wasm.core.memory/writeU32(kotlin/Int, kotlin/UInt) // at.released.weh.wasm.core.memory/writeU32|writeU32@at.released.weh.wasm.core.memory.Memory(kotlin.Int;kotlin.UInt){}[0]
+final fun (at.released.weh.wasm.core.memory/Memory).at.released.weh.wasm.core.memory/writeU64(kotlin/Int, kotlin/ULong) // at.released.weh.wasm.core.memory/writeU64|writeU64@at.released.weh.wasm.core.memory.Memory(kotlin.Int;kotlin.ULong){}[0]
+final fun (at.released.weh.wasm.core.memory/Memory).at.released.weh.wasm.core.memory/writeU8(kotlin/Int, kotlin/UByte) // at.released.weh.wasm.core.memory/writeU8|writeU8@at.released.weh.wasm.core.memory.Memory(kotlin.Int;kotlin.UByte){}[0]
+final fun (at.released.weh.wasm.core.memory/ReadOnlyMemory).at.released.weh.wasm.core.memory/readNullTerminatedString(kotlin/Int): kotlin/String // at.released.weh.wasm.core.memory/readNullTerminatedString|readNullTerminatedString@at.released.weh.wasm.core.memory.ReadOnlyMemory(kotlin.Int){}[0]
+final fun (at.released.weh.wasm.core.memory/ReadOnlyMemory).at.released.weh.wasm.core.memory/readNullableNullTerminatedString(kotlin/Int): kotlin/String? // at.released.weh.wasm.core.memory/readNullableNullTerminatedString|readNullableNullTerminatedString@at.released.weh.wasm.core.memory.ReadOnlyMemory(kotlin.Int){}[0]
+final fun (at.released.weh.wasm.core.memory/ReadOnlyMemory).at.released.weh.wasm.core.memory/readPtr(kotlin/Int): kotlin/Int // at.released.weh.wasm.core.memory/readPtr|readPtr@at.released.weh.wasm.core.memory.ReadOnlyMemory(kotlin.Int){}[0]
+final fun (at.released.weh.wasm.core.memory/ReadOnlyMemory).at.released.weh.wasm.core.memory/readU32(kotlin/Int): kotlin/UInt // at.released.weh.wasm.core.memory/readU32|readU32@at.released.weh.wasm.core.memory.ReadOnlyMemory(kotlin.Int){}[0]
+final fun (at.released.weh.wasm.core.memory/ReadOnlyMemory).at.released.weh.wasm.core.memory/readU64(kotlin/Int): kotlin/ULong // at.released.weh.wasm.core.memory/readU64|readU64@at.released.weh.wasm.core.memory.ReadOnlyMemory(kotlin.Int){}[0]
+final fun (at.released.weh.wasm.core.memory/ReadOnlyMemory).at.released.weh.wasm.core.memory/readU8(kotlin/Int): kotlin/UByte // at.released.weh.wasm.core.memory/readU8|readU8@at.released.weh.wasm.core.memory.ReadOnlyMemory(kotlin.Int){}[0]
+final fun (at.released.weh.wasm.core.memory/ReadOnlyMemory).at.released.weh.wasm.core.memory/sourceWithMaxSize(kotlin/Int, kotlin/Int): kotlinx.io/RawSource // at.released.weh.wasm.core.memory/sourceWithMaxSize|sourceWithMaxSize@at.released.weh.wasm.core.memory.ReadOnlyMemory(kotlin.Int;kotlin.Int){}[0]
+final fun (at.released.weh.wasm.core/WasmFunctionBinding).at.released.weh.wasm.core/executeForUInt(kotlin/Array<out kotlin/Any?>...): kotlin/UInt // at.released.weh.wasm.core/executeForUInt|executeForUInt@at.released.weh.wasm.core.WasmFunctionBinding(kotlin.Array<out|kotlin.Any?>...){}[0]
+final fun (at.released.weh.wasm.core/WasmFunctionBinding).at.released.weh.wasm.core/executeForULong(kotlin/Array<out kotlin/Any?>...): kotlin/ULong // at.released.weh.wasm.core/executeForULong|executeForULong@at.released.weh.wasm.core.WasmFunctionBinding(kotlin.Array<out|kotlin.Any?>...){}[0]
+final inline fun at.released.weh.wasm.core/witxPointer(kotlin/Int): kotlin/Int // at.released.weh.wasm.core/witxPointer|witxPointer(kotlin.Int){}[0]

@@ -1,0 +1,512 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, linuxArm64, linuxX64, macosArm64, mingwX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <at.released.weh:emscripten-runtime>
+open annotation class at.released.weh.emcripten.runtime.include.sys/SysIntervalTimer : kotlin/Annotation { // at.released.weh.emcripten.runtime.include.sys/SysIntervalTimer|null[0]
+    constructor <init>() // at.released.weh.emcripten.runtime.include.sys/SysIntervalTimer.<init>|<init>(){}[0]
+}
+
+final enum class at.released.weh.emcripten.runtime/EmscriptenHostFunction : at.released.weh.wasm.core/HostFunction, kotlin/Enum<at.released.weh.emcripten.runtime/EmscriptenHostFunction> { // at.released.weh.emcripten.runtime/EmscriptenHostFunction|null[0]
+    enum entry ABORT_JS // at.released.weh.emcripten.runtime/EmscriptenHostFunction.ABORT_JS|null[0]
+    enum entry ASSERT_FAIL // at.released.weh.emcripten.runtime/EmscriptenHostFunction.ASSERT_FAIL|null[0]
+    enum entry EMSCRIPTEN_ASM_CONST_ASYNC_ON_MAIN_THREAD // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_ASM_CONST_ASYNC_ON_MAIN_THREAD|null[0]
+    enum entry EMSCRIPTEN_ASM_CONST_INT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_ASM_CONST_INT|null[0]
+    enum entry EMSCRIPTEN_CHECK_BLOCKING_ALLOWED // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_CHECK_BLOCKING_ALLOWED|null[0]
+    enum entry EMSCRIPTEN_CONSOLE_ERROR // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_CONSOLE_ERROR|null[0]
+    enum entry EMSCRIPTEN_DATE_NOW // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_DATE_NOW|null[0]
+    enum entry EMSCRIPTEN_EXIT_WITH_LIVE_RUNTIME // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_EXIT_WITH_LIVE_RUNTIME|null[0]
+    enum entry EMSCRIPTEN_GET_NOW // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_GET_NOW|null[0]
+    enum entry EMSCRIPTEN_GET_NOW_IS_MONOTONIC // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_GET_NOW_IS_MONOTONIC|null[0]
+    enum entry EMSCRIPTEN_INIT_MAIN_THREAD_JS // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_INIT_MAIN_THREAD_JS|null[0]
+    enum entry EMSCRIPTEN_NOTIFY_MAILBOX_POSTMESSAGE // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_NOTIFY_MAILBOX_POSTMESSAGE|null[0]
+    enum entry EMSCRIPTEN_RECEIVE_ON_MAIN_THREAD_JS // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_RECEIVE_ON_MAIN_THREAD_JS|null[0]
+    enum entry EMSCRIPTEN_RESIZE_HEAP // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_RESIZE_HEAP|null[0]
+    enum entry EMSCRIPTEN_RUNTIME_KEEPALIVE_CLEAR // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_RUNTIME_KEEPALIVE_CLEAR|null[0]
+    enum entry EMSCRIPTEN_THREAD_CLEANUP // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_THREAD_CLEANUP|null[0]
+    enum entry EMSCRIPTEN_THREAD_MAILBOX_AWAIT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_THREAD_MAILBOX_AWAIT|null[0]
+    enum entry EMSCRIPTEN_THREAD_SET_STRONGREF // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_THREAD_SET_STRONGREF|null[0]
+    enum entry EMSCRIPTEN_UNWIND_TO_JS_EVENT_LOOP // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EMSCRIPTEN_UNWIND_TO_JS_EVENT_LOOP|null[0]
+    enum entry EXIT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.EXIT|null[0]
+    enum entry GETENTROPY // at.released.weh.emcripten.runtime/EmscriptenHostFunction.GETENTROPY|null[0]
+    enum entry HANDLE_STACK_OVERFLOW // at.released.weh.emcripten.runtime/EmscriptenHostFunction.HANDLE_STACK_OVERFLOW|null[0]
+    enum entry LOCALTIME_JS // at.released.weh.emcripten.runtime/EmscriptenHostFunction.LOCALTIME_JS|null[0]
+    enum entry MMAP_JS // at.released.weh.emcripten.runtime/EmscriptenHostFunction.MMAP_JS|null[0]
+    enum entry MUNMAP_JS // at.released.weh.emcripten.runtime/EmscriptenHostFunction.MUNMAP_JS|null[0]
+    enum entry PTHREAD_CREATE_JS // at.released.weh.emcripten.runtime/EmscriptenHostFunction.PTHREAD_CREATE_JS|null[0]
+    enum entry SETITIMER_JS // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SETITIMER_JS|null[0]
+    enum entry SYSCALL_CHMOD // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_CHMOD|null[0]
+    enum entry SYSCALL_FACCESSAT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_FACCESSAT|null[0]
+    enum entry SYSCALL_FCHMOD // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_FCHMOD|null[0]
+    enum entry SYSCALL_FCHOWN32 // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_FCHOWN32|null[0]
+    enum entry SYSCALL_FCNTL64 // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_FCNTL64|null[0]
+    enum entry SYSCALL_FDATASYNC // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_FDATASYNC|null[0]
+    enum entry SYSCALL_FSTAT64 // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_FSTAT64|null[0]
+    enum entry SYSCALL_FTRUNCATE64 // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_FTRUNCATE64|null[0]
+    enum entry SYSCALL_GETCWD // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_GETCWD|null[0]
+    enum entry SYSCALL_IOCTL // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_IOCTL|null[0]
+    enum entry SYSCALL_LSTAT64 // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_LSTAT64|null[0]
+    enum entry SYSCALL_MKDIRAT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_MKDIRAT|null[0]
+    enum entry SYSCALL_NEWFSTATAT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_NEWFSTATAT|null[0]
+    enum entry SYSCALL_OPENAT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_OPENAT|null[0]
+    enum entry SYSCALL_READLINKAT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_READLINKAT|null[0]
+    enum entry SYSCALL_RMDIR // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_RMDIR|null[0]
+    enum entry SYSCALL_STAT64 // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_STAT64|null[0]
+    enum entry SYSCALL_UNLINKAT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_UNLINKAT|null[0]
+    enum entry SYSCALL_UTIMENSAT // at.released.weh.emcripten.runtime/EmscriptenHostFunction.SYSCALL_UTIMENSAT|null[0]
+    enum entry TZSET_JS // at.released.weh.emcripten.runtime/EmscriptenHostFunction.TZSET_JS|null[0]
+
+    final val entries // at.released.weh.emcripten.runtime/EmscriptenHostFunction.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.emcripten.runtime/EmscriptenHostFunction> // at.released.weh.emcripten.runtime/EmscriptenHostFunction.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val type // at.released.weh.emcripten.runtime/EmscriptenHostFunction.type|{}type[0]
+        final fun <get-type>(): at.released.weh.wasm.core/HostFunction.HostFunctionType // at.released.weh.emcripten.runtime/EmscriptenHostFunction.type.<get-type>|<get-type>(){}[0]
+    final val wasmName // at.released.weh.emcripten.runtime/EmscriptenHostFunction.wasmName|{}wasmName[0]
+        final fun <get-wasmName>(): kotlin/String // at.released.weh.emcripten.runtime/EmscriptenHostFunction.wasmName.<get-wasmName>|<get-wasmName>(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.emcripten.runtime/EmscriptenHostFunction // at.released.weh.emcripten.runtime/EmscriptenHostFunction.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.emcripten.runtime/EmscriptenHostFunction> // at.released.weh.emcripten.runtime/EmscriptenHostFunction.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.emcripten.runtime/EmscriptenHostFunction.Companion|null[0]
+        final val byWasmName // at.released.weh.emcripten.runtime/EmscriptenHostFunction.Companion.byWasmName|{}byWasmName[0]
+            final fun <get-byWasmName>(): kotlin.collections/Map<kotlin/String, at.released.weh.emcripten.runtime/EmscriptenHostFunction> // at.released.weh.emcripten.runtime/EmscriptenHostFunction.Companion.byWasmName.<get-byWasmName>|<get-byWasmName>(){}[0]
+    }
+}
+
+abstract interface at.released.weh.emcripten.runtime.export.memory/DynamicMemoryExports { // at.released.weh.emcripten.runtime.export.memory/DynamicMemoryExports|null[0]
+    abstract val free // at.released.weh.emcripten.runtime.export.memory/DynamicMemoryExports.free|{}free[0]
+        abstract fun <get-free>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.memory/DynamicMemoryExports.free.<get-free>|<get-free>(){}[0]
+    abstract val malloc // at.released.weh.emcripten.runtime.export.memory/DynamicMemoryExports.malloc|{}malloc[0]
+        abstract fun <get-malloc>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.memory/DynamicMemoryExports.malloc.<get-malloc>|<get-malloc>(){}[0]
+}
+
+abstract interface at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports { // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports|null[0]
+    abstract val __tls_align // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.__tls_align|{}__tls_align[0]
+        abstract fun <get-__tls_align>(): kotlin/Int // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.__tls_align.<get-__tls_align>|<get-__tls_align>(){}[0]
+    abstract val __tls_size // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.__tls_size|{}__tls_size[0]
+        abstract fun <get-__tls_size>(): kotlin/Int // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.__tls_size.<get-__tls_size>|<get-__tls_size>(){}[0]
+    abstract val _emscripten_check_mailbox // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_check_mailbox|{}_emscripten_check_mailbox[0]
+        abstract fun <get-_emscripten_check_mailbox>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_check_mailbox.<get-_emscripten_check_mailbox>|<get-_emscripten_check_mailbox>(){}[0]
+    abstract val _emscripten_run_on_main_thread_js // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_run_on_main_thread_js|{}_emscripten_run_on_main_thread_js[0]
+        abstract fun <get-_emscripten_run_on_main_thread_js>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_run_on_main_thread_js.<get-_emscripten_run_on_main_thread_js>|<get-_emscripten_run_on_main_thread_js>(){}[0]
+    abstract val _emscripten_thread_crashed // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_thread_crashed|{}_emscripten_thread_crashed[0]
+        abstract fun <get-_emscripten_thread_crashed>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_thread_crashed.<get-_emscripten_thread_crashed>|<get-_emscripten_thread_crashed>(){}[0]
+    abstract val _emscripten_thread_exit // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_thread_exit|{}_emscripten_thread_exit[0]
+        abstract fun <get-_emscripten_thread_exit>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_thread_exit.<get-_emscripten_thread_exit>|<get-_emscripten_thread_exit>(){}[0]
+    abstract val _emscripten_thread_free_data // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_thread_free_data|{}_emscripten_thread_free_data[0]
+        abstract fun <get-_emscripten_thread_free_data>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_thread_free_data.<get-_emscripten_thread_free_data>|<get-_emscripten_thread_free_data>(){}[0]
+    abstract val _emscripten_thread_init // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_thread_init|{}_emscripten_thread_init[0]
+        abstract fun <get-_emscripten_thread_init>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_thread_init.<get-_emscripten_thread_init>|<get-_emscripten_thread_init>(){}[0]
+    abstract val _emscripten_tls_init // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_tls_init|{}_emscripten_tls_init[0]
+        abstract fun <get-_emscripten_tls_init>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports._emscripten_tls_init.<get-_emscripten_tls_init>|<get-_emscripten_tls_init>(){}[0]
+    abstract val emscripten_main_runtime_thread_id // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.emscripten_main_runtime_thread_id|{}emscripten_main_runtime_thread_id[0]
+        abstract fun <get-emscripten_main_runtime_thread_id>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.emscripten_main_runtime_thread_id.<get-emscripten_main_runtime_thread_id>|<get-emscripten_main_runtime_thread_id>(){}[0]
+    abstract val emscripten_main_thread_process_queued_calls // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.emscripten_main_thread_process_queued_calls|{}emscripten_main_thread_process_queued_calls[0]
+        abstract fun <get-emscripten_main_thread_process_queued_calls>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.emscripten_main_thread_process_queued_calls.<get-emscripten_main_thread_process_queued_calls>|<get-emscripten_main_thread_process_queued_calls>(){}[0]
+    abstract val pthread_create // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.pthread_create|{}pthread_create[0]
+        abstract fun <get-pthread_create>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.pthread_create.<get-pthread_create>|<get-pthread_create>(){}[0]
+    abstract val pthread_exit // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.pthread_exit|{}pthread_exit[0]
+        abstract fun <get-pthread_exit>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.pthread_exit.<get-pthread_exit>|<get-pthread_exit>(){}[0]
+    abstract val pthread_self // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.pthread_self|{}pthread_self[0]
+        abstract fun <get-pthread_self>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.pthread_self.<get-pthread_self>|<get-pthread_self>(){}[0]
+
+    abstract var __tls_base // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.__tls_base|{}__tls_base[0]
+        abstract fun <get-__tls_base>(): kotlin/Int // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.__tls_base.<get-__tls_base>|<get-__tls_base>(){}[0]
+        abstract fun <set-__tls_base>(kotlin/Int) // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.__tls_base.<set-__tls_base>|<set-__tls_base>(kotlin.Int){}[0]
+    abstract var g_needs_dynamic_alloc // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.g_needs_dynamic_alloc|{}g_needs_dynamic_alloc[0]
+        abstract fun <get-g_needs_dynamic_alloc>(): kotlin/Int // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.g_needs_dynamic_alloc.<get-g_needs_dynamic_alloc>|<get-g_needs_dynamic_alloc>(){}[0]
+        abstract fun <set-g_needs_dynamic_alloc>(kotlin/Int) // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.g_needs_dynamic_alloc.<set-g_needs_dynamic_alloc>|<set-g_needs_dynamic_alloc>(kotlin.Int){}[0]
+    abstract var is_main_thread // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.is_main_thread|{}is_main_thread[0]
+        abstract fun <get-is_main_thread>(): kotlin/Int // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.is_main_thread.<get-is_main_thread>|<get-is_main_thread>(){}[0]
+        abstract fun <set-is_main_thread>(kotlin/Int) // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.is_main_thread.<set-is_main_thread>|<set-is_main_thread>(kotlin.Int){}[0]
+    abstract var is_runtime_thread // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.is_runtime_thread|{}is_runtime_thread[0]
+        abstract fun <get-is_runtime_thread>(): kotlin/Int // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.is_runtime_thread.<get-is_runtime_thread>|<get-is_runtime_thread>(){}[0]
+        abstract fun <set-is_runtime_thread>(kotlin/Int) // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.is_runtime_thread.<set-is_runtime_thread>|<set-is_runtime_thread>(kotlin.Int){}[0]
+    abstract var supports_wait // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.supports_wait|{}supports_wait[0]
+        abstract fun <get-supports_wait>(): kotlin/Int // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.supports_wait.<get-supports_wait>|<get-supports_wait>(){}[0]
+        abstract fun <set-supports_wait>(kotlin/Int) // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.supports_wait.<set-supports_wait>|<set-supports_wait>(kotlin.Int){}[0]
+    abstract var thread_ptr // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.thread_ptr|{}thread_ptr[0]
+        abstract fun <get-thread_ptr>(): kotlin/Int // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.thread_ptr.<get-thread_ptr>|<get-thread_ptr>(){}[0]
+        abstract fun <set-thread_ptr>(kotlin/Int) // at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadExports.thread_ptr.<set-thread_ptr>|<set-thread_ptr>(kotlin.Int){}[0]
+}
+
+abstract interface at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports { // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports|null[0]
+    abstract val __set_stack_limits // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__set_stack_limits|{}__set_stack_limits[0]
+        abstract fun <get-__set_stack_limits>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__set_stack_limits.<get-__set_stack_limits>|<get-__set_stack_limits>(){}[0]
+    abstract val _emscripten_stack_alloc // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports._emscripten_stack_alloc|{}_emscripten_stack_alloc[0]
+        abstract fun <get-_emscripten_stack_alloc>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports._emscripten_stack_alloc.<get-_emscripten_stack_alloc>|<get-_emscripten_stack_alloc>(){}[0]
+    abstract val _emscripten_stack_restore // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports._emscripten_stack_restore|{}_emscripten_stack_restore[0]
+        abstract fun <get-_emscripten_stack_restore>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports._emscripten_stack_restore.<get-_emscripten_stack_restore>|<get-_emscripten_stack_restore>(){}[0]
+    abstract val emscripten_stack_get_base // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_get_base|{}emscripten_stack_get_base[0]
+        abstract fun <get-emscripten_stack_get_base>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_get_base.<get-emscripten_stack_get_base>|<get-emscripten_stack_get_base>(){}[0]
+    abstract val emscripten_stack_get_current // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_get_current|{}emscripten_stack_get_current[0]
+        abstract fun <get-emscripten_stack_get_current>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_get_current.<get-emscripten_stack_get_current>|<get-emscripten_stack_get_current>(){}[0]
+    abstract val emscripten_stack_get_end // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_get_end|{}emscripten_stack_get_end[0]
+        abstract fun <get-emscripten_stack_get_end>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_get_end.<get-emscripten_stack_get_end>|<get-emscripten_stack_get_end>(){}[0]
+    abstract val emscripten_stack_get_free // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_get_free|{}emscripten_stack_get_free[0]
+        abstract fun <get-emscripten_stack_get_free>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_get_free.<get-emscripten_stack_get_free>|<get-emscripten_stack_get_free>(){}[0]
+    abstract val emscripten_stack_init // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_init|{}emscripten_stack_init[0]
+        abstract fun <get-emscripten_stack_init>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_init.<get-emscripten_stack_init>|<get-emscripten_stack_init>(){}[0]
+    abstract val emscripten_stack_set_limits // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_set_limits|{}emscripten_stack_set_limits[0]
+        abstract fun <get-emscripten_stack_set_limits>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.emscripten_stack_set_limits.<get-emscripten_stack_set_limits>|<get-emscripten_stack_set_limits>(){}[0]
+
+    abstract var __stack_base // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__stack_base|{}__stack_base[0]
+        abstract fun <get-__stack_base>(): kotlin/Int? // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__stack_base.<get-__stack_base>|<get-__stack_base>(){}[0]
+        abstract fun <set-__stack_base>(kotlin/Int?) // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__stack_base.<set-__stack_base>|<set-__stack_base>(kotlin.Int?){}[0]
+    abstract var __stack_end // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__stack_end|{}__stack_end[0]
+        abstract fun <get-__stack_end>(): kotlin/Int? // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__stack_end.<get-__stack_end>|<get-__stack_end>(){}[0]
+        abstract fun <set-__stack_end>(kotlin/Int?) // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__stack_end.<set-__stack_end>|<set-__stack_end>(kotlin.Int?){}[0]
+    abstract var __stack_pointer // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__stack_pointer|{}__stack_pointer[0]
+        abstract fun <get-__stack_pointer>(): kotlin/Int // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__stack_pointer.<get-__stack_pointer>|<get-__stack_pointer>(){}[0]
+        abstract fun <set-__stack_pointer>(kotlin/Int) // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.__stack_pointer.<set-__stack_pointer>|<set-__stack_pointer>(kotlin.Int){}[0]
+
+    final object Companion // at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports.Companion|null[0]
+}
+
+abstract interface at.released.weh.emcripten.runtime.export.timer/IntervalTimerExports { // at.released.weh.emcripten.runtime.export.timer/IntervalTimerExports|null[0]
+    abstract val _emscripten_timeout // at.released.weh.emcripten.runtime.export.timer/IntervalTimerExports._emscripten_timeout|{}_emscripten_timeout[0]
+        abstract fun <get-_emscripten_timeout>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export.timer/IntervalTimerExports._emscripten_timeout.<get-_emscripten_timeout>|<get-_emscripten_timeout>(){}[0]
+}
+
+abstract interface at.released.weh.emcripten.runtime.export/EmscriptenMainExports { // at.released.weh.emcripten.runtime.export/EmscriptenMainExports|null[0]
+    abstract val __errno_location // at.released.weh.emcripten.runtime.export/EmscriptenMainExports.__errno_location|{}__errno_location[0]
+        abstract fun <get-__errno_location>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export/EmscriptenMainExports.__errno_location.<get-__errno_location>|<get-__errno_location>(){}[0]
+    abstract val __wasm_call_ctors // at.released.weh.emcripten.runtime.export/EmscriptenMainExports.__wasm_call_ctors|{}__wasm_call_ctors[0]
+        abstract fun <get-__wasm_call_ctors>(): at.released.weh.wasm.core/WasmFunctionBinding // at.released.weh.emcripten.runtime.export/EmscriptenMainExports.__wasm_call_ctors.<get-__wasm_call_ctors>|<get-__wasm_call_ctors>(){}[0]
+    abstract val _initialize // at.released.weh.emcripten.runtime.export/EmscriptenMainExports._initialize|{}_initialize[0]
+        abstract fun <get-_initialize>(): at.released.weh.wasm.core/WasmFunctionBinding? // at.released.weh.emcripten.runtime.export/EmscriptenMainExports._initialize.<get-_initialize>|<get-_initialize>(){}[0]
+
+    final object Companion // at.released.weh.emcripten.runtime.export/EmscriptenMainExports.Companion|null[0]
+}
+
+abstract interface at.released.weh.emcripten.runtime.export/EmscriptenRuntime { // at.released.weh.emcripten.runtime.export/EmscriptenRuntime|null[0]
+    abstract val isMultiThread // at.released.weh.emcripten.runtime.export/EmscriptenRuntime.isMultiThread|{}isMultiThread[0]
+        abstract fun <get-isMultiThread>(): kotlin/Boolean // at.released.weh.emcripten.runtime.export/EmscriptenRuntime.isMultiThread.<get-isMultiThread>|<get-isMultiThread>(){}[0]
+
+    abstract fun initMainThread() // at.released.weh.emcripten.runtime.export/EmscriptenRuntime.initMainThread|initMainThread(){}[0]
+}
+
+abstract class at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle|null[0]
+    constructor <init>(at.released.weh.wasm.core/HostFunction, at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle.<init>|<init>(at.released.weh.wasm.core.HostFunction;at.released.weh.host.EmbedderHost){}[0]
+
+    final val function // at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle.function|{}function[0]
+        final fun <get-function>(): at.released.weh.wasm.core/HostFunction // at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle.function.<get-function>|<get-function>(){}[0]
+    final val host // at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle.host|{}host[0]
+        final fun <get-host>(): at.released.weh.host/EmbedderHost // at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle.host.<get-host>|<get-host>(){}[0]
+    final val logger // at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle.logger|{}logger[0]
+        final fun <get-logger>(): at.released.weh.common.api/Logger // at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle.logger.<get-logger>|<get-logger>(){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.export.pthread/PthreadException : kotlin/RuntimeException { // at.released.weh.emcripten.runtime.export.pthread/PthreadException|null[0]
+    constructor <init>(kotlin/String?, kotlin/Int? = ...) // at.released.weh.emcripten.runtime.export.pthread/PthreadException.<init>|<init>(kotlin.String?;kotlin.Int?){}[0]
+    constructor <init>(kotlin/String?, kotlin/Throwable?, kotlin/Int? = ...) // at.released.weh.emcripten.runtime.export.pthread/PthreadException.<init>|<init>(kotlin.String?;kotlin.Throwable?;kotlin.Int?){}[0]
+
+    final val errCode // at.released.weh.emcripten.runtime.export.pthread/PthreadException.errCode|{}errCode[0]
+        final fun <get-errCode>(): at.released.weh.wasi.preview1.type/Errno? // at.released.weh.emcripten.runtime.export.pthread/PthreadException.errCode.<get-errCode>|<get-errCode>(){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.export.stack/EmscriptenStack { // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack|null[0]
+    constructor <init>(at.released.weh.emcripten.runtime.export.stack/EmscriptenStackExports, at.released.weh.common.api/Logger) // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.<init>|<init>(at.released.weh.emcripten.runtime.export.stack.EmscriptenStackExports;at.released.weh.common.api.Logger){}[0]
+
+    final val emscriptenStackBase // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackBase|{}emscriptenStackBase[0]
+        final fun <get-emscriptenStackBase>(): kotlin/Int // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackBase.<get-emscriptenStackBase>|<get-emscriptenStackBase>(){}[0]
+    final val emscriptenStackCurrent // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackCurrent|{}emscriptenStackCurrent[0]
+        final fun <get-emscriptenStackCurrent>(): kotlin/Int // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackCurrent.<get-emscriptenStackCurrent>|<get-emscriptenStackCurrent>(){}[0]
+    final val emscriptenStackEnd // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackEnd|{}emscriptenStackEnd[0]
+        final fun <get-emscriptenStackEnd>(): kotlin/Int // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackEnd.<get-emscriptenStackEnd>|<get-emscriptenStackEnd>(){}[0]
+    final val emscriptenStackFree // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackFree|{}emscriptenStackFree[0]
+        final fun <get-emscriptenStackFree>(): kotlin/Int // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackFree.<get-emscriptenStackFree>|<get-emscriptenStackFree>(){}[0]
+
+    final fun checkStackCookie(at.released.weh.wasm.core.memory/ReadOnlyMemory) // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.checkStackCookie|checkStackCookie(at.released.weh.wasm.core.memory.ReadOnlyMemory){}[0]
+    final fun emscriptenStackRestore(kotlin/Int) // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackRestore|emscriptenStackRestore(kotlin.Int){}[0]
+    final fun emscriptenStackSetLimits(kotlin/Int, kotlin/Int) // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.emscriptenStackSetLimits|emscriptenStackSetLimits(kotlin.Int;kotlin.Int){}[0]
+    final fun setStackLimits() // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.setStackLimits|setStackLimits(){}[0]
+    final fun stackCheckInit(at.released.weh.wasm.core.memory/Memory) // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.stackCheckInit|stackCheckInit(at.released.weh.wasm.core.memory.Memory){}[0]
+    final fun writeStackCookie(at.released.weh.wasm.core.memory/Memory) // at.released.weh.emcripten.runtime.export.stack/EmscriptenStack.writeStackCookie|writeStackCookie(at.released.weh.wasm.core.memory.Memory){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.export/IndirectFunctionTableIndex { // at.released.weh.emcripten.runtime.export/IndirectFunctionTableIndex|null[0]
+    constructor <init>(kotlin/Int) // at.released.weh.emcripten.runtime.export/IndirectFunctionTableIndex.<init>|<init>(kotlin.Int){}[0]
+
+    final val funcId // at.released.weh.emcripten.runtime.export/IndirectFunctionTableIndex.funcId|{}funcId[0]
+        final fun <get-funcId>(): kotlin/Int // at.released.weh.emcripten.runtime.export/IndirectFunctionTableIndex.funcId.<get-funcId>|<get-funcId>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.emcripten.runtime.export/IndirectFunctionTableIndex.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.emcripten.runtime.export/IndirectFunctionTableIndex.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.emcripten.runtime.export/IndirectFunctionTableIndex.toString|toString(){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/AbortJsFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/AbortJsFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/AbortJsFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(): kotlin/Nothing // at.released.weh.emcripten.runtime.function/AbortJsFunctionHandle.execute|execute(){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/AssertFailFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/AssertFailFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/AssertFailFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Nothing // at.released.weh.emcripten.runtime.function/AssertFailFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/EmscriptenAsmConstAsyncOnMainThreadFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/EmscriptenAsmConstAsyncOnMainThreadFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/EmscriptenAsmConstAsyncOnMainThreadFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Int, kotlin/Int) // at.released.weh.emcripten.runtime.function/EmscriptenAsmConstAsyncOnMainThreadFunctionHandle.execute|execute(kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/EmscriptenAsmConstIntFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/EmscriptenAsmConstIntFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/EmscriptenAsmConstIntFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Int, kotlin/Int): kotlin/Int // at.released.weh.emcripten.runtime.function/EmscriptenAsmConstIntFunctionHandle.execute|execute(kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/EmscriptenConsoleErrorFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/EmscriptenConsoleErrorFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/EmscriptenConsoleErrorFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...) // at.released.weh.emcripten.runtime.function/EmscriptenConsoleErrorFunctionHandle.execute|execute(0:0;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/EmscriptenDateNowFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/EmscriptenDateNowFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/EmscriptenDateNowFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(): kotlin/Double // at.released.weh.emcripten.runtime.function/EmscriptenDateNowFunctionHandle.execute|execute(){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/EmscriptenGetNowFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/EmscriptenGetNowFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/EmscriptenGetNowFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(): kotlin/Double // at.released.weh.emcripten.runtime.function/EmscriptenGetNowFunctionHandle.execute|execute(){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/EmscriptenGetNowIsMonotonicFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/EmscriptenGetNowIsMonotonicFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/EmscriptenGetNowIsMonotonicFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(): kotlin/Int // at.released.weh.emcripten.runtime.function/EmscriptenGetNowIsMonotonicFunctionHandle.execute|execute(){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/EmscriptenResizeHeapFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/EmscriptenResizeHeapFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/EmscriptenResizeHeapFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final object Companion { // at.released.weh.emcripten.runtime.function/EmscriptenResizeHeapFunctionHandle.Companion|null[0]
+        final fun calculateNewSizePages(kotlin/Long, at.released.weh.wasm.core.memory/Pages, at.released.weh.wasm.core.memory/Pages): at.released.weh.wasm.core.memory/Pages // at.released.weh.emcripten.runtime.function/EmscriptenResizeHeapFunctionHandle.Companion.calculateNewSizePages|calculateNewSizePages(kotlin.Long;at.released.weh.wasm.core.memory.Pages;at.released.weh.wasm.core.memory.Pages){}[0]
+    }
+}
+
+final class at.released.weh.emcripten.runtime.function/EmscriptenRuntimeKeepaliveClearFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/EmscriptenRuntimeKeepaliveClearFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/EmscriptenRuntimeKeepaliveClearFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute() // at.released.weh.emcripten.runtime.function/EmscriptenRuntimeKeepaliveClearFunctionHandle.execute|execute(){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/FdDatasyncFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/FdDatasyncFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/FdDatasyncFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int): at.released.weh.wasi.preview1.type/Errno // at.released.weh.emcripten.runtime.function/FdDatasyncFunctionHandle.execute|execute(kotlin.Int){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/GetentropyFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/GetentropyFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/GetentropyFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/GetentropyFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/HandleStackOverflowFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/HandleStackOverflowFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/HandleStackOverflowFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(at.released.weh.emcripten.runtime.export.stack/EmscriptenStack, kotlin/Int): kotlin/Nothing // at.released.weh.emcripten.runtime.function/HandleStackOverflowFunctionHandle.execute|execute(at.released.weh.emcripten.runtime.export.stack.EmscriptenStack;kotlin.Int){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/LocaltimeJsFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/LocaltimeJsFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/LocaltimeJsFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Long, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...) // at.released.weh.emcripten.runtime.function/LocaltimeJsFunctionHandle.execute|execute(0:0;kotlin.Long;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/MmapJsFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/MmapJsFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/MmapJsFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Long, kotlin/Int, kotlin/Int): kotlin/Int // at.released.weh.emcripten.runtime.function/MmapJsFunctionHandle.execute|execute(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Long;kotlin.Int;kotlin.Int){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/MunapJsFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/MunapJsFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/MunapJsFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Long): kotlin/Int // at.released.weh.emcripten.runtime.function/MunapJsFunctionHandle.execute|execute(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Long){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SetitimerJsFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SetitimerJsFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SetitimerJsFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Double): kotlin/Int // at.released.weh.emcripten.runtime.function/SetitimerJsFunctionHandle.execute|execute(kotlin.Int;kotlin.Double){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallChmodFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallChmodFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallChmodFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallChmodFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallFaccessatFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallFaccessatFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallFaccessatFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallFaccessatFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallFchmodFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallFchmodFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallFchmodFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Int): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallFchmodFunctionHandle.execute|execute(kotlin.Int;kotlin.Int){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallFchown32FunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallFchown32FunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallFchown32FunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Int, kotlin/Int): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallFchown32FunctionHandle.execute|execute(kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallFcntl64FunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallFcntl64FunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallFcntl64FunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallFcntl64FunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallFstat64FunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallFstat64FunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallFstat64FunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallFstat64FunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallFtruncate64FunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallFtruncate64FunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallFtruncate64FunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Long): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallFtruncate64FunctionHandle.execute|execute(kotlin.Int;kotlin.Long){}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallGetcwdFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallGetcwdFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallGetcwdFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallGetcwdFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallMkdiratFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallMkdiratFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallMkdiratFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallMkdiratFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallOpenatFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallOpenatFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallOpenatFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallOpenatFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallReadlinkatFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallReadlinkatFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallReadlinkatFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallReadlinkatFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallRmdirFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallRmdirFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallRmdirFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallRmdirFunctionHandle.execute|execute(0:0;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallStatLstat64FunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallStatLstat64FunctionHandle|null[0]
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallStatLstat64FunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+
+    final object Companion { // at.released.weh.emcripten.runtime.function/SyscallStatLstat64FunctionHandle.Companion|null[0]
+        final fun syscallLstat64(at.released.weh.host/EmbedderHost): at.released.weh.emcripten.runtime.function/SyscallStatLstat64FunctionHandle // at.released.weh.emcripten.runtime.function/SyscallStatLstat64FunctionHandle.Companion.syscallLstat64|syscallLstat64(at.released.weh.host.EmbedderHost){}[0]
+        final fun syscallStat64(at.released.weh.host/EmbedderHost): at.released.weh.emcripten.runtime.function/SyscallStatLstat64FunctionHandle // at.released.weh.emcripten.runtime.function/SyscallStatLstat64FunctionHandle.Companion.syscallStat64|syscallStat64(at.released.weh.host.EmbedderHost){}[0]
+    }
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallUnlinkatFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallUnlinkatFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallUnlinkatFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallUnlinkatFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/SyscallUtimensatFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/SyscallUtimensatFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/SyscallUtimensatFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): kotlin/Int // at.released.weh.emcripten.runtime.function/SyscallUtimensatFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.function/TzsetJsFunctionHandle : at.released.weh.emcripten.runtime.function/EmscriptenHostFunctionHandle { // at.released.weh.emcripten.runtime.function/TzsetJsFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.emcripten.runtime.function/TzsetJsFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...) // at.released.weh.emcripten.runtime.function/TzsetJsFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.emcripten.runtime.include/StructPthread { // at.released.weh.emcripten.runtime.include/StructPthread|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Byte) // at.released.weh.emcripten.runtime.include/StructPthread.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Byte){}[0]
+
+    final val canary // at.released.weh.emcripten.runtime.include/StructPthread.canary|{}canary[0]
+        final fun <get-canary>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.canary.<get-canary>|<get-canary>(){}[0]
+    final val mailbox // at.released.weh.emcripten.runtime.include/StructPthread.mailbox|{}mailbox[0]
+        final fun <get-mailbox>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.mailbox.<get-mailbox>|<get-mailbox>(){}[0]
+    final val mailboxRefcount // at.released.weh.emcripten.runtime.include/StructPthread.mailboxRefcount|{}mailboxRefcount[0]
+        final fun <get-mailboxRefcount>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.mailboxRefcount.<get-mailboxRefcount>|<get-mailboxRefcount>(){}[0]
+    final val next // at.released.weh.emcripten.runtime.include/StructPthread.next|{}next[0]
+        final fun <get-next>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.next.<get-next>|<get-next>(){}[0]
+    final val prev // at.released.weh.emcripten.runtime.include/StructPthread.prev|{}prev[0]
+        final fun <get-prev>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.prev.<get-prev>|<get-prev>(){}[0]
+    final val self // at.released.weh.emcripten.runtime.include/StructPthread.self|{}self[0]
+        final fun <get-self>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.self.<get-self>|<get-self>(){}[0]
+    final val sleeping // at.released.weh.emcripten.runtime.include/StructPthread.sleeping|{}sleeping[0]
+        final fun <get-sleeping>(): kotlin/Byte // at.released.weh.emcripten.runtime.include/StructPthread.sleeping.<get-sleeping>|<get-sleeping>(){}[0]
+    final val sysinfo // at.released.weh.emcripten.runtime.include/StructPthread.sysinfo|{}sysinfo[0]
+        final fun <get-sysinfo>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.sysinfo.<get-sysinfo>|<get-sysinfo>(){}[0]
+    final val tlsBase // at.released.weh.emcripten.runtime.include/StructPthread.tlsBase|{}tlsBase[0]
+        final fun <get-tlsBase>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.tlsBase.<get-tlsBase>|<get-tlsBase>(){}[0]
+    final val waitingAsync // at.released.weh.emcripten.runtime.include/StructPthread.waitingAsync|{}waitingAsync[0]
+        final fun <get-waitingAsync>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.waitingAsync.<get-waitingAsync>|<get-waitingAsync>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.emcripten.runtime.include/StructPthread.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.emcripten.runtime.include/StructPthread.toString|toString(){}[0]
+
+    final object Companion { // at.released.weh.emcripten.runtime.include/StructPthread.Companion|null[0]
+        final const val STRUCT_PTHREAD_STACK_HIGH_OFFSET // at.released.weh.emcripten.runtime.include/StructPthread.Companion.STRUCT_PTHREAD_STACK_HIGH_OFFSET|{}STRUCT_PTHREAD_STACK_HIGH_OFFSET[0]
+            final fun <get-STRUCT_PTHREAD_STACK_HIGH_OFFSET>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.Companion.STRUCT_PTHREAD_STACK_HIGH_OFFSET.<get-STRUCT_PTHREAD_STACK_HIGH_OFFSET>|<get-STRUCT_PTHREAD_STACK_HIGH_OFFSET>(){}[0]
+        final const val STRUCT_PTHREAD_STACK_SZIE_OFFSET // at.released.weh.emcripten.runtime.include/StructPthread.Companion.STRUCT_PTHREAD_STACK_SZIE_OFFSET|{}STRUCT_PTHREAD_STACK_SZIE_OFFSET[0]
+            final fun <get-STRUCT_PTHREAD_STACK_SZIE_OFFSET>(): kotlin/Int // at.released.weh.emcripten.runtime.include/StructPthread.Companion.STRUCT_PTHREAD_STACK_SZIE_OFFSET.<get-STRUCT_PTHREAD_STACK_SZIE_OFFSET>|<get-STRUCT_PTHREAD_STACK_SZIE_OFFSET>(){}[0]
+    }
+}
+
+final class at.released.weh.emcripten.runtime/AssertionFailedException : kotlin/RuntimeException { // at.released.weh.emcripten.runtime/AssertionFailedException|null[0]
+    constructor <init>(kotlin/String?, kotlin/String?, kotlin/Int, kotlin/String?) // at.released.weh.emcripten.runtime/AssertionFailedException.<init>|<init>(kotlin.String?;kotlin.String?;kotlin.Int;kotlin.String?){}[0]
+}
+
+open class at.released.weh.emcripten.runtime.export.pthread/PthreadManager { // at.released.weh.emcripten.runtime.export.pthread/PthreadManager|null[0]
+    constructor <init>(at.released.weh.emcripten.runtime.export.pthread/EmscriptenPthreadInternal, kotlin/Function0<kotlin/Boolean>) // at.released.weh.emcripten.runtime.export.pthread/PthreadManager.<init>|<init>(at.released.weh.emcripten.runtime.export.pthread.EmscriptenPthreadInternal;kotlin.Function0<kotlin.Boolean>){}[0]
+
+    final fun initMainThreadJs(kotlin/Int) // at.released.weh.emcripten.runtime.export.pthread/PthreadManager.initMainThreadJs|initMainThreadJs(kotlin.Int){}[0]
+}
+
+final object at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag { // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag|null[0]
+    final const val PROT_EXEC // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_EXEC|{}PROT_EXEC[0]
+        final fun <get-PROT_EXEC>(): kotlin/Int // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_EXEC.<get-PROT_EXEC>|<get-PROT_EXEC>(){}[0]
+    final const val PROT_GROWSDOWN // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_GROWSDOWN|{}PROT_GROWSDOWN[0]
+        final fun <get-PROT_GROWSDOWN>(): kotlin/Int // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_GROWSDOWN.<get-PROT_GROWSDOWN>|<get-PROT_GROWSDOWN>(){}[0]
+    final const val PROT_GROWSUP // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_GROWSUP|{}PROT_GROWSUP[0]
+        final fun <get-PROT_GROWSUP>(): kotlin/Int // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_GROWSUP.<get-PROT_GROWSUP>|<get-PROT_GROWSUP>(){}[0]
+    final const val PROT_NONE // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_NONE|{}PROT_NONE[0]
+        final fun <get-PROT_NONE>(): kotlin/Int // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_NONE.<get-PROT_NONE>|<get-PROT_NONE>(){}[0]
+    final const val PROT_READ // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_READ|{}PROT_READ[0]
+        final fun <get-PROT_READ>(): kotlin/Int // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_READ.<get-PROT_READ>|<get-PROT_READ>(){}[0]
+    final const val PROT_WRITE // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_WRITE|{}PROT_WRITE[0]
+        final fun <get-PROT_WRITE>(): kotlin/Int // at.released.weh.emcripten.runtime.include.sys/MemoryProtectionFlag.PROT_WRITE.<get-PROT_WRITE>|<get-PROT_WRITE>(){}[0]
+}
+
+final object at.released.weh.emcripten.runtime.include.sys/SysIntervalTimerValue { // at.released.weh.emcripten.runtime.include.sys/SysIntervalTimerValue|null[0]
+    final const val ITIMER_PROF // at.released.weh.emcripten.runtime.include.sys/SysIntervalTimerValue.ITIMER_PROF|{}ITIMER_PROF[0]
+        final fun <get-ITIMER_PROF>(): kotlin/Int // at.released.weh.emcripten.runtime.include.sys/SysIntervalTimerValue.ITIMER_PROF.<get-ITIMER_PROF>|<get-ITIMER_PROF>(){}[0]
+    final const val ITIMER_REAL // at.released.weh.emcripten.runtime.include.sys/SysIntervalTimerValue.ITIMER_REAL|{}ITIMER_REAL[0]
+        final fun <get-ITIMER_REAL>(): kotlin/Int // at.released.weh.emcripten.runtime.include.sys/SysIntervalTimerValue.ITIMER_REAL.<get-ITIMER_REAL>|<get-ITIMER_REAL>(){}[0]
+    final const val ITIMER_VIRTUAL // at.released.weh.emcripten.runtime.include.sys/SysIntervalTimerValue.ITIMER_VIRTUAL|{}ITIMER_VIRTUAL[0]
+        final fun <get-ITIMER_VIRTUAL>(): kotlin/Int // at.released.weh.emcripten.runtime.include.sys/SysIntervalTimerValue.ITIMER_VIRTUAL.<get-ITIMER_VIRTUAL>|<get-ITIMER_VIRTUAL>(){}[0]
+}

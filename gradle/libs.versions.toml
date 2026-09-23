@@ -7,14 +7,13 @@ antlr4 = "4.13.2"
 atomicfu = "0.33.0"
 arrow = "2.1.2"
 assertk = "0.28.1"
-chasm = "2.0.0-SNAPSHOT"
+chasm = "2.0.0"
 detekt = "1.23.8"
 dokka = "2.2.0"
 gradle-maven-publish-plugin = "0.37.0"
 kotest = "5.9.1"
 kotlin = "2.4.0"
 kotlinpoet = "2.3.0"
-kotlinx-binary-compatibility-validator = "0.18.1"
 kotlinx-datetime = "0.7.1"
 kotlinx-serialization-json = "1.9.0"
 kotlinx-io ="0.9.1"
@@ -49,5 +48,4 @@ node-plugin = { group = "com.github.node-gradle", name = "gradle-node-plugin", v
 poko-plugin = { group = "dev.drewhamilton.poko", name = "poko-gradle-plugin", version.ref = "poko-plugin" }
 gradle-maven-publish-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "gradle-maven-publish-plugin" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlinx-binary-compatibility-validator-plugin = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin", version.ref = "kotlinx-binary-compatibility-validator" }
 spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }

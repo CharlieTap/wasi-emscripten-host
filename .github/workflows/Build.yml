@@ -37,6 +37,7 @@ jobs:
         run: >-
           ./gradlew
           styleCheck
+          checkKotlinAbi
           :bindings-chasm-wasip1:jvmTest
           :common-util:jvmTest
           :host:jvmTest

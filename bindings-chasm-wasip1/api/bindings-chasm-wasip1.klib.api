@@ -1,0 +1,35 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, linuxArm64, linuxX64, macosArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.charlietap.wasi.emscripten.host:bindings-chasm-wasip1>
+final class at.released.weh.bindings.chasm.dsl/ChasmHostFunctionDsl { // at.released.weh.bindings.chasm.dsl/ChasmHostFunctionDsl|null[0]
+    final var host // at.released.weh.bindings.chasm.dsl/ChasmHostFunctionDsl.host|{}host[0]
+        final fun <get-host>(): at.released.weh.host/EmbedderHost? // at.released.weh.bindings.chasm.dsl/ChasmHostFunctionDsl.host.<get-host>|<get-host>(){}[0]
+        final fun <set-host>(at.released.weh.host/EmbedderHost?) // at.released.weh.bindings.chasm.dsl/ChasmHostFunctionDsl.host.<set-host>|<set-host>(at.released.weh.host.EmbedderHost?){}[0]
+}
+
+final class at.released.weh.bindings.chasm.exception/ChasmErrorException : at.released.weh.bindings.chasm.exception/ChasmException { // at.released.weh.bindings.chasm.exception/ChasmErrorException|null[0]
+    constructor <init>(io.github.charlietap.chasm.embedding.error/ChasmError, kotlin/String? = ..., kotlin/Throwable? = ...) // at.released.weh.bindings.chasm.exception/ChasmErrorException.<init>|<init>(io.github.charlietap.chasm.embedding.error.ChasmError;kotlin.String?;kotlin.Throwable?){}[0]
+
+    final val error // at.released.weh.bindings.chasm.exception/ChasmErrorException.error|{}error[0]
+        final fun <get-error>(): io.github.charlietap.chasm.embedding.error/ChasmError // at.released.weh.bindings.chasm.exception/ChasmErrorException.error.<get-error>|<get-error>(){}[0]
+}
+
+final class at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder { // at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder|null[0]
+    final fun build(kotlin/String = ...): kotlin.collections/List<io.github.charlietap.chasm.embedding.shapes/Import> // at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder.build|build(kotlin.String){}[0]
+
+    final object Companion { // at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder.Companion|null[0]
+        final fun invoke(io.github.charlietap.chasm.embedding.shapes/Store, io.github.charlietap.chasm.embedding.shapes/Module, kotlin/Function1<at.released.weh.bindings.chasm.dsl/ChasmHostFunctionDsl, kotlin/Unit> = ...): at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder // at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder.Companion.invoke|invoke(io.github.charlietap.chasm.embedding.shapes.Store;io.github.charlietap.chasm.embedding.shapes.Module;kotlin.Function1<at.released.weh.bindings.chasm.dsl.ChasmHostFunctionDsl,kotlin.Unit>){}[0]
+    }
+}
+
+open class at.released.weh.bindings.chasm.exception/ChasmException : kotlin/RuntimeException { // at.released.weh.bindings.chasm.exception/ChasmException|null[0]
+    constructor <init>() // at.released.weh.bindings.chasm.exception/ChasmException.<init>|<init>(){}[0]
+    constructor <init>(kotlin/String?) // at.released.weh.bindings.chasm.exception/ChasmException.<init>|<init>(kotlin.String?){}[0]
+    constructor <init>(kotlin/String?, kotlin/Throwable?) // at.released.weh.bindings.chasm.exception/ChasmException.<init>|<init>(kotlin.String?;kotlin.Throwable?){}[0]
+    constructor <init>(kotlin/Throwable?) // at.released.weh.bindings.chasm.exception/ChasmException.<init>|<init>(kotlin.Throwable?){}[0]
+}

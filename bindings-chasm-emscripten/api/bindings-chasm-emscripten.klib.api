@@ -1,0 +1,24 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, linuxArm64, linuxX64, macosArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <at.released.weh:bindings-chasm-emscripten>
+final class at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder { // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder|null[0]
+    final fun setupEmscriptenFunctions(kotlin/String = ...): at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.ChasmEmscriptenSetupFinalizer // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.setupEmscriptenFunctions|setupEmscriptenFunctions(kotlin.String){}[0]
+    final fun setupWasiPreview1HostFunctions(kotlin/String = ...): kotlin.collections/List<io.github.charlietap.chasm.embedding.shapes/Import> // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.setupWasiPreview1HostFunctions|setupWasiPreview1HostFunctions(kotlin.String){}[0]
+
+    final class ChasmEmscriptenSetupFinalizer { // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.ChasmEmscriptenSetupFinalizer|null[0]
+        final var emscriptenFunctions // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.ChasmEmscriptenSetupFinalizer.emscriptenFunctions|{}emscriptenFunctions[0]
+            final fun <get-emscriptenFunctions>(): kotlin.collections/List<io.github.charlietap.chasm.embedding.shapes/Import> // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.ChasmEmscriptenSetupFinalizer.emscriptenFunctions.<get-emscriptenFunctions>|<get-emscriptenFunctions>(){}[0]
+
+        final fun finalize(io.github.charlietap.chasm.embedding.shapes/Instance): at.released.weh.emcripten.runtime.export/EmscriptenRuntime // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.ChasmEmscriptenSetupFinalizer.finalize|finalize(io.github.charlietap.chasm.embedding.shapes.Instance){}[0]
+        final fun finalize(io.github.charlietap.chasm.embedding.shapes/Instance, io.github.charlietap.chasm.embedding.shapes/Memory): at.released.weh.emcripten.runtime.export/EmscriptenRuntime // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.ChasmEmscriptenSetupFinalizer.finalize|finalize(io.github.charlietap.chasm.embedding.shapes.Instance;io.github.charlietap.chasm.embedding.shapes.Memory){}[0]
+    }
+
+    final object Companion { // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.Companion|null[0]
+        final fun invoke(io.github.charlietap.chasm.embedding.shapes/Store, io.github.charlietap.chasm.embedding.shapes/Module, kotlin/Function1<at.released.weh.bindings.chasm.dsl/ChasmHostFunctionDsl, kotlin/Unit> = ...): at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder // at.released.weh.bindings.chasm/ChasmEmscriptenHostBuilder.Companion.invoke|invoke(io.github.charlietap.chasm.embedding.shapes.Store;io.github.charlietap.chasm.embedding.shapes.Module;kotlin.Function1<at.released.weh.bindings.chasm.dsl.ChasmHostFunctionDsl,kotlin.Unit>){}[0]
+    }
+}

@@ -19,7 +19,7 @@ The Maven Central account must be authorised to publish the `io.github.charlieta
 
 1. Change `weh_version` in `config/version.properties` to a non-SNAPSHOT version.
 2. Update `CHANGELOG.md` and commit the release preparation.
-3. Run the CI tasks documented in `README.md`.
+3. Run the CI tasks documented in `README.md`, including Kotlin ABI compatibility validation.
 4. Validate the JVM publications without contacting Maven Central:
 
    ```shell
@@ -35,5 +35,4 @@ The Maven Central account must be authorised to publish the `io.github.charlieta
    it if it is awaiting manual approval.
 7. Change `weh_version` to the next SNAPSHOT version and push that change.
 
-A non-SNAPSHOT release must depend on a non-SNAPSHOT Chasm version. Until Chasm 2.0 is released, publish this project
-as a snapshot using the manual workflow.
+A non-SNAPSHOT release must depend on a non-SNAPSHOT Chasm version.

@@ -7,7 +7,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("at.released.weh.gradle.lint.binary-compatibility-validator")
+    id("at.released.weh.gradle.lint.abi-validation")
     id("at.released.weh.gradle.multiplatform.kotlin")
     id("com.android.kotlin.multiplatform.library")
     id("at.released.weh.gradle.multiplatform.publish")

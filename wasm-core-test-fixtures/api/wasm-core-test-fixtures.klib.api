@@ -1,0 +1,40 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, linuxArm64, linuxX64, macosArm64, mingwX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <at.released.weh:wasm-core-test-fixtures>
+final class at.released.weh.wasm.core.test.fixtures/TestMemoryRawSource : at.released.weh.wasm.core.memory/MemoryRawSource { // at.released.weh.wasm.core.test.fixtures/TestMemoryRawSource|null[0]
+    constructor <init>(at.released.weh.wasm.core.test.fixtures/TestMemory, kotlin/Int, kotlin/Int) // at.released.weh.wasm.core.test.fixtures/TestMemoryRawSource.<init>|<init>(at.released.weh.wasm.core.test.fixtures.TestMemory;kotlin.Int;kotlin.Int){}[0]
+}
+
+open class at.released.weh.wasm.core.test.fixtures/TestMemory : at.released.weh.wasm.core.memory/Memory { // at.released.weh.wasm.core.test.fixtures/TestMemory|null[0]
+    constructor <init>(kotlin/Int = ...) // at.released.weh.wasm.core.test.fixtures/TestMemory.<init>|<init>(kotlin.Int){}[0]
+
+    final val bytes // at.released.weh.wasm.core.test.fixtures/TestMemory.bytes|{}bytes[0]
+        final fun <get-bytes>(): kotlin/ByteArray // at.released.weh.wasm.core.test.fixtures/TestMemory.bytes.<get-bytes>|<get-bytes>(){}[0]
+    final val size // at.released.weh.wasm.core.test.fixtures/TestMemory.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // at.released.weh.wasm.core.test.fixtures/TestMemory.size.<get-size>|<get-size>(){}[0]
+
+    final fun fill(kotlin/Byte) // at.released.weh.wasm.core.test.fixtures/TestMemory.fill|fill(kotlin.Byte){}[0]
+    open fun readI32(kotlin/Int): kotlin/Int // at.released.weh.wasm.core.test.fixtures/TestMemory.readI32|readI32(kotlin.Int){}[0]
+    open fun readI64(kotlin/Int): kotlin/Long // at.released.weh.wasm.core.test.fixtures/TestMemory.readI64|readI64(kotlin.Int){}[0]
+    open fun readI8(kotlin/Int): kotlin/Byte // at.released.weh.wasm.core.test.fixtures/TestMemory.readI8|readI8(kotlin.Int){}[0]
+    open fun sink(kotlin/Int, kotlin/Int): kotlinx.io/RawSink // at.released.weh.wasm.core.test.fixtures/TestMemory.sink|sink(kotlin.Int;kotlin.Int){}[0]
+    open fun source(kotlin/Int, kotlin/Int): kotlinx.io/RawSource // at.released.weh.wasm.core.test.fixtures/TestMemory.source|source(kotlin.Int;kotlin.Int){}[0]
+    open fun toString(): kotlin/String // at.released.weh.wasm.core.test.fixtures/TestMemory.toString|toString(){}[0]
+    open fun writeI32(kotlin/Int, kotlin/Int) // at.released.weh.wasm.core.test.fixtures/TestMemory.writeI32|writeI32(kotlin.Int;kotlin.Int){}[0]
+    open fun writeI64(kotlin/Int, kotlin/Long) // at.released.weh.wasm.core.test.fixtures/TestMemory.writeI64|writeI64(kotlin.Int;kotlin.Long){}[0]
+    open fun writeI8(kotlin/Int, kotlin/Byte) // at.released.weh.wasm.core.test.fixtures/TestMemory.writeI8|writeI8(kotlin.Int;kotlin.Byte){}[0]
+
+    final object Companion { // at.released.weh.wasm.core.test.fixtures/TestMemory.Companion|null[0]
+        final const val MEMORY_FILL_BYTE // at.released.weh.wasm.core.test.fixtures/TestMemory.Companion.MEMORY_FILL_BYTE|{}MEMORY_FILL_BYTE[0]
+            final fun <get-MEMORY_FILL_BYTE>(): kotlin/Byte // at.released.weh.wasm.core.test.fixtures/TestMemory.Companion.MEMORY_FILL_BYTE.<get-MEMORY_FILL_BYTE>|<get-MEMORY_FILL_BYTE>(){}[0]
+    }
+}
+
+final fun (assertk/Assert<at.released.weh.wasm.core.test.fixtures/TestMemory>).at.released.weh.wasm.core.test.assertions/byteAt(kotlin/Int): assertk/Assert<kotlin/Byte> // at.released.weh.wasm.core.test.assertions/byteAt|byteAt@assertk.Assert<at.released.weh.wasm.core.test.fixtures.TestMemory>(kotlin.Int){}[0]
+final fun (assertk/Assert<at.released.weh.wasm.core.test.fixtures/TestMemory>).at.released.weh.wasm.core.test.assertions/bytesAt(kotlin/Int, kotlin/Int): assertk/Assert<kotlin/ByteArray> // at.released.weh.wasm.core.test.assertions/bytesAt|bytesAt@assertk.Assert<at.released.weh.wasm.core.test.fixtures.TestMemory>(kotlin.Int;kotlin.Int){}[0]
+final fun (assertk/Assert<at.released.weh.wasm.core.test.fixtures/TestMemory>).at.released.weh.wasm.core.test.assertions/hasBytesAt(kotlin/Int, kotlin/ByteArray) // at.released.weh.wasm.core.test.assertions/hasBytesAt|hasBytesAt@assertk.Assert<at.released.weh.wasm.core.test.fixtures.TestMemory>(kotlin.Int;kotlin.ByteArray){}[0]

@@ -5,17 +5,6 @@ plugins {
 dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
     repositories {
-        maven {
-            name = "Central Portal Snapshots"
-            url = uri("https://central.sonatype.com/repository/maven-snapshots/")
-            mavenContent {
-                snapshotsOnly()
-            }
-            content {
-                includeGroup("io.github.charlietap.chasm")
-                includeGroup("io.github.charlietap.wasi.emscripten.host")
-            }
-        }
         mavenCentral()
     }
 }

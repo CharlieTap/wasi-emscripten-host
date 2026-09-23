@@ -1,0 +1,61 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, js, linuxArm64, linuxX64, macosArm64, mingwX64, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.charlietap.wasi.emscripten.host:common-api>
+open annotation class at.released.weh.common.api.typedef/WasiEmscriptenHostIntDef : kotlin/Annotation { // at.released.weh.common.api.typedef/WasiEmscriptenHostIntDef|null[0]
+    constructor <init>(kotlin/IntArray... = ..., kotlin/Boolean = ..., kotlin/Boolean = ...) // at.released.weh.common.api.typedef/WasiEmscriptenHostIntDef.<init>|<init>(kotlin.IntArray...;kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val flag // at.released.weh.common.api.typedef/WasiEmscriptenHostIntDef.flag|{}flag[0]
+        final fun <get-flag>(): kotlin/Boolean // at.released.weh.common.api.typedef/WasiEmscriptenHostIntDef.flag.<get-flag>|<get-flag>(){}[0]
+    final val open // at.released.weh.common.api.typedef/WasiEmscriptenHostIntDef.open|{}open[0]
+        final fun <get-open>(): kotlin/Boolean // at.released.weh.common.api.typedef/WasiEmscriptenHostIntDef.open.<get-open>|<get-open>(){}[0]
+    final val value // at.released.weh.common.api.typedef/WasiEmscriptenHostIntDef.value|{}value[0]
+        final fun <get-value>(): kotlin/IntArray // at.released.weh.common.api.typedef/WasiEmscriptenHostIntDef.value.<get-value>|<get-value>(){}[0]
+}
+
+open annotation class at.released.weh.common.api.typedef/WasiEmscriptenHostLongDef : kotlin/Annotation { // at.released.weh.common.api.typedef/WasiEmscriptenHostLongDef|null[0]
+    constructor <init>(kotlin/LongArray... = ..., kotlin/Boolean = ..., kotlin/Boolean = ...) // at.released.weh.common.api.typedef/WasiEmscriptenHostLongDef.<init>|<init>(kotlin.LongArray...;kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val flag // at.released.weh.common.api.typedef/WasiEmscriptenHostLongDef.flag|{}flag[0]
+        final fun <get-flag>(): kotlin/Boolean // at.released.weh.common.api.typedef/WasiEmscriptenHostLongDef.flag.<get-flag>|<get-flag>(){}[0]
+    final val open // at.released.weh.common.api.typedef/WasiEmscriptenHostLongDef.open|{}open[0]
+        final fun <get-open>(): kotlin/Boolean // at.released.weh.common.api.typedef/WasiEmscriptenHostLongDef.open.<get-open>|<get-open>(){}[0]
+    final val value // at.released.weh.common.api.typedef/WasiEmscriptenHostLongDef.value|{}value[0]
+        final fun <get-value>(): kotlin/LongArray // at.released.weh.common.api.typedef/WasiEmscriptenHostLongDef.value.<get-value>|<get-value>(){}[0]
+}
+
+open annotation class at.released.weh.common.api/InternalWasiEmscriptenHostApi : kotlin/Annotation { // at.released.weh.common.api/InternalWasiEmscriptenHostApi|null[0]
+    constructor <init>() // at.released.weh.common.api/InternalWasiEmscriptenHostApi.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.common.api/WasiEmscriptenHostDataModel : kotlin/Annotation { // at.released.weh.common.api/WasiEmscriptenHostDataModel|null[0]
+    constructor <init>() // at.released.weh.common.api/WasiEmscriptenHostDataModel.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.common.api/WasiEmscriptenHostDsl : kotlin/Annotation { // at.released.weh.common.api/WasiEmscriptenHostDsl|null[0]
+    constructor <init>() // at.released.weh.common.api/WasiEmscriptenHostDsl.<init>|<init>(){}[0]
+}
+
+abstract interface at.released.weh.common.api/Logger { // at.released.weh.common.api/Logger|null[0]
+    abstract fun a(kotlin/Throwable? = ..., kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.a|a(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+    abstract fun d(kotlin/Throwable? = ..., kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.d|d(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+    abstract fun e(kotlin/Throwable? = ..., kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.e|e(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+    abstract fun i(kotlin/Throwable? = ..., kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.i|i(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+    abstract fun v(kotlin/Throwable? = ..., kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.v|v(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+    abstract fun w(kotlin/Throwable? = ..., kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.w|w(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+    abstract fun withTag(kotlin/String): at.released.weh.common.api/Logger // at.released.weh.common.api/Logger.withTag|withTag(kotlin.String){}[0]
+
+    final object Companion : at.released.weh.common.api/Logger { // at.released.weh.common.api/Logger.Companion|null[0]
+        final fun a(kotlin/Throwable?, kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.Companion.a|a(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+        final fun d(kotlin/Throwable?, kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.Companion.d|d(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+        final fun e(kotlin/Throwable?, kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.Companion.e|e(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+        final fun i(kotlin/Throwable?, kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.Companion.i|i(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+        final fun v(kotlin/Throwable?, kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.Companion.v|v(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+        final fun w(kotlin/Throwable?, kotlin/Function0<kotlin/String>) // at.released.weh.common.api/Logger.Companion.w|w(kotlin.Throwable?;kotlin.Function0<kotlin.String>){}[0]
+        final fun withTag(kotlin/String): at.released.weh.common.api/Logger // at.released.weh.common.api/Logger.Companion.withTag|withTag(kotlin.String){}[0]
+    }
+}

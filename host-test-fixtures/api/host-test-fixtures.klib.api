@@ -1,0 +1,143 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, linuxArm64, linuxX64, macosArm64, mingwX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <at.released.weh:host-test-fixtures>
+final class at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider : at.released.weh.filesystem.stdio/StdioSink.Provider { // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider|null[0]
+    constructor <init>() // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.<init>|<init>(){}[0]
+
+    final val sink // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.sink|{}sink[0]
+        final fun <get-sink>(): at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.TestSink // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.sink.<get-sink>|<get-sink>(){}[0]
+
+    final fun open(): at.released.weh.filesystem.stdio/StdioSink // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.open|open(){}[0]
+    final fun readContent(): kotlin/String // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.readContent|readContent(){}[0]
+
+    final class TestSink : at.released.weh.filesystem.stdio/StdioSink { // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.TestSink|null[0]
+        constructor <init>() // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.TestSink.<init>|<init>(){}[0]
+
+        final val buffer // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.TestSink.buffer|{}buffer[0]
+            final fun <get-buffer>(): kotlinx.io/Buffer // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.TestSink.buffer.<get-buffer>|<get-buffer>(){}[0]
+
+        final fun close() // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.TestSink.close|close(){}[0]
+        final fun flush() // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.TestSink.flush|flush(){}[0]
+        final fun write(kotlinx.io/Buffer, kotlin/Long) // at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider.TestSink.write|write(kotlinx.io.Buffer;kotlin.Long){}[0]
+    }
+}
+
+final class at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider : at.released.weh.filesystem.stdio/StdioSource.Provider { // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider|null[0]
+    constructor <init>() // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.<init>|<init>(){}[0]
+
+    final val source // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.source|{}source[0]
+        final fun <get-source>(): at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.TestRawSource // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.source.<get-source>|<get-source>(){}[0]
+
+    final fun open(): at.released.weh.filesystem.stdio/StdioSource // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.open|open(){}[0]
+
+    final class TestRawSource : at.released.weh.filesystem.stdio/StdioSource { // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.TestRawSource|null[0]
+        constructor <init>() // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.TestRawSource.<init>|<init>(){}[0]
+
+        final val buffer // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.TestRawSource.buffer|{}buffer[0]
+            final fun <get-buffer>(): kotlinx.io/Buffer // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.TestRawSource.buffer.<get-buffer>|<get-buffer>(){}[0]
+
+        final fun close() // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.TestRawSource.close|close(){}[0]
+        final fun readAtMostTo(kotlinx.io/Buffer, kotlin/Long): kotlin/Long // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.TestRawSource.readAtMostTo|readAtMostTo(kotlinx.io.Buffer;kotlin.Long){}[0]
+    }
+
+    final object Companion { // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.Companion|null[0]
+        final fun invoke(kotlin/ByteArray): at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.Companion.invoke|invoke(kotlin.ByteArray){}[0]
+        final fun invoke(kotlin/String): at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider // at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider.Companion.invoke|invoke(kotlin.String){}[0]
+    }
+}
+
+final class at.released.weh.filesystem.test.fixtures.stdio/TestStandardInputOutput : at.released.weh.filesystem.stdio/StandardInputOutput { // at.released.weh.filesystem.test.fixtures.stdio/TestStandardInputOutput|null[0]
+    constructor <init>(at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider = ..., at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider = ..., at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider = ...) // at.released.weh.filesystem.test.fixtures.stdio/TestStandardInputOutput.<init>|<init>(at.released.weh.filesystem.test.fixtures.stdio.TestSourceProvider;at.released.weh.filesystem.test.fixtures.stdio.TestSinkProvider;at.released.weh.filesystem.test.fixtures.stdio.TestSinkProvider){}[0]
+
+    final val stderrProvider // at.released.weh.filesystem.test.fixtures.stdio/TestStandardInputOutput.stderrProvider|{}stderrProvider[0]
+        final fun <get-stderrProvider>(): at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider // at.released.weh.filesystem.test.fixtures.stdio/TestStandardInputOutput.stderrProvider.<get-stderrProvider>|<get-stderrProvider>(){}[0]
+    final val stdinProvider // at.released.weh.filesystem.test.fixtures.stdio/TestStandardInputOutput.stdinProvider|{}stdinProvider[0]
+        final fun <get-stdinProvider>(): at.released.weh.filesystem.test.fixtures.stdio/TestSourceProvider // at.released.weh.filesystem.test.fixtures.stdio/TestStandardInputOutput.stdinProvider.<get-stdinProvider>|<get-stdinProvider>(){}[0]
+    final val stdoutProvider // at.released.weh.filesystem.test.fixtures.stdio/TestStandardInputOutput.stdoutProvider|{}stdoutProvider[0]
+        final fun <get-stdoutProvider>(): at.released.weh.filesystem.test.fixtures.stdio/TestSinkProvider // at.released.weh.filesystem.test.fixtures.stdio/TestStandardInputOutput.stdoutProvider.<get-stdoutProvider>|<get-stdoutProvider>(){}[0]
+}
+
+final class at.released.weh.host.test.fixtures/TestCputimeSource : at.released.weh.host.clock/CputimeSource { // at.released.weh.host.test.fixtures/TestCputimeSource|null[0]
+    constructor <init>(kotlin/Array<out kotlin/Pair<at.released.weh.host.clock/CputimeSource.CpuClockId, at.released.weh.host.clock/CputimeSource.CputimeClock>>... = ...) // at.released.weh.host.test.fixtures/TestCputimeSource.<init>|<init>(kotlin.Array<out|kotlin.Pair<at.released.weh.host.clock.CputimeSource.CpuClockId,at.released.weh.host.clock.CputimeSource.CputimeClock>>...){}[0]
+
+    final fun getClock(at.released.weh.host.clock/CputimeSource.CpuClockId): at.released.weh.host.clock/CputimeSource.CputimeClock // at.released.weh.host.test.fixtures/TestCputimeSource.getClock|getClock(at.released.weh.host.clock.CputimeSource.CpuClockId){}[0]
+
+    final class TestCputimeClock : at.released.weh.host.clock/CputimeSource.CputimeClock { // at.released.weh.host.test.fixtures/TestCputimeSource.TestCputimeClock|null[0]
+        constructor <init>(kotlin/Boolean = ..., kotlin/Long = ..., kotlin/Function0<kotlin/Long>) // at.released.weh.host.test.fixtures/TestCputimeSource.TestCputimeClock.<init>|<init>(kotlin.Boolean;kotlin.Long;kotlin.Function0<kotlin.Long>){}[0]
+
+        final val isSupported // at.released.weh.host.test.fixtures/TestCputimeSource.TestCputimeClock.isSupported|{}isSupported[0]
+            final fun <get-isSupported>(): kotlin/Boolean // at.released.weh.host.test.fixtures/TestCputimeSource.TestCputimeClock.isSupported.<get-isSupported>|<get-isSupported>(){}[0]
+
+        final fun getResolutionNanoseconds(): kotlin/Long // at.released.weh.host.test.fixtures/TestCputimeSource.TestCputimeClock.getResolutionNanoseconds|getResolutionNanoseconds(){}[0]
+        final fun getTimeMarkNanoseconds(): kotlin/Long // at.released.weh.host.test.fixtures/TestCputimeSource.TestCputimeClock.getTimeMarkNanoseconds|getTimeMarkNanoseconds(){}[0]
+    }
+
+    final object Companion { // at.released.weh.host.test.fixtures/TestCputimeSource.Companion|null[0]
+        final val UNSUPPORTED_CLOCK // at.released.weh.host.test.fixtures/TestCputimeSource.Companion.UNSUPPORTED_CLOCK|{}UNSUPPORTED_CLOCK[0]
+            final fun <get-UNSUPPORTED_CLOCK>(): at.released.weh.host.clock/CputimeSource.CputimeClock // at.released.weh.host.test.fixtures/TestCputimeSource.Companion.UNSUPPORTED_CLOCK.<get-UNSUPPORTED_CLOCK>|<get-UNSUPPORTED_CLOCK>(){}[0]
+        final val UNSUPPORTED_CPUTIME_SOURCE // at.released.weh.host.test.fixtures/TestCputimeSource.Companion.UNSUPPORTED_CPUTIME_SOURCE|{}UNSUPPORTED_CPUTIME_SOURCE[0]
+            final fun <get-UNSUPPORTED_CPUTIME_SOURCE>(): at.released.weh.host.clock/CputimeSource // at.released.weh.host.test.fixtures/TestCputimeSource.Companion.UNSUPPORTED_CPUTIME_SOURCE.<get-UNSUPPORTED_CPUTIME_SOURCE>|<get-UNSUPPORTED_CPUTIME_SOURCE>(){}[0]
+    }
+}
+
+open class at.released.weh.filesystem.test.fixtures/TestFileSystem : at.released.weh.filesystem/FileSystem { // at.released.weh.filesystem.test.fixtures/TestFileSystem|null[0]
+    constructor <init>() // at.released.weh.filesystem.test.fixtures/TestFileSystem.<init>|<init>(){}[0]
+
+    final fun <#A1: at.released.weh.filesystem.op/FileSystemOperation<#B1, #C1, #D1>, #B1: kotlin/Any, #C1: at.released.weh.filesystem.error/FileSystemOperationError, #D1: kotlin/Any> onOperation(#A1, at.released.weh.filesystem.test.fixtures/TestFileSystem.OperationHandler<#B1, #C1, #D1>) // at.released.weh.filesystem.test.fixtures/TestFileSystem.onOperation|onOperation(0:0;at.released.weh.filesystem.test.fixtures.TestFileSystem.OperationHandler<0:1,0:2,0:3>){0§<at.released.weh.filesystem.op.FileSystemOperation<0:1,0:2,0:3>>;1§<kotlin.Any>;2§<at.released.weh.filesystem.error.FileSystemOperationError>;3§<kotlin.Any>}[0]
+    open fun <#A1: kotlin/Any, #B1: at.released.weh.filesystem.error/FileSystemOperationError, #C1: kotlin/Any> execute(at.released.weh.filesystem.op/FileSystemOperation<#A1, #B1, #C1>, #A1): arrow.core/Either<#B1, #C1> // at.released.weh.filesystem.test.fixtures/TestFileSystem.execute|execute(at.released.weh.filesystem.op.FileSystemOperation<0:0,0:1,0:2>;0:0){0§<kotlin.Any>;1§<at.released.weh.filesystem.error.FileSystemOperationError>;2§<kotlin.Any>}[0]
+    open fun close() // at.released.weh.filesystem.test.fixtures/TestFileSystem.close|close(){}[0]
+    open fun isOperationSupported(at.released.weh.filesystem.op/FileSystemOperation<*, *, *>): kotlin/Boolean // at.released.weh.filesystem.test.fixtures/TestFileSystem.isOperationSupported|isOperationSupported(at.released.weh.filesystem.op.FileSystemOperation<*,*,*>){}[0]
+
+    abstract fun interface <#A1: in kotlin/Any, #B1: out at.released.weh.filesystem.error/FileSystemOperationError, #C1: out kotlin/Any> OperationHandler { // at.released.weh.filesystem.test.fixtures/TestFileSystem.OperationHandler|null[0]
+        abstract fun invoke(#A1): arrow.core/Either<#B1, #C1> // at.released.weh.filesystem.test.fixtures/TestFileSystem.OperationHandler.invoke|invoke(1:0){}[0]
+    }
+}
+
+open class at.released.weh.host.test.fixtures/TestEmbedderHost : at.released.weh.host/EmbedderHost { // at.released.weh.host.test.fixtures/TestEmbedderHost|null[0]
+    constructor <init>(at.released.weh.common.api/Logger = ..., at.released.weh.host/SystemEnvProvider = ..., at.released.weh.host/CommandArgsProvider = ..., at.released.weh.filesystem/FileSystem = ..., at.released.weh.host.clock/MonotonicClock = ..., at.released.weh.host.clock/Clock = ..., at.released.weh.host.clock/CputimeSource = ..., at.released.weh.host/LocalTimeFormatter = ..., at.released.weh.host/TimeZoneInfo.Provider = ..., at.released.weh.host/EntropySource = ...) // at.released.weh.host.test.fixtures/TestEmbedderHost.<init>|<init>(at.released.weh.common.api.Logger;at.released.weh.host.SystemEnvProvider;at.released.weh.host.CommandArgsProvider;at.released.weh.filesystem.FileSystem;at.released.weh.host.clock.MonotonicClock;at.released.weh.host.clock.Clock;at.released.weh.host.clock.CputimeSource;at.released.weh.host.LocalTimeFormatter;at.released.weh.host.TimeZoneInfo.Provider;at.released.weh.host.EntropySource){}[0]
+
+    open var clock // at.released.weh.host.test.fixtures/TestEmbedderHost.clock|{}clock[0]
+        open fun <get-clock>(): at.released.weh.host.clock/Clock // at.released.weh.host.test.fixtures/TestEmbedderHost.clock.<get-clock>|<get-clock>(){}[0]
+        open fun <set-clock>(at.released.weh.host.clock/Clock) // at.released.weh.host.test.fixtures/TestEmbedderHost.clock.<set-clock>|<set-clock>(at.released.weh.host.clock.Clock){}[0]
+    open var commandArgsProvider // at.released.weh.host.test.fixtures/TestEmbedderHost.commandArgsProvider|{}commandArgsProvider[0]
+        open fun <get-commandArgsProvider>(): at.released.weh.host/CommandArgsProvider // at.released.weh.host.test.fixtures/TestEmbedderHost.commandArgsProvider.<get-commandArgsProvider>|<get-commandArgsProvider>(){}[0]
+        open fun <set-commandArgsProvider>(at.released.weh.host/CommandArgsProvider) // at.released.weh.host.test.fixtures/TestEmbedderHost.commandArgsProvider.<set-commandArgsProvider>|<set-commandArgsProvider>(at.released.weh.host.CommandArgsProvider){}[0]
+    open var cputimeSource // at.released.weh.host.test.fixtures/TestEmbedderHost.cputimeSource|{}cputimeSource[0]
+        open fun <get-cputimeSource>(): at.released.weh.host.clock/CputimeSource // at.released.weh.host.test.fixtures/TestEmbedderHost.cputimeSource.<get-cputimeSource>|<get-cputimeSource>(){}[0]
+        open fun <set-cputimeSource>(at.released.weh.host.clock/CputimeSource) // at.released.weh.host.test.fixtures/TestEmbedderHost.cputimeSource.<set-cputimeSource>|<set-cputimeSource>(at.released.weh.host.clock.CputimeSource){}[0]
+    open var entropySource // at.released.weh.host.test.fixtures/TestEmbedderHost.entropySource|{}entropySource[0]
+        open fun <get-entropySource>(): at.released.weh.host/EntropySource // at.released.weh.host.test.fixtures/TestEmbedderHost.entropySource.<get-entropySource>|<get-entropySource>(){}[0]
+        open fun <set-entropySource>(at.released.weh.host/EntropySource) // at.released.weh.host.test.fixtures/TestEmbedderHost.entropySource.<set-entropySource>|<set-entropySource>(at.released.weh.host.EntropySource){}[0]
+    open var fileSystem // at.released.weh.host.test.fixtures/TestEmbedderHost.fileSystem|{}fileSystem[0]
+        open fun <get-fileSystem>(): at.released.weh.filesystem/FileSystem // at.released.weh.host.test.fixtures/TestEmbedderHost.fileSystem.<get-fileSystem>|<get-fileSystem>(){}[0]
+        open fun <set-fileSystem>(at.released.weh.filesystem/FileSystem) // at.released.weh.host.test.fixtures/TestEmbedderHost.fileSystem.<set-fileSystem>|<set-fileSystem>(at.released.weh.filesystem.FileSystem){}[0]
+    open var localTimeFormatter // at.released.weh.host.test.fixtures/TestEmbedderHost.localTimeFormatter|{}localTimeFormatter[0]
+        open fun <get-localTimeFormatter>(): at.released.weh.host/LocalTimeFormatter // at.released.weh.host.test.fixtures/TestEmbedderHost.localTimeFormatter.<get-localTimeFormatter>|<get-localTimeFormatter>(){}[0]
+        open fun <set-localTimeFormatter>(at.released.weh.host/LocalTimeFormatter) // at.released.weh.host.test.fixtures/TestEmbedderHost.localTimeFormatter.<set-localTimeFormatter>|<set-localTimeFormatter>(at.released.weh.host.LocalTimeFormatter){}[0]
+    open var monotonicClock // at.released.weh.host.test.fixtures/TestEmbedderHost.monotonicClock|{}monotonicClock[0]
+        open fun <get-monotonicClock>(): at.released.weh.host.clock/MonotonicClock // at.released.weh.host.test.fixtures/TestEmbedderHost.monotonicClock.<get-monotonicClock>|<get-monotonicClock>(){}[0]
+        open fun <set-monotonicClock>(at.released.weh.host.clock/MonotonicClock) // at.released.weh.host.test.fixtures/TestEmbedderHost.monotonicClock.<set-monotonicClock>|<set-monotonicClock>(at.released.weh.host.clock.MonotonicClock){}[0]
+    open var rootLogger // at.released.weh.host.test.fixtures/TestEmbedderHost.rootLogger|{}rootLogger[0]
+        open fun <get-rootLogger>(): at.released.weh.common.api/Logger // at.released.weh.host.test.fixtures/TestEmbedderHost.rootLogger.<get-rootLogger>|<get-rootLogger>(){}[0]
+        open fun <set-rootLogger>(at.released.weh.common.api/Logger) // at.released.weh.host.test.fixtures/TestEmbedderHost.rootLogger.<set-rootLogger>|<set-rootLogger>(at.released.weh.common.api.Logger){}[0]
+    open var systemEnvProvider // at.released.weh.host.test.fixtures/TestEmbedderHost.systemEnvProvider|{}systemEnvProvider[0]
+        open fun <get-systemEnvProvider>(): at.released.weh.host/SystemEnvProvider // at.released.weh.host.test.fixtures/TestEmbedderHost.systemEnvProvider.<get-systemEnvProvider>|<get-systemEnvProvider>(){}[0]
+        open fun <set-systemEnvProvider>(at.released.weh.host/SystemEnvProvider) // at.released.weh.host.test.fixtures/TestEmbedderHost.systemEnvProvider.<set-systemEnvProvider>|<set-systemEnvProvider>(at.released.weh.host.SystemEnvProvider){}[0]
+    open var timeZoneInfoProvider // at.released.weh.host.test.fixtures/TestEmbedderHost.timeZoneInfoProvider|{}timeZoneInfoProvider[0]
+        open fun <get-timeZoneInfoProvider>(): at.released.weh.host/TimeZoneInfo.Provider // at.released.weh.host.test.fixtures/TestEmbedderHost.timeZoneInfoProvider.<get-timeZoneInfoProvider>|<get-timeZoneInfoProvider>(){}[0]
+        open fun <set-timeZoneInfoProvider>(at.released.weh.host/TimeZoneInfo.Provider) // at.released.weh.host.test.fixtures/TestEmbedderHost.timeZoneInfoProvider.<set-timeZoneInfoProvider>|<set-timeZoneInfoProvider>(at.released.weh.host.TimeZoneInfo.Provider){}[0]
+
+    open fun close() // at.released.weh.host.test.fixtures/TestEmbedderHost.close|close(){}[0]
+}
+
+final object at.released.weh.filesystem.test.fixtures.readdir/TestDirEntry { // at.released.weh.filesystem.test.fixtures.readdir/TestDirEntry|null[0]
+    final val TEST_CURRENT_DIR_ENTRY // at.released.weh.filesystem.test.fixtures.readdir/TestDirEntry.TEST_CURRENT_DIR_ENTRY|{}TEST_CURRENT_DIR_ENTRY[0]
+        final fun <get-TEST_CURRENT_DIR_ENTRY>(): at.released.weh.filesystem.op.readdir/DirEntry // at.released.weh.filesystem.test.fixtures.readdir/TestDirEntry.TEST_CURRENT_DIR_ENTRY.<get-TEST_CURRENT_DIR_ENTRY>|<get-TEST_CURRENT_DIR_ENTRY>(){}[0]
+    final val TEST_PARENT_DIR_ENTRY // at.released.weh.filesystem.test.fixtures.readdir/TestDirEntry.TEST_PARENT_DIR_ENTRY|{}TEST_PARENT_DIR_ENTRY[0]
+        final fun <get-TEST_PARENT_DIR_ENTRY>(): at.released.weh.filesystem.op.readdir/DirEntry // at.released.weh.filesystem.test.fixtures.readdir/TestDirEntry.TEST_PARENT_DIR_ENTRY.<get-TEST_PARENT_DIR_ENTRY>|<get-TEST_PARENT_DIR_ENTRY>(){}[0]
+}

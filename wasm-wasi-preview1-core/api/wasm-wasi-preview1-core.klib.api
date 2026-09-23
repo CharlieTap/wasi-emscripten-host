@@ -1,0 +1,804 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, linuxArm64, linuxX64, macosArm64, mingwX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.charlietap.wasi.emscripten.host:wasm-wasi-preview1-core>
+open annotation class at.released.weh.wasi.preview1.type/CiovecArrayType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/CiovecArrayType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/CiovecArrayType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/DeviceType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/DeviceType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/DeviceType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/DircookieType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/DircookieType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/DircookieType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/DirnamlenType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/DirnamlenType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/DirnamlenType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/EventrwflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/EventrwflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/EventrwflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/ExitcodeType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/ExitcodeType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/ExitcodeType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/FdType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/FdType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/FdType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/FdflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/FdflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/FdflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/FiledeltaType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/FiledeltaType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/FiledeltaType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/FilesizeType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/FilesizeType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/FilesizeType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/FstflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/FstflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/FstflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/InodeType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/InodeType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/InodeType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/IovecArrayType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/IovecArrayType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/IovecArrayType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/LinkcountType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/LinkcountType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/LinkcountType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/LookupflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/LookupflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/LookupflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/OflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/OflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/OflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/RiflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/RiflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/RiflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/RightsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/RightsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/RightsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/RoflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/RoflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/RoflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/SdflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/SdflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/SdflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/SiflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/SiflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/SiflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/SizeType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/SizeType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/SizeType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/SubclockflagsType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/SubclockflagsType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/SubclockflagsType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/TimestampType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/TimestampType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/TimestampType.<init>|<init>(){}[0]
+}
+
+open annotation class at.released.weh.wasi.preview1.type/UserdataType : kotlin/Annotation { // at.released.weh.wasi.preview1.type/UserdataType|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1.type/UserdataType.<init>|<init>(){}[0]
+}
+
+final enum class at.released.weh.wasi.preview1.type/Advice : kotlin/Enum<at.released.weh.wasi.preview1.type/Advice> { // at.released.weh.wasi.preview1.type/Advice|null[0]
+    enum entry DONTNEED // at.released.weh.wasi.preview1.type/Advice.DONTNEED|null[0]
+    enum entry NOREUSE // at.released.weh.wasi.preview1.type/Advice.NOREUSE|null[0]
+    enum entry NORMAL // at.released.weh.wasi.preview1.type/Advice.NORMAL|null[0]
+    enum entry RANDOM // at.released.weh.wasi.preview1.type/Advice.RANDOM|null[0]
+    enum entry SEQUENTIAL // at.released.weh.wasi.preview1.type/Advice.SEQUENTIAL|null[0]
+    enum entry WILLNEED // at.released.weh.wasi.preview1.type/Advice.WILLNEED|null[0]
+
+    final val code // at.released.weh.wasi.preview1.type/Advice.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // at.released.weh.wasi.preview1.type/Advice.code.<get-code>|<get-code>(){}[0]
+    final val entries // at.released.weh.wasi.preview1.type/Advice.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.wasi.preview1.type/Advice> // at.released.weh.wasi.preview1.type/Advice.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.wasi.preview1.type/Advice // at.released.weh.wasi.preview1.type/Advice.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.wasi.preview1.type/Advice> // at.released.weh.wasi.preview1.type/Advice.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.wasi.preview1.type/Advice.Companion|null[0]
+        final fun fromCode(kotlin/Int): at.released.weh.wasi.preview1.type/Advice? // at.released.weh.wasi.preview1.type/Advice.Companion.fromCode|fromCode(kotlin.Int){}[0]
+    }
+}
+
+final enum class at.released.weh.wasi.preview1.type/Clockid : kotlin/Enum<at.released.weh.wasi.preview1.type/Clockid> { // at.released.weh.wasi.preview1.type/Clockid|null[0]
+    enum entry MONOTONIC // at.released.weh.wasi.preview1.type/Clockid.MONOTONIC|null[0]
+    enum entry PROCESS_CPUTIME_ID // at.released.weh.wasi.preview1.type/Clockid.PROCESS_CPUTIME_ID|null[0]
+    enum entry REALTIME // at.released.weh.wasi.preview1.type/Clockid.REALTIME|null[0]
+    enum entry THREAD_CPUTIME_ID // at.released.weh.wasi.preview1.type/Clockid.THREAD_CPUTIME_ID|null[0]
+
+    final val code // at.released.weh.wasi.preview1.type/Clockid.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // at.released.weh.wasi.preview1.type/Clockid.code.<get-code>|<get-code>(){}[0]
+    final val entries // at.released.weh.wasi.preview1.type/Clockid.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.wasi.preview1.type/Clockid> // at.released.weh.wasi.preview1.type/Clockid.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.wasi.preview1.type/Clockid // at.released.weh.wasi.preview1.type/Clockid.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.wasi.preview1.type/Clockid> // at.released.weh.wasi.preview1.type/Clockid.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.wasi.preview1.type/Clockid.Companion|null[0]
+        final fun fromCode(kotlin/Int): at.released.weh.wasi.preview1.type/Clockid? // at.released.weh.wasi.preview1.type/Clockid.Companion.fromCode|fromCode(kotlin.Int){}[0]
+    }
+}
+
+final enum class at.released.weh.wasi.preview1.type/Errno : kotlin/Enum<at.released.weh.wasi.preview1.type/Errno> { // at.released.weh.wasi.preview1.type/Errno|null[0]
+    enum entry ACCES // at.released.weh.wasi.preview1.type/Errno.ACCES|null[0]
+    enum entry ADDRINUSE // at.released.weh.wasi.preview1.type/Errno.ADDRINUSE|null[0]
+    enum entry ADDRNOTAVAIL // at.released.weh.wasi.preview1.type/Errno.ADDRNOTAVAIL|null[0]
+    enum entry AFNOSUPPORT // at.released.weh.wasi.preview1.type/Errno.AFNOSUPPORT|null[0]
+    enum entry AGAIN // at.released.weh.wasi.preview1.type/Errno.AGAIN|null[0]
+    enum entry ALREADY // at.released.weh.wasi.preview1.type/Errno.ALREADY|null[0]
+    enum entry BADF // at.released.weh.wasi.preview1.type/Errno.BADF|null[0]
+    enum entry BADMSG // at.released.weh.wasi.preview1.type/Errno.BADMSG|null[0]
+    enum entry BUSY // at.released.weh.wasi.preview1.type/Errno.BUSY|null[0]
+    enum entry CANCELED // at.released.weh.wasi.preview1.type/Errno.CANCELED|null[0]
+    enum entry CHILD // at.released.weh.wasi.preview1.type/Errno.CHILD|null[0]
+    enum entry CONNABORTED // at.released.weh.wasi.preview1.type/Errno.CONNABORTED|null[0]
+    enum entry CONNREFUSED // at.released.weh.wasi.preview1.type/Errno.CONNREFUSED|null[0]
+    enum entry CONNRESET // at.released.weh.wasi.preview1.type/Errno.CONNRESET|null[0]
+    enum entry DEADLK // at.released.weh.wasi.preview1.type/Errno.DEADLK|null[0]
+    enum entry DESTADDRREQ // at.released.weh.wasi.preview1.type/Errno.DESTADDRREQ|null[0]
+    enum entry DOM // at.released.weh.wasi.preview1.type/Errno.DOM|null[0]
+    enum entry DQUOT // at.released.weh.wasi.preview1.type/Errno.DQUOT|null[0]
+    enum entry EXIST // at.released.weh.wasi.preview1.type/Errno.EXIST|null[0]
+    enum entry FAULT // at.released.weh.wasi.preview1.type/Errno.FAULT|null[0]
+    enum entry FBIG // at.released.weh.wasi.preview1.type/Errno.FBIG|null[0]
+    enum entry HOSTUNREACH // at.released.weh.wasi.preview1.type/Errno.HOSTUNREACH|null[0]
+    enum entry IDRM // at.released.weh.wasi.preview1.type/Errno.IDRM|null[0]
+    enum entry ILSEQ // at.released.weh.wasi.preview1.type/Errno.ILSEQ|null[0]
+    enum entry INPROGRESS // at.released.weh.wasi.preview1.type/Errno.INPROGRESS|null[0]
+    enum entry INTR // at.released.weh.wasi.preview1.type/Errno.INTR|null[0]
+    enum entry INVAL // at.released.weh.wasi.preview1.type/Errno.INVAL|null[0]
+    enum entry IO // at.released.weh.wasi.preview1.type/Errno.IO|null[0]
+    enum entry ISCONN // at.released.weh.wasi.preview1.type/Errno.ISCONN|null[0]
+    enum entry ISDIR // at.released.weh.wasi.preview1.type/Errno.ISDIR|null[0]
+    enum entry LOOP // at.released.weh.wasi.preview1.type/Errno.LOOP|null[0]
+    enum entry MFILE // at.released.weh.wasi.preview1.type/Errno.MFILE|null[0]
+    enum entry MLINK // at.released.weh.wasi.preview1.type/Errno.MLINK|null[0]
+    enum entry MSGSIZE // at.released.weh.wasi.preview1.type/Errno.MSGSIZE|null[0]
+    enum entry MULTIHOP // at.released.weh.wasi.preview1.type/Errno.MULTIHOP|null[0]
+    enum entry NAMETOOLONG // at.released.weh.wasi.preview1.type/Errno.NAMETOOLONG|null[0]
+    enum entry NETDOWN // at.released.weh.wasi.preview1.type/Errno.NETDOWN|null[0]
+    enum entry NETRESET // at.released.weh.wasi.preview1.type/Errno.NETRESET|null[0]
+    enum entry NETUNREACH // at.released.weh.wasi.preview1.type/Errno.NETUNREACH|null[0]
+    enum entry NFILE // at.released.weh.wasi.preview1.type/Errno.NFILE|null[0]
+    enum entry NOBUFS // at.released.weh.wasi.preview1.type/Errno.NOBUFS|null[0]
+    enum entry NODEV // at.released.weh.wasi.preview1.type/Errno.NODEV|null[0]
+    enum entry NOENT // at.released.weh.wasi.preview1.type/Errno.NOENT|null[0]
+    enum entry NOEXEC // at.released.weh.wasi.preview1.type/Errno.NOEXEC|null[0]
+    enum entry NOLCK // at.released.weh.wasi.preview1.type/Errno.NOLCK|null[0]
+    enum entry NOLINK // at.released.weh.wasi.preview1.type/Errno.NOLINK|null[0]
+    enum entry NOMEM // at.released.weh.wasi.preview1.type/Errno.NOMEM|null[0]
+    enum entry NOMSG // at.released.weh.wasi.preview1.type/Errno.NOMSG|null[0]
+    enum entry NOPROTOOPT // at.released.weh.wasi.preview1.type/Errno.NOPROTOOPT|null[0]
+    enum entry NOSPC // at.released.weh.wasi.preview1.type/Errno.NOSPC|null[0]
+    enum entry NOSYS // at.released.weh.wasi.preview1.type/Errno.NOSYS|null[0]
+    enum entry NOTCAPABLE // at.released.weh.wasi.preview1.type/Errno.NOTCAPABLE|null[0]
+    enum entry NOTCONN // at.released.weh.wasi.preview1.type/Errno.NOTCONN|null[0]
+    enum entry NOTDIR // at.released.weh.wasi.preview1.type/Errno.NOTDIR|null[0]
+    enum entry NOTEMPTY // at.released.weh.wasi.preview1.type/Errno.NOTEMPTY|null[0]
+    enum entry NOTRECOVERABLE // at.released.weh.wasi.preview1.type/Errno.NOTRECOVERABLE|null[0]
+    enum entry NOTSOCK // at.released.weh.wasi.preview1.type/Errno.NOTSOCK|null[0]
+    enum entry NOTSUP // at.released.weh.wasi.preview1.type/Errno.NOTSUP|null[0]
+    enum entry NOTTY // at.released.weh.wasi.preview1.type/Errno.NOTTY|null[0]
+    enum entry NXIO // at.released.weh.wasi.preview1.type/Errno.NXIO|null[0]
+    enum entry OVERFLOW // at.released.weh.wasi.preview1.type/Errno.OVERFLOW|null[0]
+    enum entry OWNERDEAD // at.released.weh.wasi.preview1.type/Errno.OWNERDEAD|null[0]
+    enum entry PERM // at.released.weh.wasi.preview1.type/Errno.PERM|null[0]
+    enum entry PIPE // at.released.weh.wasi.preview1.type/Errno.PIPE|null[0]
+    enum entry PROTO // at.released.weh.wasi.preview1.type/Errno.PROTO|null[0]
+    enum entry PROTONOSUPPORT // at.released.weh.wasi.preview1.type/Errno.PROTONOSUPPORT|null[0]
+    enum entry PROTOTYPE // at.released.weh.wasi.preview1.type/Errno.PROTOTYPE|null[0]
+    enum entry RANGE // at.released.weh.wasi.preview1.type/Errno.RANGE|null[0]
+    enum entry ROFS // at.released.weh.wasi.preview1.type/Errno.ROFS|null[0]
+    enum entry SPIPE // at.released.weh.wasi.preview1.type/Errno.SPIPE|null[0]
+    enum entry SRCH // at.released.weh.wasi.preview1.type/Errno.SRCH|null[0]
+    enum entry STALE // at.released.weh.wasi.preview1.type/Errno.STALE|null[0]
+    enum entry SUCCESS // at.released.weh.wasi.preview1.type/Errno.SUCCESS|null[0]
+    enum entry TIMEDOUT // at.released.weh.wasi.preview1.type/Errno.TIMEDOUT|null[0]
+    enum entry TOO_BIG // at.released.weh.wasi.preview1.type/Errno.TOO_BIG|null[0]
+    enum entry TXTBSY // at.released.weh.wasi.preview1.type/Errno.TXTBSY|null[0]
+    enum entry XDEV // at.released.weh.wasi.preview1.type/Errno.XDEV|null[0]
+
+    final val code // at.released.weh.wasi.preview1.type/Errno.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // at.released.weh.wasi.preview1.type/Errno.code.<get-code>|<get-code>(){}[0]
+    final val entries // at.released.weh.wasi.preview1.type/Errno.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.wasi.preview1.type/Errno> // at.released.weh.wasi.preview1.type/Errno.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.type/Errno.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.wasi.preview1.type/Errno> // at.released.weh.wasi.preview1.type/Errno.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.wasi.preview1.type/Errno.Companion|null[0]
+        final fun fromCode(kotlin/Int): at.released.weh.wasi.preview1.type/Errno? // at.released.weh.wasi.preview1.type/Errno.Companion.fromCode|fromCode(kotlin.Int){}[0]
+    }
+}
+
+final enum class at.released.weh.wasi.preview1.type/Eventtype : kotlin/Enum<at.released.weh.wasi.preview1.type/Eventtype> { // at.released.weh.wasi.preview1.type/Eventtype|null[0]
+    enum entry CLOCK // at.released.weh.wasi.preview1.type/Eventtype.CLOCK|null[0]
+    enum entry FD_READ // at.released.weh.wasi.preview1.type/Eventtype.FD_READ|null[0]
+    enum entry FD_WRITE // at.released.weh.wasi.preview1.type/Eventtype.FD_WRITE|null[0]
+
+    final val code // at.released.weh.wasi.preview1.type/Eventtype.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // at.released.weh.wasi.preview1.type/Eventtype.code.<get-code>|<get-code>(){}[0]
+    final val entries // at.released.weh.wasi.preview1.type/Eventtype.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.wasi.preview1.type/Eventtype> // at.released.weh.wasi.preview1.type/Eventtype.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.wasi.preview1.type/Eventtype // at.released.weh.wasi.preview1.type/Eventtype.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.wasi.preview1.type/Eventtype> // at.released.weh.wasi.preview1.type/Eventtype.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.wasi.preview1.type/Eventtype.Companion|null[0]
+        final fun fromCode(kotlin/Int): at.released.weh.wasi.preview1.type/Eventtype? // at.released.weh.wasi.preview1.type/Eventtype.Companion.fromCode|fromCode(kotlin.Int){}[0]
+    }
+}
+
+final enum class at.released.weh.wasi.preview1.type/Filetype : kotlin/Enum<at.released.weh.wasi.preview1.type/Filetype> { // at.released.weh.wasi.preview1.type/Filetype|null[0]
+    enum entry BLOCK_DEVICE // at.released.weh.wasi.preview1.type/Filetype.BLOCK_DEVICE|null[0]
+    enum entry CHARACTER_DEVICE // at.released.weh.wasi.preview1.type/Filetype.CHARACTER_DEVICE|null[0]
+    enum entry DIRECTORY // at.released.weh.wasi.preview1.type/Filetype.DIRECTORY|null[0]
+    enum entry REGULAR_FILE // at.released.weh.wasi.preview1.type/Filetype.REGULAR_FILE|null[0]
+    enum entry SOCKET_DGRAM // at.released.weh.wasi.preview1.type/Filetype.SOCKET_DGRAM|null[0]
+    enum entry SOCKET_STREAM // at.released.weh.wasi.preview1.type/Filetype.SOCKET_STREAM|null[0]
+    enum entry SYMBOLIC_LINK // at.released.weh.wasi.preview1.type/Filetype.SYMBOLIC_LINK|null[0]
+    enum entry UNKNOWN // at.released.weh.wasi.preview1.type/Filetype.UNKNOWN|null[0]
+
+    final val code // at.released.weh.wasi.preview1.type/Filetype.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // at.released.weh.wasi.preview1.type/Filetype.code.<get-code>|<get-code>(){}[0]
+    final val entries // at.released.weh.wasi.preview1.type/Filetype.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.wasi.preview1.type/Filetype> // at.released.weh.wasi.preview1.type/Filetype.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.wasi.preview1.type/Filetype // at.released.weh.wasi.preview1.type/Filetype.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.wasi.preview1.type/Filetype> // at.released.weh.wasi.preview1.type/Filetype.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.wasi.preview1.type/Filetype.Companion|null[0]
+        final fun fromCode(kotlin/Int): at.released.weh.wasi.preview1.type/Filetype? // at.released.weh.wasi.preview1.type/Filetype.Companion.fromCode|fromCode(kotlin.Int){}[0]
+    }
+}
+
+final enum class at.released.weh.wasi.preview1.type/Preopentype : kotlin/Enum<at.released.weh.wasi.preview1.type/Preopentype> { // at.released.weh.wasi.preview1.type/Preopentype|null[0]
+    enum entry DIR // at.released.weh.wasi.preview1.type/Preopentype.DIR|null[0]
+
+    final val code // at.released.weh.wasi.preview1.type/Preopentype.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // at.released.weh.wasi.preview1.type/Preopentype.code.<get-code>|<get-code>(){}[0]
+    final val entries // at.released.weh.wasi.preview1.type/Preopentype.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.wasi.preview1.type/Preopentype> // at.released.weh.wasi.preview1.type/Preopentype.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.wasi.preview1.type/Preopentype // at.released.weh.wasi.preview1.type/Preopentype.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.wasi.preview1.type/Preopentype> // at.released.weh.wasi.preview1.type/Preopentype.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.wasi.preview1.type/Preopentype.Companion|null[0]
+        final fun fromCode(kotlin/Int): at.released.weh.wasi.preview1.type/Preopentype? // at.released.weh.wasi.preview1.type/Preopentype.Companion.fromCode|fromCode(kotlin.Int){}[0]
+    }
+}
+
+final enum class at.released.weh.wasi.preview1.type/Signal : kotlin/Enum<at.released.weh.wasi.preview1.type/Signal> { // at.released.weh.wasi.preview1.type/Signal|null[0]
+    enum entry ABRT // at.released.weh.wasi.preview1.type/Signal.ABRT|null[0]
+    enum entry ALRM // at.released.weh.wasi.preview1.type/Signal.ALRM|null[0]
+    enum entry BUS // at.released.weh.wasi.preview1.type/Signal.BUS|null[0]
+    enum entry CHLD // at.released.weh.wasi.preview1.type/Signal.CHLD|null[0]
+    enum entry CONT // at.released.weh.wasi.preview1.type/Signal.CONT|null[0]
+    enum entry FPE // at.released.weh.wasi.preview1.type/Signal.FPE|null[0]
+    enum entry HUP // at.released.weh.wasi.preview1.type/Signal.HUP|null[0]
+    enum entry ILL // at.released.weh.wasi.preview1.type/Signal.ILL|null[0]
+    enum entry INT // at.released.weh.wasi.preview1.type/Signal.INT|null[0]
+    enum entry KILL // at.released.weh.wasi.preview1.type/Signal.KILL|null[0]
+    enum entry NONE // at.released.weh.wasi.preview1.type/Signal.NONE|null[0]
+    enum entry PIPE // at.released.weh.wasi.preview1.type/Signal.PIPE|null[0]
+    enum entry POLL // at.released.weh.wasi.preview1.type/Signal.POLL|null[0]
+    enum entry PROF // at.released.weh.wasi.preview1.type/Signal.PROF|null[0]
+    enum entry PWR // at.released.weh.wasi.preview1.type/Signal.PWR|null[0]
+    enum entry QUIT // at.released.weh.wasi.preview1.type/Signal.QUIT|null[0]
+    enum entry SEGV // at.released.weh.wasi.preview1.type/Signal.SEGV|null[0]
+    enum entry STOP // at.released.weh.wasi.preview1.type/Signal.STOP|null[0]
+    enum entry SYS // at.released.weh.wasi.preview1.type/Signal.SYS|null[0]
+    enum entry TERM // at.released.weh.wasi.preview1.type/Signal.TERM|null[0]
+    enum entry TRAP // at.released.weh.wasi.preview1.type/Signal.TRAP|null[0]
+    enum entry TSTP // at.released.weh.wasi.preview1.type/Signal.TSTP|null[0]
+    enum entry TTIN // at.released.weh.wasi.preview1.type/Signal.TTIN|null[0]
+    enum entry TTOU // at.released.weh.wasi.preview1.type/Signal.TTOU|null[0]
+    enum entry URG // at.released.weh.wasi.preview1.type/Signal.URG|null[0]
+    enum entry USR1 // at.released.weh.wasi.preview1.type/Signal.USR1|null[0]
+    enum entry USR2 // at.released.weh.wasi.preview1.type/Signal.USR2|null[0]
+    enum entry VTALRM // at.released.weh.wasi.preview1.type/Signal.VTALRM|null[0]
+    enum entry WINCH // at.released.weh.wasi.preview1.type/Signal.WINCH|null[0]
+    enum entry XCPU // at.released.weh.wasi.preview1.type/Signal.XCPU|null[0]
+    enum entry XFSZ // at.released.weh.wasi.preview1.type/Signal.XFSZ|null[0]
+
+    final val code // at.released.weh.wasi.preview1.type/Signal.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // at.released.weh.wasi.preview1.type/Signal.code.<get-code>|<get-code>(){}[0]
+    final val entries // at.released.weh.wasi.preview1.type/Signal.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.wasi.preview1.type/Signal> // at.released.weh.wasi.preview1.type/Signal.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.wasi.preview1.type/Signal // at.released.weh.wasi.preview1.type/Signal.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.wasi.preview1.type/Signal> // at.released.weh.wasi.preview1.type/Signal.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.wasi.preview1.type/Signal.Companion|null[0]
+        final fun fromCode(kotlin/Int): at.released.weh.wasi.preview1.type/Signal? // at.released.weh.wasi.preview1.type/Signal.Companion.fromCode|fromCode(kotlin.Int){}[0]
+    }
+}
+
+final enum class at.released.weh.wasi.preview1.type/Whence : kotlin/Enum<at.released.weh.wasi.preview1.type/Whence> { // at.released.weh.wasi.preview1.type/Whence|null[0]
+    enum entry CUR // at.released.weh.wasi.preview1.type/Whence.CUR|null[0]
+    enum entry END // at.released.weh.wasi.preview1.type/Whence.END|null[0]
+    enum entry SET // at.released.weh.wasi.preview1.type/Whence.SET|null[0]
+
+    final val code // at.released.weh.wasi.preview1.type/Whence.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // at.released.weh.wasi.preview1.type/Whence.code.<get-code>|<get-code>(){}[0]
+    final val entries // at.released.weh.wasi.preview1.type/Whence.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.wasi.preview1.type/Whence> // at.released.weh.wasi.preview1.type/Whence.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.wasi.preview1.type/Whence // at.released.weh.wasi.preview1.type/Whence.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.wasi.preview1.type/Whence> // at.released.weh.wasi.preview1.type/Whence.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.wasi.preview1.type/Whence.Companion|null[0]
+        final fun fromCode(kotlin/Int): at.released.weh.wasi.preview1.type/Whence? // at.released.weh.wasi.preview1.type/Whence.Companion.fromCode|fromCode(kotlin.Int){}[0]
+    }
+}
+
+final enum class at.released.weh.wasi.preview1/WasiPreview1HostFunction : at.released.weh.wasm.core/HostFunction, kotlin/Enum<at.released.weh.wasi.preview1/WasiPreview1HostFunction> { // at.released.weh.wasi.preview1/WasiPreview1HostFunction|null[0]
+    enum entry ARGS_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.ARGS_GET|null[0]
+    enum entry ARGS_SIZES_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.ARGS_SIZES_GET|null[0]
+    enum entry CLOCK_RES_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.CLOCK_RES_GET|null[0]
+    enum entry CLOCK_TIME_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.CLOCK_TIME_GET|null[0]
+    enum entry ENVIRON_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.ENVIRON_GET|null[0]
+    enum entry ENVIRON_SIZES_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.ENVIRON_SIZES_GET|null[0]
+    enum entry FD_ADVISE // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_ADVISE|null[0]
+    enum entry FD_ALLOCATE // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_ALLOCATE|null[0]
+    enum entry FD_CLOSE // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_CLOSE|null[0]
+    enum entry FD_DATASYNC // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_DATASYNC|null[0]
+    enum entry FD_FDSTAT_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_FDSTAT_GET|null[0]
+    enum entry FD_FDSTAT_SET_FLAGS // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_FDSTAT_SET_FLAGS|null[0]
+    enum entry FD_FDSTAT_SET_RIGHTS // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_FDSTAT_SET_RIGHTS|null[0]
+    enum entry FD_FILESTAT_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_FILESTAT_GET|null[0]
+    enum entry FD_FILESTAT_SET_SIZE // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_FILESTAT_SET_SIZE|null[0]
+    enum entry FD_FILESTAT_SET_TIMES // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_FILESTAT_SET_TIMES|null[0]
+    enum entry FD_PREAD // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_PREAD|null[0]
+    enum entry FD_PRESTAT_DIR_NAME // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_PRESTAT_DIR_NAME|null[0]
+    enum entry FD_PRESTAT_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_PRESTAT_GET|null[0]
+    enum entry FD_PWRITE // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_PWRITE|null[0]
+    enum entry FD_READ // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_READ|null[0]
+    enum entry FD_READDIR // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_READDIR|null[0]
+    enum entry FD_RENUMBER // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_RENUMBER|null[0]
+    enum entry FD_SEEK // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_SEEK|null[0]
+    enum entry FD_SYNC // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_SYNC|null[0]
+    enum entry FD_TELL // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_TELL|null[0]
+    enum entry FD_WRITE // at.released.weh.wasi.preview1/WasiPreview1HostFunction.FD_WRITE|null[0]
+    enum entry PATH_CREATE_DIRECTORY // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_CREATE_DIRECTORY|null[0]
+    enum entry PATH_FILESTAT_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_FILESTAT_GET|null[0]
+    enum entry PATH_FILESTAT_SET_TIMES // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_FILESTAT_SET_TIMES|null[0]
+    enum entry PATH_LINK // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_LINK|null[0]
+    enum entry PATH_OPEN // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_OPEN|null[0]
+    enum entry PATH_READLINK // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_READLINK|null[0]
+    enum entry PATH_REMOVE_DIRECTORY // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_REMOVE_DIRECTORY|null[0]
+    enum entry PATH_RENAME // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_RENAME|null[0]
+    enum entry PATH_SYMLINK // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_SYMLINK|null[0]
+    enum entry PATH_UNLINK_FILE // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PATH_UNLINK_FILE|null[0]
+    enum entry POLL_ONEOFF // at.released.weh.wasi.preview1/WasiPreview1HostFunction.POLL_ONEOFF|null[0]
+    enum entry PROC_EXIT // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PROC_EXIT|null[0]
+    enum entry PROC_RAISE // at.released.weh.wasi.preview1/WasiPreview1HostFunction.PROC_RAISE|null[0]
+    enum entry RANDOM_GET // at.released.weh.wasi.preview1/WasiPreview1HostFunction.RANDOM_GET|null[0]
+    enum entry SCHED_YIELD // at.released.weh.wasi.preview1/WasiPreview1HostFunction.SCHED_YIELD|null[0]
+    enum entry SOCK_ACCEPT // at.released.weh.wasi.preview1/WasiPreview1HostFunction.SOCK_ACCEPT|null[0]
+    enum entry SOCK_RECV // at.released.weh.wasi.preview1/WasiPreview1HostFunction.SOCK_RECV|null[0]
+    enum entry SOCK_SEND // at.released.weh.wasi.preview1/WasiPreview1HostFunction.SOCK_SEND|null[0]
+    enum entry SOCK_SHUTDOWN // at.released.weh.wasi.preview1/WasiPreview1HostFunction.SOCK_SHUTDOWN|null[0]
+
+    final val entries // at.released.weh.wasi.preview1/WasiPreview1HostFunction.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<at.released.weh.wasi.preview1/WasiPreview1HostFunction> // at.released.weh.wasi.preview1/WasiPreview1HostFunction.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val type // at.released.weh.wasi.preview1/WasiPreview1HostFunction.type|{}type[0]
+        final fun <get-type>(): at.released.weh.wasm.core/HostFunction.HostFunctionType // at.released.weh.wasi.preview1/WasiPreview1HostFunction.type.<get-type>|<get-type>(){}[0]
+    final val wasmName // at.released.weh.wasi.preview1/WasiPreview1HostFunction.wasmName|{}wasmName[0]
+        final fun <get-wasmName>(): kotlin/String // at.released.weh.wasi.preview1/WasiPreview1HostFunction.wasmName.<get-wasmName>|<get-wasmName>(){}[0]
+
+    final fun valueOf(kotlin/String): at.released.weh.wasi.preview1/WasiPreview1HostFunction // at.released.weh.wasi.preview1/WasiPreview1HostFunction.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<at.released.weh.wasi.preview1/WasiPreview1HostFunction> // at.released.weh.wasi.preview1/WasiPreview1HostFunction.values|values#static(){}[0]
+
+    final object Companion { // at.released.weh.wasi.preview1/WasiPreview1HostFunction.Companion|null[0]
+        final val byWasmName // at.released.weh.wasi.preview1/WasiPreview1HostFunction.Companion.byWasmName|{}byWasmName[0]
+            final fun <get-byWasmName>(): kotlin.collections/Map<kotlin/String, at.released.weh.wasi.preview1/WasiPreview1HostFunction> // at.released.weh.wasi.preview1/WasiPreview1HostFunction.Companion.byWasmName.<get-byWasmName>|<get-byWasmName>(){}[0]
+    }
+}
+
+sealed interface at.released.weh.wasi.preview1.type/Prestat { // at.released.weh.wasi.preview1.type/Prestat|null[0]
+    abstract val tag // at.released.weh.wasi.preview1.type/Prestat.tag|{}tag[0]
+        abstract fun <get-tag>(): at.released.weh.wasi.preview1.type/Preopentype // at.released.weh.wasi.preview1.type/Prestat.tag.<get-tag>|<get-tag>(){}[0]
+}
+
+sealed interface at.released.weh.wasi.preview1.type/SubscriptionU { // at.released.weh.wasi.preview1.type/SubscriptionU|null[0]
+    abstract val tag // at.released.weh.wasi.preview1.type/SubscriptionU.tag|{}tag[0]
+        abstract fun <get-tag>(): at.released.weh.wasi.preview1.type/Eventtype // at.released.weh.wasi.preview1.type/SubscriptionU.tag.<get-tag>|<get-tag>(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/Ciovec { // at.released.weh.wasi.preview1.type/Ciovec|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int) // at.released.weh.wasi.preview1.type/Ciovec.<init>|<init>(kotlin.Int;kotlin.Int){}[0]
+
+    final val buf // at.released.weh.wasi.preview1.type/Ciovec.buf|{}buf[0]
+        final fun <get-buf>(): kotlin/Int // at.released.weh.wasi.preview1.type/Ciovec.buf.<get-buf>|<get-buf>(){}[0]
+    final val bufLen // at.released.weh.wasi.preview1.type/Ciovec.bufLen|{}bufLen[0]
+        final fun <get-bufLen>(): kotlin/Int // at.released.weh.wasi.preview1.type/Ciovec.bufLen.<get-bufLen>|<get-bufLen>(){}[0]
+
+    final fun component1(): kotlin/Int // at.released.weh.wasi.preview1.type/Ciovec.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // at.released.weh.wasi.preview1.type/Ciovec.component2|component2(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/Int = ...): at.released.weh.wasi.preview1.type/Ciovec // at.released.weh.wasi.preview1.type/Ciovec.copy|copy(kotlin.Int;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/Ciovec.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/Ciovec.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/Ciovec.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/Dirent { // at.released.weh.wasi.preview1.type/Dirent|null[0]
+    constructor <init>(kotlin/Long, kotlin/Long, kotlin/Int, at.released.weh.wasi.preview1.type/Filetype) // at.released.weh.wasi.preview1.type/Dirent.<init>|<init>(kotlin.Long;kotlin.Long;kotlin.Int;at.released.weh.wasi.preview1.type.Filetype){}[0]
+
+    final val dIno // at.released.weh.wasi.preview1.type/Dirent.dIno|{}dIno[0]
+        final fun <get-dIno>(): kotlin/Long // at.released.weh.wasi.preview1.type/Dirent.dIno.<get-dIno>|<get-dIno>(){}[0]
+    final val dNamlen // at.released.weh.wasi.preview1.type/Dirent.dNamlen|{}dNamlen[0]
+        final fun <get-dNamlen>(): kotlin/Int // at.released.weh.wasi.preview1.type/Dirent.dNamlen.<get-dNamlen>|<get-dNamlen>(){}[0]
+    final val dNext // at.released.weh.wasi.preview1.type/Dirent.dNext|{}dNext[0]
+        final fun <get-dNext>(): kotlin/Long // at.released.weh.wasi.preview1.type/Dirent.dNext.<get-dNext>|<get-dNext>(){}[0]
+    final val dType // at.released.weh.wasi.preview1.type/Dirent.dType|{}dType[0]
+        final fun <get-dType>(): at.released.weh.wasi.preview1.type/Filetype // at.released.weh.wasi.preview1.type/Dirent.dType.<get-dType>|<get-dType>(){}[0]
+
+    final fun component1(): kotlin/Long // at.released.weh.wasi.preview1.type/Dirent.component1|component1(){}[0]
+    final fun component2(): kotlin/Long // at.released.weh.wasi.preview1.type/Dirent.component2|component2(){}[0]
+    final fun component3(): kotlin/Int // at.released.weh.wasi.preview1.type/Dirent.component3|component3(){}[0]
+    final fun component4(): at.released.weh.wasi.preview1.type/Filetype // at.released.weh.wasi.preview1.type/Dirent.component4|component4(){}[0]
+    final fun copy(kotlin/Long = ..., kotlin/Long = ..., kotlin/Int = ..., at.released.weh.wasi.preview1.type/Filetype = ...): at.released.weh.wasi.preview1.type/Dirent // at.released.weh.wasi.preview1.type/Dirent.copy|copy(kotlin.Long;kotlin.Long;kotlin.Int;at.released.weh.wasi.preview1.type.Filetype){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/Dirent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/Dirent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/Dirent.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/Event { // at.released.weh.wasi.preview1.type/Event|null[0]
+    constructor <init>(kotlin/Long, at.released.weh.wasi.preview1.type/Errno, at.released.weh.wasi.preview1.type/Eventtype, at.released.weh.wasi.preview1.type/EventFdReadwrite) // at.released.weh.wasi.preview1.type/Event.<init>|<init>(kotlin.Long;at.released.weh.wasi.preview1.type.Errno;at.released.weh.wasi.preview1.type.Eventtype;at.released.weh.wasi.preview1.type.EventFdReadwrite){}[0]
+
+    final val error // at.released.weh.wasi.preview1.type/Event.error|{}error[0]
+        final fun <get-error>(): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.type/Event.error.<get-error>|<get-error>(){}[0]
+    final val fdReadwrite // at.released.weh.wasi.preview1.type/Event.fdReadwrite|{}fdReadwrite[0]
+        final fun <get-fdReadwrite>(): at.released.weh.wasi.preview1.type/EventFdReadwrite // at.released.weh.wasi.preview1.type/Event.fdReadwrite.<get-fdReadwrite>|<get-fdReadwrite>(){}[0]
+    final val type // at.released.weh.wasi.preview1.type/Event.type|{}type[0]
+        final fun <get-type>(): at.released.weh.wasi.preview1.type/Eventtype // at.released.weh.wasi.preview1.type/Event.type.<get-type>|<get-type>(){}[0]
+    final val userdata // at.released.weh.wasi.preview1.type/Event.userdata|{}userdata[0]
+        final fun <get-userdata>(): kotlin/Long // at.released.weh.wasi.preview1.type/Event.userdata.<get-userdata>|<get-userdata>(){}[0]
+
+    final fun component1(): kotlin/Long // at.released.weh.wasi.preview1.type/Event.component1|component1(){}[0]
+    final fun component2(): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.type/Event.component2|component2(){}[0]
+    final fun component3(): at.released.weh.wasi.preview1.type/Eventtype // at.released.weh.wasi.preview1.type/Event.component3|component3(){}[0]
+    final fun component4(): at.released.weh.wasi.preview1.type/EventFdReadwrite // at.released.weh.wasi.preview1.type/Event.component4|component4(){}[0]
+    final fun copy(kotlin/Long = ..., at.released.weh.wasi.preview1.type/Errno = ..., at.released.weh.wasi.preview1.type/Eventtype = ..., at.released.weh.wasi.preview1.type/EventFdReadwrite = ...): at.released.weh.wasi.preview1.type/Event // at.released.weh.wasi.preview1.type/Event.copy|copy(kotlin.Long;at.released.weh.wasi.preview1.type.Errno;at.released.weh.wasi.preview1.type.Eventtype;at.released.weh.wasi.preview1.type.EventFdReadwrite){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/Event.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/Event.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/Event.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/EventFdReadwrite { // at.released.weh.wasi.preview1.type/EventFdReadwrite|null[0]
+    constructor <init>(kotlin/Long, kotlin/Short) // at.released.weh.wasi.preview1.type/EventFdReadwrite.<init>|<init>(kotlin.Long;kotlin.Short){}[0]
+
+    final val flags // at.released.weh.wasi.preview1.type/EventFdReadwrite.flags|{}flags[0]
+        final fun <get-flags>(): kotlin/Short // at.released.weh.wasi.preview1.type/EventFdReadwrite.flags.<get-flags>|<get-flags>(){}[0]
+    final val nbytes // at.released.weh.wasi.preview1.type/EventFdReadwrite.nbytes|{}nbytes[0]
+        final fun <get-nbytes>(): kotlin/Long // at.released.weh.wasi.preview1.type/EventFdReadwrite.nbytes.<get-nbytes>|<get-nbytes>(){}[0]
+
+    final fun component1(): kotlin/Long // at.released.weh.wasi.preview1.type/EventFdReadwrite.component1|component1(){}[0]
+    final fun component2(): kotlin/Short // at.released.weh.wasi.preview1.type/EventFdReadwrite.component2|component2(){}[0]
+    final fun copy(kotlin/Long = ..., kotlin/Short = ...): at.released.weh.wasi.preview1.type/EventFdReadwrite // at.released.weh.wasi.preview1.type/EventFdReadwrite.copy|copy(kotlin.Long;kotlin.Short){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/EventFdReadwrite.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/EventFdReadwrite.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/EventFdReadwrite.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/Fdstat { // at.released.weh.wasi.preview1.type/Fdstat|null[0]
+    constructor <init>(at.released.weh.wasi.preview1.type/Filetype, kotlin/Short, kotlin/Long, kotlin/Long) // at.released.weh.wasi.preview1.type/Fdstat.<init>|<init>(at.released.weh.wasi.preview1.type.Filetype;kotlin.Short;kotlin.Long;kotlin.Long){}[0]
+
+    final val fsFiletype // at.released.weh.wasi.preview1.type/Fdstat.fsFiletype|{}fsFiletype[0]
+        final fun <get-fsFiletype>(): at.released.weh.wasi.preview1.type/Filetype // at.released.weh.wasi.preview1.type/Fdstat.fsFiletype.<get-fsFiletype>|<get-fsFiletype>(){}[0]
+    final val fsFlags // at.released.weh.wasi.preview1.type/Fdstat.fsFlags|{}fsFlags[0]
+        final fun <get-fsFlags>(): kotlin/Short // at.released.weh.wasi.preview1.type/Fdstat.fsFlags.<get-fsFlags>|<get-fsFlags>(){}[0]
+    final val fsRightsBase // at.released.weh.wasi.preview1.type/Fdstat.fsRightsBase|{}fsRightsBase[0]
+        final fun <get-fsRightsBase>(): kotlin/Long // at.released.weh.wasi.preview1.type/Fdstat.fsRightsBase.<get-fsRightsBase>|<get-fsRightsBase>(){}[0]
+    final val fsRightsInheriting // at.released.weh.wasi.preview1.type/Fdstat.fsRightsInheriting|{}fsRightsInheriting[0]
+        final fun <get-fsRightsInheriting>(): kotlin/Long // at.released.weh.wasi.preview1.type/Fdstat.fsRightsInheriting.<get-fsRightsInheriting>|<get-fsRightsInheriting>(){}[0]
+
+    final fun component1(): at.released.weh.wasi.preview1.type/Filetype // at.released.weh.wasi.preview1.type/Fdstat.component1|component1(){}[0]
+    final fun component2(): kotlin/Short // at.released.weh.wasi.preview1.type/Fdstat.component2|component2(){}[0]
+    final fun component3(): kotlin/Long // at.released.weh.wasi.preview1.type/Fdstat.component3|component3(){}[0]
+    final fun component4(): kotlin/Long // at.released.weh.wasi.preview1.type/Fdstat.component4|component4(){}[0]
+    final fun copy(at.released.weh.wasi.preview1.type/Filetype = ..., kotlin/Short = ..., kotlin/Long = ..., kotlin/Long = ...): at.released.weh.wasi.preview1.type/Fdstat // at.released.weh.wasi.preview1.type/Fdstat.copy|copy(at.released.weh.wasi.preview1.type.Filetype;kotlin.Short;kotlin.Long;kotlin.Long){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/Fdstat.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/Fdstat.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/Fdstat.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/Filestat { // at.released.weh.wasi.preview1.type/Filestat|null[0]
+    constructor <init>(kotlin/Long, kotlin/Long, at.released.weh.wasi.preview1.type/Filetype, kotlin/Long, kotlin/Long, kotlin/Long, kotlin/Long, kotlin/Long) // at.released.weh.wasi.preview1.type/Filestat.<init>|<init>(kotlin.Long;kotlin.Long;at.released.weh.wasi.preview1.type.Filetype;kotlin.Long;kotlin.Long;kotlin.Long;kotlin.Long;kotlin.Long){}[0]
+
+    final val atim // at.released.weh.wasi.preview1.type/Filestat.atim|{}atim[0]
+        final fun <get-atim>(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.atim.<get-atim>|<get-atim>(){}[0]
+    final val ctim // at.released.weh.wasi.preview1.type/Filestat.ctim|{}ctim[0]
+        final fun <get-ctim>(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.ctim.<get-ctim>|<get-ctim>(){}[0]
+    final val dev // at.released.weh.wasi.preview1.type/Filestat.dev|{}dev[0]
+        final fun <get-dev>(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.dev.<get-dev>|<get-dev>(){}[0]
+    final val filetype // at.released.weh.wasi.preview1.type/Filestat.filetype|{}filetype[0]
+        final fun <get-filetype>(): at.released.weh.wasi.preview1.type/Filetype // at.released.weh.wasi.preview1.type/Filestat.filetype.<get-filetype>|<get-filetype>(){}[0]
+    final val ino // at.released.weh.wasi.preview1.type/Filestat.ino|{}ino[0]
+        final fun <get-ino>(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.ino.<get-ino>|<get-ino>(){}[0]
+    final val mtim // at.released.weh.wasi.preview1.type/Filestat.mtim|{}mtim[0]
+        final fun <get-mtim>(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.mtim.<get-mtim>|<get-mtim>(){}[0]
+    final val nlink // at.released.weh.wasi.preview1.type/Filestat.nlink|{}nlink[0]
+        final fun <get-nlink>(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.nlink.<get-nlink>|<get-nlink>(){}[0]
+    final val size // at.released.weh.wasi.preview1.type/Filestat.size|{}size[0]
+        final fun <get-size>(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.size.<get-size>|<get-size>(){}[0]
+
+    final fun component1(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.component1|component1(){}[0]
+    final fun component2(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.component2|component2(){}[0]
+    final fun component3(): at.released.weh.wasi.preview1.type/Filetype // at.released.weh.wasi.preview1.type/Filestat.component3|component3(){}[0]
+    final fun component4(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.component4|component4(){}[0]
+    final fun component5(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.component5|component5(){}[0]
+    final fun component6(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.component6|component6(){}[0]
+    final fun component7(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.component7|component7(){}[0]
+    final fun component8(): kotlin/Long // at.released.weh.wasi.preview1.type/Filestat.component8|component8(){}[0]
+    final fun copy(kotlin/Long = ..., kotlin/Long = ..., at.released.weh.wasi.preview1.type/Filetype = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/Long = ...): at.released.weh.wasi.preview1.type/Filestat // at.released.weh.wasi.preview1.type/Filestat.copy|copy(kotlin.Long;kotlin.Long;at.released.weh.wasi.preview1.type.Filetype;kotlin.Long;kotlin.Long;kotlin.Long;kotlin.Long;kotlin.Long){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/Filestat.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/Filestat.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/Filestat.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/Iovec { // at.released.weh.wasi.preview1.type/Iovec|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int) // at.released.weh.wasi.preview1.type/Iovec.<init>|<init>(kotlin.Int;kotlin.Int){}[0]
+
+    final val buf // at.released.weh.wasi.preview1.type/Iovec.buf|{}buf[0]
+        final fun <get-buf>(): kotlin/Int // at.released.weh.wasi.preview1.type/Iovec.buf.<get-buf>|<get-buf>(){}[0]
+    final val bufLen // at.released.weh.wasi.preview1.type/Iovec.bufLen|{}bufLen[0]
+        final fun <get-bufLen>(): kotlin/Int // at.released.weh.wasi.preview1.type/Iovec.bufLen.<get-bufLen>|<get-bufLen>(){}[0]
+
+    final fun component1(): kotlin/Int // at.released.weh.wasi.preview1.type/Iovec.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // at.released.weh.wasi.preview1.type/Iovec.component2|component2(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/Int = ...): at.released.weh.wasi.preview1.type/Iovec // at.released.weh.wasi.preview1.type/Iovec.copy|copy(kotlin.Int;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/Iovec.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/Iovec.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/Iovec.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/PrestatDir : at.released.weh.wasi.preview1.type/Prestat { // at.released.weh.wasi.preview1.type/PrestatDir|null[0]
+    constructor <init>(at.released.weh.wasi.preview1.type/Preopentype, kotlin/Int) // at.released.weh.wasi.preview1.type/PrestatDir.<init>|<init>(at.released.weh.wasi.preview1.type.Preopentype;kotlin.Int){}[0]
+
+    final val prNameLen // at.released.weh.wasi.preview1.type/PrestatDir.prNameLen|{}prNameLen[0]
+        final fun <get-prNameLen>(): kotlin/Int // at.released.weh.wasi.preview1.type/PrestatDir.prNameLen.<get-prNameLen>|<get-prNameLen>(){}[0]
+    final val tag // at.released.weh.wasi.preview1.type/PrestatDir.tag|{}tag[0]
+        final fun <get-tag>(): at.released.weh.wasi.preview1.type/Preopentype // at.released.weh.wasi.preview1.type/PrestatDir.tag.<get-tag>|<get-tag>(){}[0]
+
+    final fun component1(): at.released.weh.wasi.preview1.type/Preopentype // at.released.weh.wasi.preview1.type/PrestatDir.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // at.released.weh.wasi.preview1.type/PrestatDir.component2|component2(){}[0]
+    final fun copy(at.released.weh.wasi.preview1.type/Preopentype = ..., kotlin/Int = ...): at.released.weh.wasi.preview1.type/PrestatDir // at.released.weh.wasi.preview1.type/PrestatDir.copy|copy(at.released.weh.wasi.preview1.type.Preopentype;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/PrestatDir.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/PrestatDir.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/PrestatDir.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/Subscription { // at.released.weh.wasi.preview1.type/Subscription|null[0]
+    constructor <init>(kotlin/Long, at.released.weh.wasi.preview1.type/SubscriptionU) // at.released.weh.wasi.preview1.type/Subscription.<init>|<init>(kotlin.Long;at.released.weh.wasi.preview1.type.SubscriptionU){}[0]
+
+    final val u // at.released.weh.wasi.preview1.type/Subscription.u|{}u[0]
+        final fun <get-u>(): at.released.weh.wasi.preview1.type/SubscriptionU // at.released.weh.wasi.preview1.type/Subscription.u.<get-u>|<get-u>(){}[0]
+    final val userdata // at.released.weh.wasi.preview1.type/Subscription.userdata|{}userdata[0]
+        final fun <get-userdata>(): kotlin/Long // at.released.weh.wasi.preview1.type/Subscription.userdata.<get-userdata>|<get-userdata>(){}[0]
+
+    final fun component1(): kotlin/Long // at.released.weh.wasi.preview1.type/Subscription.component1|component1(){}[0]
+    final fun component2(): at.released.weh.wasi.preview1.type/SubscriptionU // at.released.weh.wasi.preview1.type/Subscription.component2|component2(){}[0]
+    final fun copy(kotlin/Long = ..., at.released.weh.wasi.preview1.type/SubscriptionU = ...): at.released.weh.wasi.preview1.type/Subscription // at.released.weh.wasi.preview1.type/Subscription.copy|copy(kotlin.Long;at.released.weh.wasi.preview1.type.SubscriptionU){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/Subscription.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/Subscription.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/Subscription.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/SubscriptionClock : at.released.weh.wasi.preview1.type/SubscriptionU { // at.released.weh.wasi.preview1.type/SubscriptionClock|null[0]
+    constructor <init>(at.released.weh.wasi.preview1.type/Eventtype, at.released.weh.wasi.preview1.type/Clockid, kotlin/Long, kotlin/Long, kotlin/Short) // at.released.weh.wasi.preview1.type/SubscriptionClock.<init>|<init>(at.released.weh.wasi.preview1.type.Eventtype;at.released.weh.wasi.preview1.type.Clockid;kotlin.Long;kotlin.Long;kotlin.Short){}[0]
+
+    final val flags // at.released.weh.wasi.preview1.type/SubscriptionClock.flags|{}flags[0]
+        final fun <get-flags>(): kotlin/Short // at.released.weh.wasi.preview1.type/SubscriptionClock.flags.<get-flags>|<get-flags>(){}[0]
+    final val id // at.released.weh.wasi.preview1.type/SubscriptionClock.id|{}id[0]
+        final fun <get-id>(): at.released.weh.wasi.preview1.type/Clockid // at.released.weh.wasi.preview1.type/SubscriptionClock.id.<get-id>|<get-id>(){}[0]
+    final val precision // at.released.weh.wasi.preview1.type/SubscriptionClock.precision|{}precision[0]
+        final fun <get-precision>(): kotlin/Long // at.released.weh.wasi.preview1.type/SubscriptionClock.precision.<get-precision>|<get-precision>(){}[0]
+    final val tag // at.released.weh.wasi.preview1.type/SubscriptionClock.tag|{}tag[0]
+        final fun <get-tag>(): at.released.weh.wasi.preview1.type/Eventtype // at.released.weh.wasi.preview1.type/SubscriptionClock.tag.<get-tag>|<get-tag>(){}[0]
+    final val timeout // at.released.weh.wasi.preview1.type/SubscriptionClock.timeout|{}timeout[0]
+        final fun <get-timeout>(): kotlin/Long // at.released.weh.wasi.preview1.type/SubscriptionClock.timeout.<get-timeout>|<get-timeout>(){}[0]
+
+    final fun component1(): at.released.weh.wasi.preview1.type/Eventtype // at.released.weh.wasi.preview1.type/SubscriptionClock.component1|component1(){}[0]
+    final fun component2(): at.released.weh.wasi.preview1.type/Clockid // at.released.weh.wasi.preview1.type/SubscriptionClock.component2|component2(){}[0]
+    final fun component3(): kotlin/Long // at.released.weh.wasi.preview1.type/SubscriptionClock.component3|component3(){}[0]
+    final fun component4(): kotlin/Long // at.released.weh.wasi.preview1.type/SubscriptionClock.component4|component4(){}[0]
+    final fun component5(): kotlin/Short // at.released.weh.wasi.preview1.type/SubscriptionClock.component5|component5(){}[0]
+    final fun copy(at.released.weh.wasi.preview1.type/Eventtype = ..., at.released.weh.wasi.preview1.type/Clockid = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/Short = ...): at.released.weh.wasi.preview1.type/SubscriptionClock // at.released.weh.wasi.preview1.type/SubscriptionClock.copy|copy(at.released.weh.wasi.preview1.type.Eventtype;at.released.weh.wasi.preview1.type.Clockid;kotlin.Long;kotlin.Long;kotlin.Short){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/SubscriptionClock.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/SubscriptionClock.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/SubscriptionClock.toString|toString(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite : at.released.weh.wasi.preview1.type/SubscriptionU { // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite|null[0]
+    constructor <init>(at.released.weh.wasi.preview1.type/Eventtype, kotlin/Int) // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.<init>|<init>(at.released.weh.wasi.preview1.type.Eventtype;kotlin.Int){}[0]
+
+    final val fileDescriptor // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.fileDescriptor|{}fileDescriptor[0]
+        final fun <get-fileDescriptor>(): kotlin/Int // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.fileDescriptor.<get-fileDescriptor>|<get-fileDescriptor>(){}[0]
+    final val tag // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.tag|{}tag[0]
+        final fun <get-tag>(): at.released.weh.wasi.preview1.type/Eventtype // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.tag.<get-tag>|<get-tag>(){}[0]
+
+    final fun component1(): at.released.weh.wasi.preview1.type/Eventtype // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.component2|component2(){}[0]
+    final fun copy(at.released.weh.wasi.preview1.type/Eventtype = ..., kotlin/Int = ...): at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.copy|copy(at.released.weh.wasi.preview1.type.Eventtype;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // at.released.weh.wasi.preview1.type/SubscriptionFdReadwrite.toString|toString(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/EventrwflagsFlag { // at.released.weh.wasi.preview1.type/EventrwflagsFlag|null[0]
+    final const val FD_READWRITE_HANGUP // at.released.weh.wasi.preview1.type/EventrwflagsFlag.FD_READWRITE_HANGUP|{}FD_READWRITE_HANGUP[0]
+        final fun <get-FD_READWRITE_HANGUP>(): kotlin/Short // at.released.weh.wasi.preview1.type/EventrwflagsFlag.FD_READWRITE_HANGUP.<get-FD_READWRITE_HANGUP>|<get-FD_READWRITE_HANGUP>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/FdflagsFlag { // at.released.weh.wasi.preview1.type/FdflagsFlag|null[0]
+    final const val APPEND // at.released.weh.wasi.preview1.type/FdflagsFlag.APPEND|{}APPEND[0]
+        final fun <get-APPEND>(): kotlin/Short // at.released.weh.wasi.preview1.type/FdflagsFlag.APPEND.<get-APPEND>|<get-APPEND>(){}[0]
+    final const val DSYNC // at.released.weh.wasi.preview1.type/FdflagsFlag.DSYNC|{}DSYNC[0]
+        final fun <get-DSYNC>(): kotlin/Short // at.released.weh.wasi.preview1.type/FdflagsFlag.DSYNC.<get-DSYNC>|<get-DSYNC>(){}[0]
+    final const val NONBLOCK // at.released.weh.wasi.preview1.type/FdflagsFlag.NONBLOCK|{}NONBLOCK[0]
+        final fun <get-NONBLOCK>(): kotlin/Short // at.released.weh.wasi.preview1.type/FdflagsFlag.NONBLOCK.<get-NONBLOCK>|<get-NONBLOCK>(){}[0]
+    final const val RSYNC // at.released.weh.wasi.preview1.type/FdflagsFlag.RSYNC|{}RSYNC[0]
+        final fun <get-RSYNC>(): kotlin/Short // at.released.weh.wasi.preview1.type/FdflagsFlag.RSYNC.<get-RSYNC>|<get-RSYNC>(){}[0]
+    final const val SYNC // at.released.weh.wasi.preview1.type/FdflagsFlag.SYNC|{}SYNC[0]
+        final fun <get-SYNC>(): kotlin/Short // at.released.weh.wasi.preview1.type/FdflagsFlag.SYNC.<get-SYNC>|<get-SYNC>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/FstflagsFlag { // at.released.weh.wasi.preview1.type/FstflagsFlag|null[0]
+    final const val ATIM // at.released.weh.wasi.preview1.type/FstflagsFlag.ATIM|{}ATIM[0]
+        final fun <get-ATIM>(): kotlin/Short // at.released.weh.wasi.preview1.type/FstflagsFlag.ATIM.<get-ATIM>|<get-ATIM>(){}[0]
+    final const val ATIM_NOW // at.released.weh.wasi.preview1.type/FstflagsFlag.ATIM_NOW|{}ATIM_NOW[0]
+        final fun <get-ATIM_NOW>(): kotlin/Short // at.released.weh.wasi.preview1.type/FstflagsFlag.ATIM_NOW.<get-ATIM_NOW>|<get-ATIM_NOW>(){}[0]
+    final const val MTIM // at.released.weh.wasi.preview1.type/FstflagsFlag.MTIM|{}MTIM[0]
+        final fun <get-MTIM>(): kotlin/Short // at.released.weh.wasi.preview1.type/FstflagsFlag.MTIM.<get-MTIM>|<get-MTIM>(){}[0]
+    final const val MTIM_NOW // at.released.weh.wasi.preview1.type/FstflagsFlag.MTIM_NOW|{}MTIM_NOW[0]
+        final fun <get-MTIM_NOW>(): kotlin/Short // at.released.weh.wasi.preview1.type/FstflagsFlag.MTIM_NOW.<get-MTIM_NOW>|<get-MTIM_NOW>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/LookupflagsFlag { // at.released.weh.wasi.preview1.type/LookupflagsFlag|null[0]
+    final const val SYMLINK_FOLLOW // at.released.weh.wasi.preview1.type/LookupflagsFlag.SYMLINK_FOLLOW|{}SYMLINK_FOLLOW[0]
+        final fun <get-SYMLINK_FOLLOW>(): kotlin/Int // at.released.weh.wasi.preview1.type/LookupflagsFlag.SYMLINK_FOLLOW.<get-SYMLINK_FOLLOW>|<get-SYMLINK_FOLLOW>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/OflagsFlag { // at.released.weh.wasi.preview1.type/OflagsFlag|null[0]
+    final const val CREAT // at.released.weh.wasi.preview1.type/OflagsFlag.CREAT|{}CREAT[0]
+        final fun <get-CREAT>(): kotlin/Short // at.released.weh.wasi.preview1.type/OflagsFlag.CREAT.<get-CREAT>|<get-CREAT>(){}[0]
+    final const val DIRECTORY // at.released.weh.wasi.preview1.type/OflagsFlag.DIRECTORY|{}DIRECTORY[0]
+        final fun <get-DIRECTORY>(): kotlin/Short // at.released.weh.wasi.preview1.type/OflagsFlag.DIRECTORY.<get-DIRECTORY>|<get-DIRECTORY>(){}[0]
+    final const val EXCL // at.released.weh.wasi.preview1.type/OflagsFlag.EXCL|{}EXCL[0]
+        final fun <get-EXCL>(): kotlin/Short // at.released.weh.wasi.preview1.type/OflagsFlag.EXCL.<get-EXCL>|<get-EXCL>(){}[0]
+    final const val TRUNC // at.released.weh.wasi.preview1.type/OflagsFlag.TRUNC|{}TRUNC[0]
+        final fun <get-TRUNC>(): kotlin/Short // at.released.weh.wasi.preview1.type/OflagsFlag.TRUNC.<get-TRUNC>|<get-TRUNC>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/RiflagsFlag { // at.released.weh.wasi.preview1.type/RiflagsFlag|null[0]
+    final const val RECV_PEEK // at.released.weh.wasi.preview1.type/RiflagsFlag.RECV_PEEK|{}RECV_PEEK[0]
+        final fun <get-RECV_PEEK>(): kotlin/Short // at.released.weh.wasi.preview1.type/RiflagsFlag.RECV_PEEK.<get-RECV_PEEK>|<get-RECV_PEEK>(){}[0]
+    final const val RECV_WAITALL // at.released.weh.wasi.preview1.type/RiflagsFlag.RECV_WAITALL|{}RECV_WAITALL[0]
+        final fun <get-RECV_WAITALL>(): kotlin/Short // at.released.weh.wasi.preview1.type/RiflagsFlag.RECV_WAITALL.<get-RECV_WAITALL>|<get-RECV_WAITALL>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/RightsFlag { // at.released.weh.wasi.preview1.type/RightsFlag|null[0]
+    final const val FD_ADVISE // at.released.weh.wasi.preview1.type/RightsFlag.FD_ADVISE|{}FD_ADVISE[0]
+        final fun <get-FD_ADVISE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_ADVISE.<get-FD_ADVISE>|<get-FD_ADVISE>(){}[0]
+    final const val FD_ALLOCATE // at.released.weh.wasi.preview1.type/RightsFlag.FD_ALLOCATE|{}FD_ALLOCATE[0]
+        final fun <get-FD_ALLOCATE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_ALLOCATE.<get-FD_ALLOCATE>|<get-FD_ALLOCATE>(){}[0]
+    final const val FD_DATASYNC // at.released.weh.wasi.preview1.type/RightsFlag.FD_DATASYNC|{}FD_DATASYNC[0]
+        final fun <get-FD_DATASYNC>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_DATASYNC.<get-FD_DATASYNC>|<get-FD_DATASYNC>(){}[0]
+    final const val FD_FDSTAT_SET_FLAGS // at.released.weh.wasi.preview1.type/RightsFlag.FD_FDSTAT_SET_FLAGS|{}FD_FDSTAT_SET_FLAGS[0]
+        final fun <get-FD_FDSTAT_SET_FLAGS>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_FDSTAT_SET_FLAGS.<get-FD_FDSTAT_SET_FLAGS>|<get-FD_FDSTAT_SET_FLAGS>(){}[0]
+    final const val FD_FILESTAT_GET // at.released.weh.wasi.preview1.type/RightsFlag.FD_FILESTAT_GET|{}FD_FILESTAT_GET[0]
+        final fun <get-FD_FILESTAT_GET>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_FILESTAT_GET.<get-FD_FILESTAT_GET>|<get-FD_FILESTAT_GET>(){}[0]
+    final const val FD_FILESTAT_SET_SIZE // at.released.weh.wasi.preview1.type/RightsFlag.FD_FILESTAT_SET_SIZE|{}FD_FILESTAT_SET_SIZE[0]
+        final fun <get-FD_FILESTAT_SET_SIZE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_FILESTAT_SET_SIZE.<get-FD_FILESTAT_SET_SIZE>|<get-FD_FILESTAT_SET_SIZE>(){}[0]
+    final const val FD_FILESTAT_SET_TIMES // at.released.weh.wasi.preview1.type/RightsFlag.FD_FILESTAT_SET_TIMES|{}FD_FILESTAT_SET_TIMES[0]
+        final fun <get-FD_FILESTAT_SET_TIMES>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_FILESTAT_SET_TIMES.<get-FD_FILESTAT_SET_TIMES>|<get-FD_FILESTAT_SET_TIMES>(){}[0]
+    final const val FD_READ // at.released.weh.wasi.preview1.type/RightsFlag.FD_READ|{}FD_READ[0]
+        final fun <get-FD_READ>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_READ.<get-FD_READ>|<get-FD_READ>(){}[0]
+    final const val FD_READDIR // at.released.weh.wasi.preview1.type/RightsFlag.FD_READDIR|{}FD_READDIR[0]
+        final fun <get-FD_READDIR>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_READDIR.<get-FD_READDIR>|<get-FD_READDIR>(){}[0]
+    final const val FD_SEEK // at.released.weh.wasi.preview1.type/RightsFlag.FD_SEEK|{}FD_SEEK[0]
+        final fun <get-FD_SEEK>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_SEEK.<get-FD_SEEK>|<get-FD_SEEK>(){}[0]
+    final const val FD_SYNC // at.released.weh.wasi.preview1.type/RightsFlag.FD_SYNC|{}FD_SYNC[0]
+        final fun <get-FD_SYNC>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_SYNC.<get-FD_SYNC>|<get-FD_SYNC>(){}[0]
+    final const val FD_TELL // at.released.weh.wasi.preview1.type/RightsFlag.FD_TELL|{}FD_TELL[0]
+        final fun <get-FD_TELL>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_TELL.<get-FD_TELL>|<get-FD_TELL>(){}[0]
+    final const val FD_WRITE // at.released.weh.wasi.preview1.type/RightsFlag.FD_WRITE|{}FD_WRITE[0]
+        final fun <get-FD_WRITE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.FD_WRITE.<get-FD_WRITE>|<get-FD_WRITE>(){}[0]
+    final const val PATH_CREATE_DIRECTORY // at.released.weh.wasi.preview1.type/RightsFlag.PATH_CREATE_DIRECTORY|{}PATH_CREATE_DIRECTORY[0]
+        final fun <get-PATH_CREATE_DIRECTORY>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_CREATE_DIRECTORY.<get-PATH_CREATE_DIRECTORY>|<get-PATH_CREATE_DIRECTORY>(){}[0]
+    final const val PATH_CREATE_FILE // at.released.weh.wasi.preview1.type/RightsFlag.PATH_CREATE_FILE|{}PATH_CREATE_FILE[0]
+        final fun <get-PATH_CREATE_FILE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_CREATE_FILE.<get-PATH_CREATE_FILE>|<get-PATH_CREATE_FILE>(){}[0]
+    final const val PATH_FILESTAT_GET // at.released.weh.wasi.preview1.type/RightsFlag.PATH_FILESTAT_GET|{}PATH_FILESTAT_GET[0]
+        final fun <get-PATH_FILESTAT_GET>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_FILESTAT_GET.<get-PATH_FILESTAT_GET>|<get-PATH_FILESTAT_GET>(){}[0]
+    final const val PATH_FILESTAT_SET_SIZE // at.released.weh.wasi.preview1.type/RightsFlag.PATH_FILESTAT_SET_SIZE|{}PATH_FILESTAT_SET_SIZE[0]
+        final fun <get-PATH_FILESTAT_SET_SIZE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_FILESTAT_SET_SIZE.<get-PATH_FILESTAT_SET_SIZE>|<get-PATH_FILESTAT_SET_SIZE>(){}[0]
+    final const val PATH_FILESTAT_SET_TIMES // at.released.weh.wasi.preview1.type/RightsFlag.PATH_FILESTAT_SET_TIMES|{}PATH_FILESTAT_SET_TIMES[0]
+        final fun <get-PATH_FILESTAT_SET_TIMES>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_FILESTAT_SET_TIMES.<get-PATH_FILESTAT_SET_TIMES>|<get-PATH_FILESTAT_SET_TIMES>(){}[0]
+    final const val PATH_LINK_SOURCE // at.released.weh.wasi.preview1.type/RightsFlag.PATH_LINK_SOURCE|{}PATH_LINK_SOURCE[0]
+        final fun <get-PATH_LINK_SOURCE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_LINK_SOURCE.<get-PATH_LINK_SOURCE>|<get-PATH_LINK_SOURCE>(){}[0]
+    final const val PATH_LINK_TARGET // at.released.weh.wasi.preview1.type/RightsFlag.PATH_LINK_TARGET|{}PATH_LINK_TARGET[0]
+        final fun <get-PATH_LINK_TARGET>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_LINK_TARGET.<get-PATH_LINK_TARGET>|<get-PATH_LINK_TARGET>(){}[0]
+    final const val PATH_OPEN // at.released.weh.wasi.preview1.type/RightsFlag.PATH_OPEN|{}PATH_OPEN[0]
+        final fun <get-PATH_OPEN>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_OPEN.<get-PATH_OPEN>|<get-PATH_OPEN>(){}[0]
+    final const val PATH_READLINK // at.released.weh.wasi.preview1.type/RightsFlag.PATH_READLINK|{}PATH_READLINK[0]
+        final fun <get-PATH_READLINK>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_READLINK.<get-PATH_READLINK>|<get-PATH_READLINK>(){}[0]
+    final const val PATH_REMOVE_DIRECTORY // at.released.weh.wasi.preview1.type/RightsFlag.PATH_REMOVE_DIRECTORY|{}PATH_REMOVE_DIRECTORY[0]
+        final fun <get-PATH_REMOVE_DIRECTORY>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_REMOVE_DIRECTORY.<get-PATH_REMOVE_DIRECTORY>|<get-PATH_REMOVE_DIRECTORY>(){}[0]
+    final const val PATH_RENAME_SOURCE // at.released.weh.wasi.preview1.type/RightsFlag.PATH_RENAME_SOURCE|{}PATH_RENAME_SOURCE[0]
+        final fun <get-PATH_RENAME_SOURCE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_RENAME_SOURCE.<get-PATH_RENAME_SOURCE>|<get-PATH_RENAME_SOURCE>(){}[0]
+    final const val PATH_RENAME_TARGET // at.released.weh.wasi.preview1.type/RightsFlag.PATH_RENAME_TARGET|{}PATH_RENAME_TARGET[0]
+        final fun <get-PATH_RENAME_TARGET>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_RENAME_TARGET.<get-PATH_RENAME_TARGET>|<get-PATH_RENAME_TARGET>(){}[0]
+    final const val PATH_SYMLINK // at.released.weh.wasi.preview1.type/RightsFlag.PATH_SYMLINK|{}PATH_SYMLINK[0]
+        final fun <get-PATH_SYMLINK>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_SYMLINK.<get-PATH_SYMLINK>|<get-PATH_SYMLINK>(){}[0]
+    final const val PATH_UNLINK_FILE // at.released.weh.wasi.preview1.type/RightsFlag.PATH_UNLINK_FILE|{}PATH_UNLINK_FILE[0]
+        final fun <get-PATH_UNLINK_FILE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.PATH_UNLINK_FILE.<get-PATH_UNLINK_FILE>|<get-PATH_UNLINK_FILE>(){}[0]
+    final const val POLL_FD_READWRITE // at.released.weh.wasi.preview1.type/RightsFlag.POLL_FD_READWRITE|{}POLL_FD_READWRITE[0]
+        final fun <get-POLL_FD_READWRITE>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.POLL_FD_READWRITE.<get-POLL_FD_READWRITE>|<get-POLL_FD_READWRITE>(){}[0]
+    final const val SOCK_ACCEPT // at.released.weh.wasi.preview1.type/RightsFlag.SOCK_ACCEPT|{}SOCK_ACCEPT[0]
+        final fun <get-SOCK_ACCEPT>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.SOCK_ACCEPT.<get-SOCK_ACCEPT>|<get-SOCK_ACCEPT>(){}[0]
+    final const val SOCK_SHUTDOWN // at.released.weh.wasi.preview1.type/RightsFlag.SOCK_SHUTDOWN|{}SOCK_SHUTDOWN[0]
+        final fun <get-SOCK_SHUTDOWN>(): kotlin/Long // at.released.weh.wasi.preview1.type/RightsFlag.SOCK_SHUTDOWN.<get-SOCK_SHUTDOWN>|<get-SOCK_SHUTDOWN>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/RoflagsFlag { // at.released.weh.wasi.preview1.type/RoflagsFlag|null[0]
+    final const val RECV_DATA_TRUNCATED // at.released.weh.wasi.preview1.type/RoflagsFlag.RECV_DATA_TRUNCATED|{}RECV_DATA_TRUNCATED[0]
+        final fun <get-RECV_DATA_TRUNCATED>(): kotlin/Short // at.released.weh.wasi.preview1.type/RoflagsFlag.RECV_DATA_TRUNCATED.<get-RECV_DATA_TRUNCATED>|<get-RECV_DATA_TRUNCATED>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/SdflagsFlag { // at.released.weh.wasi.preview1.type/SdflagsFlag|null[0]
+    final const val RD // at.released.weh.wasi.preview1.type/SdflagsFlag.RD|{}RD[0]
+        final fun <get-RD>(): kotlin/Byte // at.released.weh.wasi.preview1.type/SdflagsFlag.RD.<get-RD>|<get-RD>(){}[0]
+    final const val WR // at.released.weh.wasi.preview1.type/SdflagsFlag.WR|{}WR[0]
+        final fun <get-WR>(): kotlin/Byte // at.released.weh.wasi.preview1.type/SdflagsFlag.WR.<get-WR>|<get-WR>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1.type/SubclockflagsFlag { // at.released.weh.wasi.preview1.type/SubclockflagsFlag|null[0]
+    final const val SUBSCRIPTION_CLOCK_ABSTIME // at.released.weh.wasi.preview1.type/SubclockflagsFlag.SUBSCRIPTION_CLOCK_ABSTIME|{}SUBSCRIPTION_CLOCK_ABSTIME[0]
+        final fun <get-SUBSCRIPTION_CLOCK_ABSTIME>(): kotlin/Short // at.released.weh.wasi.preview1.type/SubclockflagsFlag.SUBSCRIPTION_CLOCK_ABSTIME.<get-SUBSCRIPTION_CLOCK_ABSTIME>|<get-SUBSCRIPTION_CLOCK_ABSTIME>(){}[0]
+}
+
+final object at.released.weh.wasi.preview1/WasiValueTypes { // at.released.weh.wasi.preview1/WasiValueTypes|null[0]
+    final const val HANDLE // at.released.weh.wasi.preview1/WasiValueTypes.HANDLE|{}HANDLE[0]
+        final fun <get-HANDLE>(): kotlin/Int // at.released.weh.wasi.preview1/WasiValueTypes.HANDLE.<get-HANDLE>|<get-HANDLE>(){}[0]
+    final const val S32 // at.released.weh.wasi.preview1/WasiValueTypes.S32|{}S32[0]
+        final fun <get-S32>(): kotlin/Int // at.released.weh.wasi.preview1/WasiValueTypes.S32.<get-S32>|<get-S32>(){}[0]
+    final const val S64 // at.released.weh.wasi.preview1/WasiValueTypes.S64|{}S64[0]
+        final fun <get-S64>(): kotlin/Int // at.released.weh.wasi.preview1/WasiValueTypes.S64.<get-S64>|<get-S64>(){}[0]
+    final const val U16 // at.released.weh.wasi.preview1/WasiValueTypes.U16|{}U16[0]
+        final fun <get-U16>(): kotlin/Int // at.released.weh.wasi.preview1/WasiValueTypes.U16.<get-U16>|<get-U16>(){}[0]
+    final const val U32 // at.released.weh.wasi.preview1/WasiValueTypes.U32|{}U32[0]
+        final fun <get-U32>(): kotlin/Int // at.released.weh.wasi.preview1/WasiValueTypes.U32.<get-U32>|<get-U32>(){}[0]
+    final const val U64 // at.released.weh.wasi.preview1/WasiValueTypes.U64|{}U64[0]
+        final fun <get-U64>(): kotlin/Int // at.released.weh.wasi.preview1/WasiValueTypes.U64.<get-U64>|<get-U64>(){}[0]
+    final const val U8 // at.released.weh.wasi.preview1/WasiValueTypes.U8|{}U8[0]
+        final fun <get-U8>(): kotlin/Int // at.released.weh.wasi.preview1/WasiValueTypes.U8.<get-U8>|<get-U8>(){}[0]
+}

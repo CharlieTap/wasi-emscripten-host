@@ -1,6 +1,5 @@
 public final class at/released/weh/bindings/chasm/ChasmEmscriptenHostBuilder {
 	public static final field Companion Lat/released/weh/bindings/chasm/ChasmEmscriptenHostBuilder$Companion;
-	public synthetic fun <init> (Lio/github/charlietap/chasm/embedding/shapes/Store;Lio/github/charlietap/chasm/embedding/shapes/Module;ILat/released/weh/host/EmbedderHost;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun setupEmscriptenFunctions (Ljava/lang/String;)Lat/released/weh/bindings/chasm/ChasmEmscriptenHostBuilder$ChasmEmscriptenSetupFinalizer;
 	public static synthetic fun setupEmscriptenFunctions$default (Lat/released/weh/bindings/chasm/ChasmEmscriptenHostBuilder;Ljava/lang/String;ILjava/lang/Object;)Lat/released/weh/bindings/chasm/ChasmEmscriptenHostBuilder$ChasmEmscriptenSetupFinalizer;
 	public final fun setupWasiPreview1HostFunctions (Ljava/lang/String;)Ljava/util/List;
@@ -9,6 +8,7 @@ public final class at/released/weh/bindings/chasm/ChasmEmscriptenHostBuilder {
 
 public final class at/released/weh/bindings/chasm/ChasmEmscriptenHostBuilder$ChasmEmscriptenSetupFinalizer {
 	public final fun finalize (Lio/github/charlietap/chasm/embedding/shapes/Instance;)Lat/released/weh/emcripten/runtime/export/EmscriptenRuntime;
+	public final fun finalize (Lio/github/charlietap/chasm/embedding/shapes/Instance;Lio/github/charlietap/chasm/embedding/shapes/Memory;)Lat/released/weh/emcripten/runtime/export/EmscriptenRuntime;
 	public final fun getEmscriptenFunctions ()Ljava/util/List;
 }
 

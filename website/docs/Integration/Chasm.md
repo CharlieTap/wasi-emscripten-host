@@ -14,9 +14,7 @@ It supports Android API 26+, JVM JDK 17+, and a variety of multiplatform targets
 
 This integration targets the Chasm 2.0 host-function API.
 
-Chasm 2.0 and these bindings are currently under development. The coordinates below describe the intended release;
-use the composite-build instructions in [Memory and performance](#memory-and-performance) until those artifacts are
-published.
+Chasm 2.0 is published to Maven Central. The coordinates below use the 0.7.0 release of these bindings.
 
 ## Wasi Preview 1 Bindings Integration
 
@@ -24,16 +22,10 @@ Check [WASI Preview 1](../WASIP1) to see the current limitations of the WASI P1 
 
 ### Installation
 
-Until Chasm 2.0 is released, add Central's snapshot repository:
+Add Maven Central to the project repositories:
 
 ```kotlin
 repositories {
-    maven {
-        url = uri("https://central.sonatype.com/repository/maven-snapshots/")
-        content {
-            includeGroup("io.github.charlietap.chasm")
-        }
-    }
     mavenCentral()
 }
 ```
@@ -43,8 +35,8 @@ Then add the required dependencies:
 ```kotlin
 sourceSets {
     commonMain.dependencies {
-        implementation("io.github.charlietap.chasm:chasm:2.0.0-SNAPSHOT")
-        implementation("at.released.weh:bindings-chasm-wasip1:0.7.0-SNAPSHOT")
+        implementation("io.github.charlietap.chasm:chasm:2.0.0")
+        implementation("io.github.charlietap.wasi.emscripten.host:bindings-chasm-wasip1:0.7.0")
     }
 }
 ```
@@ -127,8 +119,7 @@ each scatter/gather operation. This removes payload copies while remaining
 safe across memory growth. A custom Chasm memory or filesystem automatically
 uses the compatible copying fallback.
 
-The build resolves the work-in-progress Chasm 2.0 release from Central's
-snapshot repository:
+The build resolves Chasm 2.0 from Maven Central:
 
 ```shell
 ./gradlew :bindings-chasm-wasip1:jvmTest
@@ -148,16 +139,9 @@ WEH_CHASM_BENCHMARK_ENFORCE=true ./gradlew \
 
 ### Installation
 
-Add the required dependencies:
+The 0.7.0 Maven Central release intentionally publishes only the WASI Preview 1 binding. The Emscripten binding remains
+available for source and composite-build use in this repository.
 
-```kotlin
-sourceSets {
-    commonMain.dependencies {
-        implementation("io.github.charlietap.chasm:chasm:2.0.0-SNAPSHOT")
-        implementation("at.released.weh:bindings-chasm-emscripten:0.7.0-SNAPSHOT")
-    }
-}
-```
 
 ### Usage
 

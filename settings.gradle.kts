@@ -21,10 +21,6 @@ buildscript {
         classpath("org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin:2.2.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.0")
         classpath("org.jetbrains.kotlin:kotlin-serialization:2.4.0")
-        classpath(
-            "org.jetbrains.kotlinx.binary-compatibility-validator:" +
-                    "org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin:0.18.1",
-        )
         classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.33.0")
     }
 }

@@ -1,0 +1,338 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, linuxArm64, linuxX64, macosArm64, mingwX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.charlietap.wasi.emscripten.host:wasm-wasi-preview1>
+abstract fun interface <#A: kotlin/Any?> at.released.weh.wasi.preview1.memory/DirectWasiMemoryReader { // at.released.weh.wasi.preview1.memory/DirectWasiMemoryReader|null[0]
+    abstract fun read(#A, kotlin/Int, at.released.weh.filesystem.op.readwrite/ReadWriteStrategy, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A>): arrow.core/Either<at.released.weh.filesystem.error/ReadError, kotlin/ULong> // at.released.weh.wasi.preview1.memory/DirectWasiMemoryReader.read|read(1:0;kotlin.Int;at.released.weh.filesystem.op.readwrite.ReadWriteStrategy;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<1:0>){}[0]
+}
+
+abstract fun interface <#A: kotlin/Any?> at.released.weh.wasi.preview1.memory/DirectWasiMemoryWriter { // at.released.weh.wasi.preview1.memory/DirectWasiMemoryWriter|null[0]
+    abstract fun write(#A, kotlin/Int, at.released.weh.filesystem.op.readwrite/ReadWriteStrategy, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A>): arrow.core/Either<at.released.weh.filesystem.error/WriteError, kotlin/ULong> // at.released.weh.wasi.preview1.memory/DirectWasiMemoryWriter.write|write(1:0;kotlin.Int;at.released.weh.filesystem.op.readwrite.ReadWriteStrategy;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<1:0>){}[0]
+}
+
+abstract fun interface at.released.weh.wasi.preview1.memory/WasiMemoryReader { // at.released.weh.wasi.preview1.memory/WasiMemoryReader|null[0]
+    abstract fun read(kotlin/Int, at.released.weh.filesystem.op.readwrite/ReadWriteStrategy, kotlin.collections/List<at.released.weh.wasi.preview1.type/Iovec>): arrow.core/Either<at.released.weh.filesystem.error/ReadError, kotlin/ULong> // at.released.weh.wasi.preview1.memory/WasiMemoryReader.read|read(kotlin.Int;at.released.weh.filesystem.op.readwrite.ReadWriteStrategy;kotlin.collections.List<at.released.weh.wasi.preview1.type.Iovec>){}[0]
+}
+
+abstract fun interface at.released.weh.wasi.preview1.memory/WasiMemoryWriter { // at.released.weh.wasi.preview1.memory/WasiMemoryWriter|null[0]
+    abstract fun write(kotlin/Int, at.released.weh.filesystem.op.readwrite/ReadWriteStrategy, kotlin.collections/List<at.released.weh.wasi.preview1.type/Ciovec>): arrow.core/Either<at.released.weh.filesystem.error/WriteError, kotlin/ULong> // at.released.weh.wasi.preview1.memory/WasiMemoryWriter.write|write(kotlin.Int;at.released.weh.filesystem.op.readwrite.ReadWriteStrategy;kotlin.collections.List<at.released.weh.wasi.preview1.type.Ciovec>){}[0]
+}
+
+abstract class at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle|null[0]
+    constructor <init>(at.released.weh.wasm.core/HostFunction, at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle.<init>|<init>(at.released.weh.wasm.core.HostFunction;at.released.weh.host.EmbedderHost){}[0]
+
+    final val function // at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle.function|{}function[0]
+        final fun <get-function>(): at.released.weh.wasm.core/HostFunction // at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle.function.<get-function>|<get-function>(){}[0]
+    final val host // at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle.host|{}host[0]
+        final fun <get-host>(): at.released.weh.host/EmbedderHost // at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle.host.<get-host>|<get-host>(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/ArgsGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/ArgsGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/ArgsGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/ArgsGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/ArgsSizesGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/ArgsSizesGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/ArgsSizesGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/ArgsSizesGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/ClockResGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/ClockResGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/ClockResGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/ClockResGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/ClockTimeGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/ClockTimeGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/ClockTimeGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Long, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/ClockTimeGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Long;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/EnvironGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/EnvironGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/EnvironGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/EnvironGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/EnvironSizesGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/EnvironSizesGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/EnvironSizesGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/EnvironSizesGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdAdviseFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdAdviseFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdAdviseFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Long, kotlin/Long, kotlin/Byte): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdAdviseFunctionHandle.execute|execute(kotlin.Int;kotlin.Long;kotlin.Long;kotlin.Byte){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdAllocateFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdAllocateFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdAllocateFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Long, kotlin/Long): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdAllocateFunctionHandle.execute|execute(kotlin.Int;kotlin.Long;kotlin.Long){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdCloseFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdCloseFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdCloseFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdCloseFunctionHandle.execute|execute(kotlin.Int){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdDatasyncFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdDatasyncFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdDatasyncFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdDatasyncFunctionHandle.execute|execute(kotlin.Int){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdFdstatGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdFdstatGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdFdstatGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdFdstatGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdFdstatSetFlagsFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdFdstatSetFlagsFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdFdstatSetFlagsFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Short): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdFdstatSetFlagsFunctionHandle.execute|execute(kotlin.Int;kotlin.Short){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdFdstatSetRightsFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdFdstatSetRightsFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdFdstatSetRightsFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Long, kotlin/Long, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdFdstatSetRightsFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Long;kotlin.Long;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdFilestatGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdFilestatGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdFilestatGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdFilestatGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdFilestatSetSizeFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdFilestatSetSizeFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdFilestatSetSizeFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Long): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdFilestatSetSizeFunctionHandle.execute|execute(kotlin.Int;kotlin.Long){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdFilestatSetTimesFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdFilestatSetTimesFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdFilestatSetTimesFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Long, kotlin/Long, kotlin/Short): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdFilestatSetTimesFunctionHandle.execute|execute(kotlin.Int;kotlin.Long;kotlin.Long;kotlin.Short){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdPreadFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdPreadFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdPreadFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, at.released.weh.wasi.preview1.memory/WasiMemoryReader, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Long, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdPreadFunctionHandle.execute|execute(0:0;at.released.weh.wasi.preview1.memory.WasiMemoryReader;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Long;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> executeDirect(#A1, at.released.weh.wasi.preview1.memory/DirectWasiMemoryReader<#A1>, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Long, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1>): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdPreadFunctionHandle.executeDirect|executeDirect(0:0;at.released.weh.wasi.preview1.memory.DirectWasiMemoryReader<0:0>;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Long;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdPrestatDirNameFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdPrestatDirNameFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdPrestatDirNameFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdPrestatDirNameFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdPrestatGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdPrestatGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdPrestatGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdPrestatGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdPwriteFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdPwriteFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdPwriteFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, at.released.weh.wasi.preview1.memory/WasiMemoryWriter, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Long, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdPwriteFunctionHandle.execute|execute(0:0;at.released.weh.wasi.preview1.memory.WasiMemoryWriter;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Long;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> executeDirect(#A1, at.released.weh.wasi.preview1.memory/DirectWasiMemoryWriter<#A1>, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Long, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1>): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdPwriteFunctionHandle.executeDirect|executeDirect(0:0;at.released.weh.wasi.preview1.memory.DirectWasiMemoryWriter<0:0>;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Long;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdReadFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdReadFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdReadFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, at.released.weh.wasi.preview1.memory/WasiMemoryReader, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdReadFunctionHandle.execute|execute(0:0;at.released.weh.wasi.preview1.memory.WasiMemoryReader;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> executeDirect(#A1, at.released.weh.wasi.preview1.memory/DirectWasiMemoryReader<#A1>, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1>): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdReadFunctionHandle.executeDirect|executeDirect(0:0;at.released.weh.wasi.preview1.memory.DirectWasiMemoryReader<0:0>;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdReaddirFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdReaddirFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdReaddirFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Long, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdReaddirFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Long;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdRenumberFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdRenumberFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdRenumberFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int, kotlin/Int): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdRenumberFunctionHandle.execute|execute(kotlin.Int;kotlin.Int){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdSeekFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdSeekFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdSeekFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Long, kotlin/Byte, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdSeekFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Long;kotlin.Byte;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdSyncFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdSyncFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdSyncFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdSyncFunctionHandle.execute|execute(kotlin.Int){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdTellFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdTellFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdTellFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdTellFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/FdWriteFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/FdWriteFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/FdWriteFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, at.released.weh.wasi.preview1.memory/WasiMemoryWriter, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdWriteFunctionHandle.execute|execute(0:0;at.released.weh.wasi.preview1.memory.WasiMemoryWriter;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> executeDirect(#A1, at.released.weh.wasi.preview1.memory/DirectWasiMemoryWriter<#A1>, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1>): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/FdWriteFunctionHandle.executeDirect|executeDirect(0:0;at.released.weh.wasi.preview1.memory.DirectWasiMemoryWriter<0:0>;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathCreateDirectoryFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathCreateDirectoryFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathCreateDirectoryFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathCreateDirectoryFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathFilestatGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathFilestatGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathFilestatGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathFilestatGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathFilestatSetTimesFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathFilestatSetTimesFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathFilestatSetTimesFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Long, kotlin/Long, kotlin/Short, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathFilestatSetTimesFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Long;kotlin.Long;kotlin.Short;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathLinkFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathLinkFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathLinkFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathLinkFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathOpenFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathOpenFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathOpenFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Short, kotlin/Long, kotlin/Long, kotlin/Short, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathOpenFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Short;kotlin.Long;kotlin.Long;kotlin.Short;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathReadlinkFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathReadlinkFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathReadlinkFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathReadlinkFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathRemoveDirectoryFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathRemoveDirectoryFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathRemoveDirectoryFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathRemoveDirectoryFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathRenameFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathRenameFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathRenameFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathRenameFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathSymlinkFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathSymlinkFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathSymlinkFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathSymlinkFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PathUnlinkFileFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PathUnlinkFileFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PathUnlinkFileFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PathUnlinkFileFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/PollOneoffFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/PollOneoffFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/PollOneoffFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/PollOneoffFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/ProcExitFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/ProcExitFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/ProcExitFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(kotlin/Int): kotlin/Nothing // at.released.weh.wasi.preview1.function/ProcExitFunctionHandle.execute|execute(kotlin.Int){}[0]
+
+    final class ProcExitException : at.released.weh.wasi.preview1/WasiPreview1Exception { // at.released.weh.wasi.preview1.function/ProcExitFunctionHandle.ProcExitException|null[0]
+        constructor <init>(kotlin/Int) // at.released.weh.wasi.preview1.function/ProcExitFunctionHandle.ProcExitException.<init>|<init>(kotlin.Int){}[0]
+
+        final val exitCode // at.released.weh.wasi.preview1.function/ProcExitFunctionHandle.ProcExitException.exitCode|{}exitCode[0]
+            final fun <get-exitCode>(): kotlin/Int // at.released.weh.wasi.preview1.function/ProcExitFunctionHandle.ProcExitException.exitCode.<get-exitCode>|<get-exitCode>(){}[0]
+    }
+}
+
+final class at.released.weh.wasi.preview1.function/ProcRaiseFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/ProcRaiseFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/ProcRaiseFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Byte, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/ProcRaiseFunctionHandle.execute|execute(0:0;kotlin.Byte;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/RandomGetFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/RandomGetFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/RandomGetFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/RandomGetFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/SchedYieldFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/SchedYieldFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/SchedYieldFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun execute(): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/SchedYieldFunctionHandle.execute|execute(){}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/SockAcceptFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/SockAcceptFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/SockAcceptFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Short, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/SockAcceptFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Short;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/SockRecvFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/SockRecvFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/SockRecvFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Short, kotlin/Int, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/SockRecvFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Short;kotlin.Int;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/SockSendFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/SockSendFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/SockSendFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Int, kotlin/Int, kotlin/Short, kotlin/Int, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/SockSendFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Short;kotlin.Int;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.function/SockShutdownFunctionHandle : at.released.weh.wasi.preview1.function/WasiPreview1HostFunctionHandle { // at.released.weh.wasi.preview1.function/SockShutdownFunctionHandle|null[0]
+    constructor <init>(at.released.weh.host/EmbedderHost) // at.released.weh.wasi.preview1.function/SockShutdownFunctionHandle.<init>|<init>(at.released.weh.host.EmbedderHost){}[0]
+
+    final fun <#A1: kotlin/Any?> execute(#A1, kotlin/Int, kotlin/Byte, at.released.weh.wasm.core.memory/MemoryAccess<#A1> = ...): at.released.weh.wasi.preview1.type/Errno // at.released.weh.wasi.preview1.function/SockShutdownFunctionHandle.execute|execute(0:0;kotlin.Int;kotlin.Byte;at.released.weh.wasm.core.memory.MemoryAccess<0:0>){0§<kotlin.Any?>}[0]
+}
+
+final class at.released.weh.wasi.preview1.memory/DefaultWasiMemoryReader : at.released.weh.wasi.preview1.memory/WasiMemoryReader { // at.released.weh.wasi.preview1.memory/DefaultWasiMemoryReader|null[0]
+    constructor <init>(at.released.weh.wasm.core.memory/Memory, at.released.weh.filesystem/FileSystem) // at.released.weh.wasi.preview1.memory/DefaultWasiMemoryReader.<init>|<init>(at.released.weh.wasm.core.memory.Memory;at.released.weh.filesystem.FileSystem){}[0]
+
+    final fun read(kotlin/Int, at.released.weh.filesystem.op.readwrite/ReadWriteStrategy, kotlin.collections/List<at.released.weh.wasi.preview1.type/Iovec>): arrow.core/Either<at.released.weh.filesystem.error/ReadError, kotlin/ULong> // at.released.weh.wasi.preview1.memory/DefaultWasiMemoryReader.read|read(kotlin.Int;at.released.weh.filesystem.op.readwrite.ReadWriteStrategy;kotlin.collections.List<at.released.weh.wasi.preview1.type.Iovec>){}[0]
+}
+
+final class at.released.weh.wasi.preview1.memory/DefaultWasiMemoryWriter : at.released.weh.wasi.preview1.memory/WasiMemoryWriter { // at.released.weh.wasi.preview1.memory/DefaultWasiMemoryWriter|null[0]
+    constructor <init>(at.released.weh.wasm.core.memory/ReadOnlyMemory, at.released.weh.filesystem/FileSystem) // at.released.weh.wasi.preview1.memory/DefaultWasiMemoryWriter.<init>|<init>(at.released.weh.wasm.core.memory.ReadOnlyMemory;at.released.weh.filesystem.FileSystem){}[0]
+
+    final fun write(kotlin/Int, at.released.weh.filesystem.op.readwrite/ReadWriteStrategy, kotlin.collections/List<at.released.weh.wasi.preview1.type/Ciovec>): arrow.core/Either<at.released.weh.filesystem.error/WriteError, kotlin/ULong> // at.released.weh.wasi.preview1.memory/DefaultWasiMemoryWriter.write|write(kotlin.Int;at.released.weh.filesystem.op.readwrite.ReadWriteStrategy;kotlin.collections.List<at.released.weh.wasi.preview1.type.Ciovec>){}[0]
+}
+
+open class at.released.weh.wasi.preview1/WasiPreview1Exception : kotlin/RuntimeException { // at.released.weh.wasi.preview1/WasiPreview1Exception|null[0]
+    constructor <init>() // at.released.weh.wasi.preview1/WasiPreview1Exception.<init>|<init>(){}[0]
+    constructor <init>(kotlin/String?) // at.released.weh.wasi.preview1/WasiPreview1Exception.<init>|<init>(kotlin.String?){}[0]
+    constructor <init>(kotlin/String?, kotlin/Throwable?) // at.released.weh.wasi.preview1/WasiPreview1Exception.<init>|<init>(kotlin.String?;kotlin.Throwable?){}[0]
+    constructor <init>(kotlin/Throwable?) // at.released.weh.wasi.preview1/WasiPreview1Exception.<init>|<init>(kotlin.Throwable?){}[0]
+}

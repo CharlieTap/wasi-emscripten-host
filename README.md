@@ -16,6 +16,7 @@ The main verification entry points mirror CI:
 ```shell
 ./gradlew styleCheck :bindings-chasm-wasip1:jvmTest :test-wasi-testsuite:bindings-test:jvmTest \
     :wasm-wasi-preview1:jvmTest :host:jvmTest :common-util:jvmTest :wasm-core:jvmTest \
+    checkKotlinAbi \
     :bindings-chasm-wasip1:compileKotlinLinuxX64 :bindings-chasm-wasip1:compileKotlinLinuxArm64 \
     --no-configuration-cache
 ./gradlew :bindings-chasm-wasip1:compileKotlinMacosArm64 :bindings-chasm-wasip1:compileKotlinIosArm64 \
@@ -26,8 +27,8 @@ The published binding has the coordinate
 `io.github.charlietap.wasi.emscripten.host:bindings-chasm-wasip1`. Its six internal runtime dependencies are published
 at the same version and are resolved transitively.
 
-The standalone Gradle samples can be compiled against this working tree while resolving Chasm 2.0 from Central's
-snapshot repository:
+The standalone Gradle samples can be compiled against this working tree while resolving the published Chasm 2.0
+release from Maven Central:
 
 ```shell
 ./gradlew -p samples/wasm-gradle \

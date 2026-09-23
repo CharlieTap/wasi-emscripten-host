@@ -30,6 +30,7 @@ version = wehVersions.rootVersion.get()
 
 mavenPublishing {
     publishToMavenCentral()
+    signAllPublications()
 
     configure(
         KotlinMultiplatform(
