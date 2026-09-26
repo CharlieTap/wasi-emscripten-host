@@ -21,6 +21,7 @@ final class at.released.weh.bindings.chasm.exception/ChasmErrorException : at.re
 
 final class at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder { // at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder|null[0]
     final fun build(kotlin/String = ...): kotlin.collections/List<io.github.charlietap.chasm.embedding.shapes/Import> // at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder.build|build(kotlin.String){}[0]
+    final fun buildRequired(kotlin/String = ..., kotlin.collections/Collection<io.github.charlietap.chasm.embedding.shapes/Import> = ...): kotlin.collections/List<io.github.charlietap.chasm.embedding.shapes/Import> // at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder.buildRequired|buildRequired(kotlin.String;kotlin.collections.Collection<io.github.charlietap.chasm.embedding.shapes.Import>){}[0]
 
     final object Companion { // at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder.Companion|null[0]
         final fun invoke(io.github.charlietap.chasm.embedding.shapes/Store, io.github.charlietap.chasm.embedding.shapes/Module, kotlin/Function1<at.released.weh.bindings.chasm.dsl/ChasmHostFunctionDsl, kotlin/Unit> = ...): at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder // at.released.weh.bindings.chasm.wasip1/ChasmWasiPreview1Builder.Companion.invoke|invoke(io.github.charlietap.chasm.embedding.shapes.Store;io.github.charlietap.chasm.embedding.shapes.Module;kotlin.Function1<at.released.weh.bindings.chasm.dsl.ChasmHostFunctionDsl,kotlin.Unit>){}[0]

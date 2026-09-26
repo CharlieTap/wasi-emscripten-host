@@ -20,6 +20,8 @@ public final class at/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builde
 	public static final field Companion Lat/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder$Companion;
 	public final fun build (Ljava/lang/String;)Ljava/util/List;
 	public static synthetic fun build$default (Lat/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder;Ljava/lang/String;ILjava/lang/Object;)Ljava/util/List;
+	public final fun buildRequired (Ljava/lang/String;Ljava/util/Collection;)Ljava/util/List;
+	public static synthetic fun buildRequired$default (Lat/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder;Ljava/lang/String;Ljava/util/Collection;ILjava/lang/Object;)Ljava/util/List;
 }
 
 public final class at/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder$Companion {

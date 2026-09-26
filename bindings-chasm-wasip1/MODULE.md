@@ -40,7 +40,7 @@ fun executeCode(embedderHost: EmbedderHost, wasmBinary: ByteArray): Int {
     // Resolve the exported `memory` once while preparing the imports.
     val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, module) {
         host = embedderHost
-    }.build()
+    }.buildRequired()
 
     // Instantiate the WebAssembly module
     val instance = instance(store, module, wasiImports).fold(
@@ -60,6 +60,22 @@ fun executeCode(embedderHost: EmbedderHost, wasmBinary: ByteArray): Int {
     return 0
 }
 ```
+
+`buildRequired()` validates the module's `wasi_snapshot_preview1` imports and
+allocates only the functions that the module actually requires. Pass explicit
+imports when overriding individual functions; matching imports are left to the
+caller and are not allocated again:
+
+```kotlin
+val automaticImports = ChasmWasiPreview1Builder(store, module) {
+    host = embedderHost
+}.buildRequired(providedImports = explicitImports)
+
+val imports = explicitImports + automaticImports
+```
+
+Use `build()` instead when a complete Preview 1 host is required independently
+of a particular module's imports.
 
 ## Performance model
 

@@ -9,9 +9,11 @@ package at.released.weh.bindings.chasm.wasip1
 import at.released.weh.wasm.core.WasmModules
 import io.github.charlietap.chasm.embedding.function
 import io.github.charlietap.chasm.embedding.shapes.Import
+import io.github.charlietap.chasm.embedding.shapes.ImportDefinition
 import io.github.charlietap.chasm.embedding.shapes.Store
 import io.github.charlietap.chasm.host.HostFunctionException
 import io.github.charlietap.chasm.host.readI32
+import io.github.charlietap.chasm.runtime.type.ExternalType
 import io.github.charlietap.chasm.type.FunctionType
 import io.github.charlietap.chasm.type.NumberType.I32
 import io.github.charlietap.chasm.type.ResultType
@@ -25,20 +27,59 @@ internal fun createCustomWasiPreview1HostFunctions(
     return listOf(
         Import(
             moduleName,
-            "proc_exit",
+            PROC_EXIT_FUNCTION_NAME,
             function(
                 store,
-                FunctionType(
-                    ResultType(listOf(ValueType.Number(I32))),
-                    ResultType(listOf()),
-                ),
+                procExitFunctionType(),
                 procExitHostFunction,
             ),
         ),
     )
 }
 
+internal fun validateRequiredCustomWasiPreview1HostFunctions(
+    imports: List<ImportDefinition>,
+): FunctionType? {
+    if (imports.isEmpty()) return null
+
+    val expectedType = ExternalType.Function(procExitFunctionType())
+    imports.forEach { definition ->
+        require(definition.entityName == PROC_EXIT_FUNCTION_NAME) {
+            "Unsupported custom WASI Preview 1 import `${definition.moduleName}.${definition.entityName}`"
+        }
+        require(definition.type == expectedType) {
+            "WASI Preview 1 import `${definition.moduleName}.${definition.entityName}` has type " +
+                "${definition.type}; expected $expectedType"
+        }
+    }
+    return expectedType.functionType
+}
+
+internal fun createRequiredCustomWasiPreview1HostFunctions(
+    store: Store,
+    imports: List<ImportDefinition>,
+    functionType: FunctionType?,
+): List<Import> {
+    if (imports.isEmpty()) return emptyList()
+
+    val type = checkNotNull(functionType)
+    return imports.map { definition ->
+        Import(
+            definition.moduleName,
+            definition.entityName,
+            function(store, type, procExitHostFunction),
+        )
+    }
+}
+
+private fun procExitFunctionType(): FunctionType = FunctionType(
+    ResultType(listOf(ValueType.Number(I32))),
+    ResultType(listOf()),
+)
+
 private val procExitHostFunction: ChasmHostFunction = ChasmHostFunction { parameters, _ ->
     val exitCode = parameters.readI32(0)
     throw HostFunctionException(exitCode.toString())
 }
+
+private const val PROC_EXIT_FUNCTION_NAME: String = "proc_exit"

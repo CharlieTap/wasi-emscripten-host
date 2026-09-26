@@ -58,7 +58,12 @@ class ChasmBridgeBenchmarkTest {
     private val raw = HostFunction { _, results ->
         results.writeI32(0, semanticHandle.execute().code)
     }
-    private val bridge = ChasmWasiPreview1Functions(host, ModuleIndex.MemoryIndex(0)).schedYield
+    private val bridge = ChasmWasiPreview1Functions(
+        host = host,
+        memoryIndex = ModuleIndex.MemoryIndex(0),
+        requiresMemoryReader = false,
+        requiresMemoryWriter = false,
+    ).schedYield()
 
     @Test
     fun `generated numeric bridge stays allocation free and within raw callback noise`() {

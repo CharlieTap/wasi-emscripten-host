@@ -29,7 +29,7 @@ import at.released.weh.gradle.wasm.codegen.witx.parser.model.Identifier
 import at.released.weh.gradle.wasm.codegen.witx.parser.model.WasiFunc
 import at.released.weh.gradle.wasm.codegen.witx.parser.model.WasiType
 import com.squareup.kotlinpoet.CodeBlock
-import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.FunSpec
 
 internal class ChasmArgsFunctionHandles(
     wasiTypes: Map<Identifier, WasiType>,
@@ -52,9 +52,17 @@ internal class ChasmArgsFunctionHandles(
     ) {
         val handleProperty = WasiFunctionHandlerProperty(func)
 
-        fun chasmHostFunctionDeclaration(): PropertySpec =
-            PropertySpec.builder(chasmHostFunctionName, ChasmShapesClassname.HOST_FUNCTION).apply {
-                initializer(buildCallback())
+        fun chasmHostFunctionDeclaration(): FunSpec =
+            FunSpec.builder(chasmHostFunctionName).apply {
+                returns(ChasmShapesClassname.HOST_FUNCTION)
+                addStatement("val %N = %T(host)", handleProperty.propertyName, handleProperty.className)
+                if (func.export in WASI_MEMORY_READER_FUNCTIONS) {
+                    addStatement("val wasiMemoryReader = checkNotNull(this.wasiMemoryReader)")
+                }
+                if (func.export in WASI_MEMORY_WRITER_FUNCTIONS) {
+                    addStatement("val wasiMemoryWriter = checkNotNull(this.wasiMemoryWriter)")
+                }
+                addCode("return %L\n", buildCallback())
             }.build()
 
         @Suppress("CyclomaticComplexMethod")

@@ -16,6 +16,7 @@ import at.released.weh.gradle.wasm.codegen.util.classname.WehHostClassname
 import at.released.weh.gradle.wasm.codegen.witx.parser.model.WasiFunc
 import at.released.weh.gradle.wasm.codegen.witx.parser.model.WasiType
 import com.squareup.kotlinpoet.AnnotationSpec
+import com.squareup.kotlinpoet.BOOLEAN
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier.INTERNAL
@@ -31,17 +32,16 @@ internal class ChasmHostFunctionsAdapterGenerator(
     private val factoryFunctionName: String = "createWasiPreview1HostFunctions",
 ) {
     fun generate() {
-        val spec = FileSpec.builder(CHASM_FUNCTIONS_CLASS_NAME)
-            .addFunction(
-                ChasmFactoryFunctionGenerator(
-                    wasiTypenames = wasiTypenames,
-                    wasiFunctions = wasiFunctions,
-                    functionsClassName = CHASM_FUNCTIONS_CLASS_NAME,
-                    factoryFunctionName = factoryFunctionName,
-                ).generate(),
-            )
-            .addType(generateFunctionsClass())
-            .build()
+        val factoryGenerator = ChasmFactoryFunctionGenerator(
+            wasiTypenames = wasiTypenames,
+            wasiFunctions = wasiFunctions,
+            functionsClassName = CHASM_FUNCTIONS_CLASS_NAME,
+            factoryFunctionName = factoryFunctionName,
+        )
+        val spec = FileSpec.builder(CHASM_FUNCTIONS_CLASS_NAME).apply {
+            factoryGenerator.generateFunctions().forEach(::addFunction)
+            addType(generateFunctionsClass())
+        }.build()
         spec.writeTo(outputDirectory)
     }
 
@@ -52,6 +52,13 @@ internal class ChasmHostFunctionsAdapterGenerator(
             FunSpec.constructorBuilder()
                 .addParameter("host", WehHostClassname.EMBEDDER_HOST)
                 .addParameter("memoryIndex", ChasmShapesClassname.MEMORY_INDEX)
+                .addParameter("requiresMemoryReader", BOOLEAN)
+                .addParameter("requiresMemoryWriter", BOOLEAN)
+                .build(),
+        )
+        addProperty(
+            PropertySpec.builder("host", WehHostClassname.EMBEDDER_HOST, PRIVATE)
+                .initializer("host")
                 .build(),
         )
         addProperty(
@@ -60,23 +67,20 @@ internal class ChasmHostFunctionsAdapterGenerator(
                 .build(),
         )
         addProperty(
-            PropertySpec.builder("wasiMemoryReader", CHASM_WASI_MEMORY_READER, PRIVATE)
-                .initializer("%T(host.fileSystem)", CHASM_WASI_MEMORY_READER)
+            PropertySpec.builder("wasiMemoryReader", CHASM_WASI_MEMORY_READER.copy(nullable = true), PRIVATE)
+                .initializer("if (requiresMemoryReader) %T(host.fileSystem) else null", CHASM_WASI_MEMORY_READER)
                 .build(),
         )
         addProperty(
-            PropertySpec.builder("wasiMemoryWriter", CHASM_WASI_MEMORY_WRITER, PRIVATE)
-                .initializer("%T(host.fileSystem)", CHASM_WASI_MEMORY_WRITER)
+            PropertySpec.builder("wasiMemoryWriter", CHASM_WASI_MEMORY_WRITER.copy(nullable = true), PRIVATE)
+                .initializer("if (requiresMemoryWriter) %T(host.fileSystem) else null", CHASM_WASI_MEMORY_WRITER)
                 .build(),
         )
 
         val functionHandles = ChasmArgsFunctionHandles(wasiTypenames, wasiFunctions).getFunctionHandles()
 
-        functionHandles.forEach { funcHandleSpec ->
-            addProperty(funcHandleSpec.handleProperty.asPropertySpec())
-        }
         functionHandles.forEach { funcHandleSpec: WasiFunctionHandle ->
-            addProperty(funcHandleSpec.chasmHostFunctionDeclaration())
+            addFunction(funcHandleSpec.chasmHostFunctionDeclaration())
         }
     }.build()
 }
