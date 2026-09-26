@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.8.0 - 2026-09-26
+
+#### 🚀 Features
+
+- Allow the Chasm WASI Preview 1 builder to validate and construct only the
+  imports required by a decoded module while preserving the complete-host API.
+
 ## 0.7.0 - 2026-09-23
 
 #### 💥 Breaking Change
