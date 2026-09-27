@@ -37,7 +37,6 @@ import at.released.weh.filesystem.path.real.nio.NioRealPath
 import at.released.weh.filesystem.path.toOpenError
 import at.released.weh.filesystem.path.virtual.VirtualPath
 import at.released.weh.filesystem.path.virtual.VirtualPath.Companion.isDirectoryRequest
-import com.sun.nio.file.ExtendedOpenOption
 import java.nio.file.LinkOption
 import java.nio.file.OpenOption
 import java.nio.file.StandardOpenOption
@@ -186,7 +185,7 @@ private fun getOpenOptions(
     }
 
     if (flags and OpenFileFlag.O_DIRECT != 0) {
-        options += ExtendedOpenOption.DIRECT
+        notImplementedFlags = notImplementedFlags or OpenFileFlag.O_DIRECT.toUInt()
     }
 
     if (flags and OpenFileFlag.O_NOFOLLOW != 0) {
@@ -200,7 +199,7 @@ private fun getOpenOptions(
     }
 
     if (flags and OpenFileFlag.O_PATH != 0) {
-        notImplementedFlags = notImplementedFlags and OpenFileFlag.O_PATH.toUInt()
+        notImplementedFlags = notImplementedFlags or OpenFileFlag.O_PATH.toUInt()
     }
 
     if (flags and OpenFileFlag.O_TMPFILE != 0) {

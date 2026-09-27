@@ -33,6 +33,9 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v5
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Run checks
         run: >-
           ./gradlew
@@ -43,6 +46,7 @@ jobs:
           :test-wasi-testsuite:bindings-test:jvmTest
           :wasm-core:jvmTest
           :wasm-wasi-preview1:jvmTest
+          :test-android-consumer:assembleRelease
           :bindings-chasm-wasip1:compileKotlinLinuxX64
           :bindings-chasm-wasip1:compileKotlinLinuxArm64
           --no-configuration-cache
