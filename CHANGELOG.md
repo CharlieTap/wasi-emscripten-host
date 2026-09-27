@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.8.1 - 2026-09-27
+
+#### 🐛 Bug Fix
+
+- Remove the JDK-only direct-I/O dependency that broke minified Android builds.
+  The JVM filesystem now rejects `O_DIRECT` and `O_PATH` as unsupported.
+
 ## 0.8.0 - 2026-09-26
 
 #### 🚀 Features
