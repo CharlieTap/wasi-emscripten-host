@@ -10,6 +10,8 @@ plugins {
     id("at.released.weh.gradle.lint.abi-validation")
     id("at.released.weh.gradle.multiplatform.kotlin")
     id("com.android.kotlin.multiplatform.library")
+    // AGP only creates the KMP Android lint tasks when this plugin is applied.
+    id("com.android.lint")
     id("at.released.weh.gradle.multiplatform.publish")
     id("at.released.weh.gradle.wasm.codegen.chasm.chasm-adapter-generator")
 }
@@ -23,6 +25,11 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
         withHostTest {}
+        lint {
+            checkOnly += "NewApi"
+            abortOnError = true
+            ignoreTestSources = true
+        }
     }
     jvm()
     iosSimulatorArm64()
@@ -59,4 +66,10 @@ kotlin {
             implementation(libs.assertk)
         }
     }
+}
+
+// com.android.lint also lints the JVM target as part of check, with all
+// default checks on. Limit that to NewApi too, so check stays offline and quiet.
+extensions.configure<com.android.build.api.dsl.Lint>("lint") {
+    checkOnly += "NewApi"
 }
