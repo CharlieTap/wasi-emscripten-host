@@ -24,6 +24,7 @@ import java.io.IOException
 import java.nio.file.FileAlreadyExistsException
 import java.nio.file.FileSystemException
 import java.nio.file.Files
+import java.nio.file.Paths
 import kotlin.io.path.isDirectory
 import kotlin.io.path.isSymbolicLink
 import java.nio.file.Path as NioPath
@@ -68,7 +69,7 @@ private fun createHardlink(
             is FileAlreadyExistsException -> Exists("Link path already exists")
             is FileSystemException -> {
                 val otherFile = throwable.otherFile
-                if (otherFile != null && NioPath.of(otherFile).isDirectory()) {
+                if (otherFile != null && Paths.get(otherFile).isDirectory()) {
                     PermissionDenied("Can not create hardlink to directory")
                 } else {
                     IoError("Filesystem exception `${throwable.message}`")

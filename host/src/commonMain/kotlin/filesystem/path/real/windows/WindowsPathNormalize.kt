@@ -28,7 +28,7 @@ internal fun normalizeWindowsPath(
         when (component) {
             "", "." -> Unit
             ".." -> if (components.isNotEmpty()) {
-                components.removeLast()
+                components.removeAt(components.lastIndex)
             } else {
                 if (failOnOutsideOfRoot) {
                     return PathError.PathOutsideOfRootPath("Path was outside the root during normalization").left()
