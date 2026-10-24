@@ -14,6 +14,7 @@ import at.released.weh.filesystem.error.FallocateError
 import at.released.weh.filesystem.error.InvalidArgument
 import at.released.weh.filesystem.error.IoError
 import java.io.IOException
+import java.nio.Buffer
 import java.nio.ByteBuffer
 import java.nio.channels.ClosedChannelException
 import java.nio.channels.NonReadableChannelException
@@ -90,8 +91,10 @@ private fun NioFileChannel.fillWithZeroBytesOrThrow(
     val endPosition = startPosition + writeBytes
     while (position < endPosition) {
         val bytesToWrite = (endPosition - position).coerceAtMost(MAX_BUF_SIZE)
-        zeroBytesBufer.position(0)
-        zeroBytesBufer.limit(bytesToWrite.toInt())
+        // Calls through Buffer: Android lacks the ByteBuffer overloads Java 9 added.
+        val buffer: Buffer = zeroBytesBufer
+        buffer.position(0)
+        buffer.limit(bytesToWrite.toInt())
         val bytesWritten = channel.write(zeroBytesBufer, position)
         position += bytesWritten
     }
