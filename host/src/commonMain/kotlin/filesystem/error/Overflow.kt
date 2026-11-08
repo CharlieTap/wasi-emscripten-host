@@ -15,6 +15,7 @@ public class Overflow(
 ) : FileSystemOperationError,
     AdvisoryLockError,
     ReadError,
-    SeekError {
+    SeekError,
+    SetTimestampError {
     override val errno: FileSystemErrno = FileSystemErrno.OVERFLOW
 }

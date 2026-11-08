@@ -6,7 +6,7 @@
 
 package at.released.weh.gradle.multiplatform
 
-import at.released.weh.gradle.multiplatform.publish.createWehVersionsExtension
+import at.released.weh.gradle.multiplatform.publish.configureWehPublishing
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 
@@ -18,50 +18,8 @@ plugins {
     id("com.vanniktech.maven.publish.base")
 }
 
-tasks.withType<AbstractArchiveTask>().configureEach {
-    isPreserveFileTimestamps = false
-    isReproducibleFileOrder = true
-}
-
-val wehVersions = createWehVersionsExtension()
-
-group = "io.github.charlietap.wasi.emscripten.host"
-version = wehVersions.rootVersion.get()
-
-mavenPublishing {
-    publishToMavenCentral()
-    signAllPublications()
-
-    configure(
-        KotlinMultiplatform(
-            javadocJar = JavadocJar.Empty(),
-        ),
-    )
-
-    pom {
-        name.set(project.name)
-        description.set(
-            "Kotlin Multiplatform implementation of WebAssembly WASI Preview 1 host functions for Chasm",
-        )
-        url.set("https://github.com/CharlieTap/wasi-emscripten-host")
-
-        licenses {
-            license {
-                name.set("The Apache License, Version 2.0")
-                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-            }
-        }
-        developers {
-            developer {
-                id.set("CharlieTap")
-                name.set("Charlie Tapping")
-            }
-        }
-        scm {
-            connection.set("scm:git:https://github.com/CharlieTap/wasi-emscripten-host.git")
-            developerConnection.set("scm:git:ssh://git@github.com/CharlieTap/wasi-emscripten-host.git")
-            url.set("https://github.com/CharlieTap/wasi-emscripten-host")
-        }
-    }
-}
+configureWehPublishing(
+    KotlinMultiplatform(
+        javadocJar = JavadocJar.Empty(),
+    ),
+)

@@ -19,6 +19,7 @@ import at.released.weh.filesystem.model.FileMode
 import at.released.weh.filesystem.model.FileModeFlag.S_IRWXG
 import at.released.weh.filesystem.model.FileModeFlag.S_IRWXO
 import at.released.weh.filesystem.model.FileModeFlag.S_IRWXU
+import at.released.weh.filesystem.nio.nioTimestampsFor
 import at.released.weh.filesystem.op.stat.StructStat
 import at.released.weh.filesystem.op.stat.StructTimespec
 import at.released.weh.filesystem.path.real.nio.NioRealPath
@@ -76,11 +77,12 @@ internal object NioFileStat {
         val size: Long = basicFileAttrs.size()
         val blksize: Long = blockSize
         val blocks: Long = (size + blksize - 1L) / blksize
-        val cTimeFileTime = unixAttrs[ATTR_UNI_CTIME] ?: basicFileAttrs.creationTime()
-        val ctim: StructTimespec = (cTimeFileTime as? FileTime)?.toTimeSpec()
+        val times = nioTimestampsFor(path.nio)?.read(path.nio, followSymlinks)?.bind()
+        val ctim: StructTimespec = times?.changeStatusTime
+            ?: ((unixAttrs[ATTR_UNI_CTIME] ?: basicFileAttrs.creationTime()) as? FileTime)?.toTimeSpec()
             ?: raise(IoError("Can not get file creation time"))
-        val mtim: StructTimespec = basicFileAttrs.lastModifiedTime().toTimeSpec()
-        val atim: StructTimespec = basicFileAttrs.lastAccessTime().toTimeSpec()
+        val mtim: StructTimespec = times?.modificationTime ?: basicFileAttrs.lastModifiedTime().toTimeSpec()
+        val atim: StructTimespec = times?.accessTime ?: basicFileAttrs.lastAccessTime().toTimeSpec()
 
         val dev: Long = (unixAttrs[ATTR_UNI_DEV] as? Long) ?: 1L
         val ino: Long = path.nio.readOrGenerateInode(basicFileAttrs, unixAttrs)

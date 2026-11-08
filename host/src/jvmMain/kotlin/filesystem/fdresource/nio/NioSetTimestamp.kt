@@ -15,6 +15,7 @@ import at.released.weh.filesystem.error.SetTimestampError
 import at.released.weh.filesystem.error.TooManySymbolicLinks
 import at.released.weh.filesystem.ext.Os
 import at.released.weh.filesystem.ext.asLinkOptions
+import at.released.weh.filesystem.nio.nioTimestampsFor
 import java.io.IOException
 import java.nio.file.AccessDeniedException
 import java.nio.file.FileSystemException
@@ -34,6 +35,10 @@ internal fun nioSetTimestamp(
     atimeNanoseconds: Long?,
     mtimeNanoseconds: Long?,
 ): Either<SetTimestampError, Unit> {
+    nioTimestampsFor(path)?.let { timestamps ->
+        return timestamps.set(path, followSymlinks, atimeNanoseconds, mtimeNanoseconds)
+    }
+
     val isDefaultFileSystem = path.fileSystem === FileSystems.getDefault()
     val options = asLinkOptions(followSymlinks = followSymlinks)
     val newAtime = atimeNanoseconds?.let { FileTime.from(it, NANOSECONDS) }
@@ -46,7 +51,7 @@ internal fun nioSetTimestamp(
             is AccessDeniedException -> AccessDenied("Permission denied")
             is FileSystemLoopException -> TooManySymbolicLinks("Too many symbolic links")
             is FileSystemException if !followSymlinks && Os.isAndroid && isDefaultFileSystem && path.isSymbolicLink() ->
-                NotSupported("Setting timestamps on a symbolic link is not supported on Android")
+                NotSupported("Setting timestamps on a symbolic link requires the host-android-timestamps artifact")
 
             is IOException -> IoError("I/O error: ${it.message}")
             else -> throw IllegalStateException("Unexpected error", it)

@@ -1035,7 +1035,7 @@ final class at.released.weh.filesystem.error/Nxio : at.released.weh.filesystem.e
     final fun toString(): kotlin/String // at.released.weh.filesystem.error/Nxio.toString|toString(){}[0]
 }
 
-final class at.released.weh.filesystem.error/Overflow : at.released.weh.filesystem.error/AdvisoryLockError, at.released.weh.filesystem.error/FileSystemOperationError, at.released.weh.filesystem.error/ReadError, at.released.weh.filesystem.error/SeekError { // at.released.weh.filesystem.error/Overflow|null[0]
+final class at.released.weh.filesystem.error/Overflow : at.released.weh.filesystem.error/AdvisoryLockError, at.released.weh.filesystem.error/FileSystemOperationError, at.released.weh.filesystem.error/ReadError, at.released.weh.filesystem.error/SeekError, at.released.weh.filesystem.error/SetTimestampError { // at.released.weh.filesystem.error/Overflow|null[0]
     constructor <init>(kotlin/String) // at.released.weh.filesystem.error/Overflow.<init>|<init>(kotlin.String){}[0]
 
     final val errno // at.released.weh.filesystem.error/Overflow.errno|{}errno[0]

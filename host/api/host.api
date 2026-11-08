@@ -348,7 +348,7 @@ public final class at/released/weh/filesystem/error/Nxio : at/released/weh/files
 public abstract interface class at/released/weh/filesystem/error/OpenError : at/released/weh/filesystem/error/FileSystemOperationError {
 }
 
-public final class at/released/weh/filesystem/error/Overflow : at/released/weh/filesystem/error/AdvisoryLockError, at/released/weh/filesystem/error/FileSystemOperationError, at/released/weh/filesystem/error/ReadError, at/released/weh/filesystem/error/SeekError {
+public final class at/released/weh/filesystem/error/Overflow : at/released/weh/filesystem/error/AdvisoryLockError, at/released/weh/filesystem/error/FileSystemOperationError, at/released/weh/filesystem/error/ReadError, at/released/weh/filesystem/error/SeekError, at/released/weh/filesystem/error/SetTimestampError {
 	public fun <init> (Ljava/lang/String;)V
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getErrno ()Lat/released/weh/filesystem/model/FileSystemErrno;
@@ -707,6 +707,21 @@ public final class at/released/weh/filesystem/nio/NioFileSystem : at/released/we
 public final class at/released/weh/filesystem/nio/NioFileSystemConfig : at/released/weh/filesystem/dsl/FileSystemEngineConfig {
 	public final fun getNioFileSystem ()Ljava/nio/file/FileSystem;
 	public final fun setNioFileSystem (Ljava/nio/file/FileSystem;)V
+}
+
+public abstract interface class at/released/weh/filesystem/nio/NioTimestamps {
+	public abstract fun read (Ljava/nio/file/Path;Z)Larrow/core/Either;
+	public abstract fun set (Ljava/nio/file/Path;ZLjava/lang/Long;Ljava/lang/Long;)Larrow/core/Either;
+}
+
+public final class at/released/weh/filesystem/nio/NioTimestamps$Times {
+	public fun <init> (Lat/released/weh/filesystem/op/stat/StructTimespec;Lat/released/weh/filesystem/op/stat/StructTimespec;Lat/released/weh/filesystem/op/stat/StructTimespec;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccessTime ()Lat/released/weh/filesystem/op/stat/StructTimespec;
+	public final fun getChangeStatusTime ()Lat/released/weh/filesystem/op/stat/StructTimespec;
+	public final fun getModificationTime ()Lat/released/weh/filesystem/op/stat/StructTimespec;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class at/released/weh/filesystem/nio/op/RunWithChannelFd {
