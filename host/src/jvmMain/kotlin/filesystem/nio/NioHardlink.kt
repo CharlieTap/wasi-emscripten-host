@@ -8,9 +8,11 @@ package at.released.weh.filesystem.nio
 
 import arrow.core.Either
 import arrow.core.raise.either
+import at.released.weh.filesystem.error.AccessDenied
 import at.released.weh.filesystem.error.Exists
 import at.released.weh.filesystem.error.HardlinkError
 import at.released.weh.filesystem.error.IoError
+import at.released.weh.filesystem.error.NotSupported
 import at.released.weh.filesystem.error.PermissionDenied
 import at.released.weh.filesystem.error.ReadLinkError
 import at.released.weh.filesystem.error.SymlinkError
@@ -21,6 +23,7 @@ import at.released.weh.filesystem.internal.delegatefs.FileSystemOperationHandler
 import at.released.weh.filesystem.op.hardlink.Hardlink
 import at.released.weh.filesystem.path.withResolvePathErrorAsCommonError
 import java.io.IOException
+import java.nio.file.AccessDeniedException
 import java.nio.file.FileAlreadyExistsException
 import java.nio.file.FileSystemException
 import java.nio.file.Files
@@ -65,8 +68,9 @@ private fun createHardlink(
         Unit
     }.mapLeft { throwable ->
         when (throwable) {
-            is UnsupportedOperationException -> PermissionDenied("Filesystem does not support hardlinks")
+            is UnsupportedOperationException -> NotSupported("Filesystem does not support hardlinks")
             is FileAlreadyExistsException -> Exists("Link path already exists")
+            is AccessDeniedException -> AccessDenied("Permission denied")
             is FileSystemException -> {
                 val otherFile = throwable.otherFile
                 if (otherFile != null && Paths.get(otherFile).isDirectory()) {

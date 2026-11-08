@@ -40,6 +40,7 @@ Current known limitations of the WASI Preview 1 implementation:
   For example, on Windows, file names cannot contain the characters `:` and `?`, while on Android, the maximum 
   file name length on external storage can be limited to around 255 characters.  
   The actual file system may be case-sensitive or case-insensitive and may not support symlinks or hard links.
+* Android does not allow apps to create hard links, so `path_link` fails with `ACCES`.
 * The implementation of [WASI filesystem path sandboxing] has not been thoroughly tested and may contain errors.  
   Do not use it if strict sandboxing is required. The JVM NIO-based filesystem implementation is based on using
   absolute paths, making it nearly impossible to guarantee path isolation.

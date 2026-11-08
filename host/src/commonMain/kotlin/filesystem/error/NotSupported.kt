@@ -20,6 +20,7 @@ public class NotSupported(
     HardlinkError,
     OpenError,
     PollError,
-    ReadError {
+    ReadError,
+    SetTimestampError {
     override val errno: FileSystemErrno = FileSystemErrno.NOTSUP
 }

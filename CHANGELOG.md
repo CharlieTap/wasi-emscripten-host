@@ -11,6 +11,12 @@ All notable changes to this project will be documented in this file.
   ahead-of-time runtime; interpreter callers pass `moduleInfo(module)`. The WASI Preview 1 bindings now depend on
   Chasm's `embedding-runtime` instead of `chasm`, so consumers add the Chasm engine they use themselves.
 
+#### 🐛 Bug Fix
+
+- Report precise errors from the JVM file system instead of `IO`: `path_link` returns `ACCES` when the
+  platform denies hard links and `NOTSUP` when the file system has none, and setting timestamps returns `NOENT`,
+  `ACCES`, `LOOP`, or, on Android for a symbolic link itself, `NOTSUP`.
+
 ## 0.8.1 - 2026-09-27
 
 #### 🐛 Bug Fix

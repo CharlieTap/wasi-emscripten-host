@@ -12,4 +12,5 @@ internal object Os {
     private val osName = System.getProperty("os.name") ?: "generic"
     val isWindows by lazy(PUBLICATION) { osName.contains("win", true) }
     val isLinux by lazy(PUBLICATION) { osName.findAnyOf(listOf("nix", "nux", "aix"), ignoreCase = true) != null }
+    val isAndroid by lazy(PUBLICATION) { System.getProperty("java.vm.vendor").orEmpty().contains("Android", true) }
 }

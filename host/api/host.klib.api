@@ -1009,7 +1009,7 @@ final class at.released.weh.filesystem.error/NotDirectory : at.released.weh.file
     final fun toString(): kotlin/String // at.released.weh.filesystem.error/NotDirectory.toString|toString(){}[0]
 }
 
-final class at.released.weh.filesystem.error/NotSupported : at.released.weh.filesystem.error/AdvisoryLockError, at.released.weh.filesystem.error/ChmodError, at.released.weh.filesystem.error/ChownError, at.released.weh.filesystem.error/FallocateError, at.released.weh.filesystem.error/FileSystemOperationError, at.released.weh.filesystem.error/HardlinkError, at.released.weh.filesystem.error/OpenError, at.released.weh.filesystem.error/PollError, at.released.weh.filesystem.error/ReadError { // at.released.weh.filesystem.error/NotSupported|null[0]
+final class at.released.weh.filesystem.error/NotSupported : at.released.weh.filesystem.error/AdvisoryLockError, at.released.weh.filesystem.error/ChmodError, at.released.weh.filesystem.error/ChownError, at.released.weh.filesystem.error/FallocateError, at.released.weh.filesystem.error/FileSystemOperationError, at.released.weh.filesystem.error/HardlinkError, at.released.weh.filesystem.error/OpenError, at.released.weh.filesystem.error/PollError, at.released.weh.filesystem.error/ReadError, at.released.weh.filesystem.error/SetTimestampError { // at.released.weh.filesystem.error/NotSupported|null[0]
     constructor <init>(kotlin/String) // at.released.weh.filesystem.error/NotSupported.<init>|<init>(kotlin.String){}[0]
 
     final val errno // at.released.weh.filesystem.error/NotSupported.errno|{}errno[0]
