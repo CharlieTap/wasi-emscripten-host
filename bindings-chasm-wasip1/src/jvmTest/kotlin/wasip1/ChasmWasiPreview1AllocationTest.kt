@@ -11,6 +11,7 @@ import io.github.charlietap.chasm.embedding.function
 import io.github.charlietap.chasm.embedding.instance
 import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
+import io.github.charlietap.chasm.embedding.moduleInfo
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.Store
 import io.github.charlietap.chasm.embedding.shapes.expect
@@ -32,7 +33,7 @@ class ChasmWasiPreview1AllocationTest {
         val module = module(moduleImporting("args_get", argsGetTypeBytes())).expect("test module must decode")
 
         EmbedderHost().use { host ->
-            ChasmWasiPreview1Builder(store, module) {
+            ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired()
         }
@@ -52,7 +53,7 @@ class ChasmWasiPreview1AllocationTest {
         val functionCount = store.functionCount()
 
         EmbedderHost().use { host ->
-            val automaticImports = ChasmWasiPreview1Builder(store, module) {
+            val automaticImports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired(providedImports = listOf(provided))
 
@@ -74,7 +75,7 @@ class ChasmWasiPreview1AllocationTest {
 
         EmbedderHost().use { host ->
             assertFailsWith<IllegalArgumentException> {
-                ChasmWasiPreview1Builder(store, module) {
+                ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                     this.host = host
                 }.buildRequired()
             }
@@ -89,7 +90,7 @@ class ChasmWasiPreview1AllocationTest {
         val module = module(argsGetInvocationModule()).expect("test module must decode")
 
         EmbedderHost().use { host ->
-            val imports = ChasmWasiPreview1Builder(store, module) {
+            val imports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired()
             val instance = instance(store, module, imports).expect("test module must instantiate")

@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+#### 💥 Breaking Change
+
+- Migrated the Chasm bindings to Chasm 2.4.0. `ChasmWasiPreview1Builder` now takes the module's `ModuleInfo`
+  instead of the decoded `Module`, so the same builder links modules run by Chasm's interpreter, JIT or
+  ahead-of-time runtime; interpreter callers pass `moduleInfo(module)`. The WASI Preview 1 bindings now depend on
+  Chasm's `embedding-runtime` instead of `chasm`, so consumers add the Chasm engine they use themselves.
+
 ## 0.8.1 - 2026-09-27
 
 #### 🐛 Bug Fix

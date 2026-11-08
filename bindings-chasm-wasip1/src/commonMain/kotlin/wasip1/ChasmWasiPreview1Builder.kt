@@ -15,7 +15,7 @@ import at.released.weh.host.EmbedderHostBuilder
 import at.released.weh.wasm.core.WasmModules
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.ImportDefinition
-import io.github.charlietap.chasm.embedding.shapes.Module
+import io.github.charlietap.chasm.embedding.shapes.ModuleInfo
 import io.github.charlietap.chasm.embedding.shapes.Store
 import io.github.charlietap.chasm.host.ModuleIndex
 import io.github.charlietap.chasm.runtime.type.ExternalType
@@ -31,14 +31,14 @@ import io.github.charlietap.chasm.runtime.type.ExternalType
  *
  * ```kotlin
  * // Prepare WASI host imports
- * val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, module) {
+ * val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
  *     host = embedderHost
  * }.build()
  * ```
  */
 public class ChasmWasiPreview1Builder private constructor(
     private val store: Store,
-    private val module: Module,
+    private val module: ModuleInfo,
     private val memoryIndex: ModuleIndex.MemoryIndex,
     private val host: EmbedderHost,
 ) {
@@ -88,23 +88,27 @@ public class ChasmWasiPreview1Builder private constructor(
     }
 
     public companion object {
+        /**
+         * A builder for the module [info] describes. Its imports and exports are all the builder reads, so the same
+         * builder links a module run by Chasm's interpreter, its JIT or its ahead-of-time runtime.
+         */
         public operator fun invoke(
             store: Store,
-            module: Module,
+            info: ModuleInfo,
             block: ChasmHostFunctionDsl.() -> Unit = {},
         ): ChasmWasiPreview1Builder {
             val config = ChasmHostFunctionDsl().apply(block)
             return ChasmWasiPreview1Builder(
                 store = store,
-                module = module,
-                memoryIndex = module.wasiMemoryIndex(),
+                module = info,
+                memoryIndex = info.wasiMemoryIndex(),
                 host = config.host ?: EmbedderHostBuilder().build(),
             )
         }
     }
 }
 
-private fun Module.requiredImports(
+private fun ModuleInfo.requiredImports(
     moduleName: String,
     providedImports: Collection<Import>,
 ): List<ImportDefinition> {
@@ -131,7 +135,7 @@ private fun Module.requiredImports(
     return requiredByName.values.filterNot { definition -> definition.entityName in providedNames }
 }
 
-internal fun Module.wasiMemoryIndex(): ModuleIndex.MemoryIndex {
+internal fun ModuleInfo.wasiMemoryIndex(): ModuleIndex.MemoryIndex {
     val export = exports.singleOrNull { export -> export.name == WASI_MEMORY_EXPORT_NAME }
         ?: return ModuleIndex.MemoryIndex(0)
     check(export.type is ExternalType.Memory) {

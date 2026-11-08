@@ -13,6 +13,7 @@ import at.released.weh.wasi.bindings.test.runner.WasmTestRuntime
 import io.github.charlietap.chasm.embedding.instance
 import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
+import io.github.charlietap.chasm.embedding.moduleInfo
 import io.github.charlietap.chasm.embedding.shapes.Instance
 import io.github.charlietap.chasm.embedding.shapes.Store
 import io.github.charlietap.chasm.embedding.shapes.expect
@@ -48,7 +49,7 @@ object ChasmWasmTestRuntime : WasmTestRuntime {
         host: EmbedderHost,
     ): Instance {
         val module = module(bytes = wasmFile).expect("Can not decode WebAssembly binary")
-        val hostImports = ChasmWasiPreview1Builder(store, module) {
+        val hostImports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
             this.host = host
         }.build()
         val instance: Instance = instance(store, module, hostImports).fold(

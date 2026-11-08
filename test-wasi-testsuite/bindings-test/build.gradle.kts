@@ -30,6 +30,7 @@ wasiTestsuiteTestGen {
     wasiTestsuiteTestsRoot = wasiTestSuiteRoot
     runtimes = setOf(
         WasmRuntimeBindings.CHASM,
+        WasmRuntimeBindings.CHASM_AOT,
     )
     cIgnores = listOf(
         TestIgnore("sock_shutdown-invalid_fd"),
@@ -79,7 +80,12 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(projects.bindingsChasmWasip1)
+            implementation(libs.chasm)
             implementation(kotlin("test"))
+        }
+        jvmTest.dependencies {
+            implementation(libs.chasm.aot)
+            implementation(libs.chasm.runtime.aot)
         }
     }
 }

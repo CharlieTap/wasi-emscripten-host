@@ -25,7 +25,7 @@ public final class at/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builde
 }
 
 public final class at/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder$Companion {
-	public final fun invoke (Lio/github/charlietap/chasm/embedding/shapes/Store;Lio/github/charlietap/chasm/embedding/shapes/Module;Lkotlin/jvm/functions/Function1;)Lat/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder;
-	public static synthetic fun invoke$default (Lat/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder$Companion;Lio/github/charlietap/chasm/embedding/shapes/Store;Lio/github/charlietap/chasm/embedding/shapes/Module;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lat/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder;
+	public final fun invoke (Lio/github/charlietap/chasm/embedding/shapes/Store;Lio/github/charlietap/chasm/embedding/shapes/ModuleInfo;Lkotlin/jvm/functions/Function1;)Lat/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder;
+	public static synthetic fun invoke$default (Lat/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder$Companion;Lio/github/charlietap/chasm/embedding/shapes/Store;Lio/github/charlietap/chasm/embedding/shapes/ModuleInfo;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lat/released/weh/bindings/chasm/wasip1/ChasmWasiPreview1Builder;
 }
 

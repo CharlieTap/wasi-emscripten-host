@@ -11,6 +11,7 @@ import at.released.weh.host.EmbedderHost
 import io.github.charlietap.chasm.embedding.instance
 import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
+import io.github.charlietap.chasm.embedding.moduleInfo
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.Store
 import io.github.charlietap.chasm.embedding.shapes.fold
@@ -41,7 +42,7 @@ fun executeCode(embedderHost: EmbedderHost, wasmBinary: ByteArray): Int {
     )
 
     // Prepare WASI host imports after resolving the exported `memory` index.
-    val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, module) {
+    val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
         host = embedderHost
     }.build()
 

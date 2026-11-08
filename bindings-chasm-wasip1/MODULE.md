@@ -16,6 +16,7 @@ import at.released.weh.host.EmbedderHost
 import io.github.charlietap.chasm.embedding.instance
 import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
+import io.github.charlietap.chasm.embedding.moduleInfo
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.Store
 import io.github.charlietap.chasm.embedding.shapes.fold
@@ -38,7 +39,7 @@ fun executeCode(embedderHost: EmbedderHost, wasmBinary: ByteArray): Int {
     )
 
     // Resolve the exported `memory` once while preparing the imports.
-    val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, module) {
+    val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
         host = embedderHost
     }.buildRequired()
 
@@ -67,7 +68,7 @@ imports when overriding individual functions; matching imports are left to the
 caller and are not allocated again:
 
 ```kotlin
-val automaticImports = ChasmWasiPreview1Builder(store, module) {
+val automaticImports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
     host = embedderHost
 }.buildRequired(providedImports = explicitImports)
 

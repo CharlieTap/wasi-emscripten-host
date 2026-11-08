@@ -55,7 +55,7 @@ kotlin {
 
         commonMain.dependencies {
             api(projects.host)
-            api(libs.chasm)
+            api(libs.chasm.embedding.runtime)
             api(projects.commonApi)
             implementation(projects.commonUtil)
             implementation(projects.wasmWasiPreview1)
@@ -64,6 +64,7 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation(libs.assertk)
+            implementation(libs.chasm)
         }
     }
 }

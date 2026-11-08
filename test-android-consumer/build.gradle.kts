@@ -34,4 +34,5 @@ android {
 
 dependencies {
     implementation(projects.bindingsChasmWasip1)
+    implementation(libs.chasm)
 }

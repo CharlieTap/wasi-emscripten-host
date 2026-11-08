@@ -9,7 +9,9 @@ package at.released.weh.bindings.chasm.wasip1
 import at.released.weh.host.EmbedderHost
 import io.github.charlietap.chasm.embedding.function
 import io.github.charlietap.chasm.embedding.module
+import io.github.charlietap.chasm.embedding.moduleInfo
 import io.github.charlietap.chasm.embedding.shapes.Import
+import io.github.charlietap.chasm.embedding.shapes.ModuleInfo
 import io.github.charlietap.chasm.embedding.shapes.expect
 import io.github.charlietap.chasm.embedding.store
 import io.github.charlietap.chasm.host.HostFunction
@@ -30,7 +32,7 @@ class ChasmWasiPreview1BuilderTest {
         val host = EmbedderHost()
 
         try {
-            val imports = ChasmWasiPreview1Builder(store, module) {
+            val imports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.build()
 
@@ -60,11 +62,37 @@ class ChasmWasiPreview1BuilderTest {
         val host = EmbedderHost()
 
         try {
-            val imports = ChasmWasiPreview1Builder(store, module) {
+            val imports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired()
 
             assertEquals(listOf("proc_exit", "args_get"), imports.map(Import::entityName))
+        } finally {
+            host.close()
+        }
+    }
+
+    @Test
+    fun `module info alone builds the imports the module requires`() {
+        val module = module(
+            wasmModule(
+                typeSection(functionType(listOf(I32_TYPE), emptyList())),
+                importFunctionSection(functionImport("proc_exit", typeIndex = 0)),
+                memorySection(memoryCount = 2),
+                exportSection(name = "memory", kind = MEMORY_KIND, index = 1),
+            ),
+        ).expect("test module must decode")
+        val info = ModuleInfo(module.imports, module.exports)
+        val store = store()
+        val host = EmbedderHost()
+
+        try {
+            val imports = ChasmWasiPreview1Builder(store, info) {
+                this.host = host
+            }.buildRequired()
+
+            assertEquals(listOf("proc_exit"), imports.map(Import::entityName))
+            assertEquals(1, info.wasiMemoryIndex().index)
         } finally {
             host.close()
         }
@@ -77,7 +105,7 @@ class ChasmWasiPreview1BuilderTest {
         val host = EmbedderHost()
 
         try {
-            val imports = ChasmWasiPreview1Builder(store, module) {
+            val imports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired()
 
@@ -111,7 +139,7 @@ class ChasmWasiPreview1BuilderTest {
         )
 
         try {
-            val imports = ChasmWasiPreview1Builder(store, module) {
+            val imports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired(providedImports = listOf(provided))
 
@@ -139,7 +167,7 @@ class ChasmWasiPreview1BuilderTest {
         )
 
         try {
-            val imports = ChasmWasiPreview1Builder(store, module) {
+            val imports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired(providedImports = listOf(provided))
 
@@ -162,7 +190,7 @@ class ChasmWasiPreview1BuilderTest {
         val host = EmbedderHost()
 
         try {
-            val imports = ChasmWasiPreview1Builder(store, module) {
+            val imports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired()
 
@@ -188,7 +216,7 @@ class ChasmWasiPreview1BuilderTest {
         val host = EmbedderHost()
 
         try {
-            val imports = ChasmWasiPreview1Builder(store, module) {
+            val imports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired()
 
@@ -218,7 +246,7 @@ class ChasmWasiPreview1BuilderTest {
 
         try {
             val failure = assertFailsWith<IllegalStateException> {
-                ChasmWasiPreview1Builder(store, module) {
+                ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                     this.host = host
                 }.buildRequired()
             }
@@ -254,7 +282,7 @@ class ChasmWasiPreview1BuilderTest {
 
         try {
             assertFailsWith<IllegalStateException> {
-                ChasmWasiPreview1Builder(store, module) {
+                ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                     this.host = host
                 }.buildRequired(providedImports = listOf(provided))
             }
@@ -277,7 +305,7 @@ class ChasmWasiPreview1BuilderTest {
 
         try {
             val failure = assertFailsWith<IllegalStateException> {
-                ChasmWasiPreview1Builder(store, module) {
+                ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                     this.host = host
                 }.buildRequired()
             }
@@ -302,7 +330,7 @@ class ChasmWasiPreview1BuilderTest {
 
         try {
             val failure = assertFailsWith<IllegalArgumentException> {
-                ChasmWasiPreview1Builder(store, module) {
+                ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                     this.host = host
                 }.buildRequired()
             }
@@ -327,7 +355,7 @@ class ChasmWasiPreview1BuilderTest {
 
         try {
             val failure = assertFailsWith<IllegalArgumentException> {
-                ChasmWasiPreview1Builder(store, module) {
+                ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                     this.host = host
                 }.buildRequired()
             }
@@ -351,7 +379,7 @@ class ChasmWasiPreview1BuilderTest {
 
         try {
             val failure = assertFailsWith<IllegalArgumentException> {
-                ChasmWasiPreview1Builder(store, module) {
+                ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                     this.host = host
                 }.buildRequired()
             }
@@ -371,7 +399,7 @@ class ChasmWasiPreview1BuilderTest {
             ),
         ).expect("test module must decode")
 
-        assertEquals(1, module.wasiMemoryIndex().index)
+        assertEquals(1, moduleInfo(module).wasiMemoryIndex().index)
     }
 
     @Test
@@ -383,14 +411,14 @@ class ChasmWasiPreview1BuilderTest {
             ),
         ).expect("test module must decode")
 
-        assertEquals(0, module.wasiMemoryIndex().index)
+        assertEquals(0, moduleInfo(module).wasiMemoryIndex().index)
     }
 
     @Test
     fun `falls back to memory index zero when memory export is missing`() {
         val module = module(wasmModule(memorySection())).expect("test module must decode")
 
-        assertEquals(0, module.wasiMemoryIndex().index)
+        assertEquals(0, moduleInfo(module).wasiMemoryIndex().index)
     }
 
     @Test
@@ -402,7 +430,7 @@ class ChasmWasiPreview1BuilderTest {
             ),
         ).expect("test module must decode")
 
-        val failure = assertFailsWith<IllegalStateException> { module.wasiMemoryIndex() }
+        val failure = assertFailsWith<IllegalStateException> { moduleInfo(module).wasiMemoryIndex() }
 
         assertTrue(failure.message.orEmpty().contains("must be a memory"))
     }

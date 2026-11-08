@@ -17,4 +17,10 @@ public enum class WasmRuntimeBindings(
             "ChasmWasmTestRuntime",
         ).nestedClass("Factory"),
     ),
+    CHASM_AOT(
+        runtimeFactoryClassName = ClassName(
+            "at.released.weh.wasi.bindings.test.chasm.base",
+            "ChasmAotWasmTestRuntime",
+        ).nestedClass("Factory"),
+    ),
 }

@@ -21,6 +21,7 @@ import at.released.weh.host.EmbedderHostBuilder
 import at.released.weh.wasm.core.WasmModules.ENV_MODULE_NAME
 import at.released.weh.wasm.core.WasmModules.WASI_SNAPSHOT_PREVIEW1_MODULE_NAME
 import io.github.charlietap.chasm.embedding.exports
+import io.github.charlietap.chasm.embedding.moduleInfo
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.Module
 import io.github.charlietap.chasm.embedding.shapes.Store
@@ -79,7 +80,7 @@ public class ChasmEmscriptenHostBuilder private constructor(
 ) {
     public fun setupWasiPreview1HostFunctions(
         moduleName: String = WASI_SNAPSHOT_PREVIEW1_MODULE_NAME,
-    ): List<Import> = ChasmWasiPreview1Builder(store, module) {
+    ): List<Import> = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
         this.host = this@ChasmEmscriptenHostBuilder.host
     }.build(moduleName)
 

@@ -14,6 +14,7 @@ import at.released.weh.host.EmbedderHost
 import io.github.charlietap.chasm.embedding.instance
 import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
+import io.github.charlietap.chasm.embedding.moduleInfo
 import io.github.charlietap.chasm.embedding.shapes.expect
 import io.github.charlietap.chasm.embedding.store
 import java.io.File
@@ -30,7 +31,7 @@ class MainActivity : Activity() {
             val store = store()
             val binary = assets.open("open-file.wasm").use { it.readBytes() }
             val module = module(binary).expect("decode WASI consumer")
-            val imports = ChasmWasiPreview1Builder(store, module) {
+            val imports = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
                 this.host = host
             }.buildRequired()
             val instance = instance(store, module, imports).expect("instantiate WASI consumer")

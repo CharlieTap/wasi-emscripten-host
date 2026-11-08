@@ -10,11 +10,11 @@ import TabItem from '@theme/TabItem';
 # Chasm Integration
 
 [Chasm] is an experimental WebAssembly runtime built on Kotlin Multiplatform.
-It supports Android API 26+, JVM JDK 17+, and a variety of multiplatform targets.
+It supports Android API 27+, JVM JDK 17+, and a variety of multiplatform targets.
 
-This integration targets the Chasm 2.0 host-function API.
+This integration targets Chasm 2.4.
 
-Chasm 2.0 is published to Maven Central. The coordinates below use the 0.7.0 release of these bindings.
+Chasm 2.4 is published to Maven Central. The coordinates below use the 0.7.0 release of these bindings.
 
 ## Wasi Preview 1 Bindings Integration
 
@@ -35,7 +35,7 @@ Then add the required dependencies:
 ```kotlin
 sourceSets {
     commonMain.dependencies {
-        implementation("io.github.charlietap.chasm:chasm:2.0.0")
+        implementation("io.github.charlietap.chasm:chasm:2.4.0")
         implementation("io.github.charlietap.wasi.emscripten.host:bindings-chasm-wasip1:0.7.0")
     }
 }
@@ -52,6 +52,7 @@ import at.released.weh.host.EmbedderHost
 import io.github.charlietap.chasm.embedding.instance
 import io.github.charlietap.chasm.embedding.invoke
 import io.github.charlietap.chasm.embedding.module
+import io.github.charlietap.chasm.embedding.moduleInfo
 import io.github.charlietap.chasm.embedding.shapes.Import
 import io.github.charlietap.chasm.embedding.shapes.Store
 import io.github.charlietap.chasm.embedding.shapes.fold
@@ -82,7 +83,7 @@ fun executeCode(embedderHost: EmbedderHost, wasmBinary: ByteArray): Int {
     )
 
     // Resolve the exported `memory` once while preparing the imports.
-    val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, module) {
+    val wasiImports: List<Import> = ChasmWasiPreview1Builder(store, moduleInfo(module)) {
         host = embedderHost
     }.build()
 
@@ -106,8 +107,12 @@ class WasmException(message: String) : RuntimeException(message)
 
 ### Memory and performance
 
-The Chasm 2.0 builder requires the decoded module because WASI Preview 1 uses
-the module's exported memory named `memory`. The binding resolves that export
+The builder takes the module's `ModuleInfo` because WASI Preview 1 uses the
+module's exported memory named `memory`, and its imports and exports are all
+the builder reads. Any Chasm engine can supply it: `moduleInfo(module)` for the
+interpreter, `ModuleInfo(module.imports, module.exports)` for the JIT, and
+runtime-aot's `moduleInfo(compiledModule)` for a module compiled ahead of time. The
+binding depends only on Chasm's `embedding-runtime`. The binding resolves that export
 once, validates that it is a memory, and captures its typed Chasm memory index.
 It does not assume index zero and it does not repeat the name lookup in host
 callbacks.
@@ -119,7 +124,7 @@ each scatter/gather operation. This removes payload copies while remaining
 safe across memory growth. A custom Chasm memory or filesystem automatically
 uses the compatible copying fallback.
 
-The build resolves Chasm 2.0 from Maven Central:
+The build resolves Chasm 2.4 from Maven Central:
 
 ```shell
 ./gradlew :bindings-chasm-wasip1:jvmTest
