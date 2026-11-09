@@ -14,7 +14,7 @@ It supports Android API 27+, JVM JDK 17+, and a variety of multiplatform targets
 
 This integration targets Chasm 2.4.
 
-Chasm 2.4 is published to Maven Central. The coordinates below use the 0.7.0 release of these bindings.
+Chasm 2.4 is published to Maven Central. The coordinates below use the 0.9.0 release of these bindings.
 
 ## Wasi Preview 1 Bindings Integration
 
@@ -36,7 +36,7 @@ Then add the required dependencies:
 sourceSets {
     commonMain.dependencies {
         implementation("io.github.charlietap.chasm:chasm:2.4.0")
-        implementation("io.github.charlietap.wasi.emscripten.host:bindings-chasm-wasip1:0.7.0")
+        implementation("io.github.charlietap.wasi.emscripten.host:bindings-chasm-wasip1:0.9.0")
     }
 }
 ```
@@ -144,7 +144,7 @@ WEH_CHASM_BENCHMARK_ENFORCE=true ./gradlew \
 
 ### Installation
 
-The 0.7.0 Maven Central release intentionally publishes only the WASI Preview 1 binding. The Emscripten binding remains
+The 0.9.0 Maven Central release intentionally publishes only the WASI Preview 1 binding. The Emscripten binding remains
 available for source and composite-build use in this repository.
 
 
